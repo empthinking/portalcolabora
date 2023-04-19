@@ -35,7 +35,7 @@
             </div>
             <div class="md:flex items-center">
                 <div class="flex flex-col md:flex-row md:mx-6">
-                    <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="index.php">Início</a>
+                    <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="www.portalcolabora.com.br">Início</a>
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="produto.php">Produtos</a>
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="contato.php">Contato</a>
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="faq.php">FAQ</a>
