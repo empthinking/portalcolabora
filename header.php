@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../../css/main.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/main.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
@@ -20,7 +20,7 @@
         <div class="px-6 py-4 mx-auto md:flex md:items-center">
             <div class="flex items-center justify-between">
                 <div>
-                    <a class="text-xl font-bold text-gray-800 md:text-2xl hover:text-gray-700" href="index.html">
+                    <a class="text-xl font-bold text-gray-800 md:text-2xl hover:text-gray-700" href="index.php">
                         <img src="img/Ativo 1 black.png" style="max-height: 3.75rem" class="flex-shrink-0">
                     </a>
                     
