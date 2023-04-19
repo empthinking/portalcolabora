@@ -1,5 +1,5 @@
 <?php
- require "pages/partials/header.html"; 
- require "pages/home.html";
+require_once "home.php";
+
  ?>
 
