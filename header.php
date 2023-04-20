@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
+<?php include "banco_de_dados.php"; ?>
 <head>
     <meta charset="UTF-8">
     <title>Colabora</title>
