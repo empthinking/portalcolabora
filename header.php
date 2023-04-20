@@ -6,7 +6,6 @@
     <title>Colabora</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../../css/main.css">
     <link href="./css/main.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
