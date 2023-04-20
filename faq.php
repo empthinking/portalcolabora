@@ -1,6 +1,7 @@
-   <?php
-   require_once "header.php" 
-   ?>
+<?php
+require_once "header.php";
+?>
+
 <main>
   <section class="bg-gray-100 py-12">
   <div class="container mx-auto">

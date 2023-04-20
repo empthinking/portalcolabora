@@ -35,7 +35,6 @@
             <div class="navbar-menu md:flex items-center hidden">
                 <div class="flex flex-col md:flex-row md:mx-6">
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="index.php">Início</a>
-                    <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="produto.php">Produtos</a>
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="contato.php">Contato</a>
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="faq.php">FAQ</a>
                 </div>
@@ -53,45 +52,45 @@
 
                 <div class="flex items-center ml-5">
                     <button href="#" class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button>
-                    <button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">Entrar</button>
-                    <div id="singIn" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-                        <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
-                            <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
-                                <h1 class="text-3xl font-bold mb-8 text-center">Login</h1>
-                                <form method="POST" action="/users/login">
-                                    <div class="mb-4 form-group" method="POST" action="/users/login">
-                                        <label class="block font-bold mb-2" for="email">
-                                            Email
-                                        </label>
-                                        <input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email">
-                                    </div>
+                        <button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">Entrar</button>
+                        <div id="singIn" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
+                            <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
+                                <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
+                                    <h1 class="text-3xl font-bold mb-8 text-center">Login</h1>
+                                    <form method="POST" action="/users/login">
+                                        <div class="mb-4 form-group" method="POST" action="/users/login">
+                                            <label class="block font-bold mb-2" for="email">
+                                                Email
+                                            </label>
+                                            <input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email">
+                                        </div>
 
-                        
-                                    <div class="mb-6 form-group">
-                                        <label class="block font-bold mb-2" for="password">
-                                        Senha
-                                        </label>
-                                        <input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="******" id="senha">
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </div>
                             
-                                    <div class="flex items-center justify-between">
-                                        <button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                                        Entrar
+                                        <div class="mb-6 form-group">
+                                            <label class="block font-bold mb-2" for="password">
+                                            Senha
+                                            </label>
+                                            <input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="******" id="senha">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </div>
+                                
+                                        <div class="flex items-center justify-between">
+                                            <button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                                            Entrar
+                                            </button>
+                                            <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+                                            Não consigo entrar
+                                            </a>
+                                        </div>
+                                        </form>
+                                        <button type="button" onclick="document.getElementById('singIn').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
+                                        Cancelar
                                         </button>
-                                        <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                                        Não consigo entrar
-                                        </a>
                                     </div>
-                                    </form>
-                                    <button type="button" onclick="document.getElementById('singIn').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
-                                    Cancelar
-                                    </button>
+                                    </div>
                                 </div>
-                                </div>
-                            </div>
-                              
-                    </div>
+                                
+                        </div>
                     </div>
                     </div>
             
