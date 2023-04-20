@@ -1,16 +1,13 @@
 <?php
 
-$servername = "127.0.0.1:3306";
-$username = "u871226378_colabora";
-$password = "k8qXGC1|;M";
-$db = "u871226378_portalcolabora";
-// Create connection
-$conn = mysqli_connect($servername, $username, $password,$db);
+define('SERVER', 'localhost');
+define('USUARIO', 'u871226378_colabora');
+define('SENHA', 'k8qXGC1|;M');
+define('DATABASE', 'u871226378_portalcolabora');
+$conn = mysqli_connect(SERVER, USUARIO, SENHA, DATABASE);
 
-// Check connection
 if (!$conn) {
-    die("Conexao falhou" . mysqli_connect_error());
+    exit("Conexao falhou" . mysqli_connect_error());
 }
-
 
 ?>
