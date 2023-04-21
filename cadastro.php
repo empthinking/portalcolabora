@@ -1,88 +1,21 @@
 <?php 
-require_once "$pdo.php";
+require_once "$dbconn.php";
 $username = $password = $tel = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-  if(empty(trim($_POST["username"]))){
-        $username_err = "Por favor coloque um nome de usuário.";
-    } elseif(!preg_match('/^[a-zA-Z0-9_]+$/', trim($_POST["username"]))){
-        $username_err = "O nome de usuário pode conter apenas letras, números e sublinhados.";
-    } else{
-        // Prepare uma declaração selecionada
-        $sql = "SELECT user_id FROM usuarios WHERE user_nome = :username";
-        
-        if($stmt = $pdo->prepare($sql)){
-            // Vincule as variáveis à instrução preparada como parâmetros
-            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
-            
-            // Definir parâmetros
-            $param_username = trim($_POST["username"]);
-            
-            // Tente executar a declaração preparada
-            if($stmt->execute()){
-                if($stmt->rowCount() == 1){
-                    $username_err = "Este nome de usuário já está em uso.";
-                } else{
-                    $username = trim($_POST["username"]);
-                }
-            } else{
-                echo "Ops! Algo deu errado. Por favor, tente novamente mais tarde.";
-            }
+    $name = $_POST["username"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $tel = $_POST["$tel"];
+    $confirm_password = $_POST["confirm_password"];
+  
+    $sql = "INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conn, $sql);
+    mysqli_stmt_bind_param($stmt, "sss", $name, $email, $password, $tel);
+    mysqli_stmt_execute($stmt);
 
-            // Fechar declaração
-            unset($stmt);
-        }
-    }
-    
-    // Validar senha
-    if(empty(trim($_POST["password"]))){
-        $password_err = "Por favor insira uma senha.";     
-    } elseif(strlen(trim($_POST["password"])) < 6){
-        $password_err = "A senha deve ter pelo menos 6 caracteres.";
-    } else{
-        $password = trim($_POST["password"]);
-    }
-    
-    // Validar e confirmar a senha
-    if(empty(trim($_POST["confirm_password"]))){
-        $confirm_password_err = "Por favor, confirme a senha.";     
-    } else{
-        $confirm_password = trim($_POST["confirm_password"]);
-        if(empty($password_err) && ($password != $confirm_password)){
-            $confirm_password_err = "A senha não confere.";
-        }
-    }
-    
-    // Verifique os erros de entrada antes de inserir no banco de dados
-    if(empty($username_err) && empty($password_err) && empty($confirm_password_err)){
-        
-        // Prepare uma declaração de inserção
-        $sql = "INSERT INTO users (username, password) VALUES (:username, :password)";
+    mysqli_stmt_close($stmt);
+    mysqli_close($conn);
          
-        if($stmt = $pdo->prepare($sql)){
-            // Vincule as variáveis à instrução preparada como parâmetros
-            $stmt->bindParam(":username", $param_username, PDO::PARAM_STR);
-            $stmt->bindParam(":password", $param_password, PDO::PARAM_STR);
-            
-            // Definir parâmetros
-            $param_username = $username;
-            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-            
-            // Tente executar a declaração preparada
-            if($stmt->execute()){
-                // Redirecionar para a página de login
-                header("location: login.php");
-            } else{
-                echo "Ops! Algo deu errado. Por favor, tente novamente mais tarde.";
-            }
-
-            // Fechar declaração
-            unset($stmt);
-        }
-    }
-    
-    // Fechar conexão
-    unset($pdo);
 }
 ?>
 <!DOCTYPE html>
