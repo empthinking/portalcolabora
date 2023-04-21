@@ -52,7 +52,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             <div class="container mx-auto">
               <div class="max-w-lg mx-auto">
                 <h2 class="text-3xl font-semibold text-center mb-8">Cadastre-se</h2>
-                <form class="bg-white shadow-md  rounded-lg w-full max-w-md mx-auto p-8" method="POST" action="register.php">
+                <form class="bg-white shadow-md  rounded-lg w-full max-w-md mx-auto p-8" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
                   <div class="mb-4">
                       <label class="block text-gray-700 font-bold mb-2" for="nome">
                         Nome completo
