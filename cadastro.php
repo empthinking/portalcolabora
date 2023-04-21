@@ -1,23 +1,4 @@
-<?php 
-require_once "$dbconn.php";
-$username = $password = $tel = $confirm_password = "";
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    $name = $_POST["username"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $tel = $_POST["$tel"];
-    $confirm_password = $_POST["confirm_password"];
-  
-    $sql = "INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "sss", $name, $email, $password, $tel);
-    mysqli_stmt_execute($stmt);
 
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
-         
-}
-?>
 <!DOCTYPE html>
 <html lang="pt-br">
 
