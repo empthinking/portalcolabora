@@ -11,4 +11,8 @@ if ($mysqli -> connect_errno) {
   echo "Falha na conexão com o banco de dados ${mysqli -> connect_error}";
   exit();
 }
+else{
+  echo "Conexão com sucesso";
+  exit();
+}
 ?>
