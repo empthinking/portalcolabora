@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         $username_err = "O nome de usuário pode conter apenas letras, números e sublinhados.";
     } else{
         // Prepare uma declaração selecionada
-        $sql = "SELECT id FROM users WHERE username = :username";
+        $sql = "SELECT user_id FROM usuarios WHERE user_nome = :username";
         
         if($stmt = $pdo->prepare($sql)){
             // Vincule as variáveis à instrução preparada como parâmetros
