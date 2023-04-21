@@ -5,10 +5,10 @@ $password = 'F7k|MYhYf>';
 $db_name = "u871226378_portalcolabora";
 $port = 3306;
 
-$conn = mysqli_connect($servername, $user, $password, $db_name, $port);
+$mysqli = new mysqli($servername, $user, $password, $db_name, $port);
 #Verificação de conexão
-if (!$conn) {
-  echo "Falha na conexão com o banco de dados";
-  exit("Connection failed: " . mysqli_connect_error());
+if ($mysqli -> connect_errno) {
+  echo "Falha na conexão com o banco de dados ${mysqli -> connect_error}";
+  exit();
 }
 ?>
