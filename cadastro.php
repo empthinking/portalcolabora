@@ -1,14 +1,4 @@
 <?php 
-
-$servername = "localhost";
-$user = "u871226378_colabora";
-$password = 'F7k|MYhYf>';
-$db_name = "u871226378_portalcolabora";
-
-$conn = mysqli_connect($servername, $user, $password, $db_name);
-
-
-
 // Check connection
 if (!$conn) {
   die("Connection failed: " . mysqli_connect_error());
@@ -21,15 +11,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $tel = $_POST["tel"];
     $confirm_password = $_POST["confirm_password"];
   
-    $sql = "INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)";
-    $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "sss", $name, $email, $password, $tel);
-    mysqli_stmt_execute($stmt);
-
-    mysqli_stmt_close($stmt);
-    mysqli_close($conn);
-  
-       
+    $sql = "INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES ($name, $email, $password, $tel)";
+    $result = mysqli_query($mysqli, $sql);
+    $mysqli -> close();
 }
 ?>
 <!DOCTYPE html>
