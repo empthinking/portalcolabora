@@ -1,22 +1,38 @@
 <?php 
 require_once "dbconn.php";
 
-$username = $password = $tel = $confirm_password = "";
+$username = $password = $number = $confirm_password = "";
+
 if($_SERVER["REQUEST_METHOD"] == "POST"){
+    
     $name = $_POST["username"];
     $email = $_POST["email"];
     $password = $_POST["password"];
-    $tel = $_POST["tel"];
+    $number = $_POST["number"];
     $confirm_password = $_POST["confirm_password"];
-  
-    $sql = "INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES ('$name', '$email', '$password', '$tel')";
-    $result = $mysqli -> query($mysqli, $sql);
+    
+    //regex para validar os dados
+    $username_reg = "/^[a-zA-Z ]+$/";
+    $number_reg = "/^[0-9]+$/";
+    
+    //Preparacao do SQL
+    $stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)");
+    //Insercao das variaveis
+    $stmt->bind_param("ssss", $name, $email, $password, $number);
+    //Envio dos dados
+    $stmt->execute();
+    //Encerramento da conexão do db
+    $stmt->close();
+    
     if($result){
         echo "Data inserted successfully.";
     } else{
         echo "Error: " . $mysqli -> error($mysqli);
     }
     $mysqli -> close();
+    
+    //Redirecionamento para a home page
+    header("location: index.php");
 }
 ?>
 <!DOCTYPE html>
