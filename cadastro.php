@@ -10,7 +10,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $confirm_password = $_POST["confirm_password"];
   
     $sql = "INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES ('$name', '$email', '$password', '$tel')";
-    $result = mysqli_query($mysqli, $sql);
+    $result = $mysqli -> query($mysqli, $sql);
+    if($result){
+        echo "Data inserted successfully.";
+    } else{
+        echo "Error: " . $mysqli -> error($mysqli);
+    }
     $mysqli -> close();
 }
 ?>
