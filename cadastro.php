@@ -1,5 +1,5 @@
 <?php 
-require_once "cadastro.php";
+require_once "dbconn.php";
 
 $username = $password = $tel = $confirm_password = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
