@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     $tel = $_POST["tel"];
     $confirm_password = $_POST["confirm_password"];
   
-    $sql = "INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES ($name, $email, $password, $tel)";
+    $sql = "INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES ('$name', '$email', '$password', '$tel')";
     $result = mysqli_query($mysqli, $sql);
     $mysqli -> close();
 }
