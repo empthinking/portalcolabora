@@ -61,8 +61,8 @@ require_once "dbconn.php";
                             <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
                                 <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
                                     <h1 class="text-3xl font-bold mb-8 text-center">Login</h1>
-                                    <form method="POST" action="/users/login">
-                                        <div class="mb-4 form-group" method="POST" action="/users/login">
+                                    <form method="POST" action="<?php echo htmlspecialchars($_POST['PHP_SELF']);?>">
+                                        <div class="mb-4 form-group">
                                             <label class="block font-bold mb-2" for="email">
                                                 Email
                                             </label>
