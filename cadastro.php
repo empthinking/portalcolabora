@@ -1,8 +1,6 @@
 <?php 
-// Check connection
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
-}
+require_once "cadastro.php";
+
 $username = $password = $tel = $confirm_password = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
     $name = $_POST["username"];
