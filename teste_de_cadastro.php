@@ -9,7 +9,7 @@ require_once "register.php"
   <title>Teste de cadastro</title>
 </head>
 <body>
-<form>
+<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
   <label for="username">Username:</label>
   <input type="text" id="username" name="username"><br>
   <?php if(!empty($username_err)){ echo "<p> $username_err </p>";} ?>
