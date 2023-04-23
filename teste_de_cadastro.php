@@ -12,7 +12,7 @@ require_once "register.php";
  <?php if(isset($msg)){ echo "<p>$msg</p>";} else { echo "Cadastro em pendência";} ?>
 <form action="teste_de_cadastro.php" method="post">
   <label for="username">Username:</label>
-  <input type="text" id="username" name="username" value="<?php echo isset($_POST['username']) ? $_POST['username'] : ''; ?>"><br>
+  <input type="text" id="username" name="username" value="<?php if(isset($_POST['username']) echo htmlspecialchars($_POST['username']);?>"><br>
   <?php if(isset($username_err)){ echo "<p> $username_err </p>";} ?>
 
   <label for="email">Email:</label>
