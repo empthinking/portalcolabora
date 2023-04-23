@@ -1,14 +1,14 @@
 <?php 
-	//require_once "dbconn.php";
+	require_once "dbconn.php";
 
 	$username = $password = $number = $confirm_password = $number = "";
 	$username_err = $email_err = $password_err = $number_err = "";
 
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
     
-		$name = $_POST["username"]));
-		$email = $_POST["email"]));
-		$password = $_POST["password"]);
+		$name = $_POST["username"];
+		$email = $_POST["email"];
+		$password = $_POST["password"];
 		$number = $_POST["number"];
 		$confirm_password = $_POST["confirm_password"];
 
@@ -29,7 +29,7 @@
 		} 
 		if(strlen($password) > 8){ //Validacao do tamanho da senha
 			$password_err = "Senha precisa conter no mínimo 8 caracteres";
-		} elseif($passsword !== $confirm_password){ //Confirmação da senha
+		} elseif($password !== $confirm_password){ //Confirmação da senha
 			$password_err = "Insira corretamente a confirmação";
 		}
 
