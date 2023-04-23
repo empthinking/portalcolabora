@@ -10,7 +10,7 @@ require_once "register.php";
 </head>
 <body>
  <?php if(isset($msg)){ echo "<p>$msg</p>";} else { echo "Cadastro em pendência";} ?>
-<form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
+<form action="teste_de_cadastro.php" method="post">
   <label for="username">Username:</label>
   <input type="text" id="username" name="username"><br>
   <?php if(isset($username_err)){ echo "<p> $username_err </p>";} ?>
