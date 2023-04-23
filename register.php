@@ -1,5 +1,5 @@
 <?php 
-	require_once "dbconn.php";
+	//require_once "dbconn.php";
 
 	$username = $password = $number = $confirm_password = $number = "";
 	$username_err = $email_err = $password_err = $number_err = "";
