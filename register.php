@@ -45,6 +45,7 @@
 			$stmt->execute();
 			//Encerramento da conexao
 			$stmt->close();
+			$msg = "Registro completado com sucesso";
 
 		}
 }
