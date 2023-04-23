@@ -1,4 +1,6 @@
-
+<?php
+  require "register.php";
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
