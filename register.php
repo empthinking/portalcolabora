@@ -1,9 +1,6 @@
 <?php 
 	require_once "dbconn.php";
 
-	$username = $password = $number = $confirm_password = $number = "";
-	$username_err = $email_err = $password_err = $number_err = "";
-
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
     
 		$name = $_POST["username"];
@@ -34,7 +31,7 @@
 		}
 
 
-		if(empty($username_err) && empty($email_err) && empty($password_err) && empty($number_err)){
+		if(!isset($username_err) && !isset($email_err) && !isset($password_err) && !isset($number_err)){
 
 			$password_secure = password_hash($pass, PASSWORD_BCRYPT);
 			//Preparacao de declaracao SQL 
