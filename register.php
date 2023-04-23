@@ -1,7 +1,7 @@
 <?php 
 	require_once "dbconn.php";
 
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
+	if($_SERVER["REQUEST_METHOD"] === "POST"){
 		$username = $_POST["username"];
 		$email = $_POST["email"];
 		$password = $_POST["password"];
@@ -18,12 +18,12 @@
 		if(!preg_match($username_reg, $username) || empty($username)){ //Validacao do nome de usuario
 			$username_err = "Preencha o campo com letras, números ou sublinhado apenas";
 		} 
-		if(!filter_var($email, FILTER_VALIDATE_EMAIL) === false || empty($email)){ //Validacao de email
+		if(filter_var($email, FILTER_VALIDATE_EMAIL) === false || empty($email)){ //Validacao de email
 			$email_err = "Insira um email válido";
 		} elseif($email_check->num_rows > 0){
 			$email_err = "Email já cadastrado"; //Verificacao de registro do email
 		}
-		if(!preg_match($number_reg, $number) || strlen($number) != 11){ //Validacao do telefone
+		if(!preg_match($number_reg, $number) || strlen($number) !== 11){ //Validacao do telefone
 			$number_err = "Insira um número válido";
 		} 
 		if(strlen($password) < 8){ //Validacao do tamanho da senha
