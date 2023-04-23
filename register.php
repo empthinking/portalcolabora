@@ -1,14 +1,14 @@
 <?php 
 	require_once "dbconn.php";
-
-	if($_SERVER["REQUEST_METHOD"] == "POST"){
-    
+	if($_POST['submit']){
 		$username = $_POST["username"];
 		$email = $_POST["email"];
 		$password = $_POST["password"];
 		$number = $_POST["number"];
 		$confirm_password = $_POST["confirm_password"];
+	}
 
+	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		//regex para validar os dados
 		$username_reg = "/^[a-zA-Z ]+$/";
 		$number_reg = "/^[0-9]+$/";
