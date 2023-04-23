@@ -46,9 +46,6 @@
 			//Encerramento da conexao
 			$stmt->close();
 
-			//Redirecionamento para a home page
-			header("location: index.php");
-
 		}
 }
 ?>
