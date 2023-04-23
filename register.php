@@ -13,7 +13,7 @@
 		$username_reg = "/^[a-zA-Z ]+$/";
 		$number_reg = "/^[0-9]+$/";
 		//Verificacao de registro do email
-		$email_check->$mysqli->prepare("SELECT user_email FROM usuarios WHERE user_email = ?");
+		$email_check = $mysqli->prepare("SELECT user_email FROM usuarios WHERE user_email = ?");
 		$email_check->bind_param('s', $email);
 		$email_check->execute();
 		
