@@ -1,4 +1,7 @@
-<?php require_once "register.php"; ?>
+<?php 
+require_once "register.php";
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -6,27 +9,58 @@
   <title>Teste de cadastro</title>
 </head>
 <body>
+ <?php if(isset($msg)){ echo "<p>$msg</p>";} else { echo "Cadastro em pendência";} ?>
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
   <label for="username">Username:</label>
   <input type="text" id="username" name="username"><br>
-  <?php if(!empty($username_err)){ echo "<p> $username_err </p>";} ?>
+  <?php if(isset($username_err)){ echo "<p> $username_err </p>";} ?>
 
   <label for="email">Email:</label>
   <input type="email" id="email" name="email"><br>
-  <?php if(!empty($email_err)){ echo "<p> $email_err </p>";} ?>
+  <?php if(isset($email_err)){ echo "<p> $email_err </p>";} ?>
 
   <label for="password">Password:</label>
   <input type="password" id="password" name="password"><br>
-  <?php if(!empty($password_err)){ echo "<p> $password_err </p>";} ?>
+  <?php if(isset($password_err)){ echo "<p> $password_err </p>";} ?>
 
   <label for="confirm-password">Confirm Password:</label>
   <input type="password" id="confirm_password" name="confirm_password"><br>
 
   <label for="number">Number:</label>
   <input type="number" id="number" name="number"><br>
-  <?php if(!empty($number_err)){ echo "<p> $number_err </p>";} ?>
+  <?php if(isset($number_err)){ echo "<p> $number_err </p>";} ?>
 
   <input type="submit" value="Submit">
+  <?php 
+  if(isset($msg)){
+  $stmt = $mysqli->prepare("SELECT * FROM usuarios WHERE user_nome = ?");
+  $stmt->execute();
+  $result = $mysqli->get_result();
+  $row = $result->fetch_assoc();
+ 
+echo "
+<table>
+  <thead>
+    <tr>
+      <th>Column Name</th>
+      <th>Value</th>
+    </tr>
+  </thead>
+  <tbody>";
+    foreach($row as $column => $value){
+      echo"
+      <tr>
+        <td>$column</td>
+        <td>$value</td>
+      </tr>";
+    }
+  echo "
+  </tbody>
+</table>
+";
+
+  }
+  ?>
 </form>
 </body>
 </html>
