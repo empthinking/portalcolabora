@@ -37,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION['login'])){
 		$number_stored = $row['user_tel'];
 
 			
-		if(password_verify($password, $password_stored)){
+		if($password == $password_stored){
 
 
 			$_SESSION['login'] = true;
