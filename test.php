@@ -89,7 +89,7 @@ try{
 	}
 } catch(Exception $error) {
 	$error_msg = $error->getMessage();
-} finaly {
+} finally {
 	echo $error_msg . PHP_EOL . "Submissão falhou";
 }
 
