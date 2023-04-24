@@ -11,7 +11,7 @@ require_once "header.php";
         </figure>
         <div class="mt-6">
           <h3 class="text-2xl font-bold">Nome</h3>
-          <h3 class="text-3xl font-bold text-gray-500"><?php echo isset($_SESSION['login'] ? $_SESSION['username']; : '.'; ?></h3>
+          <h3 class="text-3xl font-bold text-gray-500"><?php echo isset($_SESSION['login']) ? $_SESSION['username']; : '.'; ?></h3>
           <h3 class="text-2xl font-bold">Email</h3>
           <h3 class="text-3xl font-bold text-gray-500"><?php echo echo isset($_SESSION['login']) ? $_SESSION['email']; : '.'; ?></h3>
           <div id="btp" class="mt-4">
