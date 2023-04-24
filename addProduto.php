@@ -1,4 +1,28 @@
 <?php
+session_start();
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+  header('Location: index.php');
+  exit;
+}
+require_once 'dbconn.php';
+
+$product_name = mysqli_real_escape_string($conn, $_POST['product-name']);
+$product_description = mysqli_real_escape_string($conn, $_POST['product-description']);
+$product_price = mysqli_real_escape_string($conn, $_POST['product-price']);
+$product_category = mysqli_real_escape_string($conn, $_POST['product-category']);
+
+$sql = "INSERT INTO products (produto_nome, produto_descricao, produto_preco, produto_category, user_id)
+        VALUES ('$product_name', '$product_description', '$product_price', '$product_category', {$_SESSION['id']})";
+
+
+
+if ($mysqli->query($sql)) {
+  echo "Produto adicionado com sucesso";
+} else {
+  echo "Error: " . $sql . "<br>" . $mysqli->error;
+}
+
+$mysqli->close();
 require_once "header.php"
   ?>
 
@@ -66,7 +90,7 @@ require_once "header.php"
                               bg-gray-50 text-gray-500 text-sm">
                               R$
                             </span>
-                            <input class="input" type="number"
+                            <input class="input" type="number" name="product-price"
                               placeholder="Preço" step="0.01" min="0"
                               max="10000" pattern="\d+(\.\d{2})?" required>
                           </div>
@@ -79,7 +103,7 @@ require_once "header.php"
                         <label class="text-lg label">Categoria</label>
                         <div class="control">
                           <div class="select">
-                            <select>
+                            <select name="product-category">
                               <option>tipo 1</option>
                               <option>tipo 2</option>
                               <option>tipo 3</option>
