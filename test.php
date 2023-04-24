@@ -59,9 +59,9 @@ if ($mysqli -> connect_errno) {
   exit();
 }
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-	try{
-		$user = new User($_POST["username"], $_POST["password"], $_POST["email"], $_POST["number"]);
-		$confirm_password = htmlspecialchars($_POST["confirm_password"]);
+	#try{
+		#$user = new User($_POST["username"], $_POST["password"], $_POST["email"], $_POST["number"]);
+		#$confirm_password = htmlspecialchars($_POST["confirm_password"]);
 
 /*
 		//Verificacao de registro do email
@@ -87,13 +87,14 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$mysqli->close();														     
 			$msg = "Registro completado com sucesso";
 
-		} else {
+		} /*else {
 			throw new Exception ($mysqli->error);
 		}
 	} catch(Exception $error) {
 	echo $error->getMessage();
-	} 
+	} */
 }
+
 ?>
 
 <!DOCTYPE html>
