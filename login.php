@@ -45,6 +45,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION['login'])){
 			$_SESSION['username'] = $username_stored;
 			$_SESSION['email'] = $email_stored;
 			$_SESSION['number'] = $number_stored;
+			$stmt->close();
+			$result->free_result();
 
 			header('location: index.php');
 		} else {
@@ -52,8 +54,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION['login'])){
 		}
 
 	}
-	$stmt->close();
-	$result->free_result();
 	
 }
 $mysqli->close();
