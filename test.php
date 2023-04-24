@@ -1,10 +1,10 @@
 <?php
 declare(strict_types=1);
 class User {
-	private $username;
-	private $password;
-	private $email;
-	private $number;
+	public $username;
+	public $password;
+	public $email;
+	public $number;
 
 	function __construct(string $name, string $pwd, string $email, string $num){
 		if(empty($name) || empty($email) || empty($pwd) || empty($num))
@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 		} elseif($stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)")){
 			//Insercao das variaveis
-			$stmt->bind_param("ssss", $user->get_name(), $user->get_email(), $user->get_password(), $user->get_num());
+			$stmt->bind_param("ssss", $user->username, $user->email, $user->password, $user->number);
 			//Envio dos dados
 			$stmt->execute();
 			//Encerramento da conexao
