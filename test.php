@@ -88,7 +88,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$msg = "Registro completado com sucesso";
 
 		} else {
-			throw new Exception ("Erro de insercao no banco de dados.");
+			throw new Exception ($mysqli->error);
 		}
 	} catch(Exception $error) {
 	echo $error->getMessage();
