@@ -1,5 +1,5 @@
 <?php
-require_once "home.php";
+require_once "perfil.php";
 
  ?>
 
