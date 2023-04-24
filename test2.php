@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Execute the query
   if ($stmt->execute()) {
     // Redirect to confirmation page
-    header("Location: confirmation.php");
+    header("Location: index.php");
     exit();
   } else {
     echo "Erro ao inserir usuário: " . $mysqli->error;
@@ -84,17 +84,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
   <form method="POST" action="./test2.php">
-    <h2>User Registration</h2>
-    <label for="user_nome">Name:</label>
+    <h2>Cadastro</h2>
+    <label for="user_nome">Nome:</label>
     <input type="text" id="user_nome" name="user_nome" required>
 
     <label for="user_email">Email:</label>
     <input type="email" id="user_email" name="user_email" required>
 
-    <label for="user_senha">Password:</label>
+    <label for="user_senha">Senha:</label>
     <input type="password" id="user_senha" name="user_senha" required>
 
-    <label for="user_tel">Phone:</label>
+    <label for="user_tel">Telefone:</label>
     <input type="tel" id="user_tel" name="user_tel" required>
 
     <input type="submit" value="Register">
