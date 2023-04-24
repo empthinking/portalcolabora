@@ -83,7 +83,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			//Envio dos dados
 			$stmt->execute();
 			//Encerramento da conexao
-			//$stmt->close();
+			$stmt->close();
+			$mysqli->close();														     
+																	     
 			$msg = "Registro completado com sucesso";
 
 		} else {
