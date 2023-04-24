@@ -60,6 +60,9 @@ if ($mysqli -> connect_errno) {
 }
 
 $error_msg = "";
+$user = new User('teste','123123123123', 'email@email.com', '123');
+echo $user->get_name() . $user->get_password() . PHP_EOL . $user->email() . $user->number() . PHP_EOL . $user->get_password_hash();
+/*
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	try{
 		$user = new User($_POST["username"], $_POST["password"], $_POST["email"], $_POST["number"]);
@@ -97,7 +100,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 	echo $error_msg . PHP_EOL . "Submissão falhou";
 	}
 }
-
+*/
 ?>
 
 <!DOCTYPE html>
