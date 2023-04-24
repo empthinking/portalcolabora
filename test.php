@@ -77,7 +77,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 		} elseif($stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)")){
 			//Insercao das variaveis
-			$stmt->bind_param("ssss", $user->get_name(), $user->get_email(), $user->get_password_hash(), $user->get_num());
+			$stmt->bind_param("ssss", $user->get_name(), $user->get_email(), $user->get_password(), $user->get_num());
 			//Envio dos dados
 			$stmt->execute();
 			//Encerramento da conexao
