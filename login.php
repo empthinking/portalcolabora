@@ -53,6 +53,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION['login'])){
 	}
 	
 }
-echo "$email_err\n$password_err\n$login_err\n" . $mysqli->error();
+echo "$email_err\n$password_err\n$login_err\n" . $mysqli->error;
 $mysqli->close();
 ?>
