@@ -71,11 +71,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		} else {
 			throw new Exception("Erro de checagem de email");
 		}
-		if($user->get_password() != $confirm_password){ //Confirmação da senha
-			$error_msg = "Insira corretamente a confirmação";
-			throw new Exception("Erro de confirmação de senha");
+		#if($user->get_password() != $confirm_password){ //Confirmação da senha
+			#$error_msg = "Insira corretamente a confirmação";
+			#throw new Exception("Erro de confirmação de senha");
 
-		} elseif($stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)")){
+		#} else
+		if($stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)")){
 			//Insercao das variaveis
 			$stmt->bind_param('ssss', 'uepa', 'email@uepa.com', 'teste', '123');
 			//Envio dos dados
