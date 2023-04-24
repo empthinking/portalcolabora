@@ -7,7 +7,7 @@ require_once 'dbconn.php';
 $email = $password = '';
 $email_err = $password_err = $login_err = '';
 
-if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION['login']){
+if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION['login'])){
 	$email = trim($_POST['email']);
 	$password = trim($_POST['password']);
 
