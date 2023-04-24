@@ -1,9 +1,5 @@
 <?php
 declare(strict_types=1);
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 class User {
 	private $username;
 	private $password;
@@ -64,7 +60,7 @@ if ($mysqli -> connect_errno) {
 }
 
 $error_msg = "";
-if($_SERVER["REQUEST_METHOD"] === "POST"){
+if($_SERVER["REQUEST_METHOD"] == "POST"){
 	try{
 		$user = new User($_POST["username"], $_POST["password"], $_POST["email"], $_POST["number"]);
 		$confirm_password = htmlspecialchars($_POST["confirm_password"]);
@@ -171,7 +167,6 @@ input[type="submit"]:hover {
 </head>
 <body>
  <?php if(isset($msg)){ echo "<p>$msg</p>";} else { echo "Cadastro em pendência";} ?>
-<?php if(!empty($error_msg)){ echo $error_msg;} ?>
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
   <label for="username">Username:</label>
   <input type="text" id="username" name="username" value="<?php if(isset($_POST['username'])) echo htmlspecialchars($_POST['username']);?>"><br>
@@ -192,36 +187,6 @@ input[type="submit"]:hover {
   <input type="tel" id="number" name="number" value="<?php if(isset($_POST['number'])) echo htmlspecialchars($_POST['number']);?>"><br>
 
   <input type="submit" value="Submit">
-  <?php 
-	if(isset($msg)){
-		$stmt = $mysqli->prepare("SELECT * FROM usuarios WHERE user_nome = ?");
-		$stmt->execute();
-		$result = $mysqli->get_result();
-		$row = $result->fetch_assoc();
-		 
-		echo "
-		<table>
-		<thead>
-		<tr>
-		<th>Column Name</th>
-		<th>Value</th>
-		</tr>
-		</thead>
-		<tbody>";
-		foreach($row as $column => $value){
-		echo"
-		<tr>
-		<td>$column</td>
-		<td>$value</td>
-		</tr>";
-		}
-		echo "
-		</tbody>
-		</table>
-		";
-
-	}
-  ?>
 </form>
 </body>
 </html>
