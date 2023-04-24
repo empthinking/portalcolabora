@@ -12,18 +12,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION['login'])){
 	$password = trim($_POST['password']);
 
 	if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-		$result = $mysqli->query("SELECT user_id FROM usuarios WHERE user_nome = '$email'");
+		$email_err = 'Formato inválido';
 
 	}
-	if($result->num_rows > 0) {
-		$email_err = 'Email já registrado';
-	}	
 	
 	/*if(strlen($password) < 8){
 		$password_err = 'Senha deve conter no mínimo 8 caracteres';
 	}
 */
-	if(empty($email_err) && empty($password_err) && $result->num_rows == 1){
+	if(empty($email_err) && empty($password_err)){
 		$stmt = $mysqli->prepare('SELECT * FROM usuarios WHERE user_email = ?');
 		$stmt->bind_param('s', $email);
 		$stmt->execute();
