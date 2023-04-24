@@ -48,19 +48,19 @@
 					</div>
 					<?php if(isset($_SESSION['login']) && $_SESSION['login'] === true): ?>
 					<div class="relative">
-                    <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
-                        <img src="caminho/para/imagem-de-perfil.jpg" alt="Imagem de Perfil" class="w-10 h-10 rounded-full mr-2">
-                        <i class="fa fa-angle-down"></i>
-                    </div>
-                    <div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
-                        <ul class="list-none">
-                            <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Perfil</a></li>
-                            <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Histórico</a></li>
-                            <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Anunciar</a></li>
-                            <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Sair</a></li>
-                        </ul>
-                    </div>
-                </div>
+						<div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
+							<img src="img/perfil.png" alt="Imagem de Perfil" class="w-10 h-10 rounded-full mr-2">
+							<i class="fa fa-angle-down"></i>
+						</div>
+						<div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
+							<ul class="list-none">
+								<li class="px-4 py-2 hover:bg-gray-100"><a href="#">Perfil</a></li>
+								<li class="px-4 py-2 hover:bg-gray-100"><a href="#">Histórico</a></li>
+								<li class="px-4 py-2 hover:bg-gray-100"><a href="#">Anunciar</a></li>
+								<li class="px-4 py-2 hover:bg-gray-100"><a href="#">Sair</a></li>
+							</ul>
+						</div>
+					</div>
 					<?php else: ?>
 					<div class="flex items-center ml-5">
 						<a href="test2.php"><button class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button></a>
@@ -70,27 +70,27 @@
 								<div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
 									<h1 class="text-3xl font-bold mb-8 text-center">Login</h1>
 									<form method="POST" action="<? echo htmlspecialchars($_SERVER['PHP_SELF']);?>"
-										<div class="mb-4 form-group">
-											<label class="block font-bold mb-2" for="email">
-											Email
-											</label>
-											<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email">
-										</div>
-										<div class="mb-6 form-group">
-											<label class="block font-bold mb-2" for="password">
-											Senha
-											</label>
-											<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" id="senha" name="password">
-											<i class="fa fa-eye" aria-hidden="true"></i>
-										</div>
-										<div class="flex items-center justify-between">
-											<button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-											Entrar
-											</button>
-											<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-											Não consigo entrar
-											</a>
-										</div>
+									<div class="mb-4 form-group">
+										<label class="block font-bold mb-2" for="email">
+										Email
+										</label>
+										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email">
+									</div>
+									<div class="mb-6 form-group">
+										<label class="block font-bold mb-2" for="password">
+										Senha
+										</label>
+										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" id="senha" name="password">
+										<i class="fa fa-eye" aria-hidden="true"></i>
+									</div>
+									<div class="flex items-center justify-between">
+										<button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+										Entrar
+										</button>
+										<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
+										Não consigo entrar
+										</a>
+									</div>
 									</form>
 									<button type="button" onclick="document.getElementById('singIn').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
 									Cancelar
@@ -98,8 +98,30 @@
 								</div>
 							</div>
 						</div>
-					</div> 
-			<?php endif; ?>
+					</div>
+					<script>
+						function toggleDropdown() {
+						var dropdownMenu = document.getElementById("dropdown-menu");
+						dropdownMenu.classList.toggle("hidden");
+						}
+						var elementos = document.getElementsByClassName('navbar');
+						var el = elementos[0];
+						el.style.backgroundColor= '#63f253';
+						
+						
+						let btn = document.querySelector('.fa-eye')
+						
+						btn.addEventListener('click', ()=>{
+						let inputSenha = document.querySelector('#senha')
+						
+						if(inputSenha.getAttribute('type') == 'password'){
+						inputSenha.setAttribute('type', 'text')
+						} else {
+						inputSenha.setAttribute('type', 'password')
+						}
+						})
+					</script>
+					<?php endif; ?>
 				</div>
 			</div>
 		</nav>
