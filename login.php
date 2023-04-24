@@ -47,10 +47,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && (!isset($_SESSION['login']) || $_SESS
                		session_set_cookie_params($timeout);
 			$stmt->close();
 			$result->free_result();
-			
-			echo "$username_stored";
 
-			//header('location: index.php');
+			header('location: index.php');
 		} else {
 		    $login_err = 'Nome de usuário ou senha inválidos.';
 		}
@@ -58,6 +56,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && (!isset($_SESSION['login']) || $_SESS
 	}
 	
 }
-echo "$email_err\n$password_err\n$login_err\n" . $mysqli->error;
 $mysqli->close();
 ?>
