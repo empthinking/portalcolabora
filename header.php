@@ -1,7 +1,6 @@
 <?php
 session_start();
-require_once "login.php";
-require_once "dbconn.php";
+//require_once "login.php";
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
