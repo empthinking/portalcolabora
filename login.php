@@ -19,10 +19,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION['login'])){
 		$email_err = 'Email já registrado';
 	}	
 	
-	if(strlen($password) < 8){
+	/*if(strlen($password) < 8){
 		$password_err = 'Senha deve conter no mínimo 8 caracteres';
 	}
-
+*/
 	if(empty($email_err) && empty($password_err) && $result->num_rows == 1){
 		$stmt = $mysqli->prepare('SELECT * FROM usuarios WHERE user_email = ?');
 		$stmt->bind_param('s', $email);
