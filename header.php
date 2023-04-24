@@ -1,5 +1,5 @@
 <?php
-//require_once 'login.php';
+require_once 'login.php';
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -50,7 +50,7 @@
 						</div>
 					</div>
 					
-					<!--
+					
 					<div class="flex items-center ml-5">
 						<button href="cadastro.php" class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button>
 						<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">Entrar</button>
@@ -87,9 +87,9 @@
 								</div>
 							</div>
 						</div>
-					</div> -->
+					</div> 
 					
-				
+				<!--
 					<div class="relative">
 						<div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
 							<img src="caminho/para/imagem-de-perfil.jpg" alt="Imagem de Perfil" class="w-10 h-10 rounded-full mr-2">
@@ -104,6 +104,7 @@
 							</ul>
 						</div>
 					</div>
+				-->
 				
 				</div>
 			</div>
