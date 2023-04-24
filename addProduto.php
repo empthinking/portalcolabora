@@ -5,24 +5,26 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
   exit;
 }
 require_once 'dbconn.php';
+if($_SERVER['REQUEST_METHOD'] == "POST){
 
-$product_name = $mysqli->real_escape_string($_POST['product-name']);
-$product_description = $mysqli->real_escape_string($_POST['product-description']);
-$product_price = $mysqli->real_escape_string($_POST['product-price']);
-$product_category = $mysqli->real_escape_string($_POST['product-category']);
+	$product_name = $mysqli->real_escape_string($_POST['product-name']);
+	$product_description = $mysqli->real_escape_string($_POST['product-description']);
+	$product_price = $mysqli->real_escape_string($_POST['product-price']);
+	$product_category = $mysqli->real_escape_string($_POST['product-category']);
 
-$sql = "INSERT INTO products (produto_nome, produto_descricao, produto_preco, produto_category, user_id)
-        VALUES ('$product_name', '$product_description', '$product_price', '$product_category', {$_SESSION['id']})";
+	$sql = "INSERT INTO products (produto_nome, produto_descricao, produto_preco, produto_category, user_id)
+					VALUES ('$product_name', '$product_description', '$product_price', '$product_category', {$_SESSION['id']})";
 
 
 
-if ($mysqli->query($sql)) {
-  echo "Produto adicionado com sucesso";
-} else {
-  echo "Error: " . $sql . "<br>" . $mysqli->error;
+	if ($mysqli->query($sql)) {
+		echo "Produto adicionado com sucesso";
+	} else {
+		echo "Error: " . $sql . "<br>" . $mysqli->error;
+	}
 }
 
-$mysqli->close();
+	$mysqli->close();
 require_once "header.php"
   ?>
 
