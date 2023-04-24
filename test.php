@@ -1,8 +1,9 @@
 <?php
+declare(strict_types=1);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-declare(strict_types=1);
+
 class User {
 	private $username;
 	private $password;
@@ -62,8 +63,6 @@ if ($mysqli -> connect_errno) {
   exit();
 }
 
-$error_msg = "";
-try{
 	if($_SERVER["REQUEST_METHOD"] === "POST"){
 		
 		$user = new User($_POST["username"], $_POST["password"], $_POST["email"], $_POST["number"]);
@@ -90,11 +89,7 @@ try{
 
 		}
 	}
-} catch(Exception $error) {
-	$error_msg = $error->getMessage();
-} finally {
-	echo $error_msg . PHP_EOL . "Submissão falhou";
-}
+
 
 ?>
 
