@@ -60,6 +60,7 @@ if ($mysqli -> connect_errno) {
 }
 
 $error_msg = "";
+try{
 
 	if($_SERVER["REQUEST_METHOD"] === "POST"){
 		try{
@@ -89,6 +90,12 @@ $error_msg = "";
 
 		}
 	}
+} catch(Exception $err){
+	echo $err->getMessage();
+} finally {
+	echo 'Subimissão falhou';
+}
+
 ?>
 
 <!DOCTYPE html>
