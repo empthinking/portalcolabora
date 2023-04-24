@@ -61,14 +61,11 @@ if ($mysqli -> connect_errno) {
 
 $error_msg = "";
 try{
-
 	if($_SERVER["REQUEST_METHOD"] === "POST"){
-		try{
-			$user = new User($_POST["username"], $_POST["password"], $_POST["email"], $_POST["number"]);
-			$confirm_password = htmlspecialchars($_POST["confirm_password"]);
-		} catch(Exception $error) {
-			$error_msg = $error->getMessage();
-		}
+		
+		$user = new User($_POST["username"], $_POST["password"], $_POST["email"], $_POST["number"]);
+		$confirm_password = htmlspecialchars($_POST["confirm_password"]);
+		
 
 		//Verificacao de registro do email
 		$email_check = $mysqli->prepare("SELECT user_email FROM usuarios WHERE user_email = ?");
@@ -90,10 +87,10 @@ try{
 
 		}
 	}
-} catch(Exception $err){
-	echo $err->getMessage();
-} finally {
-	echo 'Subimissão falhou';
+} catch(Exception $error) {
+	$error_msg = $error->getMessage();
+} finaly {
+	echo $error_msg . PHP_EOL . "Submissão falhou";
 }
 
 ?>
