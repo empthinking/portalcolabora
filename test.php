@@ -58,7 +58,42 @@ if ($mysqli -> connect_errno) {
   echo "Falha na conexão com o banco de dados ${mysqli->connect_error}";
   exit();
 }
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+	try{
+		$user = new User($_POST["username"], $_POST["password"], $_POST["email"], $_POST["number"]);
+		$confirm_password = htmlspecialchars($_POST["confirm_password"]);
 
+/*
+		//Verificacao de registro do email
+		if($email_check = $mysqli->prepare("SELECT user_email FROM usuarios WHERE user_email = ?")){;
+			$email_check->bind_param('s', $user->get_email());
+			$email_check->execute();
+		} else {
+			throw new Exception($mysqli->error);
+		}
+*/
+		if($user->get_password() != $confirm_password){ //Confirmação da senha
+			throw new Exception("Erro de confirmação de senha");
+
+		} 
+		$stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)"){
+		//Insercao das variaveis
+		$stmt->bind_param('ssss', 'uepa', 'email@uepa.com', 'teste', '123');
+		//Envio dos dados
+		if($stmt->execute()){
+			//Encerramento da conexao
+			$stmt->close();
+			$mysqli->close();														     
+
+			$msg = "Registro completado com sucesso";
+
+		} else {
+			throw new Exception ($mysqli->error);
+		}
+	} catch(Exception $error) {
+	echo $error->getMessage();
+	} 
+}
 ?>
 
 <!DOCTYPE html>
