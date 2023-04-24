@@ -87,6 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 		} else {
 			throw new Exception ("Erro de inserçao no banco de dados.");
+		}
 	} catch(Exception $error) {
 	$error_msg = $error->getMessage();
 	} finally {
