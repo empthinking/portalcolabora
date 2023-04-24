@@ -3,6 +3,14 @@ require_once "header.php";
 ?>
 
 <main>
+        <?php
+if (isset($login_err)) {
+  echo '<script>console.log("' . $login_err . '")</script>';
+} else {
+  echo '<script>console.log("Fine")</script>';
+}
+?>
+
 <div class="flex items-center justify-centermt-  menu-overlay" >
         <div class="bg-white rounded-lg  m-64 mx-auto p-8">
           <h3 class="text-3xl font-bold">Perfil</h3>
