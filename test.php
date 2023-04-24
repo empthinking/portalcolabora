@@ -69,7 +69,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$email_check->bind_param('s', $user->get_email());
 			$email_check->execute();
 		} else {
-			throw new Exception("Erro de checagem de email");
+			throw new Exception($mysqli->error);
 		}
 		#if($user->get_password() != $confirm_password){ //Confirmação da senha
 			#$error_msg = "Insira corretamente a confirmação";
