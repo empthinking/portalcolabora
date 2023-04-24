@@ -167,16 +167,7 @@ input[type="submit"]:hover {
 </style>
 </head>
 <body>
-<?php if(isset($msg)){ 
-	echo "<p>$msg</p>";
-} else { 
-	echo "Cadastro em pendência";
-}
- if(isset($error_msg){
-	echo "<p>$error_msg;</P";
-} else {
-	echo '<p>Cadastro concluido</p>';
-} ?>
+
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
   <label for="username">Username:</label>
   <input type="text" id="username" name="username" value="<?php if(isset($_POST['username'])) echo htmlspecialchars($_POST['username']);?>"><br>
