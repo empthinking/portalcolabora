@@ -167,8 +167,12 @@ input[type="submit"]:hover {
 </style>
 </head>
 <body>
-<?php if(isset($msg)){ echo "<p>$msg</p>";} else { echo "Cadastro em pendência";} ?>
-<?php if(isset($error_msg){
+<?php if(isset($msg)){ 
+	echo "<p>$msg</p>";
+} else { 
+	echo "Cadastro em pendência";
+}
+ if(isset($error_msg){
 	echo "<p>$error_msg;</P";
 } else {
 	echo '<p>Cadastro concluido</p>';
