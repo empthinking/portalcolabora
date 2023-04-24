@@ -58,8 +58,6 @@ if ($mysqli -> connect_errno) {
   echo "Falha na conexão com o banco de dados ${mysqli->connect_error}";
   exit();
 }
-
-$user = new User('teste','123123123123', 'email@email.com', '123');
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	try{
 		$user = new User($_POST["username"], $_POST["password"], $_POST["email"], $_POST["number"]);
@@ -169,9 +167,12 @@ input[type="submit"]:hover {
 </style>
 </head>
 <body>
-	<p> <?php
-echo $user->get_name() . $user->get_password() . $user->get_email() . $user->get_num() . PHP_EOL . $user->get_password_hash();?> </p><br>
- <?php if(isset($msg)){ echo "<p>$msg</p>";} else { echo "Cadastro em pendência";} ?>
+<?php if(isset($msg)){ echo "<p>$msg</p>";} else { echo "Cadastro em pendência";} ?>
+<?php if(isset($error_msg) && !empty($error_msg){
+	echo "<p>$error_msg;</P";
+} else {
+	echo 'Cadastro concluido';
+}
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
   <label for="username">Username:</label>
   <input type="text" id="username" name="username" value="<?php if(isset($_POST['username'])) echo htmlspecialchars($_POST['username']);?>"><br>
