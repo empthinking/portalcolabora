@@ -90,7 +90,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			throw new Exception ("Erro de insercao no banco de dados.");
 		}
 	} catch(Exception $error) {
-	$error_msg = $error->getMessage();
+	echo $error->getMessage();
 	} 
 }
 ?>
