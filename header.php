@@ -78,7 +78,7 @@
 										</div>
 									</form>
 									<button type="button" onclick="document.getElementById('singIn').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
-									Cancelar <?php echo $emal_err . $password_err . $login_err; ?>
+									Cancelar
 									</button>
 								</div>
 							</div>
