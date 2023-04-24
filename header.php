@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 session_start();
 require_once "login.php";
 require_once "dbconn.php";
@@ -59,63 +55,6 @@ require_once "dbconn.php";
                         
                     </div>
                 </div>
-<?php if(isset($_SESSION['login']) && $_SESSION['login'] == true){
-	echo ' <div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
-                        <ul class="list-none">
-                            <li class="px-4 py-2 hover:bg-gray-100"><a href="perfil.php">Perfil</a></li>
-                            <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Histórico</a></li>
-                            <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Anunciar</a></li>
-                            <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Sair</a></li>
-                        </ul>
-                    </div>
-                </div>
-                    </div>
-                    </div>
-            '; } else {
-	    echo'
-                <div class="flex items-center ml-5">
-                    <a href="test2.php" ><button class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button><a>
-                        <button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">Entrar</button>
-                        <div id="singIn" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-                            <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
-                                <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
-                                    <h1 class="text-3xl font-bold mb-8 text-center">Login</h1>
-                                    <form method="POST" action="perfil.php">
-                                        <div class="mb-4 form-group">
-                                            <label class="block font-bold mb-2" for="email">
-                                                Email
-                                            </label>
-                                            <input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email">
-                                        </div>
-
-                            
-                                        <div class="mb-6 form-group">
-                                            <label class="block font-bold mb-2" for="password">
-                                            Senha
-                                            </label>
-                                            <input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="******" id="senha">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </div>
-                                
-                                        <div class="flex items-center justify-between">
-                                            <button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                                            Entrar
-                                            </button>
-                                            <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-                                            Não consigo entrar
-                                            </a>
-                                        </div>
-                                        </form>
-                                        <button type="button" onclick="document.getElementById('singIn').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
-                                        Cancelar
-                                        </button>
-                                    </div>
-                                    </div>
-                                </div>
-                        </div>
-                    </div>
-                    </div>
-            '; ?>
         </nav>
     <script>
         
