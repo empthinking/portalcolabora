@@ -5,7 +5,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
   exit;
 }
 require_once 'dbconn.php';
-if($_SERVER['REQUEST_METHOD'] == "POST){
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 	$product_name = $mysqli->real_escape_string($_POST['product-name']);
 	$product_description = $mysqli->real_escape_string($_POST['product-description']);
