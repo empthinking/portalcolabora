@@ -12,37 +12,33 @@ if ($mysqli -> connect_errno) {
   exit();
 }
 
-// Process form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $user_nome = $_POST['user_nome'];
   $user_email = $_POST['user_email'];
   $user_senha = $_POST['user_senha'];
   $user_tel = $_POST['user_tel'];
 
-  // Prepare and bind the query
   $stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)");
   $stmt->bind_param("ssss", $user_nome, $user_email, $user_senha, $user_tel);
 
-  // Execute the query
+  
   if ($stmt->execute()) {
-    // Redirect to confirmation page
     header("Location: index.php");
     exit();
   } else {
     echo "Erro ao inserir usuário: " . $mysqli->error;
   }
 
-  // Close the statement and connection
   $stmt->close();
   $mysqli->close();
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>User Registration</title>
+  <title>Cadastro</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -97,7 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <label for="user_tel">Telefone:</label>
     <input type="tel" id="user_tel" name="user_tel" required>
 
-    <input type="submit" value="Register">
+    <input type="submit" value="Enviar">
   </form>
 </body>
 </html>
