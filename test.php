@@ -59,17 +59,6 @@ if ($mysqli -> connect_errno) {
   exit();
 }
 
-		$stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)");
-		//Insercao das variaveis
-		$stmt->bind_param('ssss', 'uepa', 'email@uepa.com', 'teste', '123');
-		//Envio dos dados
-		$stmt->execute();
-			//Encerramento da conexao
-			$stmt->close();
-			$mysqli->close();														     
-			$msg = "Registro completado com sucesso";
-
-
 ?>
 
 <!DOCTYPE html>
