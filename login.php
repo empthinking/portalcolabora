@@ -10,13 +10,12 @@ $email_err = $password_err = $login_err = '';
 if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION['login'])){
 	$email = trim($_POST['email']);
 	$password = trim($_POST['password']);
-
+/*
 	if(filter_var($email, FILTER_VALIDATE_EMAIL)){
 		$email_err = 'Formato inválido';
-		echo $email;
-		exit();
-
 	}
+*/
+	
 	
 	/*if(strlen($password) < 8){
 		$password_err = 'Senha deve conter no mínimo 8 caracteres';
