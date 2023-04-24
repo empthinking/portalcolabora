@@ -54,7 +54,7 @@ $port = 3306;
 
 $mysqli = new mysqli($servername, $user, $password, $db_name, $port);
 #Verificação de conexão
-if ($mysqli -> connect_errno) {
+if ($mysqli->connect_errno) {
   echo "Falha na conexão com o banco de dados ${mysqli->connect_error}";
   exit();
 }
@@ -76,7 +76,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			throw new Exception("Erro de confirmação de senha");
 
 		} 
-		$stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)"){
+		$stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)");
 		//Insercao das variaveis
 		$stmt->bind_param('ssss', 'uepa', 'email@uepa.com', 'teste', '123');
 		//Envio dos dados
