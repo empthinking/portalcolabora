@@ -46,7 +46,7 @@
 							</button>
 						</div>
 					</div>
-					<?php if(isset([$_SESSION['login']) && $_SESSION['login'] === true): ?>
+					<?php if(isset($_SESSION['login']) && $_SESSION['login'] === true): ?>
 					<div class="relative">
                     <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
                         <img src="caminho/para/imagem-de-perfil.jpg" alt="Imagem de Perfil" class="w-10 h-10 rounded-full mr-2">
