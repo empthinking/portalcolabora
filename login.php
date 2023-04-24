@@ -41,10 +41,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && (!isset($_SESSION['login']) || $_SESS
 			$_SESSION['username'] = $username_stored;
 			$_SESSION['email'] = $email_stored;
 			$_SESSION['number'] = $number_stored;
+			 session_regenerate_id(true);
+
+               		$timeout = 1800; // 30 minutes
+               		session_set_cookie_params($timeout);
 			$stmt->close();
 			$result->free_result();
+			
+			echo "$username_stored";
 
-			header('location: index.php');
+			//header('location: index.php');
 		} else {
 		    $login_err = 'Nome de usuário ou senha inválidos.';
 		}
