@@ -67,24 +67,26 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 
 		//Verificacao de registro do email
-		$email_check = $mysqli->prepare("SELECT user_email FROM usuarios WHERE user_email = ?");
-		$email_check->bind_param('s', $user->get_email());
-		$email_check->execute();
-
-		if($user->get_password() !== $confirm_password){ //Confirmação da senha
+		if($email_check = $mysqli->prepare("SELECT user_email FROM usuarios WHERE user_email = ?")){;
+			$email_check->bind_param('s', $user->get_email());
+			$email_check->execute();
+		} else {
+			throw new Exception("Erro de checagem de email");
+		}
+		if($user->get_password() != $confirm_password){ //Confirmação da senha
 			$error_msg = "Insira corretamente a confirmação";
 
-		} else {
-		$stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)");
-		//Insercao das variaveis
-		$stmt->bind_param("ssss", $user->get_name(), $user->get_email(), $user->get_password_hash(), $user->get_num());
-		//Envio dos dados
-		$stmt->execute();
-		//Encerramento da conexao
-		$stmt->close();
-		$msg = "Registro completado com sucesso";
+		} elseif($stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)")){;
+			//Insercao das variaveis
+			$stmt->bind_param("ssss", $user->get_name(), $user->get_email(), $user->get_password_hash(), $user->get_num());
+			//Envio dos dados
+			$stmt->execute();
+			//Encerramento da conexao
+			$stmt->close();
+			$msg = "Registro completado com sucesso";
 
-		}
+		} else {
+			throw new Exception ("Erro de inserçao no banco de dados.");
 	} catch(Exception $error) {
 	$error_msg = $error->getMessage();
 	} finally {
