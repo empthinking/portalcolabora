@@ -13,6 +13,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION['login'])){
 
 	if(filter_var($email, FILTER_VALIDATE_EMAIL)){
 		$email_err = 'Formato inválido';
+		echo $email;
+		exit();
 
 	}
 	
