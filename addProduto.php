@@ -57,7 +57,7 @@ require_once "header.php"
                   <div class="bg-white rounded-lg overflow-hidden shadow-md
                     p-6">
                     <h2 class="text-4xl font-medium mb-4">Anunciar produto</h2>
-                    <form class="space-y-4" method='POST'>
+                    <form class="space-y-4" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method='POST'>
                       <div>
                         <label for="product-name" class="block text-lg
                           font-medium text-gray-700">Nome do produto</label>
