@@ -81,12 +81,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		//Insercao das variaveis
 		$stmt->bind_param('ssss', 'uepa', 'email@uepa.com', 'teste', '123');
 		//Envio dos dados
-		$stmt->execute()){
-		//Encerramento da conexao
-		$stmt->close();
-		$mysqli->close();														     
-
-		$msg = "Registro completado com sucesso";
+		if($stmt->execute()){
+			//Encerramento da conexao
+			$stmt->close();
+			$mysqli->close();														     
+			$msg = "Registro completado com sucesso";
 
 		} else {
 			throw new Exception ($mysqli->error);
