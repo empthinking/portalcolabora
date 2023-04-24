@@ -75,6 +75,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		}
 		if($user->get_password() != $confirm_password){ //Confirmação da senha
 			$error_msg = "Insira corretamente a confirmação";
+			throw new Exception("Erro de confirmação de sernha");
 
 		} elseif($stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)")){;
 			//Insercao das variaveis
@@ -82,7 +83,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			//Envio dos dados
 			$stmt->execute();
 			//Encerramento da conexao
-			$stmt->close();
+			//$stmt->close();
 			$msg = "Registro completado com sucesso";
 
 		} else {
