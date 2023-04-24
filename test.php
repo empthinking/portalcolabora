@@ -175,7 +175,7 @@ input[type="submit"]:hover {
 </head>
 <body>
 	<p> <?php
-echo $user->get_name() . $user->get_password() . $user->email() . $user->number();?> </p><br>
+echo $user->get_name() . $user->get_password() . $user->get_email() . $user->get_number();?> </p><br>
  <?php if(isset($msg)){ echo "<p>$msg</p>";} else { echo "Cadastro em pendência";} ?>
 <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post">
   <label for="username">Username:</label>
