@@ -63,7 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       font-weight: bold;
     }
     input[type=text], input[type=email], input[type=password], input[type=tel] {
-      width: 100%;
+      width: 90%;
       padding: 10px;
       border-radius: 3px;
       border: 1px solid #dddddd;
