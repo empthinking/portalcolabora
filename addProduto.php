@@ -6,10 +6,10 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
 }
 require_once 'dbconn.php';
 
-$product_name = mysqli_real_escape_string($conn, $_POST['product-name']);
-$product_description = mysqli_real_escape_string($conn, $_POST['product-description']);
-$product_price = mysqli_real_escape_string($conn, $_POST['product-price']);
-$product_category = mysqli_real_escape_string($conn, $_POST['product-category']);
+$product_name = $mysqli->real_escape_string($_POST['product-name']);
+$product_description = $mysqli->real_escape_string($_POST['product-description']);
+$product_price = $mysqli->real_escape_string($_POST['product-price']);
+$product_category = $mysqli->real_escape_string($_POST['product-category']);
 
 $sql = "INSERT INTO products (produto_nome, produto_descricao, produto_preco, produto_category, user_id)
         VALUES ('$product_name', '$product_description', '$product_price', '$product_category', {$_SESSION['id']})";
