@@ -1,5 +1,5 @@
 <?php 
-	require_once "class.php";
+	#require_once "class.php";
 	require_once "dbconn.php";
 	$error_msg = "";
 
