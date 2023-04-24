@@ -73,9 +73,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 		}
 		if($user->get_password() != $confirm_password){ //Confirmação da senha
 			$error_msg = "Insira corretamente a confirmação";
-			throw new Exception("Erro de confirmação de sernha");
+			throw new Exception("Erro de confirmação de senha");
 
-		} elseif($stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)")){;
+		} elseif($stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)")){
 			//Insercao das variaveis
 			$stmt->bind_param("ssss", $user->get_name(), $user->get_email(), $user->get_password_hash(), $user->get_num());
 			//Envio dos dados
@@ -87,7 +87,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 			$msg = "Registro completado com sucesso";
 
 		} else {
-			throw new Exception ("Erro de inserçao no banco de dados.");
+			throw new Exception ("Erro de insercao no banco de dados.");
 		}
 	} catch(Exception $error) {
 	$error_msg = $error->getMessage();
