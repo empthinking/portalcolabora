@@ -22,10 +22,10 @@ class User {
 		if(!preg_match('/^[0-9]+$/', $num){
 			throw new Exception('Número Inválido');
 
-		$this->username = htmlspecialchars(trim($name));
-		$this->password = htmlspecialchars($pwd);
-		$this->email    = htmlspecialchars(trim($email));
-		$this->number   = htmlspecialchars(trim($num));
+		$this->username = trim($name);
+		$this->password = $pwd;
+		$this->email    = trim($email);
+		$this->number   = trim($num);
 
 	}
 	function get_name() : string {
