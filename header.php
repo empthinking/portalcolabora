@@ -49,7 +49,7 @@ require_once 'login.php'
 							</button>
 						</div>
 					</div>
-					<?php if(!isset($_SESSION['login']){
+					<?php if(!isset($_SESSION['login'])){
 	echo'
 					<div class="flex items-center ml-5">
 						<button href="cadastro.php" class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button>
@@ -58,18 +58,18 @@ require_once 'login.php'
 							<div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
 								<div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
 									<h1 class="text-3xl font-bold mb-8 text-center">Login</h1>
-									<form method="POST" action="'.htmlspecialchars($_SERVER['PHP_SELF']).'">
+									<form method="POST" action="'.htmlspecialchars($_SERVER["PHP_SELF"]).'">
 										<div class="mb-4 form-group">
 											<label class="block font-bold mb-2" for="email">
 											Email
 											</label>
-											<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email">
+											<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email">
 										</div>
 										<div class="mb-6 form-group">
 											<label class="block font-bold mb-2" for="password">
 											Senha
 											</label>
-											<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" placeholder="******" id="senha">
+											<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" id="senha" name="password">
 											<i class="fa fa-eye" aria-hidden="true"></i>
 										</div>
 										<div class="flex items-center justify-between">
