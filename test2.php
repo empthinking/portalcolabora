@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $user_tel = $_POST['user_tel'];
 
   // Prepare and bind the query
-  $stmt = $mysqli->prepare("INSERT INTO users (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)");
+  $stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)");
   $stmt->bind_param("ssss", $user_nome, $user_email, $user_senha, $user_tel);
 
   // Execute the query
@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </style>
 </head>
 <body>
-  <form method="POST" action="register.php">
+  <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <h2>User Registration</h2>
     <label for="user_nome">Name:</label>
     <input type="text" id="user_nome" name="user_nome" required>
