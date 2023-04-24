@@ -7,17 +7,15 @@ require_once 'dbconn.php';
 $email = $password = '';
 $email_err = $password_err = $login_err = '';
 
-if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION['login'])){
+if($_SERVER['REQUEST_METHOD'] == 'POST' && (!isset($_SESSION['login'] || $_SESSION['login'] !== false)){
 	$email = trim($_POST['email']);
 	$password = trim($_POST['password']);
 /*
 	if(filter_var($email, FILTER_VALIDATE_EMAIL)){
 		$email_err = 'Formato inválido';
 	}
-*/
 	
-	
-	/*if(strlen($password) < 8){
+	if(strlen($password) < 8){
 		$password_err = 'Senha deve conter no mínimo 8 caracteres';
 	}
 */
