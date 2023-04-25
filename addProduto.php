@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
-    echo '<script>alert("login necessario")</script>';
+    $_SESSION['error'] = 'Login necessario';
     header('Location: index.php');
     exit;
 }
