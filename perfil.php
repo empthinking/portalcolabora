@@ -10,7 +10,7 @@ if (isset($login_err)) {
 } else {
   echo '<script>console.log("Fine")</script>';
 }
-        if(isset($_SESSION['error']){
+        if(isset($_SESSION['error'])){
             echo "<script>alert(${_SESSION['error']})</script>";
             unset($_SESSION['error']);
         }
