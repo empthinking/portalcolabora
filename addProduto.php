@@ -1,8 +1,9 @@
 <?php
 session_start();
 if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
-  header('Location: index.php');
-  exit;
+    $_SESSION['error'] = 'Login necessário';
+    header('Location: index.php');
+    exit;
 }
 require_once 'dbconn.php';
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
