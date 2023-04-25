@@ -2,7 +2,7 @@
 function isUserLoggedIn() : bool{
 	return isset($_SESSION['login']) && $_SESSION['login'] === true);
 }
-function userLogin(string $username, string $pwd, mysqli $conn) : void {
+function userLogin(string $email, string $pwd, mysqli $conn) : void {
   if(!isset($conn))
     throw new Exception('Ausencia do objeto mysqli como parametro');
   
