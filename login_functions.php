@@ -7,6 +7,8 @@ function isUserLoggedIn():
         void {
             if (!isset($email) || !isset($pwd)) throw new Exception('Campos de email e senha devem ser preenchidos');
             if (!isset($conn)) throw new Exception('Ausencia do objeto mysqli como parametro');
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) throw new Exception ('Email em formato incorreto');
+            if (!
 
             $stmt = $mysqli->prepare('SELECT * FROM usuarios WHERE user_email = ?');
             $stmt->bind_param('s', $email);
