@@ -10,6 +10,10 @@ if (isset($login_err)) {
 } else {
   echo '<script>console.log("Fine")</script>';
 }
+        if(isset($_SESSION['error']){
+            echo "<script>alert(${_SESSION['error']})</script>";
+            unset($_SESSION['error']);
+        }
 ?>
 
 <div class="flex items-center justify-centermt-  menu-overlay" >
