@@ -105,7 +105,6 @@
 						}
 						})
 					</script>
-					<?php endif; ?>
 				</div>
 			</div>
 		</nav>
