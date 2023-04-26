@@ -1,5 +1,5 @@
 <?php
-//require_once "login.php";
+require_once "login.php";
 require_once "message_functions.php";
 require_once "header.php";
 ?>
@@ -7,7 +7,7 @@ require_once "header.php";
 <main>
         <?php
         if(isset($_SESSION['error'])){
-		showError($_SESSION['error']);
+		echo errorMsg($_SESSION['error']);
             unset($_SESSION['error']);
         }
 ?>
@@ -20,12 +20,12 @@ require_once "header.php";
         </figure>
         <div class="mt-6">
           <h3 class="text-2xl font-bold">Nome</h3>
-          <h3 class="text-3xl font-bold text-gray-500"><?php echo isset($_SESSION['login']) && $_SESSION['login'] == true ? $_SESSION['username'] : '.'; ?></h3>
+          <h3 class="text-3xl font-bold text-gray-500"><?php echo isUserLoggedIn() ? $_SESSION['username'] : '.'; ?></h3>
           <h3 class="text-2xl font-bold">Email</h3>
-          <h3 class="text-3xl font-bold text-gray-500"><?php echo isset($_SESSION['login']) && $_SESSION['login'] == true ? $_SESSION['email'] : '.'; ?></h3>
+          <h3 class="text-3xl font-bold text-gray-500"><?php echo isUserLoggedIn() ? $_SESSION['email'] : '.'; ?></h3>
           <div id="btp" class="mt-4">
             <h3 class="text-2xl font-bold">Número</h3>
-            <h3 class="text-3xl font-bold text-gray-500"><?php echo isset($_SESSION['login']) && $_SESSION['login'] == true ? $_SESSION['number'] : '.'; ?></h3>
+            <h3 class="text-3xl font-bold text-gray-500"><?php echo isUserLoggedIn() ? $_SESSION['number'] : '.'; ?></h3>
                      </div>
                      <br>
 
