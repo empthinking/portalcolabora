@@ -1,7 +1,7 @@
 <?php
 
-showError(string $msg) {
-    echo "
+function errorMsg(string $msg) {
+    return "
         <div id='popup' class='fixed mx-auto top-0 left-0 right-0 z-10 w-1/4'>
           <div class='mx-auto mt-4 bg-yellow-100 rounded-lg p-4'>
             <button id='closeBtn' class='float-right text-gray-700 hover:text-gray-800 focus:outline-none'>
@@ -13,7 +13,7 @@ showError(string $msg) {
             <p>$msg</p>
           </div>
         </div>
-<script src='scripts/msg.js'></script>
+        <script src='scripts/msg.js'></script>
     ";
 }
 ?>
