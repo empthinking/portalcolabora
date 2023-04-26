@@ -1,12 +1,11 @@
 <?php
-/*
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST'):
 	require_once "login.php";
 endif;
 require_once "message_functions.php";
 require_once "login_functions.php";
-*/
-#require_once "header.php";
+require_once "header.php";
 
 ?>
 
