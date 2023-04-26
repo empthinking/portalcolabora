@@ -2,7 +2,7 @@
 function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
-
+/*
 function userLogin(string $email, string $pwd, mysqli $conn): void {
     if (!isset($email) || !isset($pwd)) throw new Exception('Campos de email e senha devem ser preenchidos');
     if (!isset($conn)) throw new Exception('Ausencia do objeto mysqli como parametro');
@@ -39,7 +39,7 @@ function userLogin(string $email, string $pwd, mysqli $conn): void {
         throw new Exception('Nome de usuario ou senha não encontrado');
     }
 }
-
+*/
 function userLogout(): void {
     $_SESSION = array();
     session_destroy();
