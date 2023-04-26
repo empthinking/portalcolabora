@@ -1,15 +1,18 @@
 <?php
-require_once "login.php";
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST'):
+	require_once "login.php";
+endif;
 require_once "message_functions.php";
 require_once "header.php";
 ?>
 
 <main>
         <?php
-        if(isset($_SESSION['error'])){
+        if(isset($_SESSION['error'])):
 		echo errorMsg($_SESSION['error']);
             unset($_SESSION['error']);
-        }
+        endif;
 ?>
 
 <div class="flex items-center justify-centermt-  menu-overlay" >
