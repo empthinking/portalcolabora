@@ -1,0 +1,14 @@
+<?php
+
+#Receber dados do usuario pelo id
+$id = 10; //exemplo de id
+$user_table = new UserTable($id); //Objeto da classe User contendo os atributos do usuario
+
+#criar um objeto para um usuario
+$user = new User($nome, $email, $senha, $num);
+
+#Enviar o objeto criado para o banco de dados
+$user_table->setUserData($user);
+
+?>
+
