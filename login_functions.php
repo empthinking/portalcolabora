@@ -42,10 +42,12 @@ function userLogin(string $email, string $pwd, mysqli $conn): void {
     }
 }
 */
+/*
 function userLogout(): void {
     $_SESSION = array();
     session_destroy();
     header("Location: index.php");
     exit;
 }
+*/
 ?>
