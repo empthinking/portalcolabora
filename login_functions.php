@@ -1,7 +1,9 @@
 <?php
+/*
 function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
+*/
 /*
 function userLogin(string $email, string $pwd, mysqli $conn): void {
     if (!isset($email) || !isset($pwd)) throw new Exception('Campos de email e senha devem ser preenchidos');
