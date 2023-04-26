@@ -46,22 +46,6 @@
 							</button>
 						</div>
 					</div>
-					<?php if(isset($_SESSION['login']) && $_SESSION['login'] === true): ?>
-					<div class="relative">
-						<div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
-							<img src="img/perfil.png" alt="Imagem de Perfil" class="w-10 h-10 rounded-full mr-2">
-							<i class="fa fa-angle-down"></i>
-						</div>
-						<div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
-							<ul class="list-none">
-								<li class="px-4 py-2 hover:bg-gray-100"><a href="#">Perfil</a></li>
-								<li class="px-4 py-2 hover:bg-gray-100"><a href="#">Histórico</a></li>
-								<li class="px-4 py-2 hover:bg-gray-100"><a href="#">Anunciar</a></li>
-								<li class="px-4 py-2 hover:bg-gray-100"><a href="#">Sair</a></li>
-							</ul>
-						</div>
-					</div>
-					<?php else: ?>
 					<div class="flex items-center ml-5">
 						<a href="test2.php"><button class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button></a>
 						<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">Entrar</button>
