@@ -1,17 +1,13 @@
 <?php
 //require_once "login.php";
+require_once "message_functions.php";
 require_once "header.php";
 ?>
 
 <main>
         <?php
-if (isset($login_err)) {
-  echo '<script>console.log("' . $login_err . '")</script>';
-} else {
-  echo '<script>console.log("Fine")</script>';
-}
         if(isset($_SESSION['error'])){
-            echo "<script>alert(${_SESSION['error']})</script>";
+		showError($_SESSION['error']);
             unset($_SESSION['error']);
         }
 ?>
