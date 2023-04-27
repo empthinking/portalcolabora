@@ -1,40 +1,35 @@
 <?php 
-require_once "dbconn.php";
+require_once 'database.php';
+require_once 'functions/message.php';
 
-$username = $password = $number = $confirm_password = "";
 
-if($_SERVER["REQUEST_METHOD"] == "POST"){
-    
-    $name = $_POST["username"];
-    $email = $_POST["email"];
-    $password = $_POST["password"];
-    $number = $_POST["number"];
-    $confirm_password = $_POST["confirm_password"];
-    
-    //regex para validar os dados
-    $username_reg = "/^[a-zA-Z ]+$/";
-    $number_reg = "/^[0-9]+$/";
-    
-    //Preparacao do SQL
-    $stmt = $mysqli->prepare("INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES (?, ?, ?, ?)");
-    //Insercao das variaveis
-    $stmt->bind_param("ssss", $name, $email, $password, $number);
-    //Envio dos dados
-    $stmt->execute();
-    //Encerramento da conexão do db
-    $stmt->close();
-    
-    if($result){
-        echo "Data inserted successfully.";
-    } else{
-        echo "Error: " . $mysqli -> error($mysqli);
+$username = $email = $password = $confirm_password = $cellphone = '';
+if($_SERVER["REQUEST_METHOD"] === "POST"):
+    $username          = $_POST['username'];
+    $email             = $_POST['email'];
+    $password          = $_POST['password'];
+    $confirm_password  = $_POST['confirm_password'];
+    $cellphone         = $_POST['number'];
+
+    try{
+        if($password !== $confirm_password): //Confirmação da senha
+            throw new Exception('Insira corretamente a confirmação');
+        else:
+            sign_up($mysqli, $username, $email, $password, $cellphone);
+        endif;
+    } catch(Exception $error) {
+        $error_msg = $error->getMessage();
     }
-    $mysqli -> close();
-    
-    //Redirecionamento para a home page
-    header("location: index.php");
-}
+
+
+    session_start();
+    $_SESSION['msg'] = "Registro completado com sucesso";
+    header('location: index.php');
+
+endif;
+
 ?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -50,6 +45,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 </head>
+
+<?= if(isset($error_msg)) echo error_msg($error_msg); ?>
+
 <main>
         <section class="bg-gray-100 py-8">
             <div class="container mx-auto">
@@ -60,7 +58,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                       <label class="block text-gray-700 font-bold mb-2" for="nome">
                         Nome completo
                       </label>
-                      <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nome" name="username" type="text" value="<?php echo $username; ?>" placeholder="Seu nome completo">
+                      <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nome" name="username" type="text" value="<?=if($_POST['username']) ec  ?>" placeholder="Seu nome completo">
                     </div>
                     <div class="mb-4">
                       <label class="block text-gray-700 font-bold mb-2" for="email">

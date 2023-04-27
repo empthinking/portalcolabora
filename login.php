@@ -1,10 +1,10 @@
 <?php
 //adiciona as funcoes de login
-require_once 'login_functions.php';
+require_once 'functions/sign_in.php';
 
 //estabelece a conexao com o banco de dados
 //objeto $mysqli
-require_once 'dbconn.php';
+require_once 'database.php';
 
 $email = $password = '';
 
@@ -13,11 +13,12 @@ if(!isUserLoggedIn()){
     $email = $mysqli->real_escape_string($_POST['email']);
     $password = $mysqli->real_escape_string($_POST['password']);
     
-    login($email, $password, $mysqli);
+    sign_in($mysqli, $email, $password);
     header('location: index.php');
 } else {
     throw new Exception('Nome de usuário ou senha inválidos.');
 }
 
+//fecha a conexao com o banco de dados
 $mysqli->close();
 ?>

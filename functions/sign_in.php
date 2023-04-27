@@ -7,17 +7,18 @@ function isUserLoggedIn(): bool {
 
 #Executa o login
 //Necessita do email, senha e uma instancia da classe Mysqli
-function login(string $email, string $pwd, mysqli $conn): void {
+function login(mysqli $mysqli, string $email, string $pwd): void {
 
     if(isset($_SESSION['login']) && $_SESSION['login'] === true) throw new Exception('Usuario já logado');
+    if (!isset($mysqli)) throw new Exception('Ausencia do objeto mysqli como parametro');
+
     //Filtra os dados
     if (!isset($email) || !isset($pwd)) throw new Exception('Campos de email e senha devem ser preenchidos');
-    if (!isset($conn)) throw new Exception('Ausencia do objeto mysqli como parametro');
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) throw new Exception ('Email em formato incorreto');
     if (strlen($pwd) < 8) throw new Exception('Senha deve conter pelo menos 8 caracteres');
 
     //Prepara uma declaracao SQL
-    $stmt = $conn->prepare('SELECT * FROM usuarios WHERE user_email = ?');
+    $stmt = $mysqli->prepare('SELECT * FROM usuarios WHERE user_email = ?');
 
     //Adiciona a string de email na variavel '?'
     $stmt->bind_param('s', $email);
@@ -35,7 +36,7 @@ function login(string $email, string $pwd, mysqli $conn): void {
         $result->free_result();
     else: 
         //Em caso de falha, envia o respectivo erro
-        throw new Exception($conn->error);
+        throw new Exception($mysqli->error);
     endif;
 
     //ID do usuario
@@ -57,7 +58,7 @@ function login(string $email, string $pwd, mysqli $conn): void {
 
         //fecha a conexao com o banco de dados
         $stmt->close();
-        $conn->close();
+        $mysqli->close();
 
         //limpa o array
         $row = array();
