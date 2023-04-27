@@ -1,12 +1,16 @@
 <?php
+//inicia a sessao
 session_start();
-if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+
+//Caso usuario nao esteja logado, redireciona para a index
+if (!isUserLoggedIn()):
     $_SESSION['error'] = 'Login necessario';
     header('Location: index.php');
     exit;
-}
+endif;
+
 require_once 'dbconn.php';
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
+if($_SERVER['REQUEST_METHOD'] == 'POST'):
 
 	$product_name = $mysqli->real_escape_string($_POST['product-name']);
 	$product_description = $mysqli->real_escape_string($_POST['product-description']);
@@ -18,12 +22,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
 
-	if ($mysqli->query($sql)) {
+	if ($mysqli->query($sql)):
 		echo "Produto adicionado com sucesso";
-	} else {
+	else:
 		echo "Error: " . $sql . "<br>" . $mysqli->error;
-	}
-}
+	endif;
+endif;
 
 	$mysqli->close();
 require_once "header.php"
@@ -130,5 +134,5 @@ require_once "header.php"
                   </div>
                 </div>
               </main>
-            </body>
-          </html>
+
+<?= require_once 'footer.php' ?>

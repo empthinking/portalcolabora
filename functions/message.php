@@ -1,6 +1,7 @@
 <?php
 
-function errorMsg(string $msg) {
+//Retorna uma string contendo a mensagem de erro embutida no html
+function errorPopUp(string $msg) {
     return "
         <div id='popup' class='fixed mx-auto top-0 left-0 right-0 z-10 w-1/4'>
           <div class='mx-auto mt-4 bg-yellow-100 rounded-lg p-4'>
