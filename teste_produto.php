@@ -12,6 +12,13 @@ function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
 
+if(!isUserLoggedIn()) header('location: index.php')
+
+$name = $desc = $price = $categ = '';
+$error = '';
+
+try{
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'):
 	if(empty($name) || empty($desc) || empty($price) || empty($categ))
 	    throw new Exception('Todos os campos devem ser preenchidos');
@@ -23,8 +30,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'):
 	$name = trim($_POST['name']);
 	$desc = trim($_POST['description']);
 	$price = trim($_POST['price']);
-        $categ = trim($_POST['category']);
-        $user_id = $_SESSION['user_id'];
+ $categ = trim($_POST['category']);
+ $user_id = $_SESSION['user_id'];
 
         $stmt = $mysqli->prepare(SQL_INSERT_PRODUCT);
         $stmt->bind_param('ssdsi', $prod_name, $desc, $price, $categ, $user_id);
@@ -34,6 +41,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'):
         $stmt->close();
   
 endif;
+} catch (Exception $e) {
+    $error = $e->getMessage();
+}
 ?>
 <!DOCTYPE html>
 <html>
