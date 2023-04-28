@@ -1,5 +1,18 @@
 <?php
-require_once "header.php";
+function isUserLoggedIn(): bool {
+  return isset($_SESSION['login']) && $_SESSION['login'] === true;
+}
+
+//Inicia a sessao
+session_start();
+
+// Cabeçalho
+if(isUserLoggedIn()):
+	require_once 'header_loggedin.php';
+else:
+	require_once 'header.php';
+endif;
+
 ?>
 
 <main>
