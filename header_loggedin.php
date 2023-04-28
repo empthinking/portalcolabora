@@ -61,7 +61,7 @@
                         <ul class="list-none">
                             <li class="px-4 py-2 hover:bg-gray-100"><a href="perfil.php">Perfil</a></li>
                             <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Histórico</a></li>
-                            <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Anunciar</a></li>
+                            <li class="px-4 py-2 hover:bg-gray-100"><a href="cadastro.php">Anunciar</a></li>
                            <a href="logout.php"> <li class="px-4 py-2 hover:bg-gray-100">Sair</li></a>
                         </ul>
                     </div>
