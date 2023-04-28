@@ -51,7 +51,7 @@ if(!isUserLoggedIn()):
     else:
         //em caso de falha a mensagem é jo
         //throw new Exception('Nome de usuario ou senha não encontrado');
-        $login_error = 'Nome de usuario ou senha não encontrado';
+        $_SESSION['login_error'] = 'Nome de usuario ou senha não encontrado';
     endif;
 
     #Falta colocar a condição para fechar o banco, caso o contrario, ele fecha 2x.
@@ -65,6 +65,9 @@ $mysqli->close();
 ?>
 
 <!-- Aqui foi adicionado um bloco de código para exibir um alerta com a mensagem de erro -->
-<?php if (isset($login_error)): ?>
-    <script>alert('<?php echo $login_error; ?>');</script>
-<?php endif; ?>
+function loginErrorAlert() : void {
+  if(isset($_SESSION['login_error'])): 
+    echo "<script>alert('${_SESSION['login_error']}')</script>";
+    unset($_SESSION['login_error']);
+  endif;
+}
