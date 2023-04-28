@@ -41,7 +41,7 @@ if(!isUserLoggedIn()){
 
 
     //Verifica se o usuario esta cadastrado e realiza o login
-    if (password_verify($pwd, $row['user_senha'])) {
+    if (password_verify($password, $row['user_senha'])) {
         $_SESSION['login'] = true;
         $_SESSION['id'] = $row['user_id'];
         $_SESSION['username'] = $row['user_nome'];
