@@ -28,6 +28,7 @@ if(!isUserLoggedIn()):
         $result->free_result();
     else: 
         //Em caso de falha, envia o respectivo erro
+        $_SESSION['login_error'] = 'Email ou senha não encontrado';
         throw new Exception($mysqli->error);
     endif;
 
@@ -51,7 +52,7 @@ if(!isUserLoggedIn()):
     else:
         //em caso de falha a mensagem é jo
         //throw new Exception('Nome de usuario ou senha não encontrado');
-        $_SESSION['login_error'] = 'Nome de usuario ou senha não encontrado';
+        $_SESSION['login_error'] = 'Email ou senha não encontrado';
     endif;
 
     #Falta colocar a condição para fechar o banco, caso o contrario, ele fecha 2x.
