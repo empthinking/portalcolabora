@@ -46,7 +46,7 @@ endif;
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 </head>
 
-<?= if(isset($error_msg)) echo error_msg($error_msg); ?>
+<?= if(isset($error_msg)) echo $error_msg; ?>
 
 <main>
         <section class="bg-gray-100 py-8">
