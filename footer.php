@@ -1,7 +1,5 @@
 <script src="scripts/script.js"></script>
-<footer >
-    <div class=bg-green-500>
-
-    </div>
+<footer class=bg-green-500>
+    <h1>rodapé</h1>
 </footer>
 </html>
