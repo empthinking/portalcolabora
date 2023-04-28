@@ -1,5 +1,6 @@
 <?php 
 require_once 'database.php';
+require_once 'functions/sign_up.php';
 #require_once 'functions/message.php';
 
 
