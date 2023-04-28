@@ -135,4 +135,4 @@ require_once "header.php"
                 </div>
               </main>
 
-<?= require_once 'footer.php' ?>
+<?= require_once 'footer.php';?>
