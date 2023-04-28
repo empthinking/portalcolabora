@@ -64,3 +64,7 @@ endif;
 $mysqli->close();
 ?>
 
+<!-- Aqui foi adicionado um bloco de código para exibir um alerta com a mensagem de erro -->
+<?php if (isset($login_error)): ?>
+    <script>alert('<?php echo $login_error; ?>');</script>
+<?php endif; ?>
