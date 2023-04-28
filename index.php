@@ -13,10 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'):
 endif;
 
 // Cabeçalho
-require_once 'header.php';
+if(isUserLoggedIn()):
+	require_once 'header_loggedin.php';
+else:
+	require_once 'header.php';
+endif;
 
 //Pagina de perfil
-require_once 'home.php';
+require_once 'perfil.php';
 
 //Rodape
 require_once 'footer.php';
