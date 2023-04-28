@@ -54,7 +54,8 @@ if(!isUserLoggedIn()):
         throw new Exception('Nome de usuario ou senha não encontrado');
     endif;
 
-    
+    #Falta colocar a condição para fechar o banco, caso o contrario, ele fecha 2x.
+    //$mysqli->close();
     header('location: index.php');
 
 endif;
