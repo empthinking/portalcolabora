@@ -1,9 +1,8 @@
 <?php
 require_once "heaer_loggedin.php";
 ?>
-<main>
-
-<div class="flex items-center justify-centermt-  menu-overlay" >
+<body>
+    <div class="flex items-center justify-centermt-  menu-overlay" >
         <div class="bg-white rounded-lg  m-64 mx-auto p-8">
           <h3 class="text-3xl font-bold">Perfil</h3>
         <figure class="mt-4">
@@ -100,7 +99,4 @@ require_once "heaer_loggedin.php";
 </div>
 </div>
 </div>
-    
-      </main>
-    </body>
-</html>                
+</body>               
