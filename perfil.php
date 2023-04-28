@@ -1,4 +1,7 @@
 <?php
+function isUserLoggedIn(): bool {
+    return isset($_SESSION['login']) && $_SESSION['login'] === true;
+}
 require_once "header_loggedin.php";
 ?>
 <body>
