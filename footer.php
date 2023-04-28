@@ -1,5 +1,5 @@
 <script src="scripts/script.js"></script>
-<footer>
+<footer class=bg-green500>
     
 </footer>
 </html>
