@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'):
 endif;
 
 // Cabeçalho
-//require_once 'header.php';
+require_once 'header.php';
 
 //Checa se ha algum erro e exibe um popup com a respectiva mensagem
 if(isset($_SESSION['error'])):
