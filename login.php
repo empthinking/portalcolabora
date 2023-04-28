@@ -6,10 +6,6 @@
 //objeto $mysqli
 require_once 'database.php';
 
-
-
-$email = $password = '';
-
 //caso o usuario nao esteja logado, realiza o login e redireciona para a pagina principal
 if(!isUserLoggedIn()){
     $email = $mysqli->real_escape_string($_POST['email']);
