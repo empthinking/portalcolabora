@@ -1,12 +1,20 @@
 <?php
-require_once 'classes/Product.php';
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-  $name = $_POST['name'];
-  $desc = $_POST['description'];
-  $price = $_POST['price'];
-  $categ = $_POST['category'];
+
+define('SQL_PRODUCT_INSERT', 'INSERT INTO products(produto_nome, produto_descricao, produto_preco, produto_category, user_id) VALUES(?, ?, ?, ?, ?)');
+//'ssdsi'
+
+define('SQL_PRODUCT_SELECT', 'SELECT * FROM products WHERE user_id = ?');
+//'i'
+
+function isUserLoggedIn(): bool {
+    return isset($_SESSION['login']) && $_SESSION['login'] === true;
+}
+if($_SERVER['REQUEST_METHOD'] === 'POST'){
+  $name = trim($_POST['name']);
+  $desc = trim($_POST['description']);
+  $price = trim($_POST['price']);
+  $categ = trim($_POST['category']);
   
-  $prod = new Product($_SESSION['user_id'], );
 }
 
 <!DOCTYPE html>
