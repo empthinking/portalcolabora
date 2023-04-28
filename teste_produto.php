@@ -1,6 +1,8 @@
 <?php
+require_once 'database.php';
+//mysqli
 
-define('SQL_PRODUCT_INSERT', 'INSERT INTO products(produto_nome, produto_descricao, produto_preco, produto_category, user_id) VALUES(?, ?, ?, ?, ?)');
+define('SQL_PRODUCT_INSERT', 'INSERT INTO products(produto_nome, produto_descricao, produto_preco, produto_categoria, user_id) VALUES(?, ?, ?, ?, ?)');
 //'ssdsi'
 
 define('SQL_PRODUCT_SELECT', 'SELECT * FROM products WHERE user_id = ?');
@@ -9,14 +11,30 @@ define('SQL_PRODUCT_SELECT', 'SELECT * FROM products WHERE user_id = ?');
 function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
-if($_SERVER['REQUEST_METHOD'] === 'POST'){
-  $name = trim($_POST['name']);
-  $desc = trim($_POST['description']);
-  $price = trim($_POST['price']);
-  $categ = trim($_POST['category']);
-  
-}
 
+if($_SERVER['REQUEST_METHOD'] === 'POST'):
+	if(empty($name) || empty($desc) || empty($price) || empty($categ))
+	    throw new Exception('Todos os campos devem ser preenchidos');
+	if(!preg_match('/^[a-zA-Z_0-9]+$/', $name))
+	    throw new Exception('Nome deve conter apenas letras, números ou sublinhado apenas');
+	if(!filter_var($price, FILTER_VALIDATE_FLOAT))          
+	    throw new Exception('Preço em formato inválido');
+
+	$name = trim($_POST['name']);
+	$desc = trim($_POST['description']);
+	$price = trim($_POST['price']);
+        $categ = trim($_POST['category']);
+        $user_id = $_SESSION['user_id'];
+
+        $stmt = $mysqli->prepare(SQL_INSERT_PRODUCT);
+        $stmt->bind_param('ssdsi', $prod_name, $desc, $price, $categ, $user_id);
+
+        if(!$stmt->execute())
+            throw new Exception($this->mysqli->error . PHP_EOL . $this->mysqli->errno);
+        $stmt->close();
+  
+endif;
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,5 +123,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
 			<input type="submit" value="Submit">
 		</form>
 	</div>
+	<?php
+	$stmt = $mysqli->prepare(SQL_PRODUCT_SELECT);
+	$stmnt->bind(
+	echo "
+	<div class='container'>
+		<h1>${row['produto_nome']}</h1>
+		<h2${row['produto_descricao']}</h2>
+		<h2${row['produto_preco']}</h2>
+		<h2${row['produto_categoria']}</h2>
+	</div>";
 </body>
 </html>
