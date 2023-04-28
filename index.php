@@ -3,7 +3,7 @@
 session_start();
 
 //Funcoes para a exibicao de mensagens em popup
-require_once 'functions/message.php'
+//require_once 'functions/message.php'
 
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST'):
