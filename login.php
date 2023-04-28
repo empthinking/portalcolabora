@@ -1,15 +1,17 @@
 <?php
-//adiciona as funcoes de login
-//require_once 'functions/sign_in.php';
 
 //estabelece a conexao com o banco de dados
 //objeto $mysqli
 require_once 'database.php';
 
 //caso o usuario nao esteja logado, realiza o login e redireciona para a pagina principal
-if(!isUserLoggedIn()){
+if(!isUserLoggedIn()):
     $email = $mysqli->real_escape_string($_POST['email']);
     $password = $mysqli->real_escape_string($_POST['password']);
+
+    if (!isset($email) || !isset($password)) throw new Exception('Campos de email e senha devem ser preenchidos');
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) throw new Exception ('Email em formato incorreto');
+    if (strlen($password) < 8) throw new Exception('Senha deve conter pelo menos 8 caracteres');    
     
     //Prepara uma declaracao SQL
     $stmt = $mysqli->prepare('SELECT * FROM usuarios WHERE user_email = ?');
@@ -35,7 +37,7 @@ if(!isUserLoggedIn()){
 
 
     //Verifica se o usuario esta cadastrado e realiza o login
-    if (password_verify($password, $row['user_senha'])) {
+    if (password_verify($password, $row['user_senha'])):
         $_SESSION['login'] = true;
         $_SESSION['id'] = $row['user_id'];
         $_SESSION['username'] = $row['user_nome'];
@@ -51,16 +53,17 @@ if(!isUserLoggedIn()){
 
         //limpa o array
         $row = array();
-    }
-    else {
+    else:
         //em caso de falha a mensagem é jo
         throw new Exception('Nome de usuario ou senha não encontrado');
-    }
+    endif;
+
+    $mysqli->close();
     header('location: index.php');
-} else {
-    throw new Exception('Nome de usuário ou senha inválidos.');
-}
+
+endif;
 
 //fecha a conexao com o banco de dados
 $mysqli->close();
 ?>
+
