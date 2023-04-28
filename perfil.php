@@ -1,6 +1,6 @@
-<?php 
-
-require_once 'heaer_loggedin.php';
+<?php
+require_once "heaer_loggedin.php";
+?>
 <main>
 
 <div class="flex items-center justify-centermt-  menu-overlay" >
@@ -104,6 +104,3 @@ require_once 'heaer_loggedin.php';
       </main>
     </body>
 </html>                
-require_once 'footer.php';
-
-?>
