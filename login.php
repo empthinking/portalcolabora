@@ -39,8 +39,6 @@ if(!isUserLoggedIn()){
         throw new Exception($mysqli->error);
     endif;
 
-    //ID do usuario
-    $id = $row['user_id'];
 
     //Verifica se o usuario esta cadastrado e realiza o login
     if (verify_password($pwd, $row['user_senha'])) {
@@ -49,9 +47,6 @@ if(!isUserLoggedIn()){
         $_SESSION['username'] = $row['user_nome'];
         $_SESSION['email'] = $row['user_email'];
         $_SESSION['number'] = $row['user_tel'];
-
-        //gera um novo ID para a sessao
-        session_regenerate_id();
 
         //tempo limite ate a sessao expirar
         session_set_cookie_params(3600);
