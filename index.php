@@ -20,7 +20,7 @@ else:
 endif;
 
 //Pagina de perfil
-require_once 'perfil.php';
+require_once 'home.php';
 
 //Rodape
 require_once 'footer.php';
