@@ -8,13 +8,14 @@ if($_SERVER["REQUEST_METHOD"] === "POST"):
     $password          = $_POST['password'];
     $confirm_password  = $_POST['confirm_password'];
     $cellphone         = $_POST['number'];
+    $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
     try{
         if($password !== $confirm_password): //Confirmação da senha
             throw new Exception('Insira corretamente a confirmação');
         else:
             $stmt = $mysqli->prepare('INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES(?, ?, ?, ?)');
-            $stmt->bind_param('sssi', $username, $email, $password, $cellphone);
+            $stmt->bind_param('sssi', $username, $email, $password_hash, $cellphone);
             $stmt->execute();
             if($mysqli->error)
                 throw new Exception($this ->mysqli ->error);
