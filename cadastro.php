@@ -58,7 +58,7 @@ endif;
                       <label class="block text-gray-700 font-bold mb-2" for="nome">
                         Nome completo
                       </label>
-                      <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nome" name="username" type="text" value="<?=if($_POST['username']) ec  ?>" placeholder="Seu nome completo">
+                      <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nome" name="username" type="text" value="" placeholder="Seu nome completo">
                     </div>
                     <div class="mb-4">
                       <label class="block text-gray-700 font-bold mb-2" for="email">
@@ -70,14 +70,14 @@ endif;
                       <label class="block text-gray-700 font-bold mb-2" for="senha">
                         Senha
                       </label>
-                      <input class="password-input appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="senha" name="password" type="password" value="<?php echo $password; ?>" placeholder="Sua senha">
+                      <input class="password-input appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="senha" name="password" type="password" value="" placeholder="Sua senha">
                       <p class="text-gray-600 text-xs italic">Sua senha deve ter pelo menos 8 caracteres.</p>
                     </div>
                     <div class="mb-4">
                       <label class="block text-gray-700 font-bold mb-2" for="confirma-senha">
                         Confirme sua senha
                       </label>
-                      <input class="password-input appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="confirma-senha" name="confirm_password" type="password" value="<?php echo $confirm_password; ?>" placeholder="Confirme sua senha">
+                      <input class="password-input appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="confirma-senha" name="confirm_password" type="password" value="" placeholder="Confirme sua senha">
                     </div>
                     <button type="button" id="showPassword">Mostrar senha</button>
                     <div class="mb-4">
