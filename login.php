@@ -48,7 +48,7 @@ if(!isUserLoggedIn()):
         $mysqli->close();
 
         //limpa o array
-        $row = array();
+        $row = [];
     else:
         //em caso de falha a mensagem é jo
         throw new Exception('Nome de usuario ou senha não encontrado');
