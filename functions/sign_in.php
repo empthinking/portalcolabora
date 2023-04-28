@@ -54,7 +54,7 @@ function login(mysqli $mysqli, string $email, string $pwd): void {
         session_regenerate_id();
 
         //tempo limite ate a sessao expirar
-        session_set_cookie_params(3600);
+        //session_set_cookie_params(3600);
 
         //fecha a conexao com o banco de dados
         $stmt->close();
