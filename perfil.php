@@ -8,7 +8,7 @@
         </figure>
         <div class="mt-6">
           <h3 class="text-2xl font-bold">Nome</h3>
-          <h3 class="text-3xl font-bold text-gray-500"><?php echo isUserLoggedIn() ? $_SESSION['username'] : '.'; ?></h3>
+          <h3 class="text-3xl font-bold text-gray-500"><?php if(isset[$_SESSION['username']) echo $_SESSION['username']; ?></h3>
           <h3 class="text-2xl font-bold">Email</h3>
           <h3 class="text-3xl font-bold text-gray-500"><?php echo isUserLoggedIn() ? $_SESSION['email'] : '.'; ?></h3>
           <div id="btp" class="mt-4">
