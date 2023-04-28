@@ -6,9 +6,7 @@
 //objeto $mysqli
 require_once 'database.php';
 
-function isUserLoggedIn(): bool {
-    return isset($_SESSION['login']) && $_SESSION['login'] === true;
-}
+
 
 $email = $password = '';
 
