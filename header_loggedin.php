@@ -18,10 +18,10 @@
 <body class="bg-gray-100">
     <nav class="navbar flex items-center justify-between px-4 py-3 w-full">
         <div class="px-6 py-4 mx-auto md:flex md:items-center">
-            <div class="float-left">
+            <div class="flex items-center justify-between">
                 <div>
                     <a class="" href="index.php">
-                        <img src="img/Ativo 1 black.png" style="max-height: 3.75rem; max-width :10rem" class="flex-shrink-0">
+                        <img src="img/Ativo 1 black.png" style="max-height: 3.75rem" class="flex-shrink-0">
                     </a>
                     
                 </div>
@@ -62,7 +62,7 @@
                             <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Perfil</a></li>
                             <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Histórico</a></li>
                             <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Anunciar</a></li>
-                            <li class="px-4 py-2 hover:bg-gray-100"><a href="#">Sair</a></li>
+                            <li class="px-4 py-2 hover:bg-gray-100"><a href="logout.php">Sair</a></li>
                         </ul>
                     </div>
                 </div>
