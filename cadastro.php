@@ -14,8 +14,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"):
             throw new Exception('Insira corretamente a confirmação');
         else:
             $stmt = $mysqli->prepare('INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES(?, ?, ?, ?)');
-            $stmt = bind_param('sssi', $username, $email, $password, $cellphone);
-            $stmt = execute();
+            $stmt->bind_param('sssi', $username, $email, $password, $cellphone);
+            $stmt->execute();
             if($mysqli->error)
                 throw new Exception($this ->mysqli ->error);
             $stmt->close();
