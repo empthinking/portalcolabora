@@ -20,8 +20,8 @@
         <div class="px-6 py-4 mx-auto md:flex md:items-center">
             <div class="flex items-center justify-between">
                 <div>
-                    <a class="text-xl font-bold text-gray-800 md:text-2xl hover:text-gray-700" href="index.php">
-                        <img src="img/Ativo 1 black.png" style="max-height: 3.75rem" class="flex-shrink-0">
+                    <a class="" href="index.php">
+                        <img src="img/Ativo 1 black.png" style="max-height: 3.75rem; max-width :10rem" class="flex-shrink-0">
                     </a>
                     
                 </div>
