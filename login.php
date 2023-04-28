@@ -31,7 +31,6 @@ if(!isUserLoggedIn()):
         throw new Exception($mysqli->error);
     endif;
 
-
     //Verifica se o usuario esta cadastrado e realiza o login
     if (password_verify($password, $row['user_senha'])):
         $_SESSION['login'] = true;
@@ -51,7 +50,8 @@ if(!isUserLoggedIn()):
         $row = [];
     else:
         //em caso de falha a mensagem é jo
-        throw new Exception('Nome de usuario ou senha não encontrado');
+        //throw new Exception('Nome de usuario ou senha não encontrado');
+        $login_error = 'Nome de usuario ou senha não encontrado';
     endif;
 
     #Falta colocar a condição para fechar o banco, caso o contrario, ele fecha 2x.
