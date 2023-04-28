@@ -3,7 +3,7 @@ function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
 require_once "header_loggedin.php";
-?>
+
 <body>
     <div class="flex items-center justify-centermt-  menu-overlay" >
         <div class="bg-white rounded-lg  m-64 mx-auto p-8">
@@ -103,6 +103,6 @@ require_once "header_loggedin.php";
 </div>
 </div>
 </body> 
-<?php
+
 require_once "footer.php";
 ?>             
