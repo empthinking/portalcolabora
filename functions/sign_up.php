@@ -5,10 +5,8 @@
 
         if (empty($name) || empty($email) || empty($pwd) || empty($num))
             throw new Exception("Todos os campos devem ser preenchidos");
-
-        if (!preg_match('/^[a-zA-Z_0-9]+$/', $name))
+       if (!preg_match('/^[a-zA-Z_0-9]+$/', $name))
             throw new Exception('Nome deve conter apenas letras, numeros ou sublinhado apenas');
-
         if (!filter_var($email, FILTER_VALIDATE_EMAIL))
             throw new Exception("Email invalido");
 
@@ -40,3 +38,4 @@
     $stmt->close();
     $mysqli->close();
     }
+ ?>
