@@ -1,3 +1,4 @@
+<?= require_once 'heaer_loggedin.php';?>
 <main>
 
 <div class="flex items-center justify-centermt-  menu-overlay" >
@@ -101,3 +102,4 @@
       </main>
     </body>
 </html>                
+<?= require_once 'footer.php';?>
