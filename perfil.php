@@ -1,5 +1,5 @@
 <?php
-require_once "heaer_loggedin.php";
+require_once "header_loggedin.php";
 ?>
 <body>
     <div class="flex items-center justify-centermt-  menu-overlay" >
