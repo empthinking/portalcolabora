@@ -18,7 +18,7 @@
 <body class="bg-gray-100">
     <nav class="navbar flex items-center justify-between px-4 py-3 w-full">
         <div class="px-6 py-4 mx-auto md:flex md:items-center">
-            <div class="flex items-center justify-between">
+            <div class="float-left">
                 <div>
                     <a class="" href="index.php">
                         <img src="img/Ativo 1 black.png" style="max-height: 3.75rem; max-width :10rem" class="flex-shrink-0">
