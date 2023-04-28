@@ -54,7 +54,7 @@ if(!isUserLoggedIn()):
         throw new Exception('Nome de usuario ou senha não encontrado');
     endif;
 
-    $mysqli->close();
+    
     header('location: index.php');
 
 endif;
