@@ -1,6 +1,6 @@
 <?php 
 require_once 'database.php';
-require_once 'functions/message.php';
+#require_once 'functions/message.php';
 
 
 $username = $email = $password = $confirm_password = $cellphone = '';
