@@ -99,4 +99,7 @@ require_once "header_loggedin.php";
 </div>
 </div>
 </div>
-</body>               
+</body> 
+<?php
+require_once "footer.php";
+?>             
