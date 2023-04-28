@@ -3,13 +3,13 @@
 session_start();
 
 //Caso usuario nao esteja logado, redireciona para a index
-if (!isUserLoggedIn()):
+if (!isset([$_SESSION['login']) || $_SESSION['login'] === true):
     $_SESSION['error'] = 'Login necessario';
     header('Location: index.php');
     exit;
 endif;
 
-require_once 'dbconn.php';
+require_once 'database.php';
 if($_SERVER['REQUEST_METHOD'] == 'POST'):
 
 	$product_name = $mysqli->real_escape_string($_POST['product-name']);
