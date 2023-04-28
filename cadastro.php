@@ -1,8 +1,5 @@
 <?php 
 require_once 'database.php';
-require_once 'functions/sign_up.php';
-#require_once 'functions/message.php';
-
 
 $username = $email = $password = $confirm_password = $cellphone = '';
 if($_SERVER["REQUEST_METHOD"] === "POST"):
@@ -16,6 +13,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST"):
         if($password !== $confirm_password): //Confirmação da senha
             throw new Exception('Insira corretamente a confirmação');
         else:
+            $stmt = $mysqli->prepare('INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES(?, ?, ?, ?) WHERE user_id = ?');
+            $stmt = bind_param('ssssi', $username, $email, $password, $cellphone);
+            $stmt = execute();
+            if($mysqli->error)
+                throw new Exception($this ->mysqli ->error);
+            $stmt->close();
+            $mysqli->close();
             sign_up($mysqli, $username, $email, $password, $cellphone);
         endif;
     } catch(Exception $error) {
