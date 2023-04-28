@@ -1,7 +1,4 @@
-<?php
-require_once "header.php"
-  ?>
-  <main>
+ <main>
     <!-- Produtos -->
 
     <button id="botaoFiltro" style="margin-top: 100px;" class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4 mt-48 md:fixed left-10">
@@ -142,5 +139,4 @@ input[type="search"]::-webkit-search-results-decoration {
 
 
             </main>
-          </body>
-        </html>
+</body>
