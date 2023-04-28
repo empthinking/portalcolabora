@@ -8,10 +8,6 @@ require_once 'database.php';
 if(!isUserLoggedIn()):
     $email = $mysqli->real_escape_string($_POST['email']);
     $password = $mysqli->real_escape_string($_POST['password']);
-
-    if (!isset($email) || !isset($password)) throw new Exception('Campos de email e senha devem ser preenchidos');
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) throw new Exception ('Email em formato incorreto');
-    if (strlen($password) < 8) throw new Exception('Senha deve conter pelo menos 8 caracteres');    
     
     //Prepara uma declaracao SQL
     $stmt = $mysqli->prepare('SELECT * FROM usuarios WHERE user_email = ?');
