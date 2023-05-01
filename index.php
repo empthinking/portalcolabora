@@ -8,12 +8,12 @@ function isUserLoggedIn(): bool {
 session_start();
 
 if (isset($_SESSION['error_msg'])) {
-    echo '<script>alert("' . htmlspecialchars($_SESSION['error_msg']) . '")</script>';
+    echo '<div class="alert alert-danger">' . $_SESSION['error_msg'] . '</div>';
     unset($_SESSION['error_msg']);
 }
 
 if (isset($_SESSION['success_msg'])) {
-    echo '<div class="alert alert-success">' . $_SESSION['success_msg'] . '</div>';
+    echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
     unset($_SESSION['success_msg']);
 }
 
