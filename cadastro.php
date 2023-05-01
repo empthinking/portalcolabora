@@ -99,6 +99,12 @@ if (isset($error_msg)) {
               Cadastrar
             </button>
           </div>
+          <div class="flex items-center justify-between">
+            <a href="index.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+              Voltar
+            </a>
+          </div>
+
         </form>
       </div>
     </div>
