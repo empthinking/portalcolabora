@@ -56,6 +56,14 @@ if (isset($error_msg)) {
   </script>
 </head>
 
+<?php// Cabeçalho
+if(isUserLoggedIn()):
+	require_once 'header_loggedin.php';
+else:
+	require_once 'header.php';
+endif;
+?>
+
 <main>
   <section class="bg-gray-100 py-8">
     <div class="container mx-auto">
