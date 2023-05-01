@@ -8,7 +8,7 @@ function isUserLoggedIn(): bool {
 session_start();
 
 //Exibe um alerta quando o usuário se cadastra;
-
+/*
 	//alerta de erro.
 if (isset($_SESSION['error_msg'])) {
     echo '<script>alert("' . htmlspecialchars($_SESSION['error_msg']) . '")</script>';
@@ -19,7 +19,7 @@ if (isset($_SESSION['success_msg'])) {
     echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
     unset($_SESSION['success_msg']);
 }
-
+*/
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST'):
 	require_once "login.php"; //executa login de usuario
