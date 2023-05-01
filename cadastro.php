@@ -152,3 +152,7 @@ endif;
 </script>
 
 </html>
+
+<?php
+header('location: index.php');
+?>
