@@ -145,7 +145,8 @@ endif;
 <? php
 //Exibe um alerta quando o usuário se cadastra;
 	//alerta de erro.
-if (isset($_SESSION['error_msg'])) {
+if (isset($_SESSION['error_msg']))
+ {
     echo '<script>alert("' . htmlspecialchars($_SESSION['error_msg']) . '")</script>';
     unset($_SESSION['error_msg']);
 }
