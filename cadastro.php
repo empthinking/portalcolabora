@@ -39,7 +39,7 @@ if (isset($error_msg)) {
 } else {
   $_SESSION['success_msg'] = 'Registro completado com sucesso';
 }
-
+header('location: index.php');
 ?>
 
 <!DOCTYPE html>
