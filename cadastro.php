@@ -48,7 +48,7 @@ if (isset($error_msg)) {
   echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
   unset($_SESSION['success_msg']);
 }
-header('location: index.php');
+//header('location: index.php');
 ?>
 
 <!DOCTYPE html>
