@@ -1,8 +1,9 @@
 <?php
+
+//declaração da função que verivicar se o usuário está logado e direciona a página de cabeçalho.
 function isUserLoggedIn(): bool {
   return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
-
 require_once 'database.php';
 
 $username = $email = $password = $confirm_password = $cellphone = '';
