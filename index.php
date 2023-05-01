@@ -34,7 +34,7 @@ endif;
 
 //Pagina de perfil
 require_once 'home.php';
-loginErrorAlert();
+
 //Rodape
 require_once 'footer.php';
 
