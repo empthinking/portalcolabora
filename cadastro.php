@@ -1,11 +1,15 @@
 <?php
 
 //declaração da função que verivicar se o usuário está logado e direciona a página de cabeçalho.
-function isUserLoggedIn(): bool {
+function isUserLoggedIn(): bool
+{
   return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
+
+//requisitando a conexão com o banco de dados.
 require_once 'database.php';
 
+//Criando um novo usuário no banco de dados
 $username = $email = $password = $confirm_password = $cellphone = '';
 if ($_SERVER["REQUEST_METHOD"] === "POST") :
   $username          = $_POST['username'];
@@ -15,10 +19,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   $cellphone         = $_POST['number'];
   $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
+  //Validação local das senha no fomulário.
   try {
-    if ($password !== $confirm_password) : //Confirmação da senha
+    //Confirmação da senha
+    if ($password !== $confirm_password) :
       throw new Exception('Insira corretamente a confirmação');
     else :
+      // Inclusão no Banco de Dados
       $stmt = $mysqli->prepare('INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES(?, ?, ?, ?)');
       $stmt->bind_param('sssi', $username, $email, $password_hash, $cellphone);
       $stmt->execute();
@@ -36,13 +43,12 @@ session_start();
 //Exibir mensagem de alerta de sucesso
 if (isset($error_msg)) {
   $_SESSION['error_msg'] = $error_msg;
-  
 } else {
   $_SESSION['success_msg'] = 'Registro completado com sucesso';
   echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
-    unset($_SESSION['success_msg']);
+  unset($_SESSION['success_msg']);
 }
-//header('location: index.php');
+header('location: index.php');
 ?>
 
 <!DOCTYPE html>
@@ -66,10 +72,10 @@ if (isset($error_msg)) {
 
 <?php
 // Cabeçalho
-if(isUserLoggedIn()):
-	require_once 'header_loggedin.php';
-else:
-	require_once 'header.php';
+if (isUserLoggedIn()) :
+  require_once 'header_loggedin.php';
+else :
+  require_once 'header.php';
 endif;
 ?>
 
