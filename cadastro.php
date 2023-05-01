@@ -28,14 +28,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"):
 
 
     session_start();
-    $_SESSION['msg'] = "Registro completado com sucesso";
+    header('location: index.php');
+    //$_SESSION['msg'] = "Registro completado com sucesso";
     if (isset($error_msg)) {
       $_SESSION['error_msg'] = $error_msg;
   } else {
       $_SESSION['success_msg'] = 'Registro completado com sucesso';
   }
   
-    header('location: index.php');
+    
     //Exibir mensagem de alerta de sucesso
     
 
