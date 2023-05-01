@@ -29,9 +29,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST"):
 
     session_start();
     $logado = $_SESSION['msg'] = "Registro completado com sucesso";
-    header('location: index.php');
+
+    echo "<h1>$logado</h1>";
+    //header('location: index.php');
     //Exibir mensagem de alerta de sucesso
-    echo '<script>alert(logado)</script>';
+    
 
 
 endif;
