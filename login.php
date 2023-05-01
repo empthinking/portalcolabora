@@ -68,7 +68,7 @@ $mysqli->close();
 <!-- Aqui foi adicionado um bloco de código para exibir um alerta com a mensagem de erro -->
 function loginErrorAlert() : void {
   if(isset($_SESSION['login_error'])): 
-    echo "<script>alert('{$_SESSION['login_error']}')</script>";
+    echo "<script>alert('{$_SESSION["login_error"]}')</script>";
     unset($_SESSION['login_error']);
   endif;
 }

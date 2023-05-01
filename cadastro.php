@@ -1,7 +1,7 @@
 <?php 
 require_once 'database.php';
 
-/*$username = $email = $password = $confirm_password = $cellphone = '';
+$username = $email = $password = $confirm_password = $cellphone = '';
 if($_SERVER["REQUEST_METHOD"] === "POST"):
     $username          = $_POST['username'];
     $email             = $_POST['email'];
@@ -24,10 +24,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST"):
         endif;
     } catch(Exception $error) {
         $error_msg = $error->getMessage();
-    }
-    */
+    } 
 
-$username = $email = $password = $confirm_password = $cellphone = '';
+/*$username = $email = $password = $confirm_password = $cellphone = '';
 $error_msg = '';
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
@@ -87,7 +86,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 if(!empty($error_msg)){
     $_SESSION['error_msg'] = $error_msg;
 }
-
+*/
 
 
     session_start();
