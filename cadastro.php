@@ -36,8 +36,11 @@ session_start();
 //Exibir mensagem de alerta de sucesso
 if (isset($error_msg)) {
   $_SESSION['error_msg'] = $error_msg;
+  
 } else {
   $_SESSION['success_msg'] = 'Registro completado com sucesso';
+  echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
+    unset($_SESSION['success_msg']);
 }
 //header('location: index.php');
 ?>
@@ -141,18 +144,3 @@ endif;
 </script>
 
 </html>
-
-<? php
-//Exibe um alerta quando o usuário se cadastra;
-	//alerta de erro.
-if (isset($_SESSION['error_msg']))
- {
-    echo '<script>alert("' . htmlspecialchars($_SESSION['error_msg']) . '")</script>';
-    unset($_SESSION['error_msg']);
-}
-	// alerta de cadastro realizado com sucesso 
-if (isset($_SESSION['success_msg'])) {
-    echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
-    unset($_SESSION['success_msg']);
-}
-?>
