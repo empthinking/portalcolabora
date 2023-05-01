@@ -30,6 +30,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"):
     session_start();
     $_SESSION['msg'] = "Registro completado com sucesso";
     header('location: index.php');
+    //Exibir mensagem de alerta de sucesso
+    echo '<script>alert("Usuário cadastrado com sucesso!");</script>';
 
 endif;
 
