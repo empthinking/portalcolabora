@@ -27,10 +27,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST"):
     }
 
 
-    session_start();
+    if (session_start() === true)
+    {
+      echo '<script>alert("Registro completado com sucesso")</script>';
+    };
     //$logado = $_SESSION['msg'] = "Registro completado com sucesso";
     //Exibir mensagem de alerta de sucesso
-    echo '<script>alert("Registro completado com sucesso")</script>';
+    
     //header('location: index.php');
     
 endif;
