@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"):
     $_SESSION['msg'] = "Registro completado com sucesso";
     header('location: index.php');
     //Exibir mensagem de alerta de sucesso
-    echo '<script>alert("Usuário cadastrado com sucesso!");</script>';
+    echo '<script>alert("Usuário cadastrado com sucesso!"); window.location.href="index.php";</script>';
 
 endif;
 
