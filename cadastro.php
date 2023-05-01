@@ -56,7 +56,8 @@ if (isset($error_msg)) {
   </script>
 </head>
 
-<?php// Cabeçalho
+<?php
+// Cabeçalho
 if(isUserLoggedIn()):
 	require_once 'header_loggedin.php';
 else:
