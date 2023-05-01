@@ -29,11 +29,7 @@ endif;
 
 session_start();
 //Exibir mensagem de alerta de sucesso
-if (isset($error_msg)) {
-  $_SESSION['error_msg'] = $error_msg;
-} else {
-  $_SESSION['success_msg'] = 'Registro completado com sucesso';
-}
+
 header('location: index.php');
 ?>
 
