@@ -27,7 +27,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"):
     }
     */
 
-    $username = $email = $password = $confirm_password = $cellphone = '';
+$username = $email = $password = $confirm_password = $cellphone = '';
 $error_msg = '';
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
