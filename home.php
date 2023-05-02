@@ -98,7 +98,6 @@ if (mysqli_num_rows($resultado) > 0) {
 mysqli_close($conn);
 ?>
 
-</div>
                       </div>
                     </a>
                 <!-- fim do produto 1 -->
