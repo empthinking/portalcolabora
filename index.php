@@ -9,6 +9,7 @@ session_start();
 
 if(isset($_SESSION['success_msg'])):
     echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
+endif;
 
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST'):
@@ -29,5 +30,3 @@ require_once 'home.php';
 require_once 'footer.php';
 
 ?>
-
-
