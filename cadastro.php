@@ -1,4 +1,12 @@
 <?php
+// Função de validação de número de telefone (expressão regular)
+function validatePhone($phone) {
+  // Remove tudo exceto números do telefone
+  $phone = preg_replace("/[^0-9]/", "", $phone);
+  // Verifica se o telefone tem o formato correto
+  return preg_match("/^\d{10}$/", $phone);
+}
+
 
 //requisitando a conexão com o banco de dados.
 require_once 'database.php';
@@ -24,6 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   elseif ($password !== $confirm_password) :
     echo '<script>alert("' . htmlspecialchars('Insira corretamente a confirmação') . '")</script>';
   //throw new Exception('Insira corretamente a confirmação');
+  //confirmação de telefone
+  elseif (!validatePhone($cellphone)) :
+    echo '<script>alert("' . htmlspecialchars('O número de telefone não é válido') . '")</script>';
+
   elseif ($_SERVER["REQUEST_METHOD"] !== "POST") :
     unset($username);
     unset($email);
