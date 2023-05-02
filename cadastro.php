@@ -28,11 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) :
     // Se o e-mail não for válido, definir uma mensagem de erro
     echo '<script>alert("' . htmlspecialchars('O endereço de e-mail não é válido') . '")</script>';
-
   //Confirmação da senha
   elseif ($password !== $confirm_password) :
     echo '<script>alert("' . htmlspecialchars('Insira corretamente a confirmação') . '")</script>';
-  //throw new Exception('Insira corretamente a confirmação');
+  //validação do senha com menos de 8 dígitos
+  elseif (strlen($senha) < 8) :
+    echo '<script>alert("' . htmlspecialchars('A senha é muito curta!') . '")</script>';
   //confirmação de telefone
   elseif (!validatePhone($cellphone)) :
     echo '<script>alert("' . htmlspecialchars('O número de telefone não é válido') . '")</script>';
