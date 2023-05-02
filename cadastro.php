@@ -16,12 +16,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   //Validação local das senha no fomulário.
 
     //Confirmação do email
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)):
       // Se o e-mail não for válido, definir uma mensagem de erro
-      $erro_email = "O endereço de e-mail não é válido.";
-    }
+      echo '<script>alert("' . htmlspecialchars('O endereço de e-mail não é válido') . '")</script>';
+    
     //Confirmação da senha
-    if ($password !== $confirm_password) :
+    elseif ($password !== $confirm_password) :
       echo '<script>alert("' . htmlspecialchars('Insira corretamente a confirmação') . '")</script>';
       //throw new Exception('Insira corretamente a confirmação');
     else :
