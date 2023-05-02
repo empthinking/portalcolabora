@@ -8,7 +8,6 @@ function validatePhone($phone)
   return preg_match("/^\d{11}$/", $phone);
 }
 
-
 //requisitando a conexão com o banco de dados.
 require_once 'database.php';
 
