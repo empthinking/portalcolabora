@@ -35,15 +35,15 @@ endif;
 
 session_start();
 //Exibir mensagem de alerta de erro e sucesso
-if (isset($error_msg)) {
-  $_SESSION['error_msg'] = $error_msg;
-  echo '<script>alert("' . htmlspecialchars($_SESSION['error_msg']) . '")</script>';
-  unset($_SESSION['error_msg']);
-} else {
+if (!isset($error_msg)):
   $_SESSION['success_msg'] = 'Registro completado com sucesso';
   echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
   unset($_SESSION['success_msg']);
-}
+ else:
+  $_SESSION['error_msg'] = $error_msg;
+  echo '<script>alert("' . htmlspecialchars($_SESSION['error_msg']) . '")</script>';
+  unset($_SESSION['error_msg']);
+endif;
 ?>
 
 <!DOCTYPE html>
