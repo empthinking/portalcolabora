@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
   unset($_SERVER["REQUEST_METHOD"]);
  else:
-  $_SESSION['error_msg'] = $error_msg;
+  $_SESSION['error_msg'] = 'Os dados cadastrados são inválidos!';
   echo '<script>alert("' . htmlspecialchars($_SESSION['error_msg']) . '")</script>';
   unset($_SESSION['error_msg']);
 endif;
