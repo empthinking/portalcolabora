@@ -54,7 +54,7 @@
 
                 <div class="relative">
                     <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
-                        <img src="img/logo G (1).png" alt="Imagem de Perfil" class="w-10 h-10 rounded-full mr-2">
+                        <img src="img/avatar.png" alt="Imagem de Perfil" class="w-10 h-10 rounded-full mr-2">
                         <i class="fa fa-angle-down"></i>
                     </div>
                     <div id="dropdown-menu" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg hidden">
