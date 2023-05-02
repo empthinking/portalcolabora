@@ -5,7 +5,7 @@ function validatePhone($phone)
   // Remove tudo exceto números do telefone
   $phone = preg_replace("/[^0-9]/", "", $phone);
   // Verifica se o telefone tem o formato correto
-  return preg_match("/^\d{10}$/", $phone);
+  return preg_match("/^\d{11}$/", $phone);
 }
 
 
