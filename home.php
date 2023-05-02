@@ -1,4 +1,4 @@
- <main>
+<main>
     <!-- Produtos -->
 
     <button id="botaoFiltro" style="margin-top: 100px;" class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4 mt-48 md:fixed left-10">
@@ -81,7 +81,7 @@ if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
         echo '<div class="bg-white rounded-lg overflow-hidden shadow-md">';
         echo '<div class="relative">';
-        echo '<img src="#" alt="' . $linha["produto_nome"] . '" class="w-full h-64 object-cover">';
+        echo '<img src=" alt="' . $linha["produto_nome"] . '" class="w-full h-64 object-cover">';
         echo '</div>';
         echo '<div class="p-6">';
         echo '<h3 class="text-lg font-semibold mb-2">' . $linha["produto_nome"] . '</h3>';
