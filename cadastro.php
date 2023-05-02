@@ -17,7 +17,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
  
     //Confirmação da senha
     if ($password !== $confirm_password) :
-      throw new Exception('Insira corretamente a confirmação');
+      echo '<script>alert("' . htmlspecialchars('Insira corretamente a confirmação') . '")</script>';
+      //throw new Exception('Insira corretamente a confirmação');
     else :
       // Inclusão no Banco de Dados
       $stmt = $mysqli->prepare('INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES(?, ?, ?, ?)');
@@ -31,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
 
 endif;
 
-session_start();
 //Exibir mensagem de alerta de erro e sucesso
 if ($_SERVER["REQUEST_METHOD"] === "POST") :
   $_SESSION['success_msg'] = 'Registro completado com sucesso';
@@ -42,6 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   echo '<script>alert("' . htmlspecialchars($_SESSION['error_msg']) . '")</script>';
   unset($_SESSION['error_msg']);
 endif;
+
+//inicialização de uma nova sessão.
+session_start();
+
 ?>
 
 <!DOCTYPE html>
