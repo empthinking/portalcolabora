@@ -32,12 +32,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   elseif ($password !== $confirm_password) :
     echo '<script>alert("' . htmlspecialchars('Insira corretamente a confirmação') . '")</script>';
   //validação do senha com menos de 8 dígitos
-  elseif (strlen($password && $confirm_password) < 8) :
+  elseif (strlen($password && $confirm_password) <7 ) :
     echo '<script>alert("' . htmlspecialchars('A senha é muito curta!') . '")</script>';
   //confirmação de telefone
   elseif (!validatePhone($cellphone)) :
     echo '<script>alert("' . htmlspecialchars('O número de telefone não é válido') . '")</script>';
-
+  //Se o crud não for realizado com sucesso, as variáveis são destruidas.
   elseif ($_SERVER["REQUEST_METHOD"] !== "POST") :
     unset($username);
     unset($email);
