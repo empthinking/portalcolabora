@@ -81,7 +81,7 @@ if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
         echo '<div class="bg-white rounded-lg overflow-hidden shadow-md">';
         echo '<div class="relative">';
-        echo '<img src="' . $linha["imagem"] . '" alt="' . $linha["produto_nome"] . '" class="w-full h-64 object-cover">';
+        echo '<img src="#" alt="' . $linha["produto_nome"] . '" class="w-full h-64 object-cover">';
         echo '</div>';
         echo '<div class="p-6">';
         echo '<h3 class="text-lg font-semibold mb-2">' . $linha["produto_nome"] . '</h3>';
