@@ -35,7 +35,7 @@ endif;
 
 session_start();
 //Exibir mensagem de alerta de erro e sucesso
-if ($_SERVER["REQUEST_METHOD"] === "POST") :
+if ($_SERVER["REQUEST_METHOD"] !== "POST") :
   $_SESSION['success_msg'] = 'Registro completado com sucesso';
   echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
   unset($_SERVER["REQUEST_METHOD"]);
