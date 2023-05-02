@@ -15,25 +15,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
 
   //Validação local das senha no fomulário.
 
-    //Confirmação do email
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)):
-      // Se o e-mail não for válido, definir uma mensagem de erro
-      echo '<script>alert("' . htmlspecialchars('O endereço de e-mail não é válido') . '")</script>';
-    
-    //Confirmação da senha
-    elseif ($password !== $confirm_password) :
-      echo '<script>alert("' . htmlspecialchars('Insira corretamente a confirmação') . '")</script>';
-      //throw new Exception('Insira corretamente a confirmação');
-    else :
-      // Inclusão no Banco de Dados
-      $stmt = $mysqli->prepare('INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES(?, ?, ?, ?)');
-      $stmt->bind_param('sssi', $username, $email, $password_hash, $cellphone);
-      $stmt->execute();
-      if ($mysqli->error)
-        throw new Exception($this->mysqli->error);
-      $stmt->close();
-      $mysqli->close();
-    endif;
+  //Confirmação do email
+  if (!filter_var($email, FILTER_VALIDATE_EMAIL)) :
+    // Se o e-mail não for válido, definir uma mensagem de erro
+    echo '<script>alert("' . htmlspecialchars('O endereço de e-mail não é válido') . '")</script>';
+
+  //Confirmação da senha
+  elseif ($password !== $confirm_password) :
+    echo '<script>alert("' . htmlspecialchars('Insira corretamente a confirmação') . '")</script>';
+  //throw new Exception('Insira corretamente a confirmação');
+  elseif ($_SERVER["REQUEST_METHOD"] !== "POST") :
+    unset($username);
+    unset($email);
+    unset($password);
+    unset($confirm_password);
+    unset($cellphone);
+    unset($password_hash);
+  else :
+    // Inclusão no Banco de Dados
+    $stmt = $mysqli->prepare('INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES(?, ?, ?, ?)');
+    $stmt->bind_param('sssi', $username, $email, $password_hash, $cellphone);
+    $stmt->execute();
+    if ($mysqli->error)
+      throw new Exception($this->mysqli->error);
+    $stmt->close();
+    $mysqli->close();
+  endif;
 
 endif;
 
@@ -70,7 +77,7 @@ endif;
 
 <?php
 // Cabeçalho
-  require_once 'header.php';
+require_once 'header.php';
 ?>
 
 <main>
@@ -87,7 +94,9 @@ endif;
           </div>
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2" for="email" value="<?php echo htmlspecialchars($email); ?>">
-            <?php if (isset($erro_email)) { echo '<div class="erro">' . $erro_email . '</div>'; } ?>
+              <?php if (isset($erro_email)) {
+                echo '<div class="erro">' . $erro_email . '</div>';
+              } ?>
               Email
             </label>
             <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" name="email" type="email" placeholder="Seu endereço de email">
