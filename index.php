@@ -10,6 +10,7 @@ session_start();
 if(isset($_SESSION['success_msg'])):
     $msg = $_SESSION['success_msg'];
     echo '<script>alert("' . htmlspecialchars($msg) . '")</script>';
+    unset($msg);
 endif;
 
 //Checa se o formulaio de login foi enviado
