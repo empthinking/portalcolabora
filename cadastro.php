@@ -14,7 +14,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   $password_hash = password_hash($password, PASSWORD_DEFAULT);
 
   //Validação local das senha no fomulário.
- 
+
+    //Confirmação do email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+      // Se o e-mail não for válido, definir uma mensagem de erro
+      $erro_email = "O endereço de e-mail não é válido.";
+    }
     //Confirmação da senha
     if ($password !== $confirm_password) :
       echo '<script>alert("' . htmlspecialchars('Insira corretamente a confirmação') . '")</script>';
@@ -81,7 +86,8 @@ endif;
             <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nome" name="username" type="text" value="" placeholder="Seu nome completo">
           </div>
           <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2" for="email">
+            <label class="block text-gray-700 font-bold mb-2" for="email" value="<?php echo htmlspecialchars($email); ?>">
+            <?php if (isset($erro_email)) { echo '<div class="erro">' . $erro_email . '</div>'; } ?>
               Email
             </label>
             <input class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" name="email" type="email" placeholder="Seu endereço de email">
