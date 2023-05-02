@@ -7,6 +7,9 @@ function isUserLoggedIn(): bool {
 //Inicia a sessao
 session_start();
 
+if(isset($_SESSION['success_msg'])):
+    echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
+
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST'):
 	require_once "login.php"; //executa login de usuario
