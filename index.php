@@ -8,7 +8,8 @@ function isUserLoggedIn(): bool {
 session_start();
 
 if(isset($_SESSION['success_msg'])):
-    echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
+    $msg = $_SESSION['success_msg'];
+    echo '<script>alert("' . htmlspecialchars($msg) . '")</script>';
 endif;
 
 //Checa se o formulaio de login foi enviado

@@ -56,11 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
     $mysqli->close();
 
     //Alerta de registro efetuado
-    // $_SESSION['success_msg'] = 'Registro completado com sucesso';
+    session_start();
+    $_SESSION['success_msg'] = 'Registro completado com sucesso';
     // echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
     
     //inicialização de uma nova sessão.
-    session_start();
+    
     header('location: index.php');
   endif;
 
