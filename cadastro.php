@@ -1,11 +1,5 @@
 <?php
 
-//declaração da função que verivicar se o usuário está logado e direciona a página de cabeçalho.
-function isUserLoggedIn(): bool
-{
-  return isset($_SESSION['login']) && $_SESSION['login'] === true;
-}
-
 //requisitando a conexão com o banco de dados.
 require_once 'database.php';
 
@@ -50,7 +44,6 @@ if (isset($error_msg)) {
   echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
   unset($_SESSION['success_msg']);
 }
-header('location: index.php');
 ?>
 
 <!DOCTYPE html>
@@ -74,11 +67,7 @@ header('location: index.php');
 
 <?php
 // Cabeçalho
-if (isUserLoggedIn()) :
-  require_once 'header_loggedin.php';
-else :
   require_once 'header.php';
-endif;
 ?>
 
 <main>
@@ -152,7 +141,3 @@ endif;
 </script>
 
 </html>
-
-<?php
-header('location: index.php');
-?>
