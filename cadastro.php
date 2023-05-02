@@ -1,6 +1,7 @@
 <?php
 // Função de validação de número de telefone (expressão regular)
-function validatePhone($phone) {
+function validatePhone($phone)
+{
   // Remove tudo exceto números do telefone
   $phone = preg_replace("/[^0-9]/", "", $phone);
   // Verifica se o telefone tem o formato correto
@@ -52,20 +53,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
       throw new Exception($this->mysqli->error);
     $stmt->close();
     $mysqli->close();
+
+    //Alerta de registro efetuado
+    $_SESSION['success_msg'] = 'Registro completado com sucesso';
+    echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
   endif;
 
 endif;
 
-//Exibir mensagem de alerta de erro e sucesso
-if ($_SERVER["REQUEST_METHOD"] === "POST") :
-  $_SESSION['success_msg'] = 'Registro completado com sucesso';
-  echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
-  unset($_SERVER["REQUEST_METHOD"]);
-endif;
-
 //inicialização de uma nova sessão.
-//session_start();
-
+session_start();
 ?>
 
 <!DOCTYPE html>
