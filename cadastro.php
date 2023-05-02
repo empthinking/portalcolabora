@@ -64,6 +64,7 @@ endif;
 
 //inicialização de uma nova sessão.
 session_start();
+
 ?>
 
 <!DOCTYPE html>
