@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   elseif ($password !== $confirm_password) :
     echo '<script>alert("' . htmlspecialchars('Insira corretamente a confirmação') . '")</script>';
   //validação do senha com menos de 8 dígitos
-  elseif (!strlen($password && $confirm_password) >8 ) :
+  elseif (!strlen($password && $confirm_password) > 8) :
     echo '<script>alert("' . htmlspecialchars('A senha é muito curta!') . '")</script>';
   //confirmação de telefone
   elseif (!validatePhone($cellphone)) :
@@ -64,7 +64,9 @@ endif;
 
 //inicialização de uma nova sessão.
 session_start();
-
+if ($_SERVER["REQUEST_METHOD"] === "POST") :
+  header('location: index.php');
+endif;
 ?>
 
 <!DOCTYPE html>
