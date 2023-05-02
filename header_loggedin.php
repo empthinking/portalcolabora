@@ -17,7 +17,7 @@
 
 <body class="bg-gray-100">
     <nav class="navbar flex items-center justify-between px-4 py-3 w-full">
-        <div class="px-6 py-4 mx-auto md:flex md:items-center">
+        <div class="px-6 py-4 mx-auto md:flex md:items-center justify-between">
             <div class="flex items-center justify-between">
                 <div>
                     <a class="" href="index.php">
