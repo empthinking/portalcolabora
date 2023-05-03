@@ -45,7 +45,7 @@
                         <input class="bg-gray-200 rounded-full border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 pl-4 pr-10 py-2 w-80" type="text" placeholder="Pesquisar...">
                         <button class="absolute right-0 top-0 mt-3 mr-4">
                             <svg class="h-4 w-4 fill-current text-gray-500" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M6.66667 12.6667C9.89961 12.6667 12.6667 9.89961 12.6667 6.66667C12.6667 3.43373 9.89961 0.666672 6.66667 0.666672C3.43373 0.666672 0.666672 3.43373 0.666672 6.66667C0.666672 9.89961 3.43373 12.6667 6.66667 12.6667ZM6.66667 11.3333C8.91693 11.3333 10.6667 9.58357 10.6667 6.66667C10.6667 3.74976 8.91693 2.00001 6.66667 2.00001C4.4164 2.00001 2.66667 3.74976 2.66667 6.66667C2.66667 9.58357 4.4164 11.3333 6.66667 11.3333Z" />
+                                
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M14.6667 14L11.3333 10.6667L14.6667 7.33337L13.3333 6.00004L10 9.33337L6.66667 6.00004L5.33333 7.33337L8.66667 10.6667L5.33333 14L6.66667 15.3334L10 12.0001L13.3333 15.3334L14.6667 14Z" />
                             </svg>
                         </button>
