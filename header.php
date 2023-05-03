@@ -1,3 +1,11 @@
+<?php
+if(isset($_POST['email']) || isset($_POST['password'])):
+	if(strlen($_POST['email']) == 0):
+		echo '<div class="alert alert-danger">' .'Preencha seu e-mail'. '</div>';
+	if(strlen($_POST['password']) == 0):
+		echo '<div class="alert alert-danger">' .'Preencha seu senha'. '</div>';
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
