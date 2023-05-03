@@ -69,7 +69,7 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
                 gap-6">
        <?php
-require_once "dbconn.php";
+require_once 'database.php';
 
 // Executa a consulta SQL para selecionar todos os produtos
 $sql = "SELECT * FROM products;";
@@ -81,7 +81,6 @@ if (mysqli_num_rows($resultado) > 0) {
     while ($linha = mysqli_fetch_assoc($resultado)) {
         echo '<div class="bg-white rounded-lg overflow-hidden shadow-md">';
         echo '<div class="relative">';
-        echo '<img src=" alt="' . $linha["produto_nome"] . '" class="w-full h-64 object-cover">';
         echo '</div>';
         echo '<div class="p-6">';
         echo '<h3 class="text-lg font-semibold mb-2">' . $linha["produto_nome"] . '</h3>';
