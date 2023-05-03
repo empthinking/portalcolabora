@@ -51,7 +51,7 @@
 				</div>
 				<div class="flex items-center ml-5  w-1/5">
 					<a href="cadastro.php"><button class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button></a>
-					<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">Entrar</button>
+					<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'" <?php if ($_SESSION['login_error']) echo 'block'; else echo 'hidden'; ?>>Entrar</button>
 					<div id="singIn" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
 						<div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
 							<div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
