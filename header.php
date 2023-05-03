@@ -16,7 +16,7 @@
 	<body class="bg-gray-100">
 		<nav class="navbar py-2">
 			<div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex  md:items-center justify-between">
-				<div class="flex items-center">
+				<div class="flex items-center w-2/5">
 					<div>
 						<a class="" href="index.php">
 						<img src="img/Ativo 1 black.png" style="max-height: 3.75rem; max-width :10rem" class="flex-shrink-0">
@@ -35,7 +35,7 @@
 						</button>
 					</div>
 				</div>
-				<div class="flex items-center">
+				<div class="flex items-center 3/5">
 					
 					<div class="flex items-center py-2 -mx-4 md:mx-4  w-4/5">
 						<div class="relative mr-10 md:mx-0">
