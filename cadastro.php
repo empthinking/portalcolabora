@@ -7,10 +7,18 @@ function validatePhone($phone)
   // Verifica se o telefone tem o formato correto
   return preg_match("/^\d{11}$/", $phone);
 }
+function usuario_logado() : bool {
+  return isset($_SESSION['login']) && $_SESSION['login'] === true;
+  }
 
 //requisitando a conexão com o banco de dados.
 require_once 'database.php';
-
+checar_email($mysqli) : bool {
+  $stmt = $mysqli->prepae('SELECT user_email WHERE usuario_email = ?');
+  $stmt->execute();
+  $result = $stmt->get_result();
+  return ($result->num_rows > 0);
+}
 //Criando um novo usuário no banco de dados
 $username = $email = $password = $confirm_password = $cellphone = '';
 if ($_SERVER["REQUEST_METHOD"] === "POST") :
