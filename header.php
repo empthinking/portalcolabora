@@ -15,7 +15,7 @@
 	</head>
 	<body class="bg-gray-100">
 		<nav class="navbar py-2">
-			<div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex  md:items-center">
+			<div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex  md:items-center justify-between">
 				<div class="flex items-center justify-between">
 					<div>
 						<a class="" href="index.php">
@@ -111,8 +111,7 @@
 		<script>
 			var elementos = document.getElementsByClassName('navbar');
 			var el = elementos[0];
-			el.style.backgroundColor= '#63f253';
-			
+			el.style.backgroundColor= '#63f253';	
 			
 			let btn = document.querySelector('.fa-eye')
 			
