@@ -1,5 +1,11 @@
 <?php
 
+//função para verificar se o usuário está logado.
+function isUserLoggedIn(): bool
+{
+    return isset($_SESSION['login']) && $_SESSION['login'] === true;
+}
+
 //estabelece a conexao com o banco de dados
 //objeto $mysqli
 require_once 'database.php';
