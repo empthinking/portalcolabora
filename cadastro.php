@@ -15,12 +15,13 @@ function usuario_logado() : bool {
 //requisitando a conexão com o banco de dados.
 require_once 'database.php';
 //
-function checar_email(mysqli $mysqli, $email) : bool {
-  $stmt = $mysqli->prepare('SELECT user_email WHERE user_email = ?');
+function checar_email(mysqli $mysqli, string $email) : bool {
+  $stmt = $mysqli->prepare('SELECT user_email FROM usuarios WHERE user_email = ?');
   $stmt->bind_param('s', $email);
-  $stmt->execute();
+  if(!$stmt->execute())
+    return FALSE;
   $result = $stmt->get_result();
-  return ($result->num_rows > 0);
+  return $result->num_rows > 0;
 }
 //Criando um novo usuário no banco de dados
 $username = $email = $password = $confirm_password = $cellphone = '';
