@@ -22,7 +22,7 @@
 						<img src="img/Ativo 1 black.png" style="max-height: 3.75rem; max-width :10rem" class="flex-shrink-0">
 						</a>
 					</div>
-					<div class="flex flex-col md:flex-row md:mx-6">
+					<div class="flex flex-col md:flex-row md:mx-6 justify-start">
 						<a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="index.php">Início</a>
 						<a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="contato.php">Contato</a>
 						<a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="faq.php">FAQ</a>
