@@ -18,9 +18,9 @@ endif;
 //alerta de login
 if(isset($_SESSION['login_error'])):
     echo '<script>alert("' . htmlspecialchars($_SESSION['login_error']) . '")</script>';
-
 else:
     echo '<script>alert("' . htmlspecialchars('Login realizado com sucesso!') . '")</script>';
+endif;
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST'):
 	require_once "login.php"; //executa login de usuario
@@ -38,3 +38,4 @@ require_once 'home.php';
 
 //Rodape
 require_once 'footer.php';
+?>
