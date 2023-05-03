@@ -24,8 +24,6 @@ if (isset($_SESSION['login_success']) && !isset($_SESSION['login_success_display
 elseif (isset($_SESSION['login_error'])) :
     echo '<script>alert("' . htmlspecialchars($_SESSION['login_error']) . '")</script>';
     unset($_SESSION['login_error']);
-    echo "<script> document.getElementById('singIn').style.display='block'</script>";
-
 endif;
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') :
