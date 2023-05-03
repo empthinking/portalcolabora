@@ -35,7 +35,7 @@
 						</button>
 					</div>
 				</div>
-				<div class="navbar-menu md:flex items-center hidden max-w-full">
+				<div class="navbar-menu md:flex items-center hidden w-full">
 					
 					<div class="flex items-center py-2 -mx-4 md:mx-4">
 						<div class="relative mr-10 md:mx-0">
