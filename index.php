@@ -1,5 +1,6 @@
 <?php
 
+//função para verificar se o usuário está logado.
 function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
@@ -7,12 +8,19 @@ function isUserLoggedIn(): bool {
 //Inicia a sessao
 session_start();
 
+//alerta de cadastro realizado
 if(isset($_SESSION['success_msg'])):
     $msg = $_SESSION['success_msg'];
     echo '<script>alert("' . htmlspecialchars($msg) . '")</script>';
     unset($_SESSION['success_msg']);
 endif;
 
+//alerta de login
+if(isset($_SESSION['login_error'])):
+    echo '<script>alert("' . htmlspecialchars($_SESSION['login_error']) . '")</script>';
+
+else:
+    echo '<script>alert("' . htmlspecialchars('Login realizado com sucesso!') . '")</script>';
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST'):
 	require_once "login.php"; //executa login de usuario
@@ -30,5 +38,3 @@ require_once 'home.php';
 
 //Rodape
 require_once 'footer.php';
-
-?>
