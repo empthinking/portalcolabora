@@ -35,7 +35,7 @@
 						</button>
 					</div>
 				</div>
-				<div class="flex items-center 3/5">
+				<div class="flex items-center w-3/5">
 					
 					<div class="flex items-center py-2 -mx-4 md:mx-4  w-4/5">
 						<div class="relative mr-10 md:mx-0">
