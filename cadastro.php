@@ -16,7 +16,7 @@ function usuario_logado() : bool {
 require_once 'database.php';
 //
 function checar_email(mysqli $mysqli, $email) : bool {
-  $stmt = $mysqli->prepare('SELECT user_email WHERE usuario_email = ?');
+  $stmt = $mysqli->prepare('SELECT user_email WHERE user_email = ?');
   $stmt->bind_param('s', $email);
   $stmt->execute();
   $result = $stmt->get_result();
