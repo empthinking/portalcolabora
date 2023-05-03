@@ -15,8 +15,9 @@ function usuario_logado() : bool {
 //requisitando a conexão com o banco de dados.
 require_once 'database.php';
 //
-function checar_email($mysqli) : bool {
+function checar_email(mysqli $mysqli, $email) : bool {
   $stmt = $mysqli->prepae('SELECT user_email WHERE usuario_email = ?');
+  $stmt->bind_param('s', $email);
   $stmt->execute();
   $result = $stmt->get_result();
   return ($result->num_rows > 0);
@@ -37,6 +38,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) :
     // Se o e-mail não for válido, definir uma mensagem de erro
     echo '<script>alert("' . htmlspecialchars('O endereço de e-mail não é válido') . '")</script>';
+    //checa se o email já está registrado
+    elseif(checar_email($mysqli, $email)):
+    echo '<script>alert("' . htmlspecialchars('Email j') . '")</script>';
   //Confirmação da senha
   elseif ($password !== $confirm_password) :
     echo '<script>alert("' . htmlspecialchars('Insira corretamente a confirmação') . '")</script>';
