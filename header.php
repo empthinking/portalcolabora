@@ -93,7 +93,7 @@
 						el.style.backgroundColor= '#63f253';
 						
 						
-						let btn = document.querySelector('.fa-eye')
+						var btn = document.querySelector('.fa-eye')
 						
 						btn.addEventListener('click', ()=>{
 						let inputSenha = document.querySelector('#senha')
