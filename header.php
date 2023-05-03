@@ -22,6 +22,11 @@
 						<img src="img/Ativo 1 black.png" style="max-height: 3.75rem; max-width :10rem" class="flex-shrink-0">
 						</a>
 					</div>
+					<div class="flex flex-col md:flex-row md:mx-6">
+						<a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="index.php">Início</a>
+						<a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="contato.php">Contato</a>
+						<a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="faq.php">FAQ</a>
+					</div>
 					<div class="flex  navbar-toggle md:hidden">
 						<button type="button" class="navbarToggle text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" aria-label="toggle menu">
 							<svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
@@ -31,11 +36,7 @@
 					</div>
 				</div>
 				<div class="navbar-menu md:flex items-center hidden">
-					<div class="flex flex-col md:flex-row md:mx-6">
-						<a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="index.php">Início</a>
-						<a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="contato.php">Contato</a>
-						<a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="faq.php">FAQ</a>
-					</div>
+					
 					<div class="flex items-center py-2 -mx-4 md:mx-4">
 						<div class="relative mr-10 md:mx-0">
 							<input class="bg-gray-200 rounded-full border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 pl-4 pr-10 py-2 w-40" type="text" placeholder="Pesquisar...">
