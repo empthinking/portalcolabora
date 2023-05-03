@@ -37,8 +37,8 @@
 				</div>
 				<div class="flex items-center w-3/5">
 					
-					<div class="flex items-center py-2 -mx-4 md:mx-4  w-4/5">
-						<div class="relative mr-10 md:mx-0 w-full">
+					<div class="flex items-center py-2 -mx-4 md:mx-4  w-9/10">
+						<div class="relative mr-10 md:mx-0">
 							<input class="bg-gray-200 rounded-full border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 pl-4 pr-10 py-2 w-40" type="text" placeholder="Pesquisar...">
 							<button class="absolute right-0 mt-2 mr-2">
 							<span class="material-symbols-outlined ">
