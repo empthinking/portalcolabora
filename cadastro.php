@@ -36,14 +36,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   //confirmação de telefone
   elseif (!validatePhone($cellphone)) :
     echo '<script>alert("' . htmlspecialchars('O número de telefone não é válido') . '")</script>';
-  //Se o crud não for realizado com sucesso, as variáveis são destruidas.
-  elseif ($_SERVER["REQUEST_METHOD"] !== "POST") :
-    unset($username);
-    unset($email);
-    unset($password);
-    unset($confirm_password);
-    unset($cellphone);
-    unset($password_hash);
   else :
     // Inclusão no Banco de Dados
     $stmt = $mysqli->prepare('INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES(?, ?, ?, ?)');
