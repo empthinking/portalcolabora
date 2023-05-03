@@ -16,7 +16,7 @@ if(isset($_SESSION['success_msg'])):
 endif;
 
 //alerta de login
-if(!isset($_SESSION['login_error'])):
+if(isset($_SESSION['login_success'])):
     echo '<script>alert("' . htmlspecialchars('Login realizado com sucesso!') . '")</script>';
 else:
     echo '<script>alert("' . htmlspecialchars($_SESSION['login_error']) . '")</script>';    
