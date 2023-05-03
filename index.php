@@ -21,9 +21,9 @@ if (isset($_SESSION['login_success']) && !isset($_SESSION['login_success_display
     echo '<script>alert("' . htmlspecialchars('Login realizado com sucesso!') . '")</script>';
     $_SESSION['login_success_displayed'] = true;
     unset($_SESSION['login_success']);
-elseif (isset($_SESSION['login_error'])) :
-    echo '<script>alert("' . htmlspecialchars($_SESSION['login_error']) . '")</script>';
-    unset($_SESSION['login_error']);
+//elseif (isset($_SESSION['login_error'])) :
+   // echo '<script>alert("' . htmlspecialchars($_SESSION['login_error']) . '")</script>';
+    //unset($_SESSION['login_error']);
 endif;
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') :
