@@ -8,17 +8,20 @@ function validatePhone($phone)
   return preg_match("/^\d{11}$/", $phone);
 }
 //check de usuário logado
-function usuario_logado() : bool {
+function usuario_logado(): bool
+{
   return isset($_SESSION['login']) && $_SESSION['login'] === true;
-  }
+}
 
 //requisitando a conexão com o banco de dados.
 require_once 'database.php';
-//
-function checar_email(mysqli $mysqli, string $email) : bool {
+
+//função para chekar email existente
+function checar_email(mysqli $mysqli, string $email): bool
+{
   $stmt = $mysqli->prepare('SELECT user_email FROM usuarios WHERE user_email = ?');
   $stmt->bind_param('s', $email);
-  if(!$stmt->execute())
+  if (!$stmt->execute())
     return FALSE;
   $result = $stmt->get_result();
   return $result->num_rows > 0;
@@ -39,8 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) :
     // Se o e-mail não for válido, definir uma mensagem de erro
     echo '<script>alert("O endereço de e-mail não é válido")</script>';
-    //checa se o email já está registrado
-    elseif(checar_email($mysqli, $email)):
+  //checa se o email já está registrado
+  elseif (checar_email($mysqli, $email)) :
     echo '<script>alert("Endereço de email já cadastrado")</script>';
   //Confirmação da senha
   elseif ($password !== $confirm_password) :
@@ -65,9 +68,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
     session_start();
     $_SESSION['success_msg'] = 'Registro completado com sucesso';
     // echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
-    
+
     //inicialização de uma nova sessão.
-    
+
     header('location: index.php');
   endif;
 
