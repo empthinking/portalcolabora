@@ -38,19 +38,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   //Confirmação do email
   if (!filter_var($email, FILTER_VALIDATE_EMAIL)) :
     // Se o e-mail não for válido, definir uma mensagem de erro
-    echo '<script>alert("' . htmlspecialchars('O endereço de e-mail não é válido') . '")</script>';
+    echo '<script>alert("O endereço de e-mail não é válido")</script>';
     //checa se o email já está registrado
     elseif(checar_email($mysqli, $email)):
-    echo "<script>alert('${htmlspecialchars("Endereço de email já cadastrado")}')</script>";
+    echo "<script>alert("Endereço de email já cadastrado")</script>";
   //Confirmação da senha
   elseif ($password !== $confirm_password) :
-    echo '<script>alert("' . htmlspecialchars('Insira corretamente a confirmação') . '")</script>';
+    echo '<script>alert("Insira corretamente a confirmação")</script>';
   //validação do senha com menos de 8 dígitos
   elseif (strlen($password) < 8) :
-    echo '<script>alert("' . htmlspecialchars('A senha é muito curta!') . '")</script>';
+    echo '<script>alert("A senha é muito curta!")</script>';
   //confirmação de telefone
   elseif (!validatePhone($cellphone)) :
-    echo '<script>alert("' . htmlspecialchars('O número de telefone não é válido') . '")</script>';
+    echo '<script>alert("O número de telefone não é válido")</script>';
   else :
     // Inclusão no Banco de Dados
     $stmt = $mysqli->prepare('INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel) VALUES(?, ?, ?, ?)');
