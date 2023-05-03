@@ -16,10 +16,10 @@ if(isset($_SESSION['success_msg'])):
 endif;
 
 //alerta de login
-if(isset($_SESSION['login_error'])):
-    echo '<script>alert("' . htmlspecialchars($_SESSION['login_error']) . '")</script>';
-else:
+if(!isset($_SESSION['login_error'])):
     echo '<script>alert("' . htmlspecialchars('Login realizado com sucesso!') . '")</script>';
+else:
+    echo '<script>alert("' . htmlspecialchars($_SESSION['login_error']) . '")</script>';    
 endif;
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST'):
