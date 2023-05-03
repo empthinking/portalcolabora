@@ -49,7 +49,7 @@ if(!isUserLoggedIn()):
 
         //limpa o array
         $row = [];
-        $_SESSION['login_success'] = 'Login realizado com sucesso!'
+        $_SESSION['login_success'] = 'Login realizado com sucesso!';
     else:
         //em caso de falha a mensagem é jo
         //throw new Exception('Nome de usuario ou senha não encontrado');
