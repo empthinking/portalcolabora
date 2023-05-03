@@ -69,7 +69,7 @@
               <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
                 gap-6">
        <?php
-require_once "dbconn.php";
+require_once 'database.php';
 
 // Executa a consulta SQL para selecionar todos os produtos
 $sql = "SELECT * FROM products;";
