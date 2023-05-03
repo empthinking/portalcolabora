@@ -35,9 +35,9 @@
 						</button>
 					</div>
 				</div>
-				<div class="navbar-menu md:flex items-center hidden w-full">
+				<div class="navbar-menu md:flex items-center hidden">
 					
-					<div class="flex items-center py-2 -mx-4 md:mx-4">
+					<div class="flex items-center py-2 -mx-4 md:mx-4  w-4/5">
 						<div class="relative mr-10 md:mx-0">
 							<input class="bg-gray-200 rounded-full border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 pl-4 pr-10 py-2 w-40" type="text" placeholder="Pesquisar...">
 							<button class="absolute right-0 mt-2 mr-2">
@@ -47,7 +47,7 @@
 							</button>
 						</div>
 					</div>
-					<div class="flex items-center ml-5">
+					<div class="flex items-center ml-5  w-1/5">
 						<a href="cadastro.php"><button class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button></a>
 						<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">Entrar</button>
 						<div id="singIn" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
