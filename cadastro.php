@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
     echo '<script>alert("O endereço de e-mail não é válido")</script>';
     //checa se o email já está registrado
     elseif(checar_email($mysqli, $email)):
-    echo "<script>alert("Endereço de email já cadastrado")</script>";
+    echo '<script>alert("Endereço de email já cadastrado")</script>';
   //Confirmação da senha
   elseif ($password !== $confirm_password) :
     echo '<script>alert("Insira corretamente a confirmação")</script>';
