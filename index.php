@@ -20,9 +20,10 @@ if(isset($_SESSION['login_success']) && !isset($_SESSION['login_success_displaye
     echo '<script>alert("' . htmlspecialchars('Login realizado com sucesso!') . '")</script>';
     $_SESSION['login_success_displayed'] = true;
     unset($_SESSION['login_success']);
-elseif(isset($_SESSION['login_error'])&&!isset($_SESSION['login_success_displayed'])):
-    echo '<script>alert("' . htmlspecialchars($_SESSION['login_error']) . '")</script>';  
-    $_SESSION['login_success_displayed'] = true;
+elseif(isset($_SESSION['login_error'])):
+    echo '<script>alert("' . htmlspecialchars($_SESSION['login_error']) . '")</script>';
+    unset($_SESSION['login_error']);
+    //$_SESSION['login_success_displayed'] = true;
 endif;
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST'):
