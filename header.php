@@ -99,21 +99,7 @@ if (empty(trim($_POST["password"]))) {
 									<div class="flex items-center justify-between">
 										<button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
 											Entrar
-										</button>
-
-										<!-- <div class="mb-3 mt-3">
-										<label>Nome do usuário</label>
-										<input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email_err; ?>">
-										<span class="invalid-feedback"><?php echo $email_err; ?></span>
-									</div>
-									<div class="mb-3 mt-3">
-										<label>Senha</label>
-										<input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
-										<span class="invalid-feedback"><?php echo $password_err; ?></span>
-									</div>
-									<div class="mb-3 mt-3">
-										<input type="submit" class="btn btn-primary" value="Entrar">
-									</div> -->
+										</button>									
 										<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#####falta_fazer#####">
 											Não consigo entrar
 										</a>
