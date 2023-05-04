@@ -1,15 +1,13 @@
 <?php
-if (!isset($_SESSION)) :
-	session_start();
-endif;
 
-if (isset($_POST['email']) || isset($_POST['password'])) :
-	if (strlen($_POST['email']) == 0) :
-		$erros_validacao['nome'] = 'O nome da tarefa é obrigatório!';
-	elseif (strlen($_POST['password']) == 0) :
-		$erros_validacao['nome'] = 'O nome da tarefa é obrigatório!';
-	endif;
-endif;
+// Verifique se o nome de usuário está vazio
+if (empty(trim($_POST["email"]))) {
+	$email_err = "Por favor, insira o e-mail.";
+}
+// Verifique se a senha está vazia
+if (empty(trim($_POST["password"]))) {
+	$password_err = "Por favor, insira sua senha.";
+}
 ?>
 
 <!DOCTYPE html>
@@ -81,9 +79,9 @@ endif;
 								</h1>
 								<!-- Formulário de login -->
 								<form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-									<div class="mb-4 form-group">
+									<!-- <div class="mb-4 form-group">
 										<label class="block font-bold mb-2" for="email">
-											Email: <span class="erro"><?php echo $erros_validacao['nome']; ?></span>
+											Email: <span class="erro"> <?php echo $erros_validacao['nome']; ?></span>
 										
 										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email">
 										</label>
@@ -98,42 +96,56 @@ endif;
 									<div class="flex items-center justify-between">
 										<button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
 											Entrar
-										</button>
-										<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#####falta_fazer#####">
-											Não consigo entrar
-										</a>
+										</button> -->
+
+									<div class="mb-3 mt-3">
+										<label>Nome do usuário</label>
+										<input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email_err; ?>">
+										<span class="invalid-feedback"><?php echo $email_err; ?></span>
 									</div>
-								</form>
-								<button type="button" onclick="document.getElementById('singIn').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
-									Cancelar
-								</button>
+									<div class="mb-3 mt-3">
+										<label>Senha</label>
+										<input type="password" name="password" class="form-control <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+										<span class="invalid-feedback"><?php echo $password_err; ?></span>
+									</div>
+									<div class="mb-3 mt-3">
+										<input type="submit" class="btn btn-primary" value="Entrar">
+									</div>
+									<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#####falta_fazer#####">
+										Não consigo entrar
+									</a>
 							</div>
+							</form>
+							<button type="button" onclick="document.getElementById('singIn').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
+								Cancelar
+							</button>
 						</div>
 					</div>
 				</div>
-				<script>
-					function toggleDropdown() {
-						var dropdownMenu = document.getElementById("dropdown-menu");
-						dropdownMenu.classList.toggle("hidden");
-					}
-					var elementos = document.getElementsByClassName('navbar');
-					var el = elementos[0];
-					el.style.backgroundColor = '#63f253';
-
-
-					var btn = document.querySelector('.fa-eye')
-
-					btn.addEventListener('click', () => {
-						let inputSenha = document.querySelector('#senha')
-
-						if (inputSenha.getAttribute('type') == 'password') {
-							inputSenha.setAttribute('type', 'text')
-						} else {
-							inputSenha.setAttribute('type', 'password')
-						}
-					})
-				</script>
 			</div>
+			<script>
+				function toggleDropdown() {
+					var dropdownMenu = document.getElementById("dropdown-menu");
+					dropdownMenu.classList.toggle("hidden");
+				}
+				var elementos = document.getElementsByClassName('navbar');
+				var el = elementos[0];
+				el.style.backgroundColor = '#63f253';
+
+
+				var btn = document.querySelector('.fa-eye')
+
+				btn.addEventListener('click', () => {
+					let inputSenha = document.querySelector('#senha')
+
+					if (inputSenha.getAttribute('type') == 'password') {
+						inputSenha.setAttribute('type', 'text')
+					} else {
+						inputSenha.setAttribute('type', 'password')
+					}
+				})
+			</script>
+		</div>
 		</div>
 	</nav>
 	<script>
