@@ -4,18 +4,10 @@ if (!isset($_SESSION)) :
 endif;
 
 if (isset($_POST['email']) || isset($_POST['password'])) :
-	if (strlen($_POST['email']) < 1) :
-		echo '<h1>Preencha seu e-mail</h1>';
-	endif;
-	if (strlen($_POST['password']) == 0) :
-		echo '
-		<div class="alert alert-danger d-flex align-items-center" role="alert">
-			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/>
-			</svg>
-		<div>
-		  An example danger alert with an icon
-		</div>
-	  </div></div>';
+	if (strlen($_POST['email']) == 0) :
+		$erros_validacao['nome'] = 'O nome da tarefa é obrigatório!';
+	elseif (strlen($_POST['password']) == 0) :
+		$erros_validacao['nome'] = 'O nome da tarefa é obrigatório!';
 	endif;
 endif;
 ?>
@@ -91,13 +83,14 @@ endif;
 								<form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
 									<div class="mb-4 form-group">
 										<label class="block font-bold mb-2" for="email">
-											Email:
-										</label>
+											Email: <span class="erro"><?php echo $erros_validacao['nome']; ?></span>
+										
 										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email">
+										</label>
 									</div>
 									<div class="mb-6 form-group">
 										<label class="block font-bold mb-2" for="password">
-											Senha
+											Senha:
 										</label>
 										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" id="senha" name="password">
 										<i class="fa fa-eye" aria-hidden="true"></i>
