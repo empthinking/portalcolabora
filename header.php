@@ -1,18 +1,3 @@
-<?php
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST'):	
-	// Verifique se o nome de usuário está vazio
-	if (empty(trim($_POST["email"]))): 
-		$email_err = "Por favor, insira o e-mail.";
-	// Verifique se a senha está vazia
-	elseif (empty(trim($_POST["password"]))):
-		$password_err = "Por favor, insira sua senha.";
-	endif;
-endif
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -74,10 +59,10 @@ endif
 					<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">
 						Entrar
 					</button>
-					<div id="singIn" class=" <?php if ($_SERVER['REQUEST_METHOD'] == 'POST'): 
-														isset($_SESSION['login_error']) ? 'block' : 'modal hidden fixed z-10 inset-0 overflow-y-auto'; 
-														$_SESSION['login_error'] = true;
-													endif;
+					<div id="singIn" class=" <?php if ($_SERVER['REQUEST_METHOD'] == 'POST') :
+													isset($_SESSION['login_error']) ? 'block' : 'modal hidden fixed z-10 inset-0 overflow-y-auto';
+													$_SESSION['login_error'] = true;
+												endif;
 												?>">
 						<div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 	bg-gray-900" style="opacity: 0.9;">
 							<div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
@@ -89,15 +74,20 @@ endif
 									<div class="mb-4 form-group">
 										<label class="block font-bold mb-2" for="email">
 											Email:
-										</label>	
+										</label>
 										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email" class="form-control">
-										<?php if (isset($email_err)) { echo '<span>' . $email_err . '</span>'; } ?>
-
-										
+										<?php
+										if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+											$email_mss = $_POST['email'];
+											if (empty($email_mss)) {
+												echo '<label for="nome" style="color:red;">Por favor, preencha o campo nome.</label>';
+											}
+										}
+										?>
 									</div>
 									<div class="mb-6 form-group">
 										<label class="block font-bold mb-2" for="password">
-											Senha:<span><?php echo $password_err ?></span>
+											Senha:
 										</label>
 										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" id="senha" name="password">
 										<i class="fa fa-eye" aria-hidden="true"></i>
