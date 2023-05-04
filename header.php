@@ -98,7 +98,7 @@
 										<i class="fa fa-eye" aria-hidden="true"></i>
 									</div>
 									<div class="flex items-center justify-between">
-										<button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+										<button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
 											Entrar
 										</button>
 										<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#####falta_fazer#####">
