@@ -76,13 +76,18 @@ endif;
 				</div>
 				<div class="flex items-center ml-5  w-1/5">
 					<a href="cadastro.php"><button class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button></a>
-					
-					//Botão de login
-					<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">Entrar</button>
+
+					<!-- Botão de login -->
+					<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">
+						Entrar
+					</button>
 					<div id="singIn" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-						<div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
+						<div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 	bg-gray-900" style="opacity: 0.9;">
 							<div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
-								<h1 class="text-3xl font-bold mb-8 text-center">Login</h1>
+								<h1 class="text-3xl font-bold mb-8 text-center">
+									Login
+								</h1>
+								<!-- Formulário de login -->
 								<form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
 									<div class="mb-4 form-group">
 										<label class="block font-bold mb-2" for="email">
