@@ -26,7 +26,8 @@ if (isset($_SESSION['login_success']) && !isset($_SESSION['login_success_display
 endif;
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') :
-    require_once "login.php"; //executa login de usuario
+    require_once "login.php"; 
+    //executa login de usuario
 endif;
 
 // Cabeçalho
