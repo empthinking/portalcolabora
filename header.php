@@ -1,13 +1,16 @@
 <?php
 
-// Verifique se o nome de usuário está vazio
-if (!empty(trim($_POST["email"]))) {
-	$email_err = "Por favor, insira o e-mail.";
-}
-// Verifique se a senha está vazia
-if (empty(trim($_POST["password"]))) {
-	$password_err = "Por favor, insira sua senha.";
-}
+if ($_SERVER['REQUEST_METHOD'] == 'POST'):	
+	// Verifique se o nome de usuário está vazio
+	if (empty(trim($_POST["email"]))): 
+		$email_err = "Por favor, insira o e-mail.";
+	// Verifique se a senha está vazia
+	elseif (empty(trim($_POST["password"]))):
+		$password_err = "Por favor, insira sua senha.";
+	endif;
+endif
+
+
 ?>
 
 <!DOCTYPE html>
@@ -82,10 +85,12 @@ if (empty(trim($_POST["password"]))) {
 								<form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
 									<div class="mb-4 form-group">
 										<label class="block font-bold mb-2" for="email">
-											Email: 
+											Email:
+										</label>	
+										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email" class="form-control">
+										<?php if (isset($email_err)) { echo '<span>' . $email_err . '</span>'; } ?>
 
-											<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email" class="form-control" value="<?php if(isset($email_err))echo '<div class="alert alert-danger">alerta<?div>'?>">
-										</label>
+										
 									</div>
 									<div class="mb-6 form-group">
 										<label class="block font-bold mb-2" for="password">
@@ -97,7 +102,7 @@ if (empty(trim($_POST["password"]))) {
 									<div class="flex items-center justify-between">
 										<button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
 											Entrar
-										</button>									
+										</button>
 										<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#####falta_fazer#####">
 											Não consigo entrar
 										</a>
