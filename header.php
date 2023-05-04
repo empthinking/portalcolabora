@@ -92,7 +92,8 @@ if (empty(trim($_POST["password"]))) {
 										<label class="block font-bold mb-2" for="password">
 											Senha:
 										</label>
-										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" id="senha" name="password">
+										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" id="senha" name="password" <?php echo (!empty($password_err)) ? 'is-invalid' : ''; ?>">
+										<span class="invalid-feedback"><?php echo $password_err; ?></span>>
 										<i class="fa fa-eye" aria-hidden="true"></i>
 									</div>
 									<div class="flex items-center justify-between">
