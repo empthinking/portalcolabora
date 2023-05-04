@@ -1,7 +1,7 @@
 <?php
 
 // Verifique se o nome de usuário está vazio
-if (empty(trim($_POST["email"]))) {
+if (!empty(trim($_POST["email"]))) {
 	$email_err = "Por favor, insira o e-mail.";
 }
 // Verifique se a senha está vazia
