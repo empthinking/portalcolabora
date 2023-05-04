@@ -62,7 +62,7 @@
 					<div id="singIn" class=" 
 					<?php
 					if ($_SERVER['REQUEST_METHOD'] === 'POST') :
-						if (!isset($_SESSION['login_error'])) :
+						if (isset($_SESSION['login_error'])) :
 							echo 'block';
 						else :
 							echo 'hidden';
