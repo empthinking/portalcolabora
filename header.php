@@ -56,7 +56,7 @@
 					<a href="cadastro.php"><button class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button></a>
 
 					<!-- Botão de login -->
-					<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='visible'">
+					<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">
 						Entrar
 					</button>
 					<div id="singIn" class="hidden">
