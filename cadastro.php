@@ -1,25 +1,4 @@
 <?php
-if (isset($_POST['username'])) {
-  $username = $_POST['username'];
-} else {
-  $username = null;
-}
-
-if (isset($_POST['confirm_password'])) {
-  $confirm_password = $_POST['confirm_password'];
-} else {
-  $confirm_password = null;
-}
-
-if (isset($_POST['number'])) {
-  $number = $_POST['number'];
-} else {
-  $number = null;
-}
-
-
-
-
 
 // Função de validação de número de telefone (expressão regular)
 function validatePhone($phone)
