@@ -71,7 +71,8 @@ if (empty(trim($_POST["password"]))) {
 					<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">
 						Entrar
 					</button>
-					<div id="singIn" class=" <?php echo isset($_SESSION['login_error']) ? 'block' : 'modal hidden fixed z-10 inset-0 overflow-y-auto';?>   ">
+					<div id="singIn" class=" <?php echo isset($_SESSION['login_error']) ? 'block' : 'modal hidden fixed z-10 inset-0 overflow-y-auto';
+												unset($_SESSION['login_error']) ?>   ">
 						<div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 	bg-gray-900" style="opacity: 0.9;">
 							<div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
 								<h1 class="text-3xl font-bold mb-8 text-center">
@@ -79,11 +80,12 @@ if (empty(trim($_POST["password"]))) {
 								</h1>
 								<!-- Formulário de login -->
 								<form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-									<!-- <div class="mb-4 form-group">
+									<div class="mb-4 form-group">
 										<label class="block font-bold mb-2" for="email">
 											Email: <span class="erro"> <?php echo $erros_validacao['nome']; ?></span>
-										
-										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email">
+
+											<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email_err; ?>">
+											<span class="invalid-feedback"><?php echo $email_err; ?></span>>
 										</label>
 									</div>
 									<div class="mb-6 form-group">
@@ -96,9 +98,9 @@ if (empty(trim($_POST["password"]))) {
 									<div class="flex items-center justify-between">
 										<button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
 											Entrar
-										</button> -->
+										</button>
 
-									<div class="mb-3 mt-3">
+										<!-- <div class="mb-3 mt-3">
 										<label>Nome do usuário</label>
 										<input type="text" name="email" class="form-control <?php echo (!empty($email_err)) ? 'is-invalid' : ''; ?>" value="<?php echo $email_err; ?>">
 										<span class="invalid-feedback"><?php echo $email_err; ?></span>
@@ -110,42 +112,42 @@ if (empty(trim($_POST["password"]))) {
 									</div>
 									<div class="mb-3 mt-3">
 										<input type="submit" class="btn btn-primary" value="Entrar">
+									</div> -->
+										<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#####falta_fazer#####">
+											Não consigo entrar
+										</a>
 									</div>
-									<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#####falta_fazer#####">
-										Não consigo entrar
-									</a>
+								</form>
+								<button type="button" onclick="document.getElementById('singIn').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
+									Cancelar
+								</button>
 							</div>
-							</form>
-							<button type="button" onclick="document.getElementById('singIn').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
-								Cancelar
-							</button>
 						</div>
 					</div>
 				</div>
-			</div>
-			<script>
-				function toggleDropdown() {
-					var dropdownMenu = document.getElementById("dropdown-menu");
-					dropdownMenu.classList.toggle("hidden");
-				}
-				var elementos = document.getElementsByClassName('navbar');
-				var el = elementos[0];
-				el.style.backgroundColor = '#63f253';
-
-
-				var btn = document.querySelector('.fa-eye')
-
-				btn.addEventListener('click', () => {
-					let inputSenha = document.querySelector('#senha')
-
-					if (inputSenha.getAttribute('type') == 'password') {
-						inputSenha.setAttribute('type', 'text')
-					} else {
-						inputSenha.setAttribute('type', 'password')
+				<script>
+					function toggleDropdown() {
+						var dropdownMenu = document.getElementById("dropdown-menu");
+						dropdownMenu.classList.toggle("hidden");
 					}
-				})
-			</script>
-		</div>
+					var elementos = document.getElementsByClassName('navbar');
+					var el = elementos[0];
+					el.style.backgroundColor = '#63f253';
+
+
+					var btn = document.querySelector('.fa-eye')
+
+					btn.addEventListener('click', () => {
+						let inputSenha = document.querySelector('#senha')
+
+						if (inputSenha.getAttribute('type') == 'password') {
+							inputSenha.setAttribute('type', 'text')
+						} else {
+							inputSenha.setAttribute('type', 'password')
+						}
+					})
+				</script>
+			</div>
 		</div>
 	</nav>
 	<script>
