@@ -61,12 +61,14 @@
 					</button>
 					<div id="singIn" class=" 
 					<?php
-					if (isset($_SESSION['login_error'])) :
-						echo 'block';
-					else : 
-						echo 'hidden';
-						unset($_SESSION['login_error']);
-					endif
+					if ($_SERVER['REQUEST_METHOD'] === 'POST') :
+						if (isset($_SESSION['login_error'])) :
+							echo 'block';
+						else : 
+							echo 'hidden';
+							unset($_SESSION['login_error']);
+						endif;
+					endif;
 					?> ">
 						<div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 	bg-gray-900" style="opacity: 0.9;">
 							<div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
