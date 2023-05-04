@@ -56,17 +56,15 @@
 					<a href="cadastro.php"><button class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button></a>
 
 					<!-- Botão de login -->
-					<a href="login.php">
 					<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2"> <!--onclick="document.getElementById('singIn').style.display='block'"> -->
 						Entrar
 					</button>
-					</a>
 					<div id="singIn" class=" 
 					<?php
 					if ($_SERVER['REQUEST_METHOD'] === 'POST') :
 						if (isset($_SESSION['login_error'])) :
 							echo 'block';
-						else : 
+						else :
 							echo 'hidden';
 							unset($_SESSION['login_error']);
 						endif;
