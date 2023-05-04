@@ -1,4 +1,26 @@
 <?php
+if (isset($_POST['username'])) {
+  $username = $_POST['username'];
+} else {
+  $username = null;
+}
+
+if (isset($_POST['confirm_password'])) {
+  $confirm_password = $_POST['confirm_password'];
+} else {
+  $confirm_password = null;
+}
+
+if (isset($_POST['number'])) {
+  $number = $_POST['number'];
+} else {
+  $number = null;
+}
+
+
+
+
+
 // Função de validação de número de telefone (expressão regular)
 function validatePhone($phone)
 {
@@ -87,8 +109,11 @@ require_once 'header.php';
     <div class="container mx-auto">
       <div class="max-w-lg mx-auto">
         <h2 class="text-3xl font-semibold text-center mb-8">Cadastre-se</h2>
+
+        <!-- Formulário de cadastro -->
         <form class="bg-white shadow-md  rounded-lg w-full max-w-md mx-auto p-8" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
           <div class="mb-4">
+            <!-- Nome -->
             <label class="block text-gray-700 font-bold mb-2" for="nome">
               Nome completo
             </label>
