@@ -74,7 +74,7 @@ endif
 					<button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('singIn').style.display='block'">
 						Entrar
 					</button>
-					<div id="singIn" class=" <?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): 
+					<div id="singIn" class=" <?php if ($_SERVER['REQUEST_METHOD'] == 'POST'): 
 														isset($_SESSION['login_error']) ? 'block' : 'modal hidden fixed z-10 inset-0 overflow-y-auto'; 
 														$_SESSION['login_error'] = true;
 													endif;
