@@ -79,16 +79,9 @@
 								<form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
 									<div class="mb-4 form-group">
 										<label class="block font-bold mb-2" for="email">
-											Email: <?php
-													if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-														$email_mss = $_POST['email'];
-														if (empty($email_mss)) {
-															echo '<label for="nome" style="color:red;">Por favor, preencha o campo email.</label>';
-														}
-													}
-													?>
+											Email: 
 										</label>
-										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email" class="form-control">
+										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email">
 									</div>
 									<div class="mb-6 form-group">
 										<label class="block font-bold mb-2" for="password">
