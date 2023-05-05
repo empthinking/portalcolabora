@@ -55,7 +55,8 @@
     </div>
   </div>
   <div class="menu-overlay fixed inset-0 bg-gray-400 opacity-50 z-30
-        hidden"></div>
+        hidden">
+  </div>
 
 
 
@@ -102,11 +103,6 @@
         <!-- fim do produto 1 -->
       </div>
   </div>
-  </div>
-  </div>
-  </section>
-
-
   <script>
     var botaoFiltro = document.querySelector('#botaoFiltro');
 
@@ -149,10 +145,4 @@
       -webkit-appearance: none;
     }
   </style>
-
-  </html>
-
-
-
 </main>
-</body>
