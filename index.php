@@ -30,7 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') :
     require_once "login.php"; 
     //executa login de usuario
 endif;
-
+echo 'success';
+     exit();
  } catch (Exception $error){
       $msg = $error->getMessage();
  } finally {
