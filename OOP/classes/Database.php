@@ -2,10 +2,10 @@
 
 class Database {
 
-    private $mysqli
+    private $mysqli;
     public  $error;
 
-    public __construct(mysqli $mysqli){
+    function __construct(mysqli $mysqli){
     	$this->mysqli = $mysqli;
     }    
 
@@ -22,7 +22,7 @@ class Database {
 
     // Realiza uma query preparada
    protected function secureQuery(string $sql_prep, mixed ...$variables) : bool{
-        if(($stmt = $this->msqli->prepare($sql_prep)) === FALSE):
+        if(($stmt = $this->mysqli->prepare($sql_prep)) === FALSE):
             $this->error = $stmt->error;
             $stmt->close();
             return FALSE;
@@ -37,7 +37,7 @@ class Database {
 
     //Requisita quantidades arbitrárias de linhas e retorna como array numérico
    protected function getRows(string $sql) : array | bool {
-        $sql = $mysqli->real_escape_string($sql);
+        $sql = $this->mysqli->real_escape_string($sql);
         if(($result = $this->mysqli->query($sql)) === FALSE):
             $this->error[__METHOD__] = $this->mysqli->error;
             return FALSE;
@@ -49,7 +49,7 @@ class Database {
     }
 
    protected function secureGetRows(string $sql_prep, mixed ...$variables) : array | bool {
-        if(($stmt = $this->msqli->prepare($sql_prep)) === FALSE):
+        if(($stmt = $this->mysqli->prepare($sql_prep)) === FALSE):
             $this->error[__METHOD__] = $stmt->error;
             $stmt->close();
             return FALSE;
