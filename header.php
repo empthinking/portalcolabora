@@ -69,19 +69,19 @@
 								<form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
 									<div class="mb-4 form-group">
 										<label class="block font-bold mb-2" for="email">
-											Email: 
+											Email
 										</label>
 										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email">
 									</div>
 									<div class="mb-6 form-group">
 										<label class="block font-bold mb-2" for="password">
-											Senha:
+											Senha
 										</label>
 										<input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" id="senha" name="password">
 										<i class="fa fa-eye" aria-hidden="true"></i>
 									</div>
 									<div class="flex items-center justify-between">
-										<button class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+										<button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
 											Entrar
 										</button>
 										<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#####falta_fazer#####">
