@@ -31,13 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') :
     //executa login de usuario
 endif;
 // Cabeçalho
-
 if (isUserLoggedIn()) :
     require_once 'header_loggedin.php';
 else :
-endif;
-
     require_once 'header.php';
+endif;
 //Pagina de perfil
 require_once 'home.php';
 
