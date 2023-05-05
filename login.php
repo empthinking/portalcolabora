@@ -8,6 +8,8 @@ require_once 'database.php';
 
 //caso o usuario nao esteja logado, realiza o login e redireciona para a pagina principal
 if(!isUserLoggedIn()):
+   
+    endif;
     $email = $mysqli->real_escape_string($_POST['email']);
     $password = $mysqli->real_escape_string($_POST['password']);
     
@@ -30,7 +32,6 @@ if(!isUserLoggedIn()):
         $result->free_result();
     else: 
         //Em caso de falha, envia o respectivo erro
-        exit('Email ou senha não encontrado');
         $_SESSION['login_error'] = 'Email ou senha não encontrado';
         throw new Exception($mysqli->error);
     endif;
@@ -60,7 +61,7 @@ if(!isUserLoggedIn()):
 
     #Falta colocar a condição para fechar o banco, caso o contrario, ele fecha 2x.
     //$mysqli->close();
-    header('location: index.php');
+    header('location: test.php');
 
 endif;
 
