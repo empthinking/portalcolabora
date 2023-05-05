@@ -27,7 +27,7 @@ endif;
 
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') :
-    require_once "login.php"; 
+    require_once 'login.php'; 
     //executa login de usuario
 endif;
 // Cabeçalho
