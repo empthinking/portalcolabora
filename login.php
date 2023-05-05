@@ -58,7 +58,7 @@ if(!isUserLoggedIn()):
 
     #Falta colocar a condição para fechar o banco, caso o contrario, ele fecha 2x.
     //$mysqli->close();
-    header('location: index.php');
+    //header('location: index.php');
 
 endif;
 
