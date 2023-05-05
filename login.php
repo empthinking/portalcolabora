@@ -30,6 +30,7 @@ if(!isUserLoggedIn()):
         $result->free_result();
     else: 
         //Em caso de falha, envia o respectivo erro
+        exit('Email ou senha não encontrado');
         $_SESSION['login_error'] = 'Email ou senha não encontrado';
         throw new Exception($mysqli->error);
     endif;
@@ -53,6 +54,7 @@ if(!isUserLoggedIn()):
         $row = [];
         $_SESSION['login_success'] = 'Login realizado com sucesso!';
     else:
+        exit('Email ou senha não encontrado');
         $_SESSION['login_error'] = 'Email ou senha não encontrado';
     endif;
 
