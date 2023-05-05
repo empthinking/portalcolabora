@@ -26,7 +26,7 @@ if (isset($_SESSION['login_success']) && !isset($_SESSION['login_success_display
 endif;
  try {
 //Checa se o formulaio de login foi enviado
-if ($_SERVER['REQUEST_METHOD'] === 'POST') :
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') :
     require_once "login.php"; 
     //executa login de usuario
 endif;
@@ -36,12 +36,13 @@ endif;
      echo $msg;
  }
 // Cabeçalho
+/*
 if (isUserLoggedIn()) :
     require_once 'header_loggedin.php';
 else :
     require_once 'header.php';
 endif;
-
+*/
 //Pagina de perfil
 require_once 'home.php';
 
