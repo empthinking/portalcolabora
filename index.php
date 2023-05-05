@@ -40,4 +40,8 @@ endif;
 require_once 'home.php';
 
 //Rodape
-require_once 'footer.php';
+
+?>
+<?php
+require_once "footer.php";
+?>
