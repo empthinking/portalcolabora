@@ -24,7 +24,7 @@ if (isset($_SESSION['login_success']) && !isset($_SESSION['login_success_display
 //elseif (isset($_SESSION['login_error'])==true) :
     //unset($_SESSION['login_error']);
 endif;
-
+ 
 //Checa se o formulaio de login foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') :
     require_once "login.php"; 
