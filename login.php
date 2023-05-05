@@ -53,10 +53,11 @@ if(!isUserLoggedIn()):
         //limpa o array
         $row = [];
         $_SESSION['login_success'] = 'Login realizado com sucesso!';
-        header('location: test_login.php');
+        
     else:
         exit('Email ou senha não encontrado');
         $_SESSION['login_error'] = 'Email ou senha não encontrado';
+        header('location: test_login.php');
     endif;
 
     #Falta colocar a condição para fechar o banco, caso o contrario, ele fecha 2x.
