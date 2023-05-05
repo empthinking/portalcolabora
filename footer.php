@@ -1,17 +1,3 @@
-<!doctype html>
-<html lang="en">
-
-<head>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/main.css">
-
-  <title>footer2</title>
-</head>
-
-<body>
-
   <footer  class="py-6">
     <div class="container mx-auto flex items-center justify-between bg-green-500">
       <div class="flex-col md:flex-row items-center">
@@ -48,8 +34,3 @@
       </div>
     </div>
   </footer>
-
-
-</body>
-
-</html>
