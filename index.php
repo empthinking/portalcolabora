@@ -30,6 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') :
     require_once "login.php"; 
     //executa login de usuario
 endif;
+
  } catch (Exception $error){
       $msg = $error->getMessage();
  } finally {
@@ -40,9 +41,9 @@ endif;
 if (isUserLoggedIn()) :
     require_once 'header_loggedin.php';
 else :
-    require_once 'header.php';
 endif;
 */
+    require_once 'header.php';
 //Pagina de perfil
 require_once 'home.php';
 
