@@ -8,8 +8,7 @@ require_once 'database.php';
 
 //caso o usuario nao esteja logado, realiza o login e redireciona para a pagina principal
 if(!isUserLoggedIn()):
-   
-    endif;
+  
     $email = $mysqli->real_escape_string($_POST['email']);
     $password = $mysqli->real_escape_string($_POST['password']);
     
@@ -61,7 +60,7 @@ if(!isUserLoggedIn()):
 
     #Falta colocar a condição para fechar o banco, caso o contrario, ele fecha 2x.
     //$mysqli->close();
-    header('location: test.php');
+    header('location: test_login.php');
 
 endif;
 
