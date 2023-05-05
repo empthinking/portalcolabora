@@ -1,9 +1,7 @@
 <?php
-
 //estabelece a conexao com o banco de dados
 //objeto $mysqli
 require_once 'database.php';
-header('location: test_login.php');
 //caso o usuario nao esteja logado, realiza o login e redireciona para a pagina principal
 if(!isUserLoggedIn()):
   
@@ -51,7 +49,7 @@ if(!isUserLoggedIn()):
         //limpa o array
         $row = [];
         $_SESSION['login_success'] = 'Login realizado com sucesso!';
-        
+        header('location: index.php');
     else:
         exit('Email ou senha não encontrado');
         $_SESSION['login_error'] = 'Email ou senha não encontrado';
