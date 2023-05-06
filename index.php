@@ -37,7 +37,7 @@ else :
     require_once 'header.php';
 endif;
 //Pagina de perfil
-//require_once 'home.php';
+require_once 'home2.php';
 
 //Rodape
 require_once 'footer.php';
