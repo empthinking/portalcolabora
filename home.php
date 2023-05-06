@@ -66,16 +66,17 @@
       <div class="container sm:m-4">
         <h2 class="text-2xl font-bold mb-8">Nossos Produtos</h2>
         <!-- produtxo 1 -->
-        <a href="<%= posts[0].slug %>">
+        <a href="">
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3
                 gap-6">
             <?php
-            require_once 'database.php';
-
-            // Executa a consulta SQL para selecionar todos os produtos
-            $sql = "SELECT * FROM products;";
-            $resultado = mysqli_query($conn, $sql);
-
+            require_once 'database.php'; 
+            //Prepara uma declaracao SQL
+            $stmt = $mysqli->prepare('SELECT * FROM produtos');
+            
+            //Adiciona a string de email na variavel '?'
+            $stmt->bind_param('s', $produtos_consulta);
+            
             // Verifica se a consulta retornou algum resultado
             if (mysqli_num_rows($resultado) > 0) {
               // Loop pelos resultados e exibe os dados
@@ -93,9 +94,9 @@
             } else {
               echo "Nenhum produto encontrado.";
             }
-
+            
             // Fecha a conexão com o banco de dados
-            mysqli_close($conn);
+            $mysqli->close();
             ?>
 
           </div>
