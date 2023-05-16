@@ -10,7 +10,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
         exit();
     }
     
-    $table = new UserTable($db);
+    $table = new UserTable($mysqli);
     if(!$table->register($user)){
         echo "Error $table->error";
         exit();
