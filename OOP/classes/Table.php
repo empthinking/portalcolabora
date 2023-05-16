@@ -1,6 +1,5 @@
 <?php
 require_once 'db.php';
-
 class Table {
 
     protected $table_name;
