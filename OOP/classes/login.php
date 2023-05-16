@@ -23,7 +23,7 @@ define('P_N'      , 'Product_Name');
 define('P_C'      , 'Product_Category');
 define('P_A'      , 'Product_Amount');
 
-$mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
+$mysqli = new mysqli(HOST, NAME, PASSWORD, DATABASE);
 
 if($mysqli->connect_error)
     exit('Falha na conexão');
@@ -83,7 +83,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $number   = $_POST[U_NUM];
     $user = new User();
     
-    if(!$user->setName($username) || !$user->setPassword($password]) || !$user->setEmail($email) || !$user->setNumber($number)) {
+    if(!$user->setName($username) || !$user->setPassword($password) || !$user->setEmail($email) || !$user->setNumber($number)) {
         echo $user->error;
         exit();
     }
@@ -118,7 +118,7 @@ echo <<<EOL
       </div>
       <div class="form-group">
         <label for="password">Password (at least 8 characters):</label>
-        <input type="password" class="form-control" id="password" name="$passord_field" pattern=".{8,}" required placeholder="$password">
+        <input type="password" class="form-control" id="password" name="$password_field" pattern=".{8,}" required placeholder="$password">
       </div>
       <div class="form-group">
         <label for="phone">Phone Number:</label>
