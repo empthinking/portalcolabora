@@ -1,11 +1,89 @@
 <?php
 
-#require_once 'UserTable.php';
-require_once 'User.php';
+//Constantes do banco de dados
+define('HOST'    , '127.0.0.1');
+define('NAME'    , 'u871226378_colabora');
+define('PASSWORD', 'F7k|MYhYf>');
+define('DATABASE', 'u871226378_portalcolabora');
+
+//Constantes para a tabela de usuarios
+define('U_TABLE', 'usuarios');
+define('U_ID'   , 'user_id');
+define('U_N'    , 'user_nome');
+define('U_E'    , 'user_email');
+define('U_P'    , 'user_senha');
+define('U_BD'   , 'User_BirthDay');
+define('U_CPF'  , 'User_CPF');
+define('U_NUM'  , 'user_tel');
+
+//Constantes para a tabela de produtos
+define('P_TABLE'  , 'Products');
+define('P_ID'     , 'Product_Id');
+define('P_N'      , 'Product_Name');
+define('P_C'      , 'Product_Category');
+define('P_A'      , 'Product_Amount');
+
+$mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
+
+if($mysqli->connect_error)
+    exit('Falha na conexão');
+
+class Table {
+
+    protected $table_name;
+    protected $db;
+    public  $error;
+
+    function __construct(mysqli $db, string $table_name){
+        $this->db = $db;
+        $this->table_name = $table_name;
+    }    
+
+    // Realiza uma query preparada
+    protected function secureSqlQuery(string $sql_prep, array $bindings, bool $return = FALSE, bool $mult_row = FALSE) : bool | array {
+        if(!$stmt = $this->db->prepare($sql_prep)){
+            $this->error = $stmt->error;
+            $stmt->close();
+            return FALSE;
+        }
+
+        if(!$stmt->execute($bindings)){
+            $this->error = $stmt->error;
+            $stmt->close();
+            return FALSE;
+        }
+
+        if($return){
+            $result = $stmt->get_result();
+            $stmt->close();
+            $row = $mult_result ? $result->fetch_all(MYSQLI_BOTH) : $result->fetch_assoc();
+            $result->close();
+            return $row;
+	}
+
+        return TRUE;
+    }
+
+
+    function __destruct(){
+        $this->db->close();
+    }
+
+} 
+$username = $password = $email = $number = '';
+$name_field = U_N;
+$password_field = U_P;
+$email_field = U_E;
+$number_field = U_NUM;
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    $username = $_POST[U_N];
+    $password = $_POST[U_P];
+    $email    = $_POST[U_E];
+    $number   = $_POST[U_NUM];
     $user = new User();
-    if(!$user->setName($_POST[U_N]) || !$user->setPassword($_POST[U_P]) || !$user->setEmail($_POST[U_E]) || !$user->setNumber($_POST[U_NUM])) {
+    
+    if(!$user->setName($username) || !$user->setPassword($password]) || !$user->setEmail($email) || !$user->setNumber($number)) {
         echo $user->error;
         exit();
     }
@@ -18,6 +96,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     echo "Success";
     exit();
 }
+
 echo <<<EOL
 <!DOCTYPE html>
 <html>
@@ -31,19 +110,19 @@ echo <<<EOL
     <form action="registration.php" method="POST">
       <div class="form-group">
         <label for="name">Name:</label>
-        <input type="text" class="form-control" id="name" name="{U_N}" pattern="^[a-zA-Z]+$" required placeholder="{isset($_POST[U_N]) ? $_POST[U_N] : ''}">
+        <input type="text" class="form-control" id="name" name="$name_field" pattern="^[a-zA-Z]+$" required placeholder="$username">
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="{U_E}" required placeholder="{isset($_POST[U_E]) ? $_POST[U_E] : ''}">
+        <input type="email" class="form-control" id="email" name="$email_field" required placeholder="$email">
       </div>
       <div class="form-group">
         <label for="password">Password (at least 8 characters):</label>
-        <input type="password" class="form-control" id="password" name="{U_P}" pattern=".{8,}" required placeholder="{isset($_POST[U_P]) ? $_POST[U_P] : ''}">
+        <input type="password" class="form-control" id="password" name="$passord_field" pattern=".{8,}" required placeholder="$password">
       </div>
       <div class="form-group">
         <label for="phone">Phone Number:</label>
-        <input type="tel" class="form-control" id="phone" name="{U_NUM}" required placeholder="{isset($_POST[U_NUM]) ? $_POST[U_NUM] : ''}">
+        <input type="tel" class="form-control" id="phone" name="$number_field" required placeholder="$number">
       </div>
       <button type="submit" class="btn btn-primary">Register</button>
     </form>
