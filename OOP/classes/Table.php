@@ -1,14 +1,11 @@
 <?php
 require_once 'db.php';
 class Table {
-
-    protected $table_name;
     protected $db;
     public  $error;
 
-    function __construct(mysqli $db, string $table_name){
+    function __construct(mysqli $db){
         $this->db = $db;
-        $this->table_name = $table_name;
     }    
 
     // Realiza uma query preparada
