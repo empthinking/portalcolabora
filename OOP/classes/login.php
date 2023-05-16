@@ -70,17 +70,15 @@ class Table {
     }
 
 } 
+
 $username = $password = $email = $number = '';
-$name_field = U_N;
-$password_field = U_P;
-$email_field = U_E;
-$number_field = U_NUM;
+$redirect = htmlspecialchars($_SERVER['PHP_SELF']);
 
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
-    $username = $_POST[U_N];
-    $password = $_POST[U_P];
-    $email    = $_POST[U_E];
-    $number   = $_POST[U_NUM];
+    $username = htmlspecialchars($_POST[U_N]);
+    $password = htmlspecialchars($_POST[U_P]);
+    $email    = htmlspecialchars($_POST[U_E]);
+    $number   = htmlspecialchars($_POST[U_NUM]);
     $user = new User();
     
     if(!$user->setName($username) || !$user->setPassword($password) || !$user->setEmail($email) || !$user->setNumber($number)) {
@@ -107,22 +105,22 @@ echo <<<EOL
 <body>
   <div class="container">
     <h2>User Registration Form</h2>
-    <form action="registration.php" method="POST">
+    <form action="{html_special_chars(" method="POST">
       <div class="form-group">
         <label for="name">Name:</label>
-        <input type="text" class="form-control" id="name" name="$name_field" pattern="^[a-zA-Z]+$" required placeholder="$username">
+        <input type="text" class="form-control" id="name" name="{U_N}" pattern="^[a-zA-Z]+$" required placeholder="$username">
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="$email_field" required placeholder="$email">
+        <input type="email" class="form-control" id="email" name="{U_E}" required placeholder="$email">
       </div>
       <div class="form-group">
         <label for="password">Password (at least 8 characters):</label>
-        <input type="password" class="form-control" id="password" name="$password_field" pattern=".{8,}" required placeholder="$password">
+        <input type="password" class="form-control" id="password" name="{U_P}" pattern=".{8,}" required placeholder="$password">
       </div>
       <div class="form-group">
         <label for="phone">Phone Number:</label>
-        <input type="tel" class="form-control" id="phone" name="$number_field" required placeholder="$number">
+        <input type="tel" class="form-control" id="phone" name="{U_NUM}" required placeholder="$number">
       </div>
       <button type="submit" class="btn btn-primary">Register</button>
     </form>
