@@ -1,4 +1,5 @@
 <?php
+/*
 require_once 'UserTable.php';
 require_once 'User.php';
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -16,6 +17,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST'){
     echo "Success";
     exit();
 }
+*/
 echo <<<EOL
 <!DOCTYPE html>
 <html>
