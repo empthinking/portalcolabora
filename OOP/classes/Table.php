@@ -23,7 +23,7 @@ abstract class Table {
     
 
     // Realiza uma query preparada
-    protected function secureQuery(string $sql_prep, mixed ...$variables) : bool{
+    protected function secureSqlQuery(string $sql_prep, mixed ...$variables) : bool{
         if(!$stmt = $this->db->prepare($sql_prep)){
             $this->error = $stmt->error;
             $stmt->close();
@@ -41,7 +41,7 @@ abstract class Table {
 
     //Retorna um array multidimensional contendo as linhas requistadas
     protected function getRows(string $sql) : array | bool {
-        $sql = $db->real_escape_string($sql);
+        $sql = $this->db->real_escape_string($sql);
 
         if(!$result = $this->db->query($sql)){
             $this->error = $this->db->error;
@@ -55,7 +55,7 @@ abstract class Table {
 
     //Retorna uma única linha requisitada
     protected function getOneRow(string $sql) : array | bool {
-        $sql = $db->real_escape_string($sql);
+        $sql = $this->db->real_escape_string($sql);
 
         if(!$result = $this->db->query($sql)) {
             $this->error = $this->db->error;
@@ -68,7 +68,7 @@ abstract class Table {
     }
     
     protected function secureGetOneRow(string $sql_prep, mixed ...$variables) : array | bool {
-        if(!$stmt = $this->msqli->prepare($sql_prep)){
+        if(!$stmt = $this->db->prepare($sql_prep)){
             $this->error = $stmt->error;
             $stmt->close();
             return FALSE;
