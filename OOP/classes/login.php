@@ -1,75 +1,6 @@
 <?php
-
-//Constantes do banco de dados
-define('HOST'    , '127.0.0.1');
-define('NAME'    , 'u871226378_colabora');
-define('PASSWORD', 'F7k|MYhYf>');
-define('DATABASE', 'u871226378_portalcolabora');
-
-//Constantes para a tabela de usuarios
-define('U_TABLE', 'usuarios');
-define('U_ID'   , 'user_id');
-define('U_N'    , 'user_nome');
-define('U_E'    , 'user_email');
-define('U_P'    , 'user_senha');
-define('U_BD'   , 'User_BirthDay');
-define('U_CPF'  , 'User_CPF');
-define('U_NUM'  , 'user_tel');
-
-//Constantes para a tabela de produtos
-define('P_TABLE'  , 'Products');
-define('P_ID'     , 'Product_Id');
-define('P_N'      , 'Product_Name');
-define('P_C'      , 'Product_Category');
-define('P_A'      , 'Product_Amount');
-
-$mysqli = new mysqli(HOST, NAME, PASSWORD, DATABASE);
-
-if($mysqli->connect_error)
-    exit('Falha na conexão');
-
-class Table {
-
-    protected $table_name;
-    protected $db;
-    public  $error;
-
-    function __construct(mysqli $db, string $table_name){
-        $this->db = $db;
-        $this->table_name = $table_name;
-    }    
-
-    // Realiza uma query preparada
-    protected function secureSqlQuery(string $sql_prep, array $bindings, bool $return = FALSE, bool $mult_row = FALSE) : bool | array {
-        if(!$stmt = $this->db->prepare($sql_prep)){
-            $this->error = $stmt->error;
-            $stmt->close();
-            return FALSE;
-        }
-
-        if(!$stmt->execute($bindings)){
-            $this->error = $stmt->error;
-            $stmt->close();
-            return FALSE;
-        }
-
-        if($return){
-            $result = $stmt->get_result();
-            $stmt->close();
-            $row = $mult_result ? $result->fetch_all(MYSQLI_BOTH) : $result->fetch_assoc();
-            $result->close();
-            return $row;
-	}
-
-        return TRUE;
-    }
-
-
-    function __destruct(){
-        $this->db->close();
-    }
-
-} 
+require_once 'UserTable.php';
+require_once 'User.php';
 
 $username = $password = $email = $number = '';
 $redirect = htmlspecialchars($_SERVER['PHP_SELF']);
@@ -105,7 +36,7 @@ echo <<<EOL
 <body>
   <div class="container">
     <h2>User Registration Form</h2>
-    <form action="{html_special_chars(" method="POST">
+    <form action="$redirect" method="POST">
       <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" class="form-control" id="name" name="{U_N}" pattern="^[a-zA-Z]+$" required placeholder="$username">
