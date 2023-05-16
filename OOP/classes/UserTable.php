@@ -1,5 +1,6 @@
 <?php
 require_once 'Table.php';
+require_once 'User.php';
 
 class UserTable extends Table {
 
