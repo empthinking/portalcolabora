@@ -11,7 +11,7 @@ class User {
 
 
     function __construct() {
-        $this->$logged_in = self::isLoggedIn();
+        $this->logged_in = self::isLoggedIn();
     }
 
     static function isLoggedIn(): bool {
@@ -34,7 +34,7 @@ class User {
         return $this->password;
     }
 
-    function setUsername($string name): bool {
+    function setUsername(string $name): bool {
         if ($this->logged_in) {
             $this->error = 'Usuario logado';
             return FALSE;
@@ -70,7 +70,7 @@ class User {
             return FALSE;
 	    }
 
-        if (strlen($password < 8)) {
+        if (strlen($password) < 8) {
             $this->error = 'Senha possui menos que 8 caracteres';
             return FALSE;
         }
@@ -85,7 +85,7 @@ class User {
             return FALSE;
         }
 
-	    if (!validateEmail($email)) {
+	    if (!$this->validateEmail($email)) {
             $this->error = "Email invalido";
             return FALSE;
         }
@@ -94,18 +94,15 @@ class User {
 	    return TRUE;
     }
 
-    protected validateEmail(mixed $email) : bool {
-	   return filter_var($email, FILTER_VALIDATE_EMAIL));
+    protected function validateEmail(mixed $email) : bool {
+        return filter_var($email, FILTER_VALIDATE_EMAIL);
     }
 
     static function logout() : bool {
-        if(!$logged_in) {
-            $this->error = 'Usuario não está logado';
+        if(!self::isLoggedIn()) {
             return FALSE;
         }
-
         session_destroy();
-        $_SESSION = [];
         return TRUE;
     }
 }
