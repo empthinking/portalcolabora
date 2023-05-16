@@ -1,7 +1,7 @@
 <?php
-#require_once 'Table.php';
+require_once 'Table.php';
 
-class UserTable{
+class UserTable extends Table {
 
     private $table_name;
 
@@ -21,7 +21,7 @@ class UserTable{
         string $password   = U_P,
         string $number     = U_NUM
     ) {
-        #parent::__construct($db);
+        parent::__construct($db);
 	$this->table_name = $table_name;
         $this->user_id    = $id;
         $this->username   = $username;
