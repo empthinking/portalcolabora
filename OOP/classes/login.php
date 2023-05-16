@@ -1,5 +1,5 @@
 <?php
-#require_once 'UserTable.php';
+require_once 'UserTable.php';
 require_once 'User.php';
 
 $username = $password = $email = $number = '';
