@@ -1,8 +1,8 @@
 <?php
-/*
-require_once 'UserTable.php';
+
+#require_once 'UserTable.php';
 require_once 'User.php';
-*/
+
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
     $user = new User();
     if(!$user->setName($_POST[U_N]) || !$user->setPassword($_POST[U_P]) || !$user->setEmail($_POST[U_E]) || !$user->setNumber($_POST[U_NUM])) {
