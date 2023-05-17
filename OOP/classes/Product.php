@@ -1,168 +1,120 @@
 <?php
+
 class Product {
-   private $prod_id;
-   private $prod_name;
-   private $desc;
-   private $price;
-   private $categ;
-   private $user_id;
-   private $mysqli;
+    private $prod_id;
+    private $prod_name;
+    private $desc;
+    private $price;
+    private $categ;
+    private $user_id;
 
-   function __construct(mysqli $mysqli, int $user_id){
-       if(isset($user_id) && filter_var($user_id, FILTER_VALIDATE_INT)):
-           $this->user_id = $user_id;
-       else:
-           throw new Exception('ID de usuario ausente ou inválido');
-       endif;
-   
-	if(isset($mysqli)):
-         $this->mysqli = $mysqli;
-      else:
-         throw new Exception('Necessita do objeto mysqli');
-       endif;
-   } 
+    public $error; 
 
-    function setName(string $name) : void {
+    function __construct(db $db, mixed $user_id){
+        parent::__construct($db);
+        $this->user_id = $user_id;
+    } 
+
+    function setName(string $name) : bool {
+        if(!validateName($name)){
+            $this->error[__METHOD__] = 'Nome inválido';
+            return FALSE;
+        }
+
         $this->prod_name = $name;
     }
 
-    function setPrice(float $price) : void {
-        $this->price = $price;
+    function setPrice(mixed $price) : bool {
+        if(!validatePrice($price)){
+            $this->error[__METHOD__] = 'Formato inválido';
+            return FALSE;
+        }
+
+        $this->price = (float)$price;
+        return TRUE;
     }
 
-    function setDescription(string $desc) : void {
-        $this->desc = $desc;
+    function setDescription(mixed $desc = '') : bool {
+        if(empty($desc))
+            return TRUE;
+        $this->desc = $this->db->real_escape_string(htmlspecialchars(trim((string)$desc)));
+        return TRUE;
     }
 
-    function setCategory(string $categ) : void{
+    function setCategory(mixed $categ) : bool {
         $this->categ = $categ;
-    }
-    function setUserId(int $id) : void {
-	    $this->user_id = $id;
+        return TRUE;
     }
 
-    function setAllProductData(string $name, string $desc, float $price, string $categ) : void{
-        if(empty($name) || empty($desc) || empty($price) || empty($categ))
-            throw new Exception('Todos os campos devem ser preenchidos');
-        if(!preg_match('/^[a-zA-Z_0-9]+$/', $name))
-            throw new Exception('Nome deve conter apenas letras, números ou sublinhado apenas');
-        if(!filter_var($price, FILTER_VALIDATE_FLOAT))
-            throw new Exception('Preço em formato inválido');
-      //Filtro de categoria a definir
+    function setUserId(int $id) : bool {
+        $this->user_id = $id;
+        return TRUE;
+    }
 
-        $this->prod_name  = $name;
-        $this->desc       = $desc;
-        $this->price      = $price;
-        $this->categ      = $categ;
+    protected function validateName(mixed $name) : bool {
+        return preg_match('/^[a-zA-Z_0-9]+$/', $name))
     }
-   function getName() : string{
-      return $this->prod_name;
-   }
-   function getDescription() : string{
-      return $this->desc;
+
+    protected function validatePrice(mixed $price) : bool {
+        return filter_var($price, FILTER_VALIDATE_FLOAT) || filter_var($price, FILTER_VALIDATE_INT); 
     }
-   function getPrice() : float {
-      return $this->price;
+
+    //protected function validateCategory() : bool;
+
+    function getName() : string{
+        return $this->prod_name;
     }
-   function getCategory() : string {
-      return $this->categ;
+
+    function getDescription() : string{
+        return $this->desc;
     }
+
+    function getPrice() : float {
+        return $this->price;
+    }
+
+    function getCategory() : string {
+        return $this->categ;
+    }
+
     function getUserId() : int {
-      return $this->user_id;
-    }
-    function getProductDataById() : void {
-        $stmt = $this->mysqli->prepare(SQL_SELECT_PRODUCT);
-        $stmt->bind_param('i', $this->user_id);
-        if($stmt->execute()):
-            $result  = $stmt->get_result();
-            $row     = $result->fetch_assoc();
-
-            $this->id         = $row['produto_id'];   
-            $this->prod_name  = $row['produto_nome'];
-            $this->desc       = $row['produto_descricao'];
-            $this->price      = $row['produto_preco'];
-            $this->categ      = $row['produto_category'];
-            $this->user_id    = $row['user_id'];
-        else:
-            throw new Exception($this->mysqli->error . PHP_EOL . $this->mysqli->errno);
-        endif;
-
-      $stmt->close();
-      $result->free_result();
-    }
-/*
-    function getProductData(string $sql) : void {
-        $stmt = $this->mysqli->prepare($sql);
-        $stmt->bind_param('i', $this->user_id);
-        if($stmt->execute()):
-            $result  = $stmt->get_result();
-            $row     = $result->fetch_assoc();
-
-            $this->id         = $row['produto_id'];   
-            $this->prod_name  = $row['produto_nome'];
-            $this->desc       = $row['produto_descricao'];
-            $this->price      = $row['produto_preco'];
-            $this->categ      = $row['produto_category'];
-            $this->user_id    = $row['user_id'];
-        else:
-            throw new Exception($this->mysqli->error . PHP_EOL . $this->mysqli->errno);
-        endif;
-
-      $stmt->close();
-      $result->free_result();
-    }
- */
-
-    function insertToDataBase() : void {
-        $stmt = $this->mysqli->prepare(SQL_INSERT_PRODUCT);
-        $stmt->bind_param('ssdsii', $this->prod_name, $this->desc, $this->price, $this->categ, $this->user_id, $this->prod_id);
-        if(!$stmt->execute())
-            throw new Exception($this->mysqli->error . PHP_EOL . $this->mysqli->errno);
-        $stmt->close();
+         return $this->user_id;
     }
 
-    function updateNameFromDataBase(){
-	if(!isset($this->prod_name)) throw new Exception('Nome ausente');
-        $stmt = $this->mysqli->prepare(SQL_UPDATE_PRODUCT_NAME);
-        $stmt->bind_param('si', $this->prod_name, $this->id);
-        if(!$stmt->execute())
-            throw new Exception($this->mysqli->error . PHP_EOL . $this->mysqli->errno);
-        $stmt->close();
+    function insert() : bool {
+        if(empty($this->prod_name) || empty($this->desc) || empty($this->price) || empty($this->categ)){
+            $this->error[__METHOD__] = 'Todos os campos devem ser preenchidos';
+            return FALSE;
+        }
+        $sql = 'INSERT INTO %s(%s, %s, %s, %s) VALUES(%s, %s, %s, %s) WHERE %s = %s';
+        $sql = sprintf($sql, P_TABLE, P_N, P_D, P_P, P_C, U_ID, $this->prod_name, $this->prod_desc, $this->price, $this->categ, U_ID, $this->user_id);
+
+        if(!$this->query($sql)){
+            $this->error[__METHOD__] = 'Não foi possível concluir a transação';
+            return FALSE;
+        }
+        return TRUE;
     }
 
-    function updateDescriptionFromDataBase(){
-	    if(!isset($this->desc)) throw new Exception('Descrição ausente');
-        $stmt = $this->mysqli->prepare(SQL_UPDATE_PRODUCT_DESCRIPTION);
-        $stmt->bind_param('si', $this->desc, $this->prod_id);
-        if(!$stmt->execute())
-            throw new Exception($this->mysqli->error . PHP_EOL . $this->mysqli->errno);
-        $stmt->close();
+    function update(string $column) : bool {
+        $sql = 'UPDATE '. P_TABLE . 'SET ' . $column . '=%s WHERE ' . U_ID . ' = ' . $this->user_id;
+        if(!$this->query($sql)){
+            $this->error[__METHOD__] = 'Não foi possível concluir a transação';
+            return FALSE;
+        }
+        return TRUE;
     }
-    function updatePriceFromDataBase(){
-	    if(!isset($this->price)) throw new Exception('Preço ausente');
-        $stmt = $this->mysqli->prepare(SQL_UPDATE_PRODUCT_DESCRIPTION);
-        $stmt->bind_param('di', $this->price, $this->prod_id);
-        if(!$stmt->execute())
-            throw new Exception($this->mysqli->error . PHP_EOL . $this->mysqli->errno);
-        $stmt->close();
-    }
-    function updateCategoryFromDataBase(){
-	    if(!isset($this->categ)) throw new Exception('Categoria ausente');
-        $stmt = $this->mysqli->prepare(SQL_UPDATE_PRODUCT_CATEGORY);
-        $stmt->bind_param('si', $this->categ, $this->prod_id);
-        if(!$stmt->execute())
-            throw new Exception($this->mysqli->error . PHP_EOL . $this->mysqli->errno);
-        $stmt->close();
-    }
-    function deleteProduct(){
-        $stmt = $this->mysqli->prepare(SQL_PRODUCT_DELETE);
-        $stmt->bind_param('i', $this->prod_id);
-        if(!$stmt->execute())
-            throw new Exception($this->mysqli->error . PHP_EOL . $this->mysqli->errno);
-        $stmt->close();
+
+    function delete() : bool {
+        $sql = 'DELETE FROM ' . P_TABLE . ' WHERE ' . U_ID . ' = ' . $this->user_id;
+        if(!$this->query($sql)){
+            $this->error[__METHOD__] = 'Não foi possível concluir a transação';
+            return FALSE;
+        }
+        return TRUE;
     }
 
     function close(){
-        $this->mysqli->close();
+        $this->db->close();
     }
 ?>
