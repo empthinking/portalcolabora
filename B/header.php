@@ -72,7 +72,6 @@
 										<button type="submit" class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
 										Entrar
 										</button>
-										<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/B/adm/login_admin.php">entrar como admin										</a>
 									</div>
 									</form>
 									<button type="button" onclick="document.getElementById('singIn').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
