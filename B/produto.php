@@ -44,141 +44,68 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-?>
-
-    <!-- Conteúdo principal -->
-<main class="bg-white">
-  
+?
+	<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalhes do Produto</title>
+</head>
+<body>
 <?php
-  $nome = htmlentities($produto['nome']);
-  $imagem = htmlentities($produto['imagem']);
-  $descricao = htmlentities($produto['descricao']);
-  $preco = number_format($produto['preco'], 2, ',', '.');
-  $nomeUsuario = htmlentities($produto['nome_usuario']);
-?>
-
-<div class="container  md:flex">
-  <div class="m-5 md:w-1/2">
-    <div id="slider">
-      <div><img src="<?php echo $imagem ?>" alt="Imagem do Produto"></div>
-      <div><img src="<?php echo $imagem ?>" alt="Imagem do Produto"></div>
-      <div><img src="<?php echo $imagem ?>" alt="Imagem do Produto"></div>
-    </div>
-  </div>
-
-  <div class="column is-6-desktop m-4 md:w-1/2">
-    <h2 class="title is-2 text-8xl font-bold mb-2"><?= $nome ?></h2>
-    <p class="subtitle is-4 text-4lg text-gray-600 mb-4"><?= $descricao ?></p>
-    <p class="subtitle is-3 has-text-success text-6xl text-green-600 mb-4">R$ <?= $preco ?></p>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg mb-4"><a href="contato.php">Entrar em contato</a></button>
-    <div class="flex items-center">
-      <div class="w-10 h-10 rounded-full mr-4">
-  <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
-									
-<img src="<?php echo $caminho_imagem_prod; ?>" alt="Imagem de Perfil" class="w-10 h-10 rounded-full mr-2">
-                    </div> 
-                       </div>
-      <a href="#" class="text-blue-500 font-bold"><label for="perfil"><?= $nomeUsuario ?></label></a>
-    </div>
-  </div>
-</div>
-
-  
-  </main>  
-  <section class="bg-gray-100 py-8">
-  <div class="container">
-  <div class="container">
-    <h2 class="text-2xl font-bold mb-6">Outros Produtos</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-
-    <?php
-    // Abrindo a conexão com o banco de dados
-    $conn = mysqli_connect("localhost", "root", "", "crud");
-
-    // Verificando se a conexão foi estabelecida com sucesso
-    if (!$conn) {
-        die("Não foi possível conectar ao banco de dados: " . mysqli_connect_error());
+// Função para obter produtos recomendados aleatoriamente
+function getProdutosRecomendados($conn, $id, $limit = 3) {
+    $query = "SELECT * FROM produtos WHERE id != $id ORDER BY RAND() LIMIT $limit";
+    $result = mysqli_query($conn, $query);
+    $produtos = array();
+    while ($row = mysqli_fetch_assoc($result)) {
+        $produtos[] = $row;
     }
+    return $produtos;
+}
 
-    // Consultando outros produtos de forma aleatória
-    $consulta = "SELECT * FROM produtos WHERE id != " . $produto['id'] . " ORDER BY RAND() LIMIT 4";
+// Verifica se foi passado um ID de produto válido na URL
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    // Conecta ao banco de dados e faz a consulta para obter os detalhes do produto
+    $conn = mysqli_connect('localhost', 'usuario', 'senha', 'meu_banco_de_dados');
+    $id = $_GET['id'];
+    $query = "SELECT * FROM produtos WHERE id = $id";
+    $result = mysqli_query($conn, $query);
 
-    // Verificando se a consulta foi executada com sucesso
-    $resultado = mysqli_query($conn, $consulta);
-
-    if (!$resultado) {
-        die("Não foi possível consultar o banco de dados: " . mysqli_error($conn));
-    }
-
-    // Loop para exibir os produtos
-    while ($produto = mysqli_fetch_array($resultado)) {
+    // Verifica se a consulta retornou algum resultado
+    if (mysqli_num_rows($result) > 0) {
+        $produto = mysqli_fetch_assoc($result);
         ?>
+        <h1><?php echo $produto['nome']; ?></h1>
+        <p><?php echo $produto['descricao']; ?></p>
+        <p>Preço: R$ <?php echo $produto['preco']; ?></p>
+        <p>Quantidade em estoque: <?php echo $produto['estoque']; ?></p>
+        <!-- Adicione aqui outros detalhes do produto que deseja exibir -->
+        <?php
 
-        <!-- Card do Produto -->
-        <div class="card">
-            <div class="card-image">
-                <figure class="w-full">
-                    <img src="<?= htmlentities($produto['imagem']) ?>" alt="Product Image" class="object-cover w-full h-48">
-                </figure>
-            </div>
-            <div class="card-content p-4">
-                <p class="text-lg font-bold mb-2"><?= htmlentities($produto['nome']) ?></p>
-                <p class="text-lg font-bold text-green-600 mb-2">R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
-                    <a href="produto.php?id=<?= $produto['id'] ?>">ver mais</a>
-                </button>
-            </div>
-        </div>
+        // Obter produtos recomendados aleatoriamente
+        $produtosRecomendados = getProdutosRecomendados($conn, $id);
 
-    <?php
+        if (!empty($produtosRecomendados)) {
+            ?>
+            <h2>Produtos Recomendados</h2>
+            <ul>
+                <?php foreach ($produtosRecomendados as $recomendado) { ?>
+                    <li><?php echo $recomendado['nome']; ?></li>
+                    <!-- Adicione aqui os detalhes dos produtos recomendados que deseja exibir -->
+                <?php } ?>
+            </ul>
+            <?php
+        }
+    } else {
+        echo "Produto não encontrado.";
     }
-    // Fechando a conexão com o banco de dados
+
+    // Fecha a conexão com o banco de dados
     mysqli_close($conn);
-    ?>
-
-    </div>
-</div>
-
-  
-    </div>
-  </div>
-</section>
-
-  <style>
-    /* Slick Carousel styles */
-    .slick-slide {
-      margin: 0 10px;
-    }
-  
-    .slick-prev:before,
-    .slick-next:before {
-        color: #999;
-    }
-    
-    .slick-dots li button:before {
-        color: #999;
-    }
-  
-    .slick-dots li.slick-active button:before {
-      color: #3273dc;
-    }
-    
-    /* Custom styles */
-    .related-products {
-        margin: 0
-    }
-    </style>
-  </body>
-    <script>
-   
-     $(document).ready(function(){
-      $('#slider').slick({
-        dots: true,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 1,
-        adaptiveHeight: true
-      });
-    });
-    
-    </script>       
+} else {
+    echo "ID de produto inválido.";
+}
+?>
+</body>
+</html>
