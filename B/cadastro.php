@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
   else :
     // Inclusão no Banco de Dados
     $stmt = $mysqli->prepare('INSERT INTO usuarios (user_nome, user_email, user_senha, user_tel, permissao_publicar) VALUES(?, ?, ?, ?, ?)');
-    $stmt->bind_param('sssii', $username, $email, $password_hash, $cellphone, $permission_publicar);
+//     $stmt->bind_param('sssii', $username, $email, $password_hash, $cellphone, $permission_publicar);
     $stmt->execute();
     $stmt->close();
     $mysqli->close();
