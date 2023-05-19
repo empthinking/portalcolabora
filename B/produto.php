@@ -8,12 +8,12 @@ function isUserLoggedIn(): bool {
 
 //Inicia a sessao
 
-// Cabeçalho
-if(isUserLoggedIn()):
-  require_once 'header_loggedin.php';
-else:
-  require_once 'header.php';
-endif;
+// // Cabeçalho
+// if(isUserLoggedIn()):
+//   require_once 'header_loggedin.php';
+// else:
+//   require_once 'header.php';
+// endif;
 
 function obter_produto($conn, $id) {
   $query = "SELECT p.*, u.user_nome as nome_usuario, u.user_imagem FROM produtos p JOIN usuarios u ON p.usuario_id = u.user_id WHERE p.id = " . mysqli_real_escape_string($conn, $id);
