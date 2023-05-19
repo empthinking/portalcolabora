@@ -14,18 +14,6 @@ if(isUserLoggedIn()):
 else:
   require_once 'header.php';
 endif;
-
-function obter_produto($conn, $id) {
-  $query = "SELECT p.*, u.user_nome as nome_usuario, u.user_imagem FROM produtos p JOIN usuarios u ON p.usuario_id = u.user_id WHERE p.id = " . mysqli_real_escape_string($conn, $id);
-  $result = mysqli_query($conn, $query);
-  if (!$result) {
-      throw new Exception("Erro na consulta: " . mysqli_error($conn));
-  }
-  $produto = mysqli_fetch_assoc($result);
-  mysqli_free_result($result);
-  return $produto;
-}
-
 $id = $_GET['id'];
 if (!$id) {
   header("Location: index.php");
@@ -193,5 +181,4 @@ error_reporting(E_ALL);
       });
     });
     
-    </script>
-<?=require_once "footer.php";?>             
+    </script>       
