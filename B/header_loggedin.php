@@ -1,3 +1,6 @@
+<?php
+require_once "dbconn.php";
+
 $usuario_id = $_SESSION['id'] ?? null;
 if ($usuario_id === null) {
     header("Location: index.php");
