@@ -34,7 +34,7 @@ function obter_produto($conn, $id) {
 }
 
 // Abrindo a conexão com o banco de dados
-$conn = mysqli_connect("127.0.0.1", "seu_usuario", "sua_senha", "seu_banco_de_dados");
+$conn = mysqli_connect("127.0.0.1", "u871226378_colabora", "F7k|MYhYf>", "u871226378_portalcolabora");
 
 // Verificando se a conexão foi estabelecida com sucesso
 if (!$conn) {
