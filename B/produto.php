@@ -52,6 +52,10 @@ if ($produto['user_imagem'] == null) {
 } else {
   $caminho_imagem_prod = $produto['user_imagem'];
 }
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 ?>
 
     <!-- Conteúdo principal -->
