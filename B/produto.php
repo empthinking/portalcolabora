@@ -23,6 +23,7 @@ if (isUserLoggedIn()) {
   if (!$result) {
     throw new Exception("Erro ao registrar histórico: " . mysqli_error($conn));
   }
+  $produto = $result->fetch_assoc();
 }
 ?>
 <body class="bg-gray-100">
