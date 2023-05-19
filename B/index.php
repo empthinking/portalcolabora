@@ -1,5 +1,7 @@
 <?php
 
+require_once "dbconn.php";
+require_once "funcoes.php";
 function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
@@ -30,10 +32,7 @@ endif;
 //Rodape
 // require_once 'footer.php';
 
-?>
-<?php
-require_once "dbconn.php";
-require_once "funcoes.php";
+
 
 // Configurações da paginação
 $produtosPorPagina = 10;
