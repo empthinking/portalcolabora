@@ -17,7 +17,7 @@ if (isUserLoggedIn()) {
 // Registra o histórico de acesso
 if (isUserLoggedIn()) {
   $usuario_id = $_SESSION['id'];
-  $produto_id = mysqli_real_escape_string($conn, $id);
+  $produto_id = mysqli_real_escape_string($conn, $_GET['id']);
   $query = "INSERT INTO historico (usuario_id, produto_id) VALUES ('$usuario_id', '$produto_id')";
   $result = mysqli_query($conn, $query);
   if (!$result) {
