@@ -54,7 +54,7 @@ if ($produto['user_imagem'] == null) {
 }
 ?>
 
-    <!-- Conteúdo principal -->
+<!-- Conteúdo principal -->
 <main class="bg-white">
   
 <?php
@@ -81,20 +81,17 @@ if ($produto['user_imagem'] == null) {
     <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg mb-4"><a href="contato.php">Entrar em contato</a></button>
     <div class="flex items-center">
       <div class="w-10 h-10 rounded-full mr-4">
-  <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
-									
-<img src="<?php echo $caminho_imagem_prod; ?>" alt="Imagem de Perfil" class="w-10 h-10 rounded-full mr-2">
-                    </div> 
-                       </div>
+        <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
+          <img src="<?php echo $caminho_imagem_prod; ?>" alt="Imagem de Perfil" class="w-10 h-10 rounded-full mr-2">
+        </div>
+      </div>
       <a href="#" class="text-blue-500 font-bold"><label for="perfil"><?= $nomeUsuario ?></label></a>
     </div>
   </div>
 </div>
 
-  
-  </main>  
-  <section class="bg-gray-100 py-8">
-  <div class="container">
+</main>  
+<section class="bg-gray-100 py-8">
   <div class="container">
     <h2 class="text-2xl font-bold mb-6">Outros Produtos</h2>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -145,49 +142,44 @@ if ($produto['user_imagem'] == null) {
     ?>
 
     </div>
-</div>
-
-  
-    </div>
   </div>
 </section>
 
-  <style>
-    /* Slick Carousel styles */
-    .slick-slide {
-      margin: 0 10px;
-    }
+<style>
+  /* Slick Carousel styles */
+  .slick-slide {
+    margin: 0 10px;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+      color: #999;
+  }
   
-    .slick-prev:before,
-    .slick-next:before {
-        color: #999;
-    }
-    
-    .slick-dots li button:before {
-        color: #999;
-    }
-  
-    .slick-dots li.slick-active button:before {
-      color: #3273dc;
-    }
-    
-    /* Custom styles */
-    .related-products {
-        margin: 0
-    }
-    </style>
-  </body>
-    <script>
-   
-     $(document).ready(function(){
-      $('#slider').slick({
-        dots: true,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 1,
-        adaptiveHeight: true
-      });
+  .slick-dots li button:before {
+      color: #999;
+  }
+
+  .slick-dots li.slick-active button:before {
+    color: #3273dc;
+  }
+
+  /* Custom styles */
+  .related-products {
+      margin: 0
+  }
+</style>
+
+<script>
+  $(document).ready(function(){
+    $('#slider').slick({
+      dots: true,
+      infinite: true,
+      speed: 300,
+      slidesToShow: 1,
+      adaptiveHeight: true
     });
-    
-    </script>
-<?=require_once "footer.php";?>             
+  });
+</script>
+
+<?php require_once "footer.php"; ?>
