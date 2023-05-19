@@ -1,7 +1,9 @@
 <?php
+session_start();
+require_once "dbconn.php";
 // Função para verificar se o usuário está logado
 function isUserLoggedIn(): bool {
-  return isset($_SESSION['login']) && $_SESSION['login'] === true;
+    return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
 
 // Inicia a sessão
@@ -9,23 +11,55 @@ session_start();
 
 // Cabeçalho
 if (isUserLoggedIn()) {
-  require_once 'header_loggedin.php';
+    require_once 'header_loggedin.php';
 } else {
-  require_once 'header.php';
+    require_once 'header.php';
+}
+
+// Recupera o ID do produto
+$id = mysqli_real_escape_string($conn, $_GET['id']);
+
+// Recupera os dados do produto em exibição
+$query = "SELECT * FROM produtos WHERE id = '$id'";
+$result = mysqli_query($conn, $query);
+$produto = mysqli_fetch_assoc($result);
+
+// Verifica se o produto existe
+if (!$produto) {
+    throw new Exception("Produto não encontrado.");
+}
+
+// Recupera os dados dos produtos recomendados
+$queryRecomendados = "SELECT * FROM produtos_recomendados";
+$resultRecomendados = mysqli_query($conn, $queryRecomendados);
+$produtosRecomendados = [];
+while ($row = mysqli_fetch_assoc($resultRecomendados)) {
+    $produtosRecomendados[] = $row;
 }
 
 // Registra o histórico de acesso
 if (isUserLoggedIn()) {
-  $usuario_id = $_SESSION['id'];
-  $produto_id = mysqli_real_escape_string($conn, $_GET['id']);
-  $query = "INSERT INTO historico (usuario_id, produto_id) VALUES ('$usuario_id', '$produto_id')";
-  $result = mysqli_query($conn, $query);
-  if (!$result) {
-    throw new Exception("Erro ao registrar histórico: " . mysqli_error($conn));
-  }
-  $produto = $result->fetch_assoc();
+    $usuario_id = $_SESSION['id'];
+    $produto_id = mysqli_real_escape_string($conn, $id);
+    $queryHistorico = "INSERT INTO historico (usuario_id, produto_id) VALUES ('$usuario_id', '$produto_id')";
+    $resultHistorico = mysqli_query($conn, $queryHistorico);
+    if (!$resultHistorico) {
+        throw new Exception("Erro ao registrar histórico: " . mysqli_error($conn));
+    }
 }
+
 ?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Detalhes do Produto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.7/dist/tailwind.min.css">
+</head>
+
 <body class="bg-gray-100">
   <div class="container mx-auto py-8">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -74,3 +108,8 @@ if (isUserLoggedIn()) {
 </body>
 
 </html>
+
+<?php
+// Fecha a conexão com o banco de dados
+mysqli_close($conn);
+?>
