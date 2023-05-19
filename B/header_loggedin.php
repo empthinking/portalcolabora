@@ -1,7 +1,10 @@
 <?php
+session_start();
+
 require_once "dbconn.php";
 
 $usuario_id = $_SESSION['id'] ?? null;
+
 if ($usuario_id === null) {
     header("Location: index.php");
     exit();
@@ -9,33 +12,26 @@ if ($usuario_id === null) {
 
 $query = "SELECT * FROM usuarios WHERE user_id = $usuario_id";
 $result = mysqli_query($conn, $query);
-// Obtém as informações do usuário
-$user = mysqli_fetch_assoc($result);
-// Verifica se a foto de perfil está vazia
-if ($user['user_imagem'] == null) {
-    $caminho_imagem = "img/perfil.png";
+
+// Verifica se o usuário está logado
+if (mysqli_num_rows($result) > 0) {
+    // Obtém as informações do usuário
+    $user = mysqli_fetch_assoc($result);
+    // Verifica se a foto de perfil está vazia
+    if ($user['user_imagem'] == null) {
+        $caminho_imagem = "img/perfil.png";
+    } else {
+        $caminho_imagem = $user['user_imagem'];
+    }
+
+    $permissao_publicar = $user['permissao_publicar'] ?? false;
 } else {
-    $caminho_imagem = $user['user_imagem'];
+    // Se o usuário não estiver logado, redireciona para a página de login
+    header("Location: index.php");
+    exit();
 }
-
-$permissao_publicar = $user['permissao_publicar'] ?? false;
-
 ?>
-
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Colabora</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/main.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
-    <style>
+<style>
         .navbar {
             position: relative;
             z-index: 9999;
