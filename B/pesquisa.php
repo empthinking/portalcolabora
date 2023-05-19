@@ -1,10 +1,10 @@
 <?php
 
 function conectar() {
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $db = "crud";
+    $host = "127.0.0.1";
+    $user = "u871226378_colabora";
+    $password = "F7k|MYhYf>";
+    $db = "u871226378_portalcolabora";
     $conn = mysqli_connect($host, $user, $password, $db);
     if (!$conn) {
         die("Erro na conexão: " . mysqli_connect_error());
