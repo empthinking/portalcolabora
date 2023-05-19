@@ -1,68 +1,68 @@
 <?php
 session_start();
 ob_start();
+require_once "header_loggedin.php";
+require_once "dbconn.php";
+require_once "funcoes.php";
 
+// Verifica se o usuário está logado
 function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
 
-require_once "header_loggedin.php";
-require_once "dbconn.php";
+// Inicializa as variáveis com valores vazios
+$nome = $descricao = $preco = $imagem = '';
+$erros = [];
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Verifica se as informações foram enviadas corretamente
-    if (isset($_POST["nome"]) && isset($_POST["descricao"]) && isset($_POST["preco"]) && isset($_SESSION["usuario_id"]) && isset($_FILES["imagem"])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Processa os dados do formulário quando o mesmo for submetido
+    $nome = isset($_POST['nome']) ? $_POST['nome'] : '';
+    $descricao = isset($_POST['descricao']) ? $_POST['descricao'] : '';
+    $preco = isset($_POST['preco']) ? $_POST['preco'] : '';
 
-        // Define as informações do produto a partir dos dados do formulário
-        $nome = $_POST["nome"];
-        $descricao = $_POST["descricao"];
-        $preco = $_POST["preco"];
-        $usuario_id = $_SESSION["usuario_id"];
+    // Verifica se uma nova imagem foi selecionada
+    $imagem_nome = $prod['imagem_nome'];
+    $imagem = $prod['imagem'];
+    if ($_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
+        $imagem_nome = basename($_FILES['imagem']['name']);
+        $imagem = "uploads/$imagem_nome";
+        move_uploaded_file($_FILES['imagem']['tmp_name'], $imagem);
+    }
 
-        // Verifica se foi enviada alguma imagem
-        if (!empty($_FILES["imagem"]["name"])) {
-            // Define o caminho para salvar a imagem no servidor
-            $nome_imagem = uniqid() . "_" . $_FILES["imagem"]["name"];
-            $caminho_imagem = "uploads/" . $nome_imagem;
+    // Validação do nome
+    if (empty($nome)) {
+        $erros[] = 'O nome do produto é obrigatório.';
+    } elseif (!preg_match('/^[a-zA-Z0-9\s]+$/', $nome)) {
+        $erros[] = 'O nome do produto deve conter somente letras, números e espaços em branco.';
+    }
 
-            // Move o arquivo para o diretório de uploads
-            if (move_uploaded_file($_FILES["imagem"]["tmp_name"], $caminho_imagem)) {
-                // Insere o novo produto no banco de dados
-                $sql = "INSERT INTO produtos (nome, descricao, preco, imagem_nome, imagem, usuario_id) VALUES (?, ?, ?, ?, ?, ?)";
-                $stmt = mysqli_prepare($conn, $sql);
-                mysqli_stmt_bind_param($stmt, "ssdssi", $nome, $descricao, $preco, $nome_imagem, $caminho_imagem, $usuario_id);
-                mysqli_stmt_execute($stmt);
-                mysqli_stmt_close($stmt);
+    // Validação da descrição
+    if (empty($descricao)) {
+        $erros[] = 'A descrição do produto é obrigatória.';
+    }
 
-                // Redireciona o usuário de volta para a página de listagem de produtos
-                header("Location: meus_produtos.php");
-                exit();
-            } else {
-                echo "Erro ao fazer upload da imagem.";
-            }
+    // Validação do preço
+    if (empty($preco)) {
+        $erros[] = 'O preço do produto é obrigatório.';
+    } elseif (!preg_match('/^\d+(\.\d{1,2})?$/', $preco)) {
+        $erros[] = 'O preço do produto deve ser um valor numérico válido.';
+    }
+
+    if (empty($erros)) {
+        // Cria um novo produto no banco de dados
+        $sql = "INSERT INTO produtos (nome, descricao, preco, imagem, usuario_id, ativo) VALUES ('$nome', '$descricao', $preco, '$imagem', $usuario_id, true)";
+        if (mysqli_query($conn, $sql)) {
+            // Redireciona para a página de "Meus Produtos" com uma mensagem de sucesso
+            $_SESSION['mensagem'] = 'Produto adicionado com sucesso!';
+            header('Location: meus_produtos.php');
+            exit;
         } else {
-            // Define um valor padrão para a imagem, caso não tenha sido enviada nenhuma
-            $nome_imagem = "";
-            $caminho_imagem = "";
-
-            // Insere o novo produto no banco de dados
-            $sql = "INSERT INTO produtos (nome, descricao, preco, imagem_nome, imagem, usuario_id) VALUES (?, ?, ?, ?, ?, ?)";
-            $stmt = mysqli_prepare($conn, $sql);
-            mysqli_stmt_bind_param($stmt, "ssdssi", $nome, $descricao, $preco, $nome_imagem, $caminho_imagem, $usuario_id);
-            mysqli_stmt_execute($stmt);
-            mysqli_stmt_close($stmt);
-
-            // Redireciona o usuário de volta para a página de listagem de produtos
-            header("Location: meus_produtos.php");
-            exit();
+            $erros[] = 'Ocorreu um erro ao adicionar o produto. Por favor, tente novamente.';
         }
-
-    } else {
-        // Algum campo do formulário não foi enviado corretamente
-        echo "Erro ao enviar os dados do formulário.";
     }
 }
 ?>
+
 
 
         <main>
