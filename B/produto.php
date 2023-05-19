@@ -1,6 +1,12 @@
 <?php
-session_start();
-require_once "dbconn.php";
+// Conexão com o banco de dados
+$conn = mysqli_connect("127.0.0.1", "u871226378_colabora", "F7k|MYhYf>", "u871226378_portalcolabora");
+
+// Verificação de erros na conexão
+if (mysqli_connect_errno()) {
+    throw new Exception("Falha na conexão com o banco de dados: " . mysqli_connect_error());
+}
+
 // Função para verificar se o usuário está logado
 function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
