@@ -8,12 +8,12 @@ function isUserLoggedIn(): bool {
 
 //Inicia a sessao
 
-// // Cabeçalho
-// if(isUserLoggedIn()):
-//   require_once 'header_loggedin.php';
-// else:
-//   require_once 'header.php';
-// endif;
+// Cabeçalho
+if(isUserLoggedIn()):
+  require_once 'header_loggedin.php';
+else:
+  require_once 'header.php';
+endif;
 
 function obter_produto($conn, $id) {
   $query = "SELECT p.*, u.user_nome as nome_usuario, u.user_imagem FROM produtos p JOIN usuarios u ON p.usuario_id = u.user_id WHERE p.id = " . mysqli_real_escape_string($conn, $id);
@@ -98,7 +98,7 @@ if ($produto['user_imagem'] == null) {
 
     <?php
     // Abrindo a conexão com o banco de dados
-    $conn = mysqli_connect("localhost", "root", "", "crud");
+    $conn = mysqli_connect("127.0.0.1", "u871226378_colabora", "F7k|MYhYf>", "u871226378_portalcolabora");
 
     // Verificando se a conexão foi estabelecida com sucesso
     if (!$conn) {
