@@ -9,11 +9,11 @@ function isUserLoggedIn(): bool {
 //Inicia a sessao
 
 // Cabeçalho
-if(isUserLoggedIn()):
+// if(isUserLoggedIn()):
   require_once 'header_loggedin.php';
-else:
-  require_once 'header.php';
-endif;
+// else:
+//   require_once 'header.php';
+// endif;
 
 $id = $_GET['id'];
 if (!$id) {
