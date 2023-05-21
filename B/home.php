@@ -101,19 +101,19 @@ $totalPaginas = ceil($totalProdutos / $produtosPorPagina);
                     <div class="w-full md:w-1/2 lg:w-1/4">
                         <div class="group relative">
                             <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
-                                <img src="<?php echo $imagem ?>" alt="Imagem do produto <?php echo $nome ?>" class="h-full w-full object-cover object-center">
+                                <img src="<?php echo $imagem; ?>" alt="Imagem do produto <?php echo $nome; ?>" class="h-full w-full object-cover object-center">
                             </div>
 
                             <div class="mt-4 flex justify-between">
                                 <div>
                                     <h3 class="text-sm text-gray-700">
-                                        <a href="produto.php?id=<?php echo $id ?>">
+                                        <a href="produto.php?id=<?php echo $id; ?>">
                                             <span aria-hidden="true" class="absolute inset-0"></span>
-                                            <?php echo $nome ?></a>
+                                            <?php echo $nome; ?></a>
                                     </h3>
-                                    <p class="mt-1 text-sm text-gray-500"><?php echo $descricao ?></p>
+                                    <p class="mt-1 text-sm text-gray-500"><?php echo $descricao; ?></p>
                                 </div>
-                                <p class="text-sm font-medium text-gray-900">R$<?php echo $preco ?></p>
+                                <p class="text-sm font-medium text-gray-900">R$<?php echo $preco; ?></p>
                             </div>
                         </div>
                     </div>
@@ -126,7 +126,7 @@ $totalPaginas = ceil($totalProdutos / $produtosPorPagina);
                         <ul class="flex items-center">
                             <?php if ($paginaAtual > 1) { ?>
                                 <li>
-                                    <a href="?pagina=<?php echo $paginaAtual - 1 ?>" class="relative inline-flex items-center px-4 py-2 rounded-md bg-white border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                    <a href="?pagina=<?php echo $paginaAtual - 1; ?>" class="relative inline-flex items-center px-4 py-2 rounded-md bg-white border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50">
                                         <span class="sr-only">Previous</span>
                                         Anterior
                                     </a>
@@ -135,7 +135,7 @@ $totalPaginas = ceil($totalProdutos / $produtosPorPagina);
 
                             <?php for ($i = 1; $i <= $totalPaginas; $i++) { ?>
                                 <li>
-                                    <a href="?pagina=<?php echo $i ?>" class="<?php echo ($i == $paginaAtual) ? 'bg-gray-100' : 'bg-white' ?> relative inline-flex items-center px-4 py-2 rounded-md border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                    <a href="?pagina=<?php echo $i; ?>" class="<?php echo ($i == $paginaAtual) ? 'bg-gray-100' : 'bg-white'; ?> relative inline-flex items-center px-4 py-2 rounded-md border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50">
                                         <?php echo $i ?>
                                     </a>
                                 </li>
@@ -143,7 +143,7 @@ $totalPaginas = ceil($totalProdutos / $produtosPorPagina);
 
                             <?php if ($paginaAtual < $totalPaginas) { ?>
                                 <li>
-                                    <a href="?pagina=<?php echo $paginaAtual + 1 ?>" class="relative inline-flex items-center px-4 py-2 rounded-md bg-white border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                    <a href="?pagina=<?php echo $paginaAtual + 1; ?>" class="relative inline-flex items-center px-4 py-2 rounded-md bg-white border border-gray-300 text-sm font-medium text-gray-500 hover:bg-gray-50">
                                         <span class="sr-only">Next</span>
                                         Próxima
                                     </a>
