@@ -10,7 +10,7 @@ function isUserLoggedIn() : bool {
 
 require_once 'constants.php';
 
-$db = new mysqli(HOST, NAME, PASSWORD, DATABASE);
+$db = new mysqli(HOST, NAME, PASSWORD, DATABASE, PORT);
 
 if($db->connect_error)
     exit('Falha na conexão');
