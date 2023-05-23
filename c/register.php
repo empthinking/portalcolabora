@@ -15,7 +15,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $isEmailRegistered = function() use ($email, $db) : bool {
         $stmt = $db->prepare("SELECT * FROM Users WHERE User_Email = ?");
-        $stmt->execute([$email]);
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
         $result = $stmt->get_result();
         return $result->num_rows > 0;
     };
