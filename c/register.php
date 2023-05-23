@@ -33,7 +33,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         if($isEmailRegistered() === false) {
             $sql_prep = "INSERT INTO Users(User_Name, User_Email, User_Password, User_Number) VALUES(?, ?, ?, ?)";
             $stmt = $db->prepare($sql_prep);
-            $stmt->execute([$name, $email, password_hash($password, PASSWORD_DEFAULT), $number]);
+            $stmt->bind_param('ssss',$name, $email, password_hash($password, PASSWORD_DEFAULT), $number);
+            $stmt->execute();
             echo "<p>Cadastro Realizado</p><a href='index.php'><button>página inicial</button></a>";
             $db->close();
             exit(); 
