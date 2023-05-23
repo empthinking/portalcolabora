@@ -54,9 +54,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
-            echo 'Produto Adicionado Com Sucesso';
+            echo '<div class="conteiner">
+            Produto Adicionado Com Sucesso';
             echo '<a href="'.htmlspecialchars($_SERVER['PHP_SELF']).'" class="btn btn-primary">ADICIONAR OUTRO</a>';
             echo '<a href="index.php" class="btn btn-success">INÍCIO</a>';
+            echo '</div>';
             exit();
         } else {
             $error = 'Failed to add the product. Please try again.';
