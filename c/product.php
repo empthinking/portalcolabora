@@ -16,7 +16,7 @@ $sql = "SELECT p.Product_Name, p.Product_Description, p.Product_Price, u.User_Na
         LEFT JOIN Images i ON p.Product_Id = i.Product_Id
         WHERE p.Product_Id = '$productId'
         ORDER BY i.Image_Id ASC";
-$result = $db->query($sql);
+$result = $conn->query($sql);
 
 require_once 'header.php';
 ?>
@@ -40,29 +40,29 @@ require_once 'header.php';
                 <?php mysqli_data_seek($result, 0); ?>
                 <?php while ($image = $result->fetch_assoc()) : ?>
                     <div class="carousel-item <?php if ($imageIndex === 0) echo 'active'; ?>">
-                        <img src="<?php echo $image['Image_Name']; ?>" class="d-block w-100" alt="Product Image">
+                        <img src="<?php echo $image['Image_Name']; ?>" class="d-block w-100 img-fluid" style="max-height: 400px;" alt="Product Image">
                     </div>
                     <?php $imageIndex++; ?>
                 <?php endwhile; ?>
             </div>
             <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Anterior</span>
+                <span class="sr-only">Previous</span>
             </a>
             <a class="carousel-control-next" href="#productCarousel" role="button" data-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Próximo</span>
+                <span class="sr-only">Next</span>
             </a>
         </div>
 
         <div class="mt-4">
-            <h4>Owner: <?php echo $row['User_Name']; ?></h4>
-            <p>Description: <?php echo $row['Product_Description']; ?></p>
-            <p>Price: <?php echo $row['Product_Price']; ?></p>
+            <h4>Vendedor(a): <?php echo $row['User_Name']; ?></h4>
+            <p>Descrição: <?php echo $row['Product_Description']; ?></p>
+            <p>Preço: <?php echo $row['Product_Price']; ?></p>
             <button class="btn btn-primary">Comprar</button>
         </div>
     <?php else : ?>
-        <p>Produto n</p>
+        <p>Produto não encontrar.</p>
     <?php endif; ?>
 </div>
 
