@@ -16,7 +16,7 @@ $sql = "SELECT p.Product_Name, p.Product_Description, p.Product_Price, u.User_Na
         LEFT JOIN Images i ON p.Product_Id = i.Product_Id
         WHERE p.Product_Id = '$productId'
         ORDER BY i.Image_Id ASC";
-$result = $conn->query($sql);
+$result = $db->query($sql);
 
 require_once 'header.php';
 ?>
