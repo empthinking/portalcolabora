@@ -1,8 +1,8 @@
 <?php
 //Constantes do banco de dados
 define('HOST'    , 'localhost');
-define('NAME'    , 'root');
-define('PASSWORD', '');
+define('NAME'    , 'u871226378_colabora');
+define('PASSWORD', 'F7k|MYhYf>');
 define('DATABASE', 'PortalColabora');
 
 //Constantes para a tabela de usuarios
