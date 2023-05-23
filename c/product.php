@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'db.php';
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -17,7 +16,7 @@ $sql = "SELECT p.Product_Name, p.Product_Description, p.Product_Price, u.User_Na
         LEFT JOIN Images i ON p.Product_Id = i.Product_Id
         WHERE p.Product_Id = '$productId'
         ORDER BY i.Image_Id ASC";
-$result = $db->query($sql);
+$result = $conn->query($sql);
 
 require_once 'header.php';
 ?>
@@ -41,7 +40,9 @@ require_once 'header.php';
                 <?php mysqli_data_seek($result, 0); ?>
                 <?php while ($image = $result->fetch_assoc()) : ?>
                     <div class="carousel-item <?php if ($imageIndex === 0) echo 'active'; ?>">
-                        <img src="<?php echo $image['Image_Name']; ?>" class="d-block w-100 img-fluid" style="max-height: 400px;" alt="Product Image">
+                        <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
+                            <img src="<?php echo $image['Image_Name']; ?>" class="img-fluid" style="max-height: 100%; max-width: 100%;" alt="Product Image">
+                        </div>
                     </div>
                     <?php $imageIndex++; ?>
                 <?php endwhile; ?>
@@ -57,13 +58,13 @@ require_once 'header.php';
         </div>
 
         <div class="mt-4">
-            <h4>Vendedor(a): <?php echo $row['User_Name']; ?></h4>
-            <p>Descrição: <?php echo $row['Product_Description']; ?></p>
-            <p>Preço: <?php echo $row['Product_Price']; ?></p>
-            <button class="btn btn-primary">Comprar</button>
+            <h4>Owner: <?php echo $row['User_Name']; ?></h4>
+            <p>Description: <?php echo $row['Product_Description']; ?></p>
+            <p>Price: <?php echo $row['Product_Price']; ?></p>
+            <button class="btn btn-primary">Buy Now</button>
         </div>
     <?php else : ?>
-        <p>Produto não encontrado.</p>
+        <p>No product found.</p>
     <?php endif; ?>
 </div>
 
