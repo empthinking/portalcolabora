@@ -21,12 +21,12 @@ require_once 'header.php';
         <?php while ($row = $result->fetch_assoc()) : ?>
             <div class="col-md-4 mb-4">
                 <div class="card">
-                    <a href="produto.php?id=<?php echo $row['Product_Id']; ?>">
+                    <a href="product.php?id=<?php echo $row['Product_Id']; ?>">
                         <img src="<?php echo $row['Image_Name']; ?>" class="card-img-top" alt="Product Image">
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="produto.php?id=<?php echo $row['Product_Id']; ?>">
+                            <a href="product.php?id=<?php echo $row['Product_Id']; ?>">
                                 <?php echo $row['Product_Name']; ?>
                             </a>
                         </h5>
