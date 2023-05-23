@@ -8,12 +8,45 @@ if (isUserLoggedIn()) {
 
 $name = $password = $password_confirm = $email = $number = $email_error = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Form submission and validation logic...
 
-    // ...
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name             = validateData($_POST['name']);
+    $password         = htmlspecialchars($_POST['password']);
+    $password_confirm = htmlspecialchars($_POST['password_confirm']);
+    $email            = validateData($_POST['email']);
+    $number           = validateData($_POST['number']);
 
-}
+    $isEmailRegistered = function() use ($email, $db) : bool {
+        $stmt = $db->prepare("SELECT * FROM Users WHERE User_Email = ?");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->num_rows > 0;
+    };
+
+    $dataError = fn() =>
+        (empty($name) || empty($password) || empty($password_confirm) || empty($email) || empty($number)) &&
+        !filter_var($email, FILTER_VALIDATE_EMAIL) &&
+        !preg_match('/^[a-bA-B1-9 ]$/', $name) &&
+        $password !== $password_confirm &&
+        strlen($password < 8);
+
+
+    if ($dataError() === false) {
+        if($isEmailRegistered() === false) {
+            $sql_prep = "INSERT INTO Users(User_Name, User_Email, User_Password, User_Number) VALUES(?, ?, ?, ?)";
+            $stmt = $db->prepare($sql_prep);
+            $stmt->bind_param('ssss',$name, $email, password_hash($password, PASSWORD_DEFAULT), $number);
+            $stmt->execute();
+            echo "<p>Cadastro Realizado</p><a href='index.php'><button>página inicial</button></a>";
+            $db->close();
+            exit(); 
+        } else {
+            $email_error = 'Email já registrado';
+        }
+    }
+
+} 
 
 $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 ?>
@@ -24,16 +57,14 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     <title>User Registration Form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
-        @media (max-width: 576px) {
-            .form-group {
-                margin-bottom: 1.5rem;
-            }
+        .container {
+            max-width: 600px;
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <h2 class="mt-4">Cadastro</h2>
+<div class="container mt-4">
+    <h2 class="text-center">Cadastro</h2>
     <form action="<?php echo $url; ?>" method="POST">
         <div class="form-group">
             <label for="name">Nome:</label>
@@ -57,8 +88,10 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             <label for="number">Telefone:</label>
             <input type="tel" class="form-control" id="number" name="number" pattern=".{11}" value="<?php echo $number; ?>" required>
         </div>
-        <button type="submit" id="submit" class="btn btn-success">Cadastrar</button>
-        <a href="index.php" class="btn btn-link mt-3">Voltar</a>
+        <div class="text-center">
+            <button type="submit" id="submit" class="btn btn-success">Cadastrar</button>
+            <a href="index.php" class="btn btn-link">Voltar</a>
+        </div>
     </form>
 </div>
 
@@ -84,3 +117,4 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 
 </body>
 </html>
+
