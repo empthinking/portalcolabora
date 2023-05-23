@@ -13,8 +13,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password  = htmlspecialchars($_POST['password']);
 
     $getUserByEmail = function() use ($email, $db) : false | array {
-        $stmt = $db->prepare("SELECT * FROM " . U_TABLE . "  WHERE " . U_E . " = ?");
-        $stmt->execute([$email]);
+        $stmt = $db->prepare("SELECT * FROM Users WHERE User_Email = ?");
+        $stmt->bind_param('s', $email);
+        $stmt->execute();
         $result = $stmt->get_result();
         return $result->num_rows > 0 ? $result->fetch_assoc() : false;
     };
