@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'db.php';
 
 if (!isset($_GET['id']) || empty($_GET['id'])) {
@@ -62,7 +63,7 @@ require_once 'header.php';
             <button class="btn btn-primary">Comprar</button>
         </div>
     <?php else : ?>
-        <p>Produto não encontrar.</p>
+        <p>Produto não encontrado.</p>
     <?php endif; ?>
 </div>
 
