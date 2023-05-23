@@ -4,7 +4,7 @@ define('HOST'    , 'localhost');
 define('NAME'    , 'u871226378_admin');
 define('PASSWORD', '3x!A3^ReX');
 define('DATABASE', 'u871226378_Colabora');
-define('PORT'    , 3306)
+define('PORT'    , 3306);
 
 //Constantes para a tabela de usuarios
 define('U_TABLE', 'Users');
