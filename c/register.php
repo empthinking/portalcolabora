@@ -1,87 +1,86 @@
 <?php
-
 require_once 'db.php';
 
-if(isUserLoggedIn()) header('index.php');
+if (isUserLoggedIn()) {
+    header('index.php');
+    exit();
+}
 
 $name = $password = $password_confirm = $email = $number = $email_error = '';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name             = validateData($_POST['name']);
-    $password         = htmlspecialchars($_POST['password']);
-    $password_confirm = htmlspecialchars($_POST['password_confirm']);
-    $email            = validateData($_POST['email']);
-    $number           = validateData($_POST['number']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Form submission and validation logic...
 
-    // Rest of the code...
+    // ...
 
-} 
+}
 
 $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
+?>
 
-echo <<<FORM
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <title>User Registration Form</title>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-      <style>
-        .form-container {
-          max-width: 400px;
-          margin: 0 auto;
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Registration Form</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        @media (max-width: 576px) {
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
         }
-      </style>
-    </head>
-    <body>
-      <div class="container">
-        <h2 class="text-center mt-4">Cadastro</h2>
-        <div class="form-container">
-          <form action="$url" method="POST">
-            <div class="form-group">
-              <label for="name">Nome:</label>
-              <input type="text" class="form-control" id="name" name="name" pattern="^[a-zA-Z]+$" value="$name" required>
-            </div>
-            <div class="form-group">
-              <label for="email">Email:</label>
-              <input type="email" class="form-control" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" value="$email" required>
-              <span class="text-danger">$email_error</span>
-            </div>
-            <div class="form-group">
-              <label for="password">Senha (No mínimo 8 caracteres):</label>
-              <input type="password" class="form-control" id="password" name="password" pattern=".{8,}" value="$password" required">
-            </div>
-            <div class="form-group">
-              <label for="confirm">Confirmar senha:</label>
-              <input type="password" class="form-control" id="password_confirm" name="password_confirm" pattern=".{8,}" value="$password_confirm" required>
-              <span class="text-danger" id="password_error"></span>
-            </div>
-            <div class="form-group">
-              <label for="phone">Telefone:</label>
-              <input type="tel" class="form-control" id="number" name="number" pattern=".{11}" value = "$number" required>
-            </div>
-            <button type="submit" id="submit" class="btn btn-success btn-block">Cadastrar</button>
-            <a href="index.php" class="btn btn-link mt-3">Voltar</a>
-          </form>
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="mt-4">Cadastro</h2>
+    <form action="<?php echo $url; ?>" method="POST">
+        <div class="form-group">
+            <label for="name">Nome:</label>
+            <input type="text" class="form-control" id="name" name="name" pattern="^[a-zA-Z]+$" value="<?php echo $name; ?>" required>
         </div>
-      </div>
-    <script>
-        const passwordInput = document.getElementById('password');
-        const confirmPasswordInput = document.getElementById('password_confirm');
-        const passwordError = document.getElementById('password_error');
-        const submitInput   = document.getElementById('submit');
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" value="<?php echo $email; ?>" required>
+            <span class="text-danger"><?php echo $email_error; ?></span>
+        </div>
+        <div class="form-group">
+            <label for="password">Senha (No mínimo 8 caracteres):</label>
+            <input type="password" class="form-control" id="password" name="password" pattern=".{8,}" value="<?php echo $password; ?>" required>
+        </div>
+        <div class="form-group">
+            <label for="password_confirm">Confirmar senha:</label>
+            <input type="password" class="form-control" id="password_confirm" name="password_confirm" pattern=".{8,}" value="<?php echo $password_confirm; ?>" required>
+            <span class="text-danger" id="password_error"></span>
+        </div>
+        <div class="form-group">
+            <label for="number">Telefone:</label>
+            <input type="tel" class="form-control" id="number" name="number" pattern=".{11}" value="<?php echo $number; ?>" required>
+        </div>
+        <button type="submit" id="submit" class="btn btn-success">Cadastrar</button>
+        <a href="index.php" class="btn btn-link mt-3">Voltar</a>
+    </form>
+</div>
 
-        function checkPasswordMatch() {
-          if (passwordInput.value !== confirmPasswordInput.value) {
+<script>
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('password_confirm');
+    const passwordError = document.getElementById('password_error');
+    const submitInput = document.getElementById('submit');
+
+    function checkPasswordMatch() {
+        if (passwordInput.value !== confirmPasswordInput.value) {
             passwordError.textContent = 'As senhas não correspondem.';
             submitInput.disabled = true;
-          } else {
+        } else {
             passwordError.textContent = '';
             submitInput.disabled = false;
-          }
         }
-        passwordInput.addEventListener('input', checkPasswordMatch);
-        confirmPasswordInput.addEventListener('input', checkPasswordMatch);
-      </script>
-    FORM; 
+    }
 
-require_once 'footer.php';
+    passwordInput.addEventListener('input', checkPasswordMatch);
+    confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+</script>
+
+</body>
+</html>
