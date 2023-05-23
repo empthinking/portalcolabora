@@ -53,6 +53,13 @@ echo <<<FORM
     <head>
       <title>User Registration Form</title>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <style>
+            .container {
+                max-width: 500px;
+                margin: auto;
+                margin-top: 50px;
+            }
+        </style>
     </head>
     <body>
       <div class="container">
@@ -61,7 +68,7 @@ echo <<<FORM
 
           <div class="form-group">
             <label for="name">Nome:</label>
-            <input type="text" class="form-control" id="name" name="name" pattern="^[a-zA-Z]+$" value="$name" required>
+            <input type="text" class="form-control" id="name" name="name" pattern="^[a-zA-Z ]+$" value="$name" required>
           </div>
           <div class="form-group">
             <label for="email">Email:</label>
