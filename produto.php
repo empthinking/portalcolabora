@@ -100,6 +100,9 @@ if ($produto['user_imagem'] == null) {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
     <?php
+    // Abrindo a conexão com o banco de dados
+    $conn =  mysqli_connect("127.0.0.1", "u871226378_colabora", "F7k|MYhYf>", "u871226378_portalcolabora");
+
     // Verificando se a conexão foi estabelecida com sucesso
     if (!$conn) {
         die("Não foi possível conectar ao banco de dados: " . mysqli_connect_error());
