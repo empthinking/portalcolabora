@@ -60,7 +60,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if ($conn->query($sql) === TRUE) {
         // Sucesso ao inserir os dados
-        echo "Cadastro realizado com sucesso!";
+        $success_messages = array(
+          "Cadastro realizado com sucesso!",
+          "Parabéns! Seu cadastro foi efetuado com sucesso.",
+          "Seu cadastro foi concluído com êxito."
+        );
+
+        $random_key = array_rand($success_messages);
+        $success_message = $success_messages[$random_key];
+
+        echo "<script>alert('$success_message');</script>";
+        header("Location: index.php");
+        exit();
       } else {
         // Erro ao inserir os dados
         echo "Erro ao cadastrar: " . $conn->error;
