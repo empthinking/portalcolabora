@@ -3,7 +3,7 @@ require_once "dbconn.php";
 require_once "funcoes.php";
 
 // Verifica se o formulário foi enviado
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
   // Verifica se a conexão foi estabelecida corretamente
   if ($conn->connect_error) {
@@ -60,15 +60,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if ($conn->query($sql) === TRUE) {
         // Sucesso ao inserir os dados
-        $success_messages = array(
-          "Cadastro realizado com sucesso!",
-          "Parabéns! Seu cadastro foi efetuado com sucesso.",
-          "Seu cadastro foi concluído com êxito."
-        );
-
-        $random_key = array_rand($success_messages);
-        $success_message = $success_messages[$random_key];
-
+        $success_messages = "Cadastro realizado com sucesso!";
+        
         echo "<script>alert('$success_message');</script>";
         header("Location: index.php");
         exit();
@@ -80,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     // Exibe os erros de validação
     foreach ($errors as $error) {
-      echo $error . "<br>";
+      echo "<script>alert('$error . '<br>');</script>";
     }
   }
 
