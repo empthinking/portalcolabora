@@ -9,11 +9,11 @@ function isUserLoggedIn(): bool {
 //Inicia a sessao
 
 // Cabeçalho
-// if(isUserLoggedIn()):
-//   require_once 'header_loggedin.php';
-// else:
-  // require_once 'header.php';
-// endif;
+if(isUserLoggedIn()):
+  require_once 'header_loggedin.php';
+else:
+  require_once 'header.php';
+endif;
 
 function obter_produto($conn, $id) {
   $query = "SELECT p.*, u.user_nome as nome_usuario, u.user_imagem FROM produtos p JOIN usuarios u ON p.usuario_id = u.user_id WHERE p.id = " . mysqli_real_escape_string($conn, $id);
@@ -53,16 +53,7 @@ if ($produto['user_imagem'] == null) {
   $caminho_imagem_prod = $produto['user_imagem'];
 }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Página de Administração</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-200">
-<div class="flex justify-center m-20">
-    <img src="../img/logo G (2).png" alt="Descrição da imagem">
-</div>
+
     <!-- Conteúdo principal -->
 <main class="bg-white">
 
@@ -109,9 +100,6 @@ if ($produto['user_imagem'] == null) {
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
     <?php
-    // Abrindo a conexão com o banco de dados
-    $conn = mysqli_connect("localhost", "root", "", "crud");
-
     // Verificando se a conexão foi estabelecida com sucesso
     if (!$conn) {
         die("Não foi possível conectar ao banco de dados: " . mysqli_connect_error());
