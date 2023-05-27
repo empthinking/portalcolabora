@@ -27,5 +27,5 @@ endif;
 //Pagina de perfil
 require_once 'home.php';
 
-
+require_once 'footer.php';
 ?>
