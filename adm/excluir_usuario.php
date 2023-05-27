@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once "dbconn.php";
 
 // Verifica se o usuário está logado como administrador
 session_start();
@@ -18,7 +17,7 @@ if (isset($_GET['id'])) {
     // Substitua esta parte pelo código adequado para o seu projeto
 
     // Exemplo de código para excluir o usuário (substitua pelo seu próprio código)
-    $conexao = mysqli_connect("localhost", "seu_usuario", "sua_senha", "seu_banco_de_dados");
+    $conexao = mysqli_connect("127.0.0.1", "u871226378_colabora", "F7k|MYhYf>", "u871226378_portalcolabora");
     if ($conexao) {
         // Executa a query para excluir o usuário
         $query = "DELETE FROM usuarios WHERE id = $idUsuario";
