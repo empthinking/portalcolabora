@@ -12,7 +12,7 @@ function isUserLoggedIn(): bool {
 // if(isUserLoggedIn()):
 //   require_once 'header_loggedin.php';
 // else:
-  // require_once 'header.php';
+  require_once 'header.php';
 // endif;
 
 function obter_produto($conn, $id) {
