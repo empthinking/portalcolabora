@@ -95,57 +95,7 @@ if ($produto['user_imagem'] == null) {
   </main>  
   <section class="bg-gray-100 py-8">
   <div class="container">
-  <div class="container">
-    <h2 class="text-2xl font-bold mb-6">Outros Produtos</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
 
-    <?php
-    // Abrindo a conexão com o banco de dados
-    $conn =  mysqli_connect("127.0.0.1", "u871226378_colabora", "F7k|MYhYf>", "u871226378_portalcolabora");
-
-    // Verificando se a conexão foi estabelecida com sucesso
-    if (!$conn) {
-        die("Não foi possível conectar ao banco de dados: " . mysqli_connect_error());
-    }
-
-    // Consultando outros produtos de forma aleatória
-    $consulta = "SELECT * FROM produtos WHERE id != " . $produto['id'] . " ORDER BY RAND() LIMIT 4";
-
-    // Verificando se a consulta foi executada com sucesso
-    $resultado = mysqli_query($conn, $consulta);
-
-    if (!$resultado) {
-        die("Não foi possível consultar o banco de dados: " . mysqli_error($conn));
-    }
-
-    // Loop para exibir os produtos
-    while ($produto = mysqli_fetch_array($resultado)) {
-        ?>
-
-        <!-- Card do Produto -->
-        <div class="card">
-            <div class="card-image">
-                <figure class="w-full">
-                    <img src="<?= htmlentities($produto['imagem']) ?>" alt="Product Image" class="object-cover w-full h-48">
-                </figure>
-            </div>
-            <div class="card-content p-4">
-                <p class="text-lg font-bold mb-2"><?= htmlentities($produto['nome']) ?></p>
-                <p class="text-lg font-bold text-green-600 mb-2">R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
-                    <a href="produto.php?id=<?= $produto['id'] ?>">ver mais</a>
-                </button>
-            </div>
-        </div>
-
-    <?php
-    }
-    // Fechando a conexão com o banco de dados
-    mysqli_close($conn);
-    ?>
-
-    </div>
-</div>
 
 
     </div>
