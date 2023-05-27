@@ -1,4 +1,7 @@
 <?php
+session_start();
+require_once "dbconn.php";
+
 // Verifica se o usuário está logado como administrador
 session_start();
 if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
