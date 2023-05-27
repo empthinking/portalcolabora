@@ -1,68 +1,68 @@
 <?php
+session_start();
 
-//estabelece a conexao com o banco de dados
-require_once 'database.php';
+require_once "dbconn.php";
+require_once "funcoes.php";
 
-//caso o usuario nao esteja logado, realiza o login e redireciona para a pagina principal
-if (!isUserLoggedIn()) :
-    $email = $mysqli->real_escape_string($_POST['email']);
-    $password = $mysqli->real_escape_string($_POST['password']);
+// Verifica se o formulário foi enviado
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    //Prepara uma declaracao SQL
-    $stmt = $mysqli->prepare('SELECT * FROM usuarios WHERE user_email = ?');
+  // Verifica se a conexão foi estabelecida corretamente
+  if ($conn->connect_error) {
+    die("Erro na conexão com o banco de dados: " . $conn->connect_error);
+  }
 
-    //Adiciona a string de email na variavel '?'
-    $stmt->bind_param('s', $email);
+  // Obtém os valores do formulário
+  $email = isset($_POST["email"]) ? $_POST["email"] : "";
+  $password = isset($_POST["password"]) ? $_POST["password"] : "";
 
-    //Executa a declaracao e checa se foi executada com sucesso
-    if ($stmt->execute()) :
+  // Validação dos dados (exemplo)
+  // Aqui você pode adicionar suas próprias regras de validação
+  $errors = array();
 
-        //cria um objeto contendo os resultados da requisicao
-        $result = $stmt->get_result();
+  if (empty($email)) {
+    $errors[] = "O campo 'Email' é obrigatório.";
+  }
 
-        //cria um array associativo contendo as informacoes obtidas
-        $row = $result->fetch_assoc();
+  if (empty($password)) {
+    $errors[] = "O campo 'Senha' é obrigatório.";
+  }
 
-        //limpa os resultados do objeto
-        $result->free_result();
-    else :
-        //Em caso de falha, envia o respectivo erro
-        $_SESSION['login_error'] = 'Email ou senha não encontrado';
-        throw new Exception($mysqli->error);
-    endif;
+  // Verifica se há erros de validação
+  if (count($errors) == 0) {
+    // Busca o usuário no banco de dados pelo email
+    $sql = "SELECT * FROM usuarios WHERE user_email = '$email'";
+    $result = $conn->query($sql);
 
-    //Verifica se o usuario esta cadastrado e realiza o login
-    if (password_verify($password, $row['user_senha'])) :
+    if ($result->num_rows == 1) {
+      $row = $result->fetch_assoc();
+
+      // Verifica se a senha está correta
+      if (password_verify($password, $row['user_senha'])) {
+        // Sucesso ao fazer login
         $_SESSION['login'] = true;
         $_SESSION['id'] = $row['user_id'];
         $_SESSION['username'] = $row['user_nome'];
         $_SESSION['email'] = $row['user_email'];
         $_SESSION['number'] = $row['user_tel'];
 
-        //tempo limite ate a sessao expirar
-        session_set_cookie_params(3600);
+        // Redireciona para a página inicial (index.php, por exemplo)
+        header("Location: index.php");
+        exit();
+      } else {
+        $errors[] = "Senha incorreta.";
+      }
+    } else {
+      $errors[] = "Usuário não encontrado.";
+    }
+  }
 
-        //fecha a conexao com o banco de dados
-        $stmt->close();
-        $mysqli->close();
+  // Exibe os erros de validação
+  foreach ($errors as $error) {
+    echo $error . "<br>";
+  }
 
-        //limpa o array
-        $row = [];
-        $_SESSION['login_success'] = 'Login realizado com sucesso!';
-        header('location: index.php');
-    else :
-        exit('Email ou senha não encontrado');
-        $_SESSION['login_error'] = 'Email ou senha não encontrado';
-
-    endif;
-
-    #Falta colocar a condição para fechar o banco, caso o contrario, ele fecha 2x.
-    //$mysqli->close();
-
-
-endif;
-
-//fecha a conexao com o banco de dados
-$mysqli->close();
-
+  // Fecha a conexão com o banco de dados
+  $conn->close();
+}
 ?>
