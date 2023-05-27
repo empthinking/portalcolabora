@@ -20,7 +20,7 @@ if (isset($_GET['id'])) {
     $conexao = mysqli_connect("127.0.0.1", "u871226378_colabora", "F7k|MYhYf>", "u871226378_portalcolabora");
     if ($conexao) {
         // Executa a query para excluir o usuário
-        $query = "DELETE FROM usuarios WHERE id = $idUsuario";
+        $query = "DELETE FROM usuarios WHERE user_id = $idUsuario";
         $resultado = mysqli_query($conexao, $query);
 
         if ($resultado) {
