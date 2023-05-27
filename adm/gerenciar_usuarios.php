@@ -91,8 +91,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["atualizar_permissao"]
                                 <form method="POST">
                                     <input type="hidden" name="user_id" value="<?php echo $usuario['user_id']; ?>">
                                     <select name="permissao" class="px-2 py-1 border border-gray-300 rounded">
-                                        <option value="0" <?php echo $usuario['permissao_publicar'] == 0 ? 'selected' : ''; ?>>Sim</option>
-                                        <option value="1" <?php echo $usuario['permissao_publicar'] == 1 ? 'selected' : ''; ?>>Não</option>
+                                        <option value="0" <?php echo $usuario['permissao_publicar'] == 0 ? 'selected' : ''; ?>>Não</option>
+                                        <option value="1" <?php echo $usuario['permissao_publicar'] == 1 ? 'selected' : ''; ?>>Sim</option>
                                     </select>
                                     <button type="submit" name="atualizar_permissao" class="bg-green-400 hover:bg-green-600 text-white font-bold py-1 px-2 rounded ml-2">Atualizar</button>
                                 </form>
@@ -102,7 +102,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["atualizar_permissao"]
                 </tbody>
             </table>
             <br>
-            <a href="#" onclick="history.back()" class="w-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-9 rounded focus:outline-none focus:shadow-outline">
+            <a href="area_admin.php"  class="w-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-9 rounded focus:outline-none focus:shadow-outline">
             Voltar
         </a>
         </div>

@@ -201,7 +201,7 @@ mysqli_close($conn);
                 <a href="gerenciar_usuarios.php" class="block mt-4 text-blue-500 hover:text-blue-700">Cancelar</a>
             </form>
             <br>
-            <a href="#" onclick="history.back()" class="w-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-9 rounded focus:outline-none focus:shadow-outline">
+            <a href="area_admin.php"  class="w-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-9 rounded focus:outline-none focus:shadow-outline">
             Voltar
         </a>
         </div>

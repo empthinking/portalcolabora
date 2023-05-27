@@ -2,16 +2,10 @@
 session_start();
 require_once "dbconn.php";
 
-// Verificar se o administrador está logado
-if (!isset($_SESSION["admin"]) || $_SESSION["admin"] !== true) {
-    header("Location: login_admin.php");
-    exit();
-}
-
 // Logout do administrador
 if (isset($_GET["logout"])) {
     session_destroy();
-    header("Location: login_admin.php");
+    header("Location: index.php");
     exit();
 }
 ?>

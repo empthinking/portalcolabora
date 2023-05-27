@@ -25,7 +25,8 @@ if (isset($_GET['id'])) {
 
         if ($resultado) {
             // Usuário excluído com sucesso
-            echo "Usuário excluído com sucesso.";
+            header("Location: index.php");
+            
         } else {
             // Erro ao excluir o usuário
             echo "Erro ao excluir o usuário.";

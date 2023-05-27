@@ -101,7 +101,7 @@ mysqli_close($conn);
                 </table>
             </form>
             <br>
-            <a href="#" onclick="history.back()" class="w-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-9 rounded focus:outline-none focus:shadow-outline">
+            <a href="area_admin.php"  class="w-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-9 rounded focus:outline-none focus:shadow-outline">
             Voltar
         </a>
          </div>
