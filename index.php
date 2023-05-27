@@ -1,11 +1,11 @@
 <?php
+//Inicia a sessao
+session_start();
 
 function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
 
-//Inicia a sessao
-session_start();
 
 if(isset($_SESSION['success_msg'])):
     $msg = $_SESSION['success_msg'];

@@ -1,6 +1,16 @@
 <?php
 require_once "dbconn.php";
 
+function isUserLoggedIn(): bool {
+  return isset($_SESSION['login']) && $_SESSION['login'] === true;
+}
+// Cabeçalho
+if(isUserLoggedIn()):
+	require_once 'header_loggedin.php';
+else:
+	require_once 'header.php';
+endif;
+
 // Verifica se o parâmetro "id" está presente na URL
 if (isset($_GET['id'])) {
   // Obtém o ID do produto da URL
@@ -18,14 +28,16 @@ if (isset($_GET['id'])) {
     $nome = $row["nome"];
     $descricao = $row["descricao"];
     $preco = $row["preco"];
+    ?>
 
-    // Exibe as informações do produto
-    echo "<div>";
-    echo "<img src='$imagem' alt='Imagem do Produto'>";
-    echo "<h2>$nome</h2>";
-    echo "<p>$descricao</p>";
-    echo "<p>Preço: R$ $preco</p>";
-    echo "</div>";
+    <div class="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
+      <img src="<?php echo $imagem; ?>" alt="Imagem do Produto" class="w-full mb-4">
+      <h2 class="text-2xl font-bold mb-2"><?php echo $nome; ?></h2>
+      <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
+      <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
+    </div>
+
+    <?php
   } else {
     echo "Produto não encontrado.";
   }
