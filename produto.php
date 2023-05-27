@@ -41,40 +41,6 @@ if (isset($_GET['id'])) {
     </div>
   </div>
 </div>
-<div class="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
-  <!-- Conteúdo do produto principal -->
-  <div class="flex">
-    <img src="<?php echo $imagem; ?>" alt="Imagem do Produto" class="w-1/2 mr-4">
-    <div class="w-1/2">
-      <h2 class="text-2xl font-bold mb-2"><?php echo $nome; ?></h2>
-      <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
-      <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Entrar em contato</button>
-    </div>
-  </div>
-
-  <!-- Produtos aleatórios -->
-  <h3 class="text-lg font-bold mt-8 mb-4">Produtos Relacionados</h3>
-  <div class="grid grid-cols-2 gap-4">
-    <?php
-    // Código para obter produtos aleatórios do banco de dados
-    $produtosRelacionados = obterProdutosRelacionados();
-    foreach ($produtosRelacionados as $produto) {
-      $nomeProduto = $produto['nome'];
-      $imagemProduto = $produto['imagem'];
-      $precoProduto = $produto['preco'];
-      ?>
-      <div class="max-w-xs bg-gray-100 shadow-md rounded-md p-4">
-        <img src="<?php echo $imagemProduto; ?>" alt="Imagem do Produto" class="w-full mb-4">
-        <h4 class="text-lg font-bold mb-2"><?php echo $nomeProduto; ?></h4>
-        <p class="text-gray-600 mb-2">Preço: R$ <?php echo $precoProduto; ?></p>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Ver detalhes</button>
-      </div>
-    <?php
-    }
-    ?>
-  </div>
-</div>
 
     <?php
   } else {
