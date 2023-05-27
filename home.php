@@ -101,7 +101,7 @@ $totalPaginas = ceil($totalProdutos / $produtosPorPagina);
                     <div class="w-full md:w-1/2 lg:w-1/4">
                         <div class="group relative">
                             <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75">
-                                <img src="<?php echo $imagem; ?>" alt="Imagem do produto <?php echo $nome; ?>" class="h-full w-full object-cover object-center">
+                                <img src="<?php echo $imagem; ?>" alt="Imagem do produto <?php echo $nome; ?>" class="h-full w-full object-cover object-center" width="500" height="600">
                             </div>
 
                             <div class="mt-4 flex justify-between">
