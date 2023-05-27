@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
       if ($conn->query($sql) === TRUE) {
         // Sucesso ao inserir os dados
-        $success_messages = "Cadastro realizado com sucesso!";
+        $success_message = "Cadastro realizado com sucesso!";
         
         echo "<script>alert('$success_message');</script>";
         header("Location: index.php");
@@ -73,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   } else {
     // Exibe os erros de validação
     foreach ($errors as $error) {
-      echo "<script>alert('$error . '<br>');</script>";
+      echo "<script>alert('$error');</script>";
     }
   }
 
