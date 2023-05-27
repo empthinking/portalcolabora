@@ -9,11 +9,11 @@ function isUserLoggedIn(): bool {
 //Inicia a sessao
 
 // Cabeçalho
-if(isUserLoggedIn()):
-  require_once 'header_loggedin.php';
-else:
-  require_once 'header.php';
-endif;
+// if(isUserLoggedIn()):
+//   require_once 'header_loggedin.php';
+// else:
+  // require_once 'header.php';
+// endif;
 
 function obter_produto($conn, $id) {
   $query = "SELECT p.*, u.user_nome as nome_usuario, u.user_imagem FROM produtos p JOIN usuarios u ON p.usuario_id = u.user_id WHERE p.id = " . mysqli_real_escape_string($conn, $id);
@@ -26,11 +26,11 @@ function obter_produto($conn, $id) {
   return $produto;
 }
 
-$id = $_GET['id'];
-if (!$id) {
-  header("Location: index.php");
-  exit;
-}
+// $id = $_GET['id'];
+// if (!$id) {
+//   header("Location: index.php");
+//   exit;
+// }
 
 // Registra o histórico de acesso
 if(isUserLoggedIn()) {
