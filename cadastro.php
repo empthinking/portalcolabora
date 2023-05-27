@@ -60,8 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
       if ($conn->query($sql) === TRUE) {
         // Sucesso ao inserir os dados
-        header("Location: index.php");
-        exit();
+        echo "Cadastro realizado com sucesso!";
       } else {
         // Erro ao inserir os dados
         echo "Erro ao cadastrar: " . $conn->error;
@@ -78,6 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $conn->close();
 }
 ?>
+
 
 
 <!DOCTYPE html>
