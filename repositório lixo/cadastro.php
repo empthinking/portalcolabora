@@ -68,7 +68,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") :
     //Alerta de registro efetuado
     session_start();
     $_SESSION['success_msg'] = 'Registro completado com sucesso';
-    // echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
+    echo '<script>alert("' . htmlspecialchars($_SESSION['success_msg']) . '")</script>';
 
     //inicialização de uma nova sessão.
 
