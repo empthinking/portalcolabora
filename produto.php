@@ -24,8 +24,8 @@ if (isset($_GET['id'])) {
           WHERE produtos.id = $produto_id";
   $result = $conn->query($sql);
 
-  // Verifica se existe um registro correspondente ao ID
-  if ($result->num_rows > 0) {
+ // Verifica se o parâmetro "id" está presente na URL
+if (isset($_GET['id'])) {
     // Obtém os detalhes do produto
     $row = $result->fetch_assoc();
     $imagem = $row["imagem"];
