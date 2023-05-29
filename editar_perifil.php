@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once "dbconn.php";
 
 $usuario_id = $_SESSION["id"];
