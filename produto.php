@@ -18,12 +18,7 @@ if (isset($_GET['id'])) {
   $produto_id = $_GET['id'];
 
   // Faz a requisição ao banco de dados para obter as informações do produto com o ID correspondente
-  $sql = "SELECT produtos.id, produtos.imagem, produtos.nome, produtos.descricao, produtos.preco, produtos.visualizacoes, 
-  (SELECT user_tel FROM usuarios WHERE usuarios.id = produtos.usuario_id) AS user_tel
-  FROM produtos
-  WHERE produtos.id = $produto_id";
-
-
+  $sql = "SELECT imagem, nome, descricao, preco, visualizacoes FROM produtos WHERE id = $produto_id";
   $result = $conn->query($sql);
 
   // Verifica se existe um registro correspondente ao ID
@@ -35,7 +30,6 @@ if (isset($_GET['id'])) {
     $descricao = $row["descricao"];
     $preco = $row["preco"];
     $visualizacoes = $row["visualizacoes"];
-    $user_tel = $row["user_tel"];
 
     // Incrementa o contador de visualizações
     $novas_visualizacoes = $visualizacoes + 1;
@@ -50,16 +44,8 @@ if (isset($_GET['id'])) {
           <h2 class="text-2xl font-bold mb-2"><?php echo $nome; ?></h2>
           <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
           <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
-          <?php if (isUserLoggedIn()): ?>
-            <p class="text-lg font-bold">entrar em contato: <?php echo $user_tel; ?></p>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Entrar em contato</button>
-          <?php else: ?>
-            <span>Para realizar essa ação, é necessário estar logado.</span>
-            <div class="mt-4">
-              <a href="cadastro.php" class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded">Cadastre-se</a>
-              <a href="login.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">Login</a>
-            </div>
-          <?php endif; ?>
+          <p class="text-lg font-bold">Visualizações: <?php echo $novas_visualizacoes; ?></p>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Entrar em contato</button>
         </div>
       </div>
     </div>
