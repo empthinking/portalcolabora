@@ -1,4 +1,4 @@
-<footer class="py-6 bg-green-500">
+<footer class="py-16 bg-green-500">
     <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
         <div class="flex flex-col items-center">
             <img class="order-last md:order-first w-16" src="img/Ativo 1 black.png" alt="Logo">
