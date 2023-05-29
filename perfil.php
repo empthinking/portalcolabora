@@ -68,24 +68,7 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
               <div class="px-4 py-5 sm:px-6">
               </div>
               <div class="border-t border-gray-200">
-                <dl>
-                  <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">
-                      Data da Compra
-                    </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                      01/01/2022
-                    </dd>
-                  </div>
-                  <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                    <dt class="text-sm font-medium text-gray-500">
-                      Total
-                    </dt>
-                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
-                      R$ 100,00
-                    </dd>
-                  </div>
-                </dl>
+              <?=require_once "mensagem_recebidas.php";?>             
               </div>
             </div>
                 <button type="button" onclick="document.getElementById('historicoProdutos').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
