@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
   $produto_id = $_GET['id'];
 
   // Faz a requisição ao banco de dados para obter as informações do produto com o ID correspondente
-  $sql = "SELECT produtos.id AS produto_id, produtos.imagem, produtos.nome, produtos.descricao, produtos.preco, produtos.visualizacoes, usuarios.telefone
+  $sql = "SELECT produtos.id AS produto_id, produtos.imagem, produtos.nome, produtos.descricao, produtos.preco, produtos.visualizacoes, usuarios.user_tel
           FROM produtos
           INNER JOIN usuarios ON produtos.usuario_id = usuarios.id
           WHERE produtos.id = $produto_id";
@@ -33,7 +33,7 @@ if (isset($_GET['id'])) {
     $descricao = $row["descricao"];
     $preco = $row["preco"];
     $visualizacoes = $row["visualizacoes"];
-    $telefone = $row["telefone"];
+    $user_tel = $row["user_tel"];
 
     // Incrementa o contador de visualizações
     $novas_visualizacoes = $visualizacoes + 1;
@@ -49,7 +49,7 @@ if (isset($_GET['id'])) {
           <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
           <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
           <?php if (isUserLoggedIn()): ?>
-            <p class="text-lg font-bold">Telefone do Vendedor: <?php echo $telefone; ?></p>
+            <p class="text-lg font-bold">entrar em contato: <?php echo $user_tel; ?></p>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Entrar em contato</button>
           <?php else: ?>
             <span>Para realizar essa ação, é necessário estar logado.</span>
