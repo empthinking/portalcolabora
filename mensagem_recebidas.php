@@ -1,13 +1,4 @@
 <?php
-session_start();
-require_once "dbconn.php";
-
-if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
-  // Redireciona para a página de login se o usuário não estiver logado
-  header("Location: login.php");
-  exit;
-}
-
 // Atualiza o status de leitura das mensagens
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $mensagem_id = $_POST['mensagem_id'];
