@@ -24,8 +24,9 @@ else:
 	require_once 'header.php';
 endif;
 
-//Pagina de perfil
+//Pagina de exibição dos produtos
 require_once 'home.php';
 
+// Pagina de rodapé
 require_once 'footer.php';
 ?>
