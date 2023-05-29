@@ -37,17 +37,17 @@ if (isset($_GET['id'])) {
 <br>
 <br>
 <br>
-    <div class="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
-      <div class="flex">
-        <img src="<?php echo $imagem; ?>" alt="Imagem do Produto" class="w-1/2 mr-4">
-        <div class="w-1/2">
-          <h2 class="text-2xl font-bold mb-2"><?php echo $nome; ?></h2>
-          <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
-          <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Entrar em contato</button>
-        </div>
-      </div>
+<div class="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
+  <div class="flex">
+    <img src="<?php echo $imagem; ?>" alt="Imagem do Produto" class="w-1/2 mr-4">
+    <div class="w-1/2">
+      <h2 class="text-3xl font-bold mb-2"><?php echo $nome; ?></h2>
+      <p class="text-gray-600 mb-4" style="font-size: 18px;"><?php echo $descricao; ?></p>
+      <p class="text-xl font-bold">Preço: R$ <?php echo $preco; ?></p>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Entrar em contato</button>
     </div>
+  </div>
+</div>
 
     <?php
   } else {
