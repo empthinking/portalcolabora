@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $conn->close();
 
   // Redireciona de volta para o produto
-  header("Location: produto.php?id=$produto_id");
+  header("Location: produto.php?id=$id");
   exit;
 }
 ?>
