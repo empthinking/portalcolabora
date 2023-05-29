@@ -98,9 +98,7 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
             </div>
             </div>
         </div> 
-       
-        <?php if ($permissao_publicar === true): ?>
-  <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('meusProdutos').style.display='block'">Meus Produtos</button>
+         <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('meusProdutos').style.display='block'">Meus Produtos</button>
   <div id="meusProdutos" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
       <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
@@ -141,50 +139,6 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
       </div>
     </div>
   </div>
-<?php else: ?>
-  <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('adicionarProduto').style.display='block'">Adicionar Produto</button>
-  <div id="adicionarProduto" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-    <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
-      <h3>Deseja anunciar um produto?</h3>
-      <form action="perfil.php" method="POST">
-  <button type="submit" name="sim" class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mt-4">Sim</button>
-</form>
-
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Verifica se o botão "Sim" foi clicado
-  if (isset($_POST['sim'])) {
-    // Realiza a atualização da permissão no banco de dados
-    $valor = 1; // Valor para permissao_publicar = 1
-
-    // Crie uma conexão
-    // Verifique se a conexão foi estabelecida corretamente
-    if ($conn->connect_error) {
-      die("Falha na conexão com o banco de dados: " . $conn->connect_error);
-    }
-
-    // Execute a query para atualizar a permissão no banco de dados
-    $usuario_id = $user['user_id']; // Substitua pelo ID do usuário atual
-    $sql = "UPDATE usuarios SET permissao_publicar = $valor WHERE user_id = $usuario_id";
-
-    if ($conn->query($sql) === TRUE) {
-
-    } else {
-      echo "Erro ao atualizar a permissão: " . $conn->error;
-    }
-
-    // Feche a conexão com o banco de dados
-    $conn->close();
-  }
-}
-?>
-      <button onclick="document.getElementById('adicionarProduto').style.display='none'" class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mt-4">Não</button>
-    </div>
-  </div>
-<?php endif; ?>
-
-
-</div>
 </div>
 </div>
 </body> 
