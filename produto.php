@@ -1,10 +1,9 @@
 <?php
-session_start();
-ob_start();
+require_once "dbconn.php";
+
 function isUserLoggedIn(): bool {
   return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
-require_once "dbconn.php";
 
 // Cabeçalho
 if(isUserLoggedIn()):
@@ -12,13 +11,14 @@ if(isUserLoggedIn()):
 else:
   require_once 'header.php';
 endif;
+
 // Verifica se o parâmetro "id" está presente na URL
 if (isset($_GET['id'])) {
   // Obtém o ID do produto da URL
   $produto_id = $_GET['id'];
 
   // Faz a requisição ao banco de dados para obter as informações do produto com o ID correspondente
-  $sql = "SELECT p.imagem, p.nome, p.descricao, p.preco, p.visualizacoes, u.user_tel, u.user_email, u.privacidade FROM produtos p JOIN usuarios u ON p.usuario_id = u.id WHERE p.id = $produto_id";
+  $sql = "SELECT p.imagem, p.nome, p.descricao, p.preco, p.visualizacoes, u.user_tel, u.user_email, u.privacidade, u.id as usuario_id FROM produtos p JOIN usuarios u ON p.usuario_id = u.id WHERE p.id = $produto_id";
   $result = $conn->query($sql);
 
   // Verifica se existe um registro correspondente ao ID
@@ -33,6 +33,7 @@ if (isset($_GET['id'])) {
     $telefone = $row["user_tel"];
     $email = $row["user_email"];
     $privacidade = $row["privacidade"];
+    $usuario_id = $row["usuario_id"];
 
     // Incrementa o contador de visualizações
     $novas_visualizacoes = $visualizacoes + 1;
@@ -41,9 +42,9 @@ if (isset($_GET['id'])) {
 
     // Registra o histórico de acesso
     if (isUserLoggedIn()) {
-      $usuario_id = $_SESSION['id'];
+      $usuario_id_logado = $_SESSION['id'];
       $produto_id = mysqli_real_escape_string($conn, $id);
-      $query = "INSERT INTO historico (usuario_id, produto_id) VALUES ('$usuario_id', '$produto_id')";
+      $query = "INSERT INTO historico (usuario_id, produto_id) VALUES ('$usuario_id_logado', '$produto_id')";
       $result = mysqli_query($conn, $query);
       if (!$result) {
         throw new Exception("Erro ao registrar histórico: " . mysqli_error($conn));
