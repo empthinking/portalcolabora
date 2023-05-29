@@ -59,7 +59,8 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
                      </div>
                      <br>
 
-<button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('historicoProdutos').style.display='block'">Historico de Compra</button>
+
+                     <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('historicoProdutos').style.display='block'">Historico de Compra</button>
 <div id="historicoProdutos" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
         <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
@@ -77,15 +78,28 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
             </div>
             </div>
         </div> 
-   
-       
-        <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('editPerfil').style.display='block'">editar Perfil</button>
-<div id="editPerfil" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-  
-<?=require_once "editar_perifil.php";?>             
 
-        </div>
-        <?php if ($permissao_publicar == true): ?>
+        
+        <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('editarPerfil').style.display='block'">editar perfil</button>
+<div id="editarPerfil" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
+        <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">editar perfil</h3>
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+              </div>
+              <div class="border-t border-gray-200">
+              <?=require_once "editar_perifil.php";?>             
+              </div>
+            </div>
+                <button type="button" onclick="document.getElementById('editarPerfil').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
+                Cancelar
+                </button>
+            </div>
+            </div>
+        </div> 
+       
+        <?php if ($permissao_publicar === true): ?>
   <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('meusProdutos').style.display='block'">Meus Produtos</button>
   <div id="meusProdutos" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
@@ -176,5 +190,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body> 
 
 <?=require_once "footer.php";?>             
-
 
