@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($erros)) {
         // Cria um novo produto no banco de dados
-        $sql = "INSERT INTO produtos (nome, descricao, preco, imagem, usuario_id) VALUES ('$nome', '$descricao', $preco, '$imagem', $usuario_id)";
+    $sql = "INSERT INTO produtos (nome, descricao, preco, imagem, usuario_id, ativo) VALUES ('$nome', '$descricao', $preco, '$imagem', $usuario_id, 1)";
         if (mysqli_query($conn, $sql)) {
             // Redireciona para a página de "Meus Produtos" com uma mensagem de sucesso
             $_SESSION['mensagem'] = 'Produto adicionado com sucesso!';
