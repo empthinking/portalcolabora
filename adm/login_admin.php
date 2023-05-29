@@ -56,8 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div>
                     <button type="submit"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Entrar</button>
-               										<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/B/adm/login_admin.php">entrar como admin										</a>
-
                 </div>
             </form>
         </div>
