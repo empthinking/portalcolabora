@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </label>
               <input
                 class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="nome" type="text" placeholder="Seu nome completo" value="<?php echo isset($nome) ? $nome : ''; ?>">
+                id="nome" name="nome" type="text" placeholder="Seu nome completo" value="<?php echo isset($nome) ? $nome : ''; ?>">
             </div>
             <div class="mb-4">
               <label class="block text-gray-700 font-bold mb-2" for="email">
@@ -91,7 +91,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </label>
               <input
                 class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email" type="email" placeholder="Seu e-mail" value="<?php echo isset($email) ? $email : ''; ?>">
+                id="email" name="email" type="email" placeholder="Seu e-mail" value="<?php echo isset($email) ? $email : ''; ?>">
             </div>
             <div class="mb-4">
               <label class="block text-gray-700 font-bold mb-2" for="assunto">
@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </label>
               <input
                 class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="assunto" type="text" placeholder="Assunto da mensagem" value="<?php echo isset($assunto) ? $assunto : ''; ?>">
+                id="assunto" name="assunto" type="text" placeholder="Assunto da mensagem" value="<?php echo isset($assunto) ? $assunto : ''; ?>">
             </div>
             <div class="mb-4">
               <label class="block text-gray-700 font-bold mb-2" for="mensagem">
@@ -107,7 +107,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               </label>
               <textarea
                 class="no-resize appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="mensagem" placeholder="Digite sua mensagem"><?php echo isset($mensagem) ? $mensagem : ''; ?></textarea>
+                id="mensagem" name="mensagem" placeholder="Digite sua mensagem"><?php echo isset($mensagem) ? $mensagem : ''; ?></textarea>
             </div>
             <div class="flex items-center justify-between">
               <button
