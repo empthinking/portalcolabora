@@ -41,7 +41,7 @@ require_once 'header.php';
                 <?php while ($image = $result->fetch_assoc()) : ?>
                     <div class="carousel-item <?php if ($imageIndex === 0) echo 'active'; ?>">
                         <div class="d-flex justify-content-center align-items-center" style="height: 400px;">
-                            <img src="<?php echo $image['Image_Name']; ?>" class="img-fluid" style="max-height: 100%; max-width: 100%;" alt="Product Image">
+                            <img src="<?php echo $image['Image_Name']; ?>" class="img-fluid" alt="Product Image">
                         </div>
                     </div>
                     <?php $imageIndex++; ?>
@@ -58,13 +58,13 @@ require_once 'header.php';
         </div>
 
         <div class="mt-4">
-            <h4>Owner: <?php echo $row['User_Name']; ?></h4>
-            <p>Description: <?php echo $row['Product_Description']; ?></p>
-            <p>Price: <?php echo $row['Product_Price']; ?></p>
-            <button class="btn btn-primary">Buy Now</button>
+            <h4>Anunciante: <?php echo $row['User_Name']; ?></h4>
+            <p>Descrição: <?php echo $row['Product_Description']; ?></p>
+            <p>Preço: <?php echo $row['Product_Price']; ?></p>
+            <button class="btn btn-success">Comprar</button>
         </div>
     <?php else : ?>
-        <p>No product found.</p>
+        <p>Item não existe</p>
     <?php endif; ?>
 </div>
 
