@@ -1,9 +1,10 @@
 <?php
-require_once "dbconn.php";
-
+session_start();
+ob_start();
 function isUserLoggedIn(): bool {
   return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
+require_once "dbconn.php";
 
 // Cabeçalho
 if(isUserLoggedIn()):
@@ -18,7 +19,7 @@ if (isset($_GET['id'])) {
   $produto_id = $_GET['id'];
 
   // Faz a requisição ao banco de dados para obter as informações do produto com o ID correspondente
-  $sql = "SELECT p.imagem, p.nome, p.descricao, p.preco, p.visualizacoes, u.user_tel, u.user_email, u.privacidade, u.id as usuario_id FROM produtos p JOIN usuarios u ON p.usuario_id = u.id WHERE p.id = $produto_id";
+  $sql = "SELECT imagem, nome, descricao, preco, visualizacoes FROM produtos WHERE id = $produto_id";
   $result = $conn->query($sql);
 
   // Verifica se existe um registro correspondente ao ID
@@ -30,10 +31,6 @@ if (isset($_GET['id'])) {
     $descricao = $row["descricao"];
     $preco = $row["preco"];
     $visualizacoes = $row["visualizacoes"];
-    $telefone = $row["user_tel"];
-    $email = $row["user_email"];
-    $privacidade = $row["privacidade"];
-    $usuario_id = $row["usuario_id"];
 
     // Incrementa o contador de visualizações
     $novas_visualizacoes = $visualizacoes + 1;
@@ -42,9 +39,9 @@ if (isset($_GET['id'])) {
 
     // Registra o histórico de acesso
     if (isUserLoggedIn()) {
-      $usuario_id_logado = $_SESSION['id'];
+      $usuario_id = $_SESSION['id'];
       $produto_id = mysqli_real_escape_string($conn, $id);
-      $query = "INSERT INTO historico (usuario_id, produto_id) VALUES ('$usuario_id_logado', '$produto_id')";
+      $query = "INSERT INTO historico (usuario_id, produto_id) VALUES ('$usuario_id', '$produto_id')";
       $result = mysqli_query($conn, $query);
       if (!$result) {
         throw new Exception("Erro ao registrar histórico: " . mysqli_error($conn));
@@ -64,13 +61,9 @@ if (isset($_GET['id'])) {
           <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
           <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
           <?php if (isUserLoggedIn()): ?>
-            <?php if ($privacidade === true): ?>
-              <p class="text-lg mt-4">Telefone: <?php echo $telefone; ?></p>
-              <p class="text-lg">E-mail: <?php echo $email; ?></p>
-            <?php endif; ?>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" onclick="showContactForm()">Entrar em contato</button>
           <?php else: ?>
-            <span>Para entrar em contato com o vendedor, você precisa estar logado.</span>
+            <span class="text-red-500">Para entrar em contato com o vendedor, você precisa estar logado.</span>
             <div class="mt-4">
               <a href="cadastro.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</a>
               <a href="login.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4">Login</a>
