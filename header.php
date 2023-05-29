@@ -20,9 +20,9 @@
 </head>
 
 <body class="bg-gray-100">
-    <nav class="navbar py-2">
+    <nav class="navbar py-2 justify-between">
         <div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex  md:items-center">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center">
                 <div>
                     <a class="" href="index.php">
                         <img src="img/Ativo 1 black.png" style="max-height: 3.75rem; max-width :10rem"
