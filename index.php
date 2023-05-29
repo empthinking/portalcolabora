@@ -2,11 +2,12 @@
 //Inicia a sessao
 session_start();
 
+//Função para verificar se o usuário esta logado
 function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
 
-
+//Alerta de login realizado com sucesso
 if(isset($_SESSION['success_msg'])):
     $msg = $_SESSION['success_msg'];
     echo '<script>alert("' . htmlspecialchars($msg) . '")</script>';
