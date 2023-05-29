@@ -6,7 +6,7 @@ function isUserLoggedIn(): bool {
   return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
 
-// Cabeçalho
+// Cabeçalho 
 if(isUserLoggedIn()):
   require_once 'header_loggedin.php';
 else:
