@@ -12,14 +12,13 @@ if(isUserLoggedIn()):
 else:
   require_once 'header.php';
 endif;
-
 // Verifica se o parâmetro "id" está presente na URL
 if (isset($_GET['id'])) {
   // Obtém o ID do produto da URL
   $produto_id = $_GET['id'];
 
   // Faz a requisição ao banco de dados para obter as informações do produto com o ID correspondente
-  $sql = "SELECT imagem, nome, descricao, preco, visualizacoes FROM produtos WHERE id = $produto_id";
+  $sql = "SELECT p.imagem, p.nome, p.descricao, p.preco, p.visualizacoes, u.user_tel, u.user_email, u.privacidade FROM produtos p JOIN usuarios u ON p.usuario_id = u.id WHERE p.id = $produto_id";
   $result = $conn->query($sql);
 
   // Verifica se existe um registro correspondente ao ID
@@ -31,6 +30,9 @@ if (isset($_GET['id'])) {
     $descricao = $row["descricao"];
     $preco = $row["preco"];
     $visualizacoes = $row["visualizacoes"];
+    $telefone = $row["user_tel"];
+    $email = $row["user_email"];
+    $privacidade = $row["privacidade"];
 
     // Incrementa o contador de visualizações
     $novas_visualizacoes = $visualizacoes + 1;
@@ -61,9 +63,13 @@ if (isset($_GET['id'])) {
           <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
           <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
           <?php if (isUserLoggedIn()): ?>
+            <?php if ($privacidade === true): ?>
+              <p class="text-lg mt-4">Telefone: <?php echo $telefone; ?></p>
+              <p class="text-lg">E-mail: <?php echo $email; ?></p>
+            <?php endif; ?>
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" onclick="showContactForm()">Entrar em contato</button>
           <?php else: ?>
-            <span class="text-red-500">Para entrar em contato com o vendedor, você precisa estar logado.</span>
+            <span>Para entrar em contato com o vendedor, você precisa estar logado.</span>
             <div class="mt-4">
               <a href="cadastro.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</a>
               <a href="login.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4">Login</a>
