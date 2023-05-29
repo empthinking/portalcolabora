@@ -1,4 +1,4 @@
-<footer class="pt-1 pb-5" style="background-color: #05f21d;">
+<footer class="p-5" style="background-color: #05f21d;">
     <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
         <div class="flex flex-col items-center">
             <img class="order-last md:order-first w-16" src="img/Ativo 1 black.png" alt="Logo">
