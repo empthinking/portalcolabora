@@ -29,14 +29,14 @@ if (isset($_GET['id'])) {
     $nome = $row["nome"];
     $descricao = $row["descricao"];
     $preco = $row["preco"];
-    $visualizacoes = $row["visualizacoes"];
-
     // Incrementa o contador de visualizações
     $novas_visualizacoes = $visualizacoes + 1;
     $sql = "UPDATE produtos SET visualizacoes = $novas_visualizacoes WHERE id = $produto_id";
     $conn->query($sql);
     ?>
-
+<br>
+<br>
+<br>
     <div class="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
       <div class="flex">
         <img src="<?php echo $imagem; ?>" alt="Imagem do Produto" class="w-1/2 mr-4">
@@ -44,7 +44,6 @@ if (isset($_GET['id'])) {
           <h2 class="text-2xl font-bold mb-2"><?php echo $nome; ?></h2>
           <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
           <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
-          <p class="text-lg font-bold">Visualizações: <?php echo $novas_visualizacoes; ?></p>
           <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Entrar em contato</button>
         </div>
       </div>
