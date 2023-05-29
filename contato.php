@@ -56,12 +56,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $headers = "From: $nome <$email>";
     if (mail($to, $subject, $message, $headers)) {
       // E-mail enviado com sucesso
-      echo "<p class='text-green-500'>Sua mensagem foi enviada com sucesso!</p>";
+      echo "<span class='text-green-500'>Sua mensagem foi enviada com sucesso!</span>";
     } else {
       // Erro ao enviar o e-mail
-      echo "<p class='text-red-500'>Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente mais tarde.</p>";
+      echo "<span class='text-red-500'>Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente mais tarde.</span>";
     }
-  } else {
+  }else {
     // Exibe os erros de validação
     foreach ($errors as $error) {
       echo "<p class='text-red-500'>$error</p>";
