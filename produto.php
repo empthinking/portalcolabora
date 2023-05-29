@@ -1,10 +1,10 @@
 <?php
-require_once "dbconn.php";
-
+session_start();
+ob_start();
 function isUserLoggedIn(): bool {
-  return isset($_SESSION['login']) && $_SESSION['login'] === true;
+    return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
-
+require_once "dbconn.php";
 // Cabeçalho
 if(isUserLoggedIn()):
   require_once 'header_loggedin.php';
