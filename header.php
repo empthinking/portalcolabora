@@ -129,7 +129,6 @@
             })
             </script>
         </div>
-        </div>
     </nav>
     <script>
     var elementos = document.getElementsByClassName('navbar');
