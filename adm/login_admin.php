@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <form method="POST">
                 <div class="mb-4">
                     <label for="email" class="block text-gray-700 font-bold mb-2">E-mail:</label>
-                    <input type="email" id="email" name="email" required
+                    <input type="text" id="email" name="email" required
                         class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500">
                 </div>
                 <div class="mb-4">
@@ -56,8 +56,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div>
                     <button type="submit"
                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Entrar</button>
-               										<a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/B/adm/login_admin.php">entrar como admin										</a>
-
                 </div>
             </form>
         </div>
