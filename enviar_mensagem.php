@@ -40,5 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // Fecha a conexão com o banco de dados
   $conn->close();
+
+  // Redireciona de volta para o produto
+  header("Location: produto.php?id=$produto_id");
+  exit;
 }
 ?>
