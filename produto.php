@@ -67,7 +67,7 @@ if (isset($_GET['id'])) {
     <div id="contactOptions" class="max-w-md mx-auto bg-white shadow-md rounded-md p-6 mt-4 hidden">
       <?php if (!isUserLoggedIn()): ?>
         <span class="text-red-500">Para entrar em contato com o vendedor, você precisa estar logado.</span>
-        <div class="mt-4">
+        <div class="class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900"">
           <a href="cadastro.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</a>
           <button href='#' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4"   onclick="document.getElementById('singIn').style.display='block'">Login</button>
         </div>
