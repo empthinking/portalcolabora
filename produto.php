@@ -38,16 +38,6 @@ if (isset($_GET['id'])) {
     $novas_visualizacoes = $visualizacoes + 1;
     $sql = "UPDATE produtos SET visualizacoes = $novas_visualizacoes WHERE id = $produto_id";
     $conn->query($sql);
-// Registra o histórico de acesso
-if (isUserLoggedIn()) {
-  $usuario_id_logado = $_SESSION['id'];
-  $produto_id = mysqli_real_escape_string($conn, $produto_id);
-  $query = "INSERT INTO historico (usuario_id, produto_id) VALUES ('$usuario_id_logado', '$produto_id')";
-  $result = mysqli_query($conn, $query);
-  if (!$result) {
-    throw new Exception("Erro ao registrar histórico: " . mysqli_error($conn));
-  }
-}
 
     }
 
