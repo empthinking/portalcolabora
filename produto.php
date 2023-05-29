@@ -18,10 +18,11 @@ if (isset($_GET['id'])) {
   $produto_id = $_GET['id'];
 
   // Faz a requisição ao banco de dados para obter as informações do produto com o ID correspondente
-  $sql = "SELECT produtos.id AS produto_id, produtos.imagem, produtos.nome, produtos.descricao, produtos.preco, produtos.visualizacoes, usuarios.user_tel
+  $sql = "SELECT produtos.id AS produto_id, produtos.imagem, produtos.nome, produtos.descricao, produtos.preco, produtos.visualizacoes, 
+  (SELECT user_tel FROM usuarios WHERE usuarios.id = produtos.usuario_id) AS user_tel
   FROM produtos
-  INNER JOIN usuarios ON produtos.usuario_id = usuarios.id
   WHERE produtos.id = $produto_id";
+
 
   $result = $conn->query($sql);
 
