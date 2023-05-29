@@ -1,10 +1,9 @@
 <?php
-session_start();
-ob_start();
+require_once "dbconn.php";
+
 function isUserLoggedIn(): bool {
   return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
-require_once "dbconn.php";
 
 // Cabeçalho
 if(isUserLoggedIn()):
@@ -60,38 +59,45 @@ if (isset($_GET['id'])) {
           <h2 class="text-2xl font-bold mb-2"><?php echo $nome; ?></h2>
           <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
           <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
-          <?php if (isUserLoggedIn()): ?>
-            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" onclick="showContactForm()">Entrar em contato</button>
-          <?php else: ?>
-            <span class="text-red-500">Para entrar em contato com o vendedor, você precisa estar logado.</span>
-            <div class="mt-4">
-              <a href="cadastro.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</a>
-              <a href="login.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4">Login</a>
-            </div>
-          <?php endif; ?>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" onclick="showContactOptions()">Entrar em contato</button>
         </div>
       </div>
     </div>
 
-    <div id="contactForm" class="max-w-md mx-auto bg-white shadow-md rounded-md p-6 mt-4 hidden">
-      <h2 class="text-2xl font-bold mb-4">Enviar mensagem para o vendedor</h2>
-      <form action="enviar_mensagem.php" method="POST">
-        <input type="hidden" name="destinatario" value="<?php echo $usuario_id; ?>">
-        <input type="hidden" name="remetente" value="<?php echo $_SESSION['id']; ?>">
-        <input type="hidden" name="produto_id" value="<?php echo $produto_id; ?>">
-        <div class="mb-4">
-          <label class="block text-gray-700 font-bold mb-2" for="mensagem">
-            Mensagem
-          </label>
-          <textarea class="no-resize appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="mensagem" name="mensagem" placeholder="Digite sua mensagem"></textarea>
+    <div id="contactOptions" class="max-w-md mx-auto bg-white shadow-md rounded-md p-6 mt-4 hidden">
+      <?php if (!isUserLoggedIn()): ?>
+        <span class="text-red-500">Para entrar em contato com o vendedor, você precisa estar logado.</span>
+        <div class="mt-4">
+          <a href="cadastro.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</a>
+          <a href="login.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4">Login</a>
         </div>
-        <div class="flex items-center justify-between">
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-            Enviar mensagem
-          </button>
-        </div>
-      </form>
+      <?php else: ?>
+        <h2 class="text-2xl font-bold mb-4">Enviar mensagem para o vendedor</h2>
+        <form action="enviar_mensagem.php" method="POST">
+          <input type="hidden" name="destinatario" value="<?php echo $usuario_id; ?>">
+          <input type="hidden" name="remetente" value="<?php echo $_SESSION['id']; ?>">
+          <input type="hidden" name="produto_id" value="<?php echo $produto_id; ?>">
+          <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2" for="mensagem">
+              Mensagem
+            </label>
+            <textarea class="no-resize appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="mensagem" name="mensagem" placeholder="Digite sua mensagem"></textarea>
+          </div>
+          <div class="flex items-center justify-between">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+              Enviar mensagem
+            </button>
+          </div>
+        </form>
+      <?php endif; ?>
     </div>
+
+    <script>
+      function showContactOptions() {
+        const contactOptions = document.getElementById('contactOptions');
+        contactOptions.style.display = 'block';
+      }
+    </script>
 
     <?php
   } else {
@@ -104,10 +110,3 @@ if (isset($_GET['id'])) {
   echo "ID do produto não fornecido na URL.";
 }
 ?>
-
-<script>
-  function showContactForm() {
-    const contactForm = document.getElementById('contactForm');
-    contactForm.style.display = 'block';
-  }
-</script>
