@@ -18,7 +18,7 @@ if (isset($_GET['id'])) {
   $produto_id = $_GET['id'];
 
   // Faz a requisição ao banco de dados para obter as informações do produto com o ID correspondente
-  $sql = "SELECT produtos.id AS produto_id, produtos.imagem, produtos.nome, produtos.descricao, produtos.preco, produtos.visualizacoes, 
+  $sql = "SELECT produtos.id, produtos.imagem, produtos.nome, produtos.descricao, produtos.preco, produtos.visualizacoes, 
   (SELECT user_tel FROM usuarios WHERE usuarios.id = produtos.usuario_id) AS user_tel
   FROM produtos
   WHERE produtos.id = $produto_id";
