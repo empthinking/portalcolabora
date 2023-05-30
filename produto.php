@@ -96,9 +96,10 @@ if (isset($_GET['id'])) {
             </button>
         </div>
     </div>
-</div>
 <button onclick="window.history.back();"  class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
 Voltar</button>
+</div>
+
 
         <style>
             .product-card {
