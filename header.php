@@ -39,7 +39,7 @@
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="contato.php">Contato</a>
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="faq.php">FAQ</a>
                 </div>
-            <div class="flex items-center py-2 -mx-4 md:mx-4">
+            <div class="flex items-center py-2 -mx-4 md:mx-4 items-center">
                 <form method="post" action="pesquisa.php">
                     <div class="relative mr-10 md:mx-0">
                         <input class="bg-gray-200 rounded-full border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 pl-4 pr-10 py-2 w-40" type="text" name="search" placeholder="Pesquisar...">
