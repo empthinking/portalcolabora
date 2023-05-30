@@ -12,6 +12,7 @@
                 <li> Email: suporte@portalcolabora.com.br </li>
             </ul>
         </div>
+
         <div class="mt-6 md:mt-0">
             <h3 class="text-gray-100 font-bold mb-3">Redes Sociais</h3>
             <ul class="flex items-center">
@@ -32,5 +33,6 @@
                 </li>
             </ul>
         </div>
+
     </div>
 </footer>
