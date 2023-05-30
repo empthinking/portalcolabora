@@ -1,5 +1,5 @@
-<footer class="px-50">
-    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
+<footer>
+    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between px-15">
         <div class="flex flex-col items-center">
             <img class="order-last md:order-first w-16" src="img/Ativo 1 black.png" alt="Logo">
             <p class="text-2xl font-bold text-red-500 ml-4">Criando soluções digitais.</p>
