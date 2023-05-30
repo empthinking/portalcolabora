@@ -1,193 +1,196 @@
 <?php
 session_start();
+ob_start();
+function isUserLoggedIn(): bool {
+    return isset($_SESSION['login']) && $_SESSION['login'] === true;
+}
+require_once "header_loggedin.php";
 require_once "dbconn.php";
 
-function isUserLoggedIn(): bool {
-  return isset($_SESSION['login']) && $_SESSION['login'] === true;
+
+// Obtém as informações do usuário a partir do ID armazenado na sessão
+$usuario_id = $_SESSION['id'] ?? null;
+if ($usuario_id === null) {
+    header("Location: index.php");
+    exit();
 }
 
-//Inicia a sessao
+$query = "SELECT * FROM usuarios WHERE user_id = $usuario_id";
+$result = mysqli_query($conn, $query);
 
-// Cabeçalho
-if(isUserLoggedIn()):
-  require_once 'header_loggedin.php';
-else:
-  require_once 'header.php';
-endif;
-
-function obter_produto($conn, $id) {
-  $query = "SELECT p.*, u.user_nome as nome_usuario, u.user_imagem FROM produtos p JOIN usuarios u ON p.usuario_id = u.user_id WHERE p.id = " . mysqli_real_escape_string($conn, $id);
-  $result = mysqli_query($conn, $query);
-  if (!$result) {
-      throw new Exception("Erro na consulta: " . mysqli_error($conn));
-  }
-  $produto = mysqli_fetch_assoc($result);
-  mysqli_free_result($result);
-  return $produto;
+// Verifica se o usuário existe no banco de dados
+if (mysqli_num_rows($result) != 1) {
+    header("Location: logout.php");
+    exit();
 }
 
-$id = $_GET['id'];
-if (!$id) {
-  header("Location: index.php");
-  exit;
-}
+// Obtém as informações do usuário
+$user = mysqli_fetch_assoc($result);
 
-// Registra o histórico de acesso
-if(isUserLoggedIn()) {
-  $usuario_id = $_SESSION['id'];
-  $produto_id = mysqli_real_escape_string($conn, $id);
-  $query = "INSERT INTO historico (usuario_id, produto_id) VALUES ('$usuario_id', '$produto_id')";
-  $result = mysqli_query($conn, $query);
-  if (!$result) {
-      throw new Exception("Erro ao registrar histórico: " . mysqli_error($conn));
-  }
-}
-
-$produto = obter_produto($conn, $id);
-mysqli_close($conn);
-
-// Verifica se a foto de perfil do usuário está vazia
-if ($produto['user_imagem'] == null) {
-  $caminho_imagem_prod = "img/perfil.png";
+// Define as variáveis nome, email e número com as informações do usuário
+$permissao_publicar = $user['permissao_publicar'];
+$nome = $user['user_nome'];
+$email = $user['user_email'];
+$numero = $user['user_tel'];
+if ($user['user_imagem'] == null) {
+  $caminho_imagem = "img/perfil.png";
 } else {
-  $caminho_imagem_prod = $produto['user_imagem'];
+  $caminho_imagem = $user['user_imagem'];
 }
+
 ?>
+<body>
+    <div class="flex items-center justify-centermt-  menu-overlay" >
+        <div class="bg-white rounded-lg  m-64 mx-auto p-8">
+          <h3 class="text-3xl font-bold">Perfil</h3>
+        <figure class="mt-4">
+        <img id="perfil" src="<?php echo $caminho_imagem; ?>" class="rounded-full w-32 h-32">
+        </figure>
+        <div class="mt-6">
+          <h3 class="text-2xl font-bold">Nome</h3>
+          <h3 class="text-3xl font-bold text-gray-500"><?php echo $nome ?></h3>
+          <h3 class="text-2xl font-bold">Email</h3>
+          <h3 class="
+text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
+          <div id="btp" class="mt-4">
+            <h3 class="text
+-2xl font-bold">Número</h3>
+            <h3 class="text-3xl font-bold text-gray-500"><?php echo $numero ?></h3>
+                     </div>
+                     <br>
 
-    <!-- Conteúdo principal -->
-<main class="bg-white">
-  
-<?php
-  $nome = htmlentities($produto['nome']);
-  $imagem = htmlentities($produto['imagem']);
-  $descricao = htmlentities($produto['descricao']);
-  $preco = number_format($produto['preco'], 2, ',', '.');
-  $nomeUsuario = htmlentities($produto['nome_usuario']);
-?>
-
-<div class="container  md:flex">
-  <div class="m-5 md:w-1/2">
-    <div id="slider">
-      <div><img src="<?php echo $imagem ?>" alt="Imagem do Produto"></div>
-      <div><img src="<?php echo $imagem ?>" alt="Imagem do Produto"></div>
-      <div><img src="<?php echo $imagem ?>" alt="Imagem do Produto"></div>
-    </div>
-  </div>
-
-  <div class="column is-6-desktop m-4 md:w-1/2">
-    <h2 class="title is-2 text-8xl font-bold mb-2"><?= $nome ?></h2>
-    <p class="subtitle is-4 text-4lg text-gray-600 mb-4"><?= $descricao ?></p>
-    <p class="subtitle is-3 has-text-success text-6xl text-green-600 mb-4">R$ <?= $preco ?></p>
-    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg mb-4"><a href="contato.php">Entrar em contato</a></button>
-    <div class="flex items-center">
-      <div class="w-10 h-10 rounded-full mr-4">
-  <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
-									
-<img src="<?php echo $caminho_imagem_prod; ?>" alt="Imagem de Perfil" class="w-10 h-10 rounded-full mr-2">
-                    </div> 
-                       </div>
-      <a href="#" class="text-blue-500 font-bold"><label for="perfil"><?= $nomeUsuario ?></label></a>
-    </div>
-  </div>
-</div>
-
-  
-  </main>  
-  <section class="bg-gray-100 py-8">
-  <div class="container">
-  <div class="container">
-    <h2 class="text-2xl font-bold mb-6">Outros Produtos</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-
-    <?php
-    // Abrindo a conexão com o banco de dados
-    $conn = mysqli_connect("127.0.0.1", "u871226378_colabora", "F7k|MYhYf>", "u871226378_portalcolabora");
-
-    // Verificando se a conexão foi estabelecida com sucesso
-    if (!$conn) {
-        die("Não foi possível conectar ao banco de dados: " . mysqli_connect_error());
-    }
-
-    // Consultando outros produtos de forma aleatória
-    $consulta = "SELECT * FROM produtos WHERE id != " . $produto['id'] . " ORDER BY RAND() LIMIT 4";
-
-    // Verificando se a consulta foi executada com sucesso
-    $resultado = mysqli_query($conn, $consulta);
-
-    if (!$resultado) {
-        die("Não foi possível consultar o banco de dados: " . mysqli_error($conn));
-    }
-
-    // Loop para exibir os produtos
-    while ($produto = mysqli_fetch_array($resultado)) {
-        ?>
-
-        <!-- Card do Produto -->
-        <div class="card">
-            <div class="card-image">
-                <figure class="w-full">
-                    <img src="<?= htmlentities($produto['imagem']) ?>" alt="Product Image" class="object-cover w-full h-48">
-                </figure>
+<button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('historicoProdutos').style.display='block'">Historico de Compra</button>
+<div id="historicoProdutos" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
+        <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Historico de Compra</h3>
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+              </div>
+              <div class="border-t border-gray-200">
+                <dl>
+                  <div class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                      Data da Compra
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      01/01/2022
+                    </dd>
+                  </div>
+                  <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                    <dt class="text-sm font-medium text-gray-500">
+                      Total
+                    </dt>
+                    <dd class="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+                      R$ 100,00
+                    </dd>
+                  </div>
+                </dl>
+              </div>
             </div>
-            <div class="card-content p-4">
-                <p class="text-lg font-bold mb-2"><?= htmlentities($produto['nome']) ?></p>
-                <p class="text-lg font-bold text-green-600 mb-2">R$ <?= number_format($produto['preco'], 2, ',', '.') ?></p>
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">
-                    <a href="produto.php?id=<?= $produto['id'] ?>">ver mais</a>
+                <button type="button" onclick="document.getElementById('historicoProdutos').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
+                Cancelar
                 </button>
             </div>
-        </div>
-
-    <?php
-    }
-    // Fechando a conexão com o banco de dados
-    mysqli_close($conn);
-    ?>
-
-    </div>
-</div>
-
+            </div>
+        </div> 
+   
+       
+        <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('editPerfil').style.display='block'">editar Perfil</button>
+<div id="editPerfil" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
   
+<?=require_once "editar_perifil.php";?>             
+
+        </div>
+        <?php if ($permissao_publicar == true): ?>
+  <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('meusProdutos').style.display='block'">Meus Produtos</button>
+  <div id="meusProdutos" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
+      <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
+        <?php
+        // Consulta os produtos do usuário logado
+        $sql = "SELECT * FROM produtos WHERE usuario_id = $usuario_id";
+        $result = mysqli_query($conn, $sql);
+
+        // Verifica se o usuário possui produtos cadastrados
+        if (mysqli_num_rows($result) == 0) {
+          echo "<h3 class='text-lg leading-6 font-medium text-gray-900'>Meus Produtos</h3>";
+          echo "<p>Você ainda não cadastrou nenhum produto.</p>";
+          echo "<a href='addproduto.php' class='bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mt-4'>Adicionar Produto</a>";
+        } else {
+          echo "<h3 class='text-lg leading-6 font-medium text-gray-900'>Meus Produtos</h3>";
+          echo "<table>";
+          echo "<tr><th>Nome</th><th>Descrição</th><th>Preço</th><th>Imagem</th><th>Opções</th></tr>";
+          while ($row = mysqli_fetch_array($result)) {
+            echo "<tr>";
+            echo "<td>" . $row['nome'] . "</td>";
+            echo "<td>" . $row['descricao'] . "</td>";
+            echo "<td>" . $row['preco'] . "</td>";
+            if (!empty($row['imagem'])) {
+              echo "<td><img src='" . $row['imagem'] . "' width='100'></td>";
+            } else {
+              echo "<td>N/A</td>";
+            }
+            echo "<td><a href='editar_produto.php?id=" . $row['id'] . "'><img src='https://www.gstatic.com/images/icons/material/system_gm/1x/create_black_24dp.png' alt='Editar'></a> | <a href='excluir_produto.php?id=" . $row['id'] . "' onclick=\"return confirm('Tem certeza que deseja excluir esse produto?')\">Excluir</a></td>";
+            echo "</tr>";
+          }
+          echo "</table>";
+          echo "<a href='addproduto.php' class='bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mt-4'>Adicionar Produto</a>";
+        }
+
+        mysqli_close($conn);
+        ?>
+        <button type="button" onclick="document.getElementById('meusProdutos').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">Cancelar</button>
+      </div>
     </div>
   </div>
-</section>
+<?php else: ?>
+  <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('adicionarProduto').style.display='block'">Adicionar Produto</button>
+  <div id="adicionarProduto" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
+    <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
+      <h3>Deseja anunciar um produto?</h3>
+      <form action="perfil.php" method="POST">
+  <button type="submit" name="sim" class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mt-4">Sim</button>
+</form>
 
-  <style>
-    /* Slick Carousel styles */
-    .slick-slide {
-      margin: 0 10px;
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  // Verifica se o botão "Sim" foi clicado
+  if (isset($_POST['sim'])) {
+    // Realiza a atualização da permissão no banco de dados
+    $valor = 1; // Valor para permissao_publicar = 1
+
+    // Crie uma conexão
+    // Verifique se a conexão foi estabelecida corretamente
+    if ($conn->connect_error) {
+      die("Falha na conexão com o banco de dados: " . $conn->connect_error);
     }
-  
-    .slick-prev:before,
-    .slick-next:before {
-        color: #999;
+
+    // Execute a query para atualizar a permissão no banco de dados
+    $usuario_id = $user['user_id']; // Substitua pelo ID do usuário atual
+    $sql = "UPDATE usuarios SET permissao_publicar = $valor WHERE user_id = $usuario_id";
+
+    if ($conn->query($sql) === TRUE) {
+
+    } else {
+      echo "Erro ao atualizar a permissão: " . $conn->error;
     }
-    
-    .slick-dots li button:before {
-        color: #999;
-    }
-  
-    .slick-dots li.slick-active button:before {
-      color: #3273dc;
-    }
-    
-    /* Custom styles */
-    .related-products {
-        margin: 0
-    }
-    </style>
-  </body>
-    <script>
-   
-     $(document).ready(function(){
-      $('#slider').slick({
-        dots: true,
-        infinite: true,
-        speed: 300,
-        slidesToShow: 1,
-        adaptiveHeight: true
-      });
-    });
-    
-    </script>
+
+    // Feche a conexão com o banco de dados
+    $conn->close();
+  }
+}
+?>
+      <button onclick="document.getElementById('adicionarProduto').style.display='none'" class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mt-4">Não</button>
+    </div>
+  </div>
+<?php endif; ?>
+
+
+</div>
+</div>
+</div>
+</body> 
+
 <?=require_once "footer.php";?>             
+
