@@ -1,4 +1,4 @@
-<footer class="p-5...">
+<footer class="px-5...">
     <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
         <div class="flex flex-col items-center">
             <img class="order-last md:order-first w-16" src="img/Ativo 1 black.png" alt="Logo">
