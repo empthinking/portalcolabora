@@ -48,7 +48,7 @@ if (isset($_GET['id'])) {
 
             if ($destinatario == $vendedor_id) {
                 // Insere a mensagem na tabela de contatos
-                $sql = "INSERT INTO contatos (destinatario, remetente, mensagem) VALUES ('$destinatario', '$remetente', '$mensagem')";
+                $sql = "INSERT INTO contato (destinatario, remetente, mensagem) VALUES ('$destinatario', '$remetente', '$mensagem')";
 
                 if ($conn->query($sql) === true) {
                     echo "Mensagem enviada com sucesso.";
