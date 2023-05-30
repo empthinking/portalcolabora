@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="menu-items hidden md:block">
-                <div class="menu-toggle md:hidden">
+                <div class="menu-toggle">
 
                     <div class="flex flex-col md:flex-row md:mx-6 items-center">
                         <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900"
@@ -112,10 +112,6 @@
         </div>
     </nav>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-  var menuToggle = document.querySelector(".menu-toggle");
- 
-
     var elementos = document.getElementsByClassName('navbar');
     var el = elementos[0];
     el.style.backgroundColor = '#63f253';
