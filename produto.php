@@ -58,17 +58,18 @@ if (isset($_GET['id'])) {
     <br>
     <br>
     <br>
-    <div class="product-card">
-  <div class="image-container">
-    <img src="<?php echo $imagem; ?>" alt="Imagem do Produto">
-  </div>
-  <div class="product-details">
-    <h2 class="product-title"><?php echo $nome; ?></h2>
-    <p class="product-description"><?php echo $descricao; ?></p>
-    <p class="product-price">Preço: R$ <?php echo $preco; ?></p>
-    <button class="contact-button" onclick="showContactOptions()">Entrar em contato</button>
+<div class="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
+  <div class="flex">
+    <img src="<?php echo $imagem; ?>" alt="Imagem do Produto" class="w-1/2 mr-4">
+    <div class="w-1/2">
+      <h2 class="text-2xl font-bold mb-2"><?php echo $nome; ?></h2>
+      <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
+      <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
+      <button class="bg-green-300 hover:bg-green-400 text-white font-bold py-3 px-6 rounded-lg mt-4 text-xl" onclick="showContactOptions()">Entrar em contato</button>
+    </div>
   </div>
 </div>
+
 
 
 
@@ -115,64 +116,7 @@ if (isset($_GET['id'])) {
 
       
     </div>
-<style>
-.product-card {
-  max-width: 400px;
-  margin: 0 auto;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 0.5rem;
-  padding: 20px;
-  display: flex;
-}
 
-.image-container {
-  width: 40%;
-  text-align: center;
-  padding-right: 20px;
-}
-
-.image-container img {
-  width: 100%;
-  max-height: 200px;
-  object-fit: cover;
-  border-radius: 0.5rem;
-}
-
-.product-details {
-  width: 60%;
-}
-
-.product-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.product-description {
-  font-size: 16px;
-  color: #666666;
-  margin-bottom: 20px;
-}
-
-.product-price {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-.contact-button {
-  background-color: #a2d9aa;
-  color: #ffffff;
-  font-weight: bold;
-  font-size: 20px;
-  padding: 12px 24px;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  align-self: flex-start;
-}
-
-  </style>
 
     <script>
       function showContactOptions() {
