@@ -51,7 +51,7 @@ if (isset($_GET['id'])) {
                 $sql = "INSERT INTO contato (destinatario, remetente, manssagem) VALUES ('$destinatario', '$remetente', '$mensagem')";
 
                 if ($conn->query($sql) === true) {
-                    echo "Mensagem enviada com sucesso.";
+                    
                 } else {
                     echo "Erro ao enviar mensagem: " . $conn->error;
                 }
@@ -97,7 +97,7 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 </div>
-
+<button onclick="window.history.back();" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">Voltar</button>
 
         <style>
             .product-card {
