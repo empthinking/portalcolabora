@@ -1,9 +1,4 @@
 <?php
-// Verifica se houve erro na conexão
-if ($conn->connect_error) {
-    die("Falha na conexão com o banco de dados: " . $conn->connect_error);
-}
-
 // Verifica se o destinatário está definido
 if (isset($_SESSION['id'])) {
     $destinatario = $_SESSION['id'];
@@ -24,6 +19,18 @@ if (isset($_SESSION['id'])) {
     }
 }
 ?>
+
+    <style>
+        .message-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Lista de Mensagens</h1>
+
     <?php if (isset($mensagens) && count($mensagens) > 0): ?>
         <?php foreach ($mensagens as $mensagem): ?>
             <div class="message-card">
@@ -35,10 +42,3 @@ if (isset($_SESSION['id'])) {
     <?php else: ?>
         <p>Nenhuma mensagem encontrada para este destinatário.</p>
     <?php endif; ?>
-
-    <?php
-    // Fecha a conexão com o banco de dados
-    $conn->close();
-    ?>
-</body>
-</html>
