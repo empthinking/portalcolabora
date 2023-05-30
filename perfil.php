@@ -60,11 +60,10 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
                      <br>
 
 
-                     <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('historicoProdutos').style.display='block'">Historico de Compra</button>
+                     <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('historicoProdutos').style.display='block'">mensagens</button>
 <div id="historicoProdutos" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
         <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">Historico de Compra</h3>
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
               <div class="px-4 py-5 sm:px-6">
               </div>
@@ -101,40 +100,15 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
          <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('meusProdutos').style.display='block'">Meus Produtos</button>
   <div id="meusProdutos" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
-      <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
-        <?php
-        // Consulta os produtos do usuário logado
-        $sql = "SELECT * FROM produtos WHERE usuario_id = $usuario_id";
-        $result = mysqli_query($conn, $sql);
-
-        // Verifica se o usuário possui produtos cadastrados
-        if (mysqli_num_rows($result) == 0) {
-          echo "<h3 class='text-lg leading-6 font-medium text-gray-900'>Meus Produtos</h3>";
-          echo "<p>Você ainda não cadastrou nenhum produto.</p>";
-          echo "<a href='addproduto.php' class='bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mt-4'>Adicionar Produto</a>";
-        } else {
-          echo "<h3 class='text-lg leading-6 font-medium text-gray-900'>Meus Produtos</h3>";
-          echo "<table>";
-          echo "<tr><th>Nome</th><th>Descrição</th><th>Preço</th><th>Imagem</th><th>Opções</th></tr>";
-          while ($row = mysqli_fetch_array($result)) {
-            echo "<tr>";
-            echo "<td>" . $row['nome'] . "</td>";
-            echo "<td>" . $row['descricao'] . "</td>";
-            echo "<td>" . $row['preco'] . "</td>";
-            if (!empty($row['imagem'])) {
-              echo "<td><img src='" . $row['imagem'] . "' width='100'></td>";
-            } else {
-              echo "<td>N/A</td>";
-            }
-            echo "<td><a href='editar_produto.php?id=" . $row['id'] . "'><img src='https://www.gstatic.com/images/icons/material/system_gm/1x/create_black_24dp.png' alt='Editar'></a> | <a href='excluir_produto.php?id=" . $row['id'] . "' onclick=\"return confirm('Tem certeza que deseja excluir esse produto?')\">Excluir</a></td>";
-            echo "</tr>";
-          }
-          echo "</table>";
-          echo "<a href='addproduto.php' class='bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full mt-4'>Adicionar Produto</a>";
-        }
-
-        mysqli_close($conn);
-        ?>
+    <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">editar perfil</h3>
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+              </div>
+              <div class="border-t border-gray-200">
+              <?=require_once "meus_produtos.php";?>             
+              </div>
+            </div>
         <button type="button" onclick="document.getElementById('meusProdutos').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">Cancelar</button>
       </div>
     </div>
