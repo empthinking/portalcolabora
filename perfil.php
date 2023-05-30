@@ -101,7 +101,7 @@ if ($produto['user_imagem'] == null) {
 
     <?php
     // Abrindo a conexão com o banco de dados
-    $conn = mysqli_connect("localhost", "root", "", "crud");
+    $conn = mysqli_connect("127.0.0.1", "u871226378_colabora", "F7k|MYhYf>", "u871226378_portalcolabora");
 
     // Verificando se a conexão foi estabelecida com sucesso
     if (!$conn) {
