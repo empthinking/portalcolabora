@@ -115,17 +115,21 @@ if (isset($_GET['id'])) {
 
       
     </div>
-<style>.product-card {
+<style>
+.product-card {
   max-width: 400px;
   margin: 0 auto;
   background-color: #ffffff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
   padding: 20px;
+  display: flex;
 }
 
 .image-container {
+  width: 40%;
   text-align: center;
+  padding-right: 20px;
 }
 
 .image-container img {
@@ -133,6 +137,10 @@ if (isset($_GET['id'])) {
   max-height: 200px;
   object-fit: cover;
   border-radius: 0.5rem;
+}
+
+.product-details {
+  width: 60%;
 }
 
 .product-title {
@@ -161,10 +169,7 @@ if (isset($_GET['id'])) {
   padding: 12px 24px;
   border-radius: 0.5rem;
   cursor: pointer;
-}
-
-.contact-button:hover {
-  background-color: #81c984;
+  align-self: flex-start;
 }
 
   </style>
@@ -187,3 +192,5 @@ if (isset($_GET['id'])) {
   echo "ID do produto não fornecido na URL.";
 }
 ?>
+</body></html>
+
