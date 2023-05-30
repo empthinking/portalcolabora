@@ -57,33 +57,49 @@
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
-                </form>                
+                </form>
             </div>
             <div class="flex items-center ml-5">
-                <a href="cadastro.php"><button class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">Cadastrar</button></a>
-                <button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('signIn').style.display='block'">Entrar</button>
+                <a href="cadastro.php">
+                    <button
+                        class="bg-green-400 hover:bg-green-700 text-white font-bold rounded-full ml-4">Cadastrar
+                    </button>
+                </a>
+                <button class="bg-green-200 hover:bg-green-600 text-white font-bold rounded-full ml-2"
+                    onclick="document.getElementById('signIn').style.display='block'">
+                    Entrar
+                </button>
                 <div id="signIn" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-                    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
+                    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900"
+                        style="opacity: 0.9;">
                         <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
                             <h1 class="text-3xl font-bold mb-8 text-center">Login</h1>
                             <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
                                 <div class="mb-4 form-group">
                                     <label class="block font-bold mb-2" for="email">Email</label>
-                                    <input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="email" placeholder="exemplo@exemplo.com" id="email" name="email">
+                                    <input
+                                        class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                                        type="email" placeholder="exemplo@exemplo.com" id="email" name="email">
                                 </div>
                                 <div class="mb-6 form-group">
                                     <label class="block font-bold mb-2" for="password">Senha</label>
                                     <div class="relative">
-                                        <input class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline" type="password" id="senha" name="password">
-                                        <i class="fa fa-eye toggle-password absolute right-0 top-0 mt-2 mr-2 cursor-pointer"></i>
+                                        <input
+                                            class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+                                            type="password" id="senha" name="password">
+                                        <i
+                                            class="fa fa-eye toggle-password absolute right-0 top-0 mt-2 mr-2 cursor-pointer"></i>
                                     </div>
                                 </div>
                                 <div class="flex items-center justify-between">
-                                    <button type="submit" class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Entrar</button>
-                                    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="/adm/login_admin.php">entrar como admin </a>
+                                    <button type="submit"
+                                        class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Entrar</button>
+                                    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                                        href="/adm/login_admin.php">entrar como admin </a>
                                 </div>
                             </form>
-                            <button type="button" onclick="document.getElementById('signIn').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">Cancelar</button>
+                            <button type="button" onclick="document.getElementById('signIn').style.display='none'"
+                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">Cancelar</button>
                         </div>
                     </div>
                 </div>
