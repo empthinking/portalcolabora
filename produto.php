@@ -8,13 +8,6 @@ function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
 
-// Verifica se o usuário está logado e redireciona de volta para a página do produto
-if (isUserLoggedIn() && isset($_SESSION['id'])) {
-    $produto_id = $_SESSION['id'];
-    header("Location: produto.php?id=$produto_id");
-    exit;
-}
-
 // Cabeçalho
 if (isUserLoggedIn()) {
     require_once 'header_loggedin.php';
