@@ -64,13 +64,25 @@ if (isset($_GET['id'])) {
       </div>
     </div>
 
-    <div id="contactOptions" class="max-w-md mx-auto bg-white shadow-md rounded-md p-6 mt-4 hidden">
-      <?php if (!isUserLoggedIn()): ?>
-        <span class="text-red-500">Para entrar em contato com o vendedor, você precisa estar logado.</span>
+
+    <div id="contactOptions" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
+    <?php if (!isUserLoggedIn()): ?>    
+    <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
+            <h3 class="text-lg leading-6 font-medium text-gray-900">Historico de Compra</h3>
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+            <span class="text-red-500">Para entrar em contato com o vendedor, você precisa estar logado.</span>
         <div class="mt-4">
           <a href="cadastro.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</a>
         <button href="login.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4"onclick="document.getElementById('singIn').style.display='block'">Login </button>
         </div>
+            </div>
+                <button type="button" onclick="document.getElementById('historicoProdutos').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
+                Cancelar
+                </button>
+            </div>
+            </div>
+        </div> 
       <?php else: ?>
         <h2 class="text-2xl font-bold mb-4">Enviar mensagem para o vendedor</h2>
         <form action="enviar_mensagem.php" method="POST">
@@ -91,6 +103,11 @@ if (isset($_GET['id'])) {
           </div>
         </form>
       <?php endif; ?>
+
+
+
+
+      
     </div>
 
     <script>
