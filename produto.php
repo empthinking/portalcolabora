@@ -59,7 +59,7 @@ if (isset($_GET['id'])) {
       <h2 class="text-2xl font-bold mb-2"><?php echo $nome; ?></h2>
       <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
       <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" onclick="showContactOptions()">Entrar em contato</button>
+      <button class="bg-green-300 hover:bg-green-400 text-white font-bold py-3 px-6 rounded-lg mt-4 text-xl" onclick="showContactOptions()">Entrar em contato</button>
     </div>
   </div>
 </div>
