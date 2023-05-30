@@ -60,47 +60,44 @@ if (isset($_GET['id'])) {
             }
         }
         ?>
+<div class="product-card">
+    <div class="image-container">
+        <img src="<?php echo $imagem; ?>" alt="Imagem do Produto">
+    </div>
+    <div class="product-details">
+        <h2 class="product-title"><?php echo $nome; ?></h2>
+        <p class="product-description"><?php echo $descricao; ?></p>
+        <p class="product-price">Preço: R$ <?php echo $preco; ?></p>
+        <?php if (isUserLoggedIn()): ?>
+            <form method="post">
+                <input type="hidden" name="destinatario" value="<?php echo $vendedor_id; ?>">
+                <input type="hidden" name="remetente" value="<?php echo $_SESSION['id']; ?>">
+                <textarea name="mensagem" placeholder="Digite sua mensagem"></textarea>
+                <button type="submit" class="contact-button">Enviar mensagem</button>
+            </form>
+        <?php else: ?>
+            <button class="contact-button" onclick="showContactOptions()">Entrar em contato</button>
+        <?php endif; ?>
+    </div>
+</div>
 
-        <br>
-        <br>
-        <br>
-        <div class="product-card">
-            <div class="image-container">
-                <img src="<?php echo $imagem; ?>" alt="Imagem do Produto">
-            </div>
-            <div class="product-details">
-                <h2 class="product-title"><?php echo $nome; ?></h2>
-                <p class="product-description"><?php echo $descricao; ?></p>
-                <p class="product-price">Preço: R$ <?php echo $preco; ?></p>
-                <?php if (isUserLoggedIn()): ?>
-                    <form method="post">
-                        <input type="hidden" name="destinatario" value="<?php echo $vendedor_id; ?>">
-                        <input type="hidden" name="remetente" value="<?php echo $_SESSION['id']; ?>">
-                        <textarea name="mensagem" placeholder="Digite sua mensagem"></textarea>
-                        <button type="submit" class="contact-button">Enviar mensagem</button>
-                    </form>
-                <?php else: ?>
-                    <button class="contact-button" onclick="showContactOptions()">Entrar em contato</button>
-                <?php endif; ?>
-            </div>
-        </div>
-
-        <div id="contactOptions" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-            <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 1;">
-                <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
-                    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                        <span class="text-red-500">Para entrar em contato com o vendedor, você precisa estar logado.</span>
-                        <div class="mt-4">
-                            <a href="cadastro.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</a>
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4" onclick="document.getElementById('singIn').style.display='block'; document.getElementById('contactOptions').style.display='none'">Login</button>
-                        </div>
-                    </div>
-                    <button type="button" onclick="document.getElementById('contactOptions').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
-                        Cancelar
-                    </button>
+<div id="contactOptions" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 1;">
+        <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
+            <div class="bg-white shadow overflow-hidden sm:rounded-lg">
+                <span class="text-red-500">Para entrar em contato com o vendedor, você precisa estar logado.</span>
+                <div class="mt-4">
+                    <a href="cadastro.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</a>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4" onclick="document.getElementById('singIn').style.display='block'; document.getElementById('contactOptions').style.display='none'">Login</button>
                 </div>
             </div>
+            <button type="button" onclick="document.getElementById('contactOptions').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
+                Cancelar
+            </button>
         </div>
+    </div>
+</div>
+
 
         <style>
             .product-card {
