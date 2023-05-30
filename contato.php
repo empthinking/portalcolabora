@@ -122,7 +122,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           <h4 class="text-xl font-bold mb-4">Informações de contato</h4>
           <p class="mb-2"><i class="fas fa-phone-alt mr-2"></i>(91) 98438-8103</p>
           <p class="mb-2"><i class="fas fa-envelope mr-2"></i>suporte@portalcolabora.com.br</p>
-          <p><i class="fas fa-map-marker-alt mr-2"></i>Rua 15 de Novembro, 1320, Centro,</p>
+          <p><i class="fas fa-map-marker-alt mr-2"></i>Rua 15 de Novembro, 1320, Centro, Mocajuba-Pa</p>
         </div>
       </div>
     </div>
