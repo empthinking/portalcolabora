@@ -75,6 +75,8 @@ if (isset($_GET['id'])) {
                 <textarea name="mensagem" placeholder="Digite sua mensagem"></textarea>
                 <button type="submit" class="contact-button">Enviar mensagem</button>
             </form>
+        <button onclick="window.history.back();"  class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
+Voltar</button>
         <?php else: ?>
             <button class="contact-button" onclick="showContactOptions()">Entrar em contato</button>
         <?php endif; ?>
@@ -96,8 +98,7 @@ if (isset($_GET['id'])) {
             </button>
         </div>
     </div>
-<button onclick="window.history.back();"  class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
-Voltar</button>
+
 </div>
 
 
