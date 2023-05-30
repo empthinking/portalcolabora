@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Colabora</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/main.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <style>
+        /* Custom CSS styles can be added here */
+    </style>
 </head>
+
 <body class="bg-gray-100">
     <nav class="navbar py-2">
         <div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex md:items-center justify-between">
             <div class="flex items-center">
                 <div>
                     <a class="" href="index.php">
-                        <img src="img/Ativo 1 black.png" style="max-height: 3.75rem; max-width :10rem" class="flex-shrink-0">
+                        <img src="img/Ativo 1 black.png" style="max-height: 3.75rem; max-width: 10rem" class="flex-shrink-0">
                     </a>
                 </div>
                 <div class="flex  navbar-toggle md:hidden">
@@ -77,19 +83,20 @@
         </div>
     </nav>
     <script>
-    var elementos = document.getElementsByClassName('navbar');
-    var el = elementos[0];
-    el.style.backgroundColor = '#63f253';
+        var elementos = document.getElementsByClassName('navbar');
+        var el = elementos[0];
+        el.style.backgroundColor = '#63f253';
 
-    var btn = document.querySelector('.toggle-password');
-    btn.addEventListener('click', () => {
-        let inputSenha = document.querySelector('#senha');
-        if (inputSenha.getAttribute('type') === 'password') {
-            inputSenha.setAttribute('type', 'text');
-        } else {
-            inputSenha.setAttribute('type', 'password');
-        }
-    });
+        var btn = document.querySelector('.toggle-password');
+        btn.addEventListener('click', () => {
+            let inputSenha = document.querySelector('#senha');
+            if (inputSenha.getAttribute('type') === 'password') {
+                inputSenha.setAttribute('type', 'text');
+            } else {
+                inputSenha.setAttribute('type', 'password');
+            }
+        });
     </script>
 </body>
+
 </html>
