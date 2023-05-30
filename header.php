@@ -34,7 +34,7 @@
                     </button>
                 </div>
             </div>
-            <div class="menu-items md:block">
+            <div class="menu-items">
             <div class="flex flex-col md:flex-row md:mx-6 items-center">
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="index.php">Início</a>
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="contato.php">Contato</a>
