@@ -1,129 +1,143 @@
 <?php
 session_start();
-ob_start();
-require_once "header_loggedin.php";
 require_once "dbconn.php";
-require_once "funcoes.php";
 
-// Verifica se o usuário está logado
-function isUserLoggedIn(): bool {
-    return isset($_SESSION['login']) && $_SESSION['login'] === true;
-}
-// Função para atualizar um produto no banco de dados
-function updateProduto($conn, $id, $nome, $descricao, $preco, $imagem, $imagem_nome): bool {
-  $sql = "UPDATE produtos SET nome = '$nome', descricao = '$descricao', preco = $preco, imagem_nome = '$imagem_nome', imagem = '$imagem' WHERE id = $id";
-  return mysqli_query($conn, $sql);
-}
+$usuario_id = $_SESSION["id"];
 
-// Função para buscar um produto pelo ID no banco de dados
-function getProdutoById($conn, $id) {
-  $sql = "SELECT * FROM produtos WHERE id = $id";
-  $result = mysqli_query($conn, $sql);
+// Obtém as informações do usuário a partir do ID armazenado na sessão
+$query = "SELECT * FROM usuarios WHERE user_id = $usuario_id";
+$result = mysqli_query($conn, $query);
 
-  if (mysqli_num_rows($result) > 0) {
-      return mysqli_fetch_assoc($result);
-  }
-
-  return false;
-}
-
-// Verifica se o ID do produto foi informado na URL
-if (!isset($_GET['id'])) {
-    header("Location: perfil.php");
+// Verifica se o usuário existe no banco de dados
+if (mysqli_num_rows($result) != 1) {
+    header("Location: logout.php");
     exit();
 }
 
-// Busca os dados do produto com o ID informado
-$id = mysqli_real_escape_string($conn, $_GET['id']);
-$prod = getProdutoById($conn, $id);
-
-// // Verifica se o produto foi encontrado
-// if (!$prod) {
-//     header("Location: perfil.php");
-//     exit();
-// }
-
-// // Verifica se o usuário tem permissão para editar o produto
-// if ($prod['usuario_id'] !== $_SESSION['user_id']) {
-//     header("Location: perfil.php");
-//     exit();
-// }
-
-// Processa o formulário de edição do produto
+// Verifica se o formulário foi enviado
 if (isset($_POST['submit'])) {
-    $nome = mysqli_real_escape_string($conn, $_POST['nome']);
-    $descricao = mysqli_real_escape_string($conn, $_POST['descricao']);
-    $preco = mysqli_real_escape_string($conn, $_POST['preco']);
+    $nome = isset($_POST['nome']) ? $_POST['nome'] : '';
+    $email = isset($_POST['email']) ? $_POST['email'] : '';
+    $senha = isset($_POST['senha']) ? $_POST['senha'] : '';
+    $confirma_senha = isset($_POST['confirma_senha']) ? $_POST['confirma_senha'] : '';
 
-    // Verifica se uma nova imagem foi selecionada
-    $imagem_nome = $prod['imagem_nome'];
-    $imagem = $prod['imagem'];
-    if ($_FILES['imagem']['error'] === UPLOAD_ERR_OK) {
-        $imagem_nome = basename($_FILES['imagem']['name']);
-        $imagem = "uploads/$imagem_nome";
-        move_uploaded_file($_FILES['imagem']['tmp_name'], $imagem);
+    // Valida os campos do formulário
+    $erros = array();
+    if (empty($nome)) {
+        $erros[] = "O campo Nome é obrigatório.";
+    }
+    if (empty($email)) {
+        $erros[] = "O campo Email é obrigatório.";
+    }
+    if (!empty($senha) && strlen($senha) < 6) {
+        $erros[] = "A senha deve ter pelo menos 6 caracteres.";
+    }
+    if ($senha != $confirma_senha) {
+        $erros[] = "As senhas não conferem.";
     }
 
-    // Atualiza os dados do produto no banco de dados
-    if (updateProduto($conn, $id, $nome, $descricao, $preco, $imagem, $imagem_nome)) {
-        header("Location: meus_produtos.php");
-        exit();
-    } else {
-        $erro = "Erro ao atualizar produto.";
+    // Verifica se foi enviada uma imagem
+    $imagem = isset($_FILES['imagem']) ? $_FILES['imagem'] : null;
+    $caminho_imagem = null;
+    if (!empty($imagem)) {
+        $nome_imagem = uniqid() . '-' . $imagem['name'];
+        $caminho_imagem = 'uploads/' . $nome_imagem;
+    }
+
+    // Atualiza as informações do usuário no banco de dados
+    if (count($erros) == 0) {
+        $query = "UPDATE usuarios SET user_nome = '$nome', user_email = '$email'";
+        if (!empty($senha)) {
+            $query .= ", user_senha = '" . md5($senha) . "'";
+        }
+        if (!empty($caminho_imagem)) {
+            $query .= ", user_imagem = '$caminho_imagem'";
+        }
+        $query .= " WHERE user_id = '$usuario_id'";
+        $result = mysqli_query($conn, $query);
+
+        // Verifica se a atualização foi bem-sucedida
+        if ($result) {
+            // Atualiza as informações do usuário na sessão
+            $_SESSION["usuario_nome"] = $nome;
+
+            // Verifica se foi enviada uma imagem
+            if (!empty($imagem)) {
+                // Move a imagem para o diretório de uploads
+                move_uploaded_file($_FILES["imagem"]["tmp_name"], $caminho_imagem);
+            }
+
+            // Exibe mensagem de sucesso
+            $_SESSION["sucesso"] = "Edição realizada com sucesso!";
+
+            // Redireciona o usuário para a página de perfil
+            header("Location: perfil.php");
+            exit();
+        } else {
+            $erro = "Erro ao atualizar informações.";
+        }
     }
 }
 
-// Exibe o formulário de edição do produto
+// Obtém as informações do usuário a partir do banco de dados
+$query = "SELECT * FROM usuarios WHERE user_id = '$usuario_id'";
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
+
 ?>
-<div class="flex justify-center m-20">
-  <h1 class="text-2xl font-bold mt-10">Edite seu produto</h1>
-</div>
-<div class="flex justify-center mt-10 menu-overlay">
-  <div class="bg-white rounded-lg mx-auto p-8">
-            <form action="" method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                <label for="nome" class="block text-gray-700 font-bold mb-2">Nome:</label>
-                    <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  id="nome" name="nome" value="<?= $prod['nome'] ?>" required>
-                </div>
-                <div class="mb-4 form-group">
-                <label for="descricao" class="block text-gray-700 font-bold mb-2">Descrição:</label>
-                    <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="descricao" name="descricao" required><?= $prod['descricao'] ?></textarea>
-                </div>
-                <div class="form-group">
-                <label for="preco" class="block text-gray-700 font-bold mb-2">Preço:</label>
-                    <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="preco" name="preco" value="<?= $prod['preco'] ?>" required>
-                </div>
-                <div class="form-group">
-                <label for="imagem" class="block text-gray-700 font-bold mb-2">Imagem:</label>
-                <div class="flex items-center mb-2">
-                    <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"id="inputFile" name="imagem">
-                    <img src="<?= $prod['imagem'] ?>" id="imagePreview" alt="Imagem do produto" width="200">
-                </div>
-                <button type="submit" name="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded btn btn-primary">Atualizar Produto</button>
-</form>
+<div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900">
+<div class="bg-white rounded-lg w-full max-w-md mx-auto p-8" style="max-height: 90vh; overflow-y: auto;">
 
-<!-- Exibição de mensagens de erro -->
-<?php if (isset($erro)): ?>
-    <div class="alert alert-danger" role="alert">
-        <?php echo $erro; ?>
-    </div>
-<?php endif; ?>
+    <h1 class="text-2xl font-bold mb-4">Editar perfil</h1>
 
-<script>
-  const inputFile = document.getElementById('inputFile');
-const imagePreview = document.getElementById('imagePreview');
+    <?php if (!empty($erros)) : ?>
+      <ul class="list-disc list-inside mb-4">
+        <?php foreach ($erros as $erro) : ?>
+          <li><?php echo $erro; ?></li>
+        <?php endforeach; ?>
+      </ul>
+    <?php endif; ?>
 
-inputFile.addEventListener('change', () => {
-  const file = inputFile.files[0];
-  const reader = new FileReader();
+    <?php if (!empty($erro)) : ?>
+      <p class="text-red-500 mb-4"><?php echo $erro; ?></p>
+    <?php endif; ?>
 
-  reader.addEventListener('load', () => {
-    imagePreview.src = reader.result;
-  });
+    <form method="post" enctype="multipart/form-data">
+      <div class="mb-4">
+        <label for="nome" class="block font-medium mb-2">Nome:</label>
+        <input type="text" name="nome" id="nome" value="<?php echo $row['user_nome']; ?>" class="border rounded py-2 px-3 w-full">
+      </div>
+      <div class="mb-4">
+        <label for="email" class="block font-medium mb-2">Email:</label>
+        <input type="email" name="email" id="email" value="<?php echo $row['user_email']; ?>" class="border rounded py-2 px-3 w-full">
+      </div>
+      <div class="mb-4">
+        <label for="senha" class="block font-medium mb-2">Senha:</label>
+        <input type="password" name="senha" id="senha" class="border rounded py-2 px-3 w-full">
+      </div>
+      <div class="mb-4">
+        <label for="confirma_senha" class="block font-medium mb-2">Confirmar senha:</label>
+        <input type="password" name="confirma_senha" id="confirma_senha" class="border rounded py-2 px-3 w-full">
+      </div>
+      <div class="mb-4">
+        <?php if ($row['user_imagem']) : ?>
+          <img src="<?php echo htmlentities($row['user_imagem']); ?>" alt="Imagem do perfil" width="150" height="150" class="mb-4">
+          <label for="apagar_imagem" class="block font-medium mb-2">Apagar imagem:</label>
+          <input type="checkbox" name="apagar_imagem" id="apagar_imagem" class="mr-2">
+          <label for="imagem" class="block font-medium mb-2">Editar imagem:</label>
+          <input type="file" name="imagem" id="imagem" class="mb-4">
+        <?php else : ?>
+          <label for="imagem" class="block font-medium mb-2">Imagem:</label>
+          <input type="file" name="imagem" id="imagem" class="mb-4">
+        <?php endif; ?>
+      </div>
+      <div>
+        <button type="submit" name="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full">Salvar alterações</button>
+      </div>
+    </form>
 
-  if (file) {
-    reader.readAsDataURL(file);
-  }
-});
-
-</script>
+    <button type="button" onclick="document.getElementById('editPerfil').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
+        Cancelar
+                </button>
+            </div>
+            </div>
