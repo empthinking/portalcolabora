@@ -3,6 +3,10 @@ session_start();
 ob_start();
 function isUserLoggedIn(): bool {
     return isset($_SESSION['login']) && $_SESSION['login'] === true;
+       // Redireciona o usuário de volta para o produto
+   $produto_id = $_SESSION['id'];
+   header("Location: produto.php?id=$pid");
+   exit;
 }
 require_once "dbconn.php";
 // Cabeçalho
@@ -12,6 +16,8 @@ else:
   require_once 'header.php';
 endif;
 
+
+   
 // Verifica se o parâmetro "id" está presente na URL
 if (isset($_GET['id'])) {
   // Obtém o ID do produto da URL
@@ -52,29 +58,29 @@ if (isset($_GET['id'])) {
     <br>
     <br>
     <br>
-<div class="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
+    <div class="max-w-md mx-auto bg-white shadow-md rounded-md p-6">
   <div class="flex">
     <img src="<?php echo $imagem; ?>" alt="Imagem do Produto" class="w-1/2 mr-4">
     <div class="w-1/2">
       <h2 class="text-2xl font-bold mb-2"><?php echo $nome; ?></h2>
       <p class="text-gray-600 mb-4"><?php echo $descricao; ?></p>
       <p class="text-lg font-bold">Preço: R$ <?php echo $preco; ?></p>
-      <button class="bg-green-300 hover:bg-green-400 text-white font-bold py-3 px-6 rounded-lg mt-4 text-xl" onclick="showContactOptions()">Entrar em contato</button>
+      <button class="contact-button" onclick="showContactOptions()">Entrar em contato</button>
     </div>
   </div>
 </div>
 
 
+
     <div id="contactOptions" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 1;">
+    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
     <?php if (!isUserLoggedIn()): ?>    
     <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
-            <h3 class="text-lg leading-6 font-medium text-gray-900">Historico de Compra</h3>
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
             <span class="text-red-500">Para entrar em contato com o vendedor, você precisa estar logado.</span>
         <div class="mt-4">
           <a href="cadastro.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</a>
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4" onclick="document.getElementById('singIn').style.display='block'; document.getElementById('contactOptions').style.display='none'">Login</button>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4" onclick="document.getElementById('singIn').style.display='block'; document.getElementById('contactOptions').style.display='none'a">Login</button>
         </div>
             </div>
             <button type="button" onclick="document.getElementById('contactOptions').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
@@ -109,6 +115,23 @@ if (isset($_GET['id'])) {
 
       
     </div>
+<style>
+  .contact-button {
+  background-color: #a2d9aa;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 1.5rem 3rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  cursor: pointer;
+}
+
+.contact-button:hover {
+  background-color: #81c984;
+}
+
+  </style>
 
     <script>
       function showContactOptions() {
