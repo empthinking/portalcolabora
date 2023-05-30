@@ -8,8 +8,8 @@
             <h3 class="text-gray-100 font-bold mb-3">Contato</h3>
             <ul class="text-gray-100">
                 <!-- <li class="mb-2">Endereço: Rua X, 123, São Paulo, SP</li> -->
-                <li class="mb-2">Telefone: (91) 984388103/li>
-                <li>Email: suporte@portalcolabora.com.br</li>
+                <li class="mb-2">Telefone: (91) 984388103 </li>
+                <li> Email: suporte@portalcolabora.com.br </li>
             </ul>
         </div>
         <div class="mt-6 md:mt-0">
