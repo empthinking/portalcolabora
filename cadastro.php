@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     
                     <form class="bg-white shadow-md rounded-lg w-full max-w-md mx-auto p-8" method="POST"
                         action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                        <h2 class="text-3xl font-semibold text-center mb-8">Cadastre-se</h2>
+                        <h2 class="text-3xl font-semibold text-center mb-8">CADASTRE-SE</h2>
                         <div class="mb-4">
                             <label class="block text-gray-700 font-bold mb-2" for="nome">
                                 Nome completo
