@@ -66,7 +66,7 @@ if (isset($_GET['id'])) {
 
 
     <div id="contactOptions" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
+    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 1;">
     <?php if (!isUserLoggedIn()): ?>    
     <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
             <h3 class="text-lg leading-6 font-medium text-gray-900">Historico de Compra</h3>
