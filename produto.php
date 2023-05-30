@@ -73,14 +73,14 @@ if (isset($_GET['id'])) {
 
 
     <div id="contactOptions" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
+    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 1;">
     <?php if (!isUserLoggedIn()): ?>    
     <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
             <div class="bg-white shadow overflow-hidden sm:rounded-lg">
             <span class="text-red-500">Para entrar em contato com o vendedor, você precisa estar logado.</span>
         <div class="mt-4">
           <a href="cadastro.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Cadastrar</a>
-          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4" onclick="document.getElementById('singIn').style.display='block'; document.getElementById('contactOptions').style.display='none'a">Login</button>
+          <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-4" onclick="document.getElementById('singIn').style.display='block'; document.getElementById('contactOptions').style.display='none'">Login</button>
         </div>
             </div>
             <button type="button" onclick="document.getElementById('contactOptions').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
