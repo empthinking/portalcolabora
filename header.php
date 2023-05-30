@@ -5,20 +5,16 @@
     <title>Colabora</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/main.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <style>
-        @media (min-width: 640px) {
-            .w-120 {
-                width: 120px;
-            }
-        }
-    </style>
 </head>
 <body class="bg-gray-100">
-    <nav class="navbar py-2 bg-green-400">
+    <nav class="navbar py-2">
         <div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex md:items-center justify-between">
             <div class="flex items-center">
                 <div>
@@ -42,7 +38,7 @@
             <div class="flex items-center py-2 -mx-4 md:mx-4">
                 <form method="post" action="pesquisa.php">
                     <div class="relative mr-10 md:mx-0">
-                        <input class="bg-gray-200 rounded-full border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 pl-4 pr-10 py-2 w-full md:w-64" type="text" name="search" placeholder="Pesquisar...">
+                        <input class="bg-gray-200 rounded-full border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 pl-4 pr-10 py-2 w-120" type="text" name="search" placeholder="Pesquisar...">
                         <button type="submit" class="absolute right-0 mt-2 mr-2">
                             <span class="material-symbols-outlined">search</span>
                         </button>
@@ -81,15 +77,19 @@
         </div>
     </nav>
     <script>
-        var btn = document.querySelector('.toggle-password');
-        btn.addEventListener('click', () => {
-            let inputSenha = document.querySelector('#senha');
-            if (inputSenha.getAttribute('type') === 'password') {
-                inputSenha.setAttribute('type', 'text');
-            } else {
-                inputSenha.setAttribute('type', 'password');
-            }
-        });
+    var elementos = document.getElementsByClassName('navbar');
+    var el = elementos[0];
+    el.style.backgroundColor = '#63f253';
+
+    var btn = document.querySelector('.toggle-password');
+    btn.addEventListener('click', () => {
+        let inputSenha = document.querySelector('#senha');
+        if (inputSenha.getAttribute('type') === 'password') {
+            inputSenha.setAttribute('type', 'text');
+        } else {
+            inputSenha.setAttribute('type', 'password');
+        }
+    });
     </script>
 </body>
 </html>
