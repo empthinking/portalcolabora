@@ -116,4 +116,4 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
     </div>
 </body>
 
-<?= require_once "footer.php"; ?>
+<?= require_once 'footer.php'; ?>
