@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/main.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0" />
@@ -21,8 +22,8 @@
 
 <body class="bg-gray-100">
     <nav class="navbar py-2">
-        <div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex  md:items-center justify-between">
-            <div class="flex items-center">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex  md:items-center">
+            <div class="flex items-center justify-between">
                 <div>
                     <a class="" href="index.php">
                         <img src="img/Ativo 1 black.png" style="max-height: 3.75rem; max-width :10rem"
@@ -47,11 +48,11 @@
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="faq.php">FAQ</a>
                 </div>
             </div>
-            <div class="flex items-center py-2 -mx-4 md:mx-4 ">
+            <div class="flex items-center py-2 -mx-4 md:mx-4">
                 <form method="post" action="pesquisa.php">
                     <div class="relative mr-10 md:mx-0">
                         <input
-                            class="bg-gray-200 rounded-full border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 pl-4 pr-10 py-2 w-120"
+                            class="bg-gray-200 rounded-full border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 pl-4 pr-10 py-2 w-40"
                             type="text" name="search" placeholder="Pesquisar...">
                         <button type="submit" class="absolute right-0 mt-2 mr-2">
                             <span class="material-symbols-outlined">search</span>
@@ -66,8 +67,7 @@
                 <button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2"
                     onclick="document.getElementById('singIn').style.display='block'">Entrar</button>
                 <div id="singIn" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-                    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900"
-                        style="opacity: 0.9;">
+                    <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900">
                         <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
                             <h1 class="text-3xl font-bold mb-8 text-center">Login</h1>
                             <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
@@ -94,7 +94,7 @@
                                         type="button">
                                         Entrar
                                     </button>
-                          <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
+                                    <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
                                         href="/adm/login_admin.php">entrar como admin </a>
                                 </div>
                             </form>
@@ -128,6 +128,7 @@
                 }
             })
             </script>
+        </div>
         </div>
     </nav>
     <script>
