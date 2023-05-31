@@ -29,9 +29,9 @@ require_once "header.php";
       </div>
     </div>
   </div>
-</section>
-
-  
+</section>  
 </main>
-  </body>
-  </html>
+
+<?php
+require_once 'footer.php';
+?>
