@@ -97,7 +97,7 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
           </div>
         </div>
 
-        <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('meusProdutos').style.display='block'">Meus Produtos</button>
+       <a href="meus_produtos.php"><button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('meusProdutos').style.display='block'">Meus Produtos</button></a>
         <div id="meusProdutos" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
           <div class="border-t border-gray-200">
             <?= require_once "meus_produtos.php"; ?>
