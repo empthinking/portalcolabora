@@ -104,7 +104,7 @@ $conn->close();
       </div>
     </form>
 
-    <button type="button" onclick="document.getElementById('editPerfil').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
+    <button type="button" onclick="document.getElementById('modaleditarPerfil').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
       Cancelar
     </button>
   </div>
