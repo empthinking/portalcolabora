@@ -81,8 +81,8 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
         </div>
 
 
-        <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('editarPerfil').style.display='block'">editar perfil</button>
-        <div id="editarPerfil" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
+        <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('modaleditarPerfil').style.display='block'">editar perfil</button>
+        <div id="modaleditarPerfil" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
           <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
             <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
               <h3 class="text-lg leading-6 font-medium text-gray-900">editar perfil</h3>
@@ -93,12 +93,13 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
                   <?= require_once "editar_perifil.php"; ?>
                 </div>
               </div>
-              <button type="button" onclick="document.getElementById('editarPerfil').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
+              <button type="button" onclick="document.getElementById('modaleditarPerfil').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
                 Cancelar
               </button>
             </div>
           </div>
         </div>
+
         <button class="bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2" onclick="document.getElementById('meusProdutos').style.display='block'">Meus Produtos</button>
         <div id="meusProdutos" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
           <div class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900" style="opacity: 0.9;">
@@ -115,6 +116,7 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
             </div>
           </div>
         </div>
+        
       </div>
     </div>
 </body>
