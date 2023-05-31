@@ -50,7 +50,7 @@ function isUserLoggedIn(): bool {
 
     mysqli_close($conn);
   ?>
-  <a href="addProduto.php">
+  <a href="addproduto.php">
     <button class='bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2' type='button'>Adicionar Produto </button>
   </a>
   <button type="button" onclick="document.getElementById('meusProdutos').style.display='none'" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">Cancelar</button>
