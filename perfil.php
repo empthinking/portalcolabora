@@ -117,8 +117,6 @@ text-3xl font-bold text-gray-500"><?php echo $email ?></h3>
                                     <?= require_once "meus_produtos.php"; ?>
                                 </div>
                             </div>
-                            <button type="button" onclick="document.getElementById('meusProdutos').style.display='none'"
-                                class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">Cancelar</button>
                         </div>
                     </div>
                 </div>
