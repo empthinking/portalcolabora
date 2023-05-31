@@ -94,8 +94,7 @@
                                         type="button">
                                         Entrar
                                     </button>
-                          <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                                        href="/adm/login_admin.php">entrar como admin </a>
+               
                                 </div>
                             </form>
                             <button type="button" onclick="document.getElementById('singIn').style.display='none'"
