@@ -27,7 +27,7 @@
                             class="flex-shrink-0">
                     </a>
                 </div>
-                <div class="flex  navbar-toggle md:hidden">
+                <div class="flex  navbar-toggle"> <!-- md:hidden -->
                     <button type="button" onclick="toggleMenu()"
                         class="navbarToggle text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600"
                         aria-label="toggle menu">
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <!-- container dos conteúdos do hamburgue -->
-            <div id="menu_hamb" class="hidden">
+            <div id="menu_hamb" class="hidden md:block">
                 <div class="flex flex-col items-center justify-center md:flex-row md:mx-6">
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900"
                         href="index.php">Início</a>
