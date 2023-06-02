@@ -42,7 +42,7 @@ if (isset($_POST['add_product'])) {
                 }
             }
 
-            echo "SUCCESS";
+            header('Location: meusprodutos.php');
         } else {
             echo "FAILED";
         }
@@ -93,7 +93,7 @@ FORM;
           newImageField.classList.add("form-group");
           newImageField.innerHTML = `
             <label for="images">Imagem:</label>
-            <input type="file" class="form-control-file" name="images[]" accept="image/*" required>
+            <input type="file" class="form-control-file" name="images[]" accept="image/*">
           `;
           imageContainer.appendChild(newImageField);
         }
