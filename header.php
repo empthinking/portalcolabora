@@ -19,7 +19,7 @@
 
 <body class="bg-gray-100">
     <nav class="navbar py-2">
-        <div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex  md:items-center">
+        <div class="mx-auto px-4 sm:px-6 lg:px-8 md:items-center">
             <div class="flex items-center justify-between">
                 <div>
                     <a class="" href="index.php">
@@ -27,7 +27,7 @@
                             class="flex-shrink-0">
                     </a>
                 </div>
-                <div class="flex  navbar-toggle"> <!-- md:hidden -->
+                <div class="flex  navbar-toggle">
                     <button type="button" onclick="toggleMenu()"
                         class="navbarToggle text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600"
                         aria-label="toggle menu">
