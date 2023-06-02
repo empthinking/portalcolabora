@@ -1,6 +1,6 @@
 <?php
 define('HOST'    , '127.0.0.1');
-define('NAME'    , 'u871226378_colabora');
+define('NAME'    , 'u871226378_admin');
 define('PASSWORD', 'F7k|MYhYf>');
 define('DATABASE', 'u871226378_Colabora');
 define('PORT'    , 3306);
