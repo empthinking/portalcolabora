@@ -1,12 +1,11 @@
 <?php
-require_once 'db.php';
 
 // Fetch products from the database
 $sql = "SELECT p.Product_Id, p.Product_Name, p.Product_Price, i.Image_Name
         FROM Products p
         LEFT JOIN Images i ON p.Product_Id = i.Product_Id
         WHERE i.Image_Id = (
-            SELECT Image_Id FROM Images WHERE Product_Id = p.Product_Id ORDER BY Image_Id ASC LIMIT 1
+            SELECT Image_Id FROM u871226378_Colabora.Images WHERE Product_Id = p.Product_Id ORDER BY Image_Id ASC LIMIT 1
         )
         ORDER BY p.Product_Date DESC";
 $result = $db->query($sql);

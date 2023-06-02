@@ -1,3 +1,15 @@
+<?php 
+if(isUserLoggedIn()) {
+    $welcome = 'Bem-Vind';
+    if($_SESSION['gender'] === 'feminino')
+        $welcome .= 'a';
+    else if($_SESSION['gender'] === 'masculino')
+        $welcome .= 'o';
+    else
+        $welcome .= 'e';
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -14,7 +26,9 @@
           display: flex;
           flex-direction: column;
     }
+
   </style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
   <!-- Header -->
@@ -40,20 +54,20 @@
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar..." aria-label="Search">
             <button class="btn btn-primary my-2 my-sm-0" type="submit">Pesquisar</button>
           </form>
 
         <!--Carrega em caso do usuario esteja logado -->
-        <?php if (isUserLoggedIn()):?>
+        <?php if (isset($welcome)):?>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="userMenuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Bem Vinde, <?php echo $_SESSION['username']; ?>
+                <?php echo "$welcome, {$_SESSION['username']}"; ?>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenuDropdown">
                 <a class="dropdown-item" href="#">Perfil</a>
-                <a class="dropdown-item" href="#">Meus Produtos</a>
+<?php echo $_SESSION['type'] === 'vendedor' ? '<a class="dropdown-item" href="meusprodutos.php">Meus Produtos</a>' : ''; ?>
                 <a class="dropdown-item" href="#">Configuração</a>
                 <a class="dropdown-item" href="logout.php">Sair</a>
               </div>

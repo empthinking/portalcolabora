@@ -8,15 +8,18 @@ if (isUserLoggedIn()) {
 
 $name = $password = $password_confirm = $email = $number = $email_error = '';
 
-
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name             = validateData($_POST['name']);
-    $password         = htmlspecialchars($_POST['password']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = validateData($_POST['name']);
+    $password = htmlspecialchars($_POST['password']);
     $password_confirm = htmlspecialchars($_POST['password_confirm']);
-    $email            = validateData($_POST['email']);
-    $number           = validateData($_POST['number']);
+    $email = validateData($_POST['email']);
+    $number = validateData($_POST['number']);
+    $gender = validateData($_POST['gender']);
+    $user_type = validateData($_POST['user_type']);
 
-    $isEmailRegistered = function() use ($email, $db) : bool {
+    $error = false;
+
+    $isEmailRegistered = function () use ($email, $db) : bool {
         $stmt = $db->prepare("SELECT * FROM Users WHERE User_Email = ?");
         $stmt->bind_param('s', $email);
         $stmt->execute();
@@ -24,29 +27,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         return $result->num_rows > 0;
     };
 
-    $dataError = fn() =>
-        (empty($name) || empty($password) || empty($password_confirm) || empty($email) || empty($number)) &&
-        !filter_var($email, FILTER_VALIDATE_EMAIL) &&
-        !preg_match('/^[a-bA-B1-9 ]$/', $name) &&
-        $password !== $password_confirm &&
-        strlen($password < 8);
+    if(empty($name) || empty($password) || empty($password_confirm) || empty($email) || empty($number) || empty($gender) || empty($user_type) || !filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/^[a-zA-Z]+$/', $name) || $password !== $password_confirm || strlen($password) < 8 || ($user_type !== 'vendedor' && $user_type !== 'cliente' && $user_type !== 'admin'))
+        $error = true;
 
 
-    if ($dataError() === false) {
-        if($isEmailRegistered() === false) {
-            $sql_prep = "INSERT INTO Users(User_Name, User_Email, User_Password, User_Number) VALUES(?, ?, ?, ?)";
+
+    if ($error !== true) {
+        if ($isEmailRegistered() === false) {
+            $sql_prep = "INSERT INTO Users(User_Name, User_Email, User_Password, User_Number, User_Gender, User_Type) VALUES(?, ?, ?, ?, ?, ?)";
             $stmt = $db->prepare($sql_prep);
-            $stmt->bind_param('ssss',$name, $email, password_hash($password, PASSWORD_DEFAULT), $number);
+            $password = password_hash($password, PASSWORD_DEFAULT);
+            $stmt->bind_param('ssssss', $name, $email, $password, $number, $gender, $user_type);
             $stmt->execute();
             echo "<p>Cadastro Realizado</p><a href='index.php'><button>página inicial</button></a>";
             $db->close();
-            exit(); 
+            exit();
         } else {
             $email_error = 'Email já registrado';
         }
     }
-
-} 
+}
 
 $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 ?>
@@ -88,6 +88,42 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             <label for="number">Telefone:</label>
             <input type="tel" class="form-control" id="number" name="number" pattern=".{11}" value="<?php echo $number; ?>" required>
         </div>
+        <div class="form-group">
+            <label for="gender">Gênero:</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="gender_male" value="masculino" required>
+                <label class="form-check-label" for="gender_male">
+                    Masculino
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="gender_female" value="feminino" required>
+                <label class="form-check-label" for="gender_female">
+                    Feminino
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="gender" id="gender_nonbinary" value="naobinario" required>
+                <label class="form-check-label" for="gender_female">
+                    Não-Binário
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="user_type">Tipo de usuário:</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="user_type" id="user_type_client" value="cliente" required>
+                <label class="form-check-label" for="user_type_client">
+                    Cliente
+                </label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="user_type" id="user_type_vendor" value="vendedor" required>
+                <label class="form-check-label" for="user_type_vendor">
+                    Vendedor
+                </label>
+            </div>
+        </div>
         <div class="text-center">
             <button type="submit" id="submit" class="btn btn-success">Cadastrar</button>
             <a href="index.php" class="btn btn-link">Voltar</a>
@@ -115,6 +151,14 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     confirmPasswordInput.addEventListener('input', checkPasswordMatch);
 </script>
 
+  <footer class="py-3 mt-auto">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">Início</a></li>
+      <li class="nav-item"><a href="contact.php" class="nav-link px-2 text-muted">Contato</a></li>
+      <li class="nav-item"><a href="faq.php" class="nav-link px-2 text-muted">FAQs</a></li>
+      <li class="nav-item"><a href="about.php" class="nav-link px-2 text-muted">Sobre Nós</a></li>
+    </ul>
+    <p class="text-center text-muted">© <?php echo date('Y'); ?> UEPA</p>
+  </footer>
 </body>
 </html>
-

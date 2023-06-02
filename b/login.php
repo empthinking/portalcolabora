@@ -20,22 +20,27 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         return $result->num_rows > 0 ? $result->fetch_assoc() : false;
     };
         
-    if(!($user = $getUserByEmail()) || !password_verify($password, $user[U_P])) {
+    if(!($user = $getUserByEmail()) || !password_verify($password, $user['User_Password'])) {
         $error = 'Email ou Senha não encontrados';
 
     } else {
         $_SESSION['login']     = true;
-        $_SESSION['username']  = $user[U_N];
-        $_SESSION['id']        = $user[U_ID];
+        $_SESSION['username']  = $user['User_Name'];
+        $_SESSION['id']        = $user['User_Id'];
+        $_SESSION['type']      = $user['User_Type'];
+        $_SESSION['gender']    = $user['User_Gender'];
+
+        $db->close();
         
         header('Location: index.php');
+        exit();
     }
 
 }
 
 $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 
-echo  <<<FORM
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,23 +63,24 @@ echo  <<<FORM
     <div class="row justify-content-center">
       <div class="col-md-6">
         <h2 class="mb-4">Login</h2>
-        <h4 class="text-danger">$error</h4>
+        <h4 class="text-danger"><?php echo $error; ?></h4>
         <form action="login.php" method="POST">
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required value="$email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+            <input type="email" class="form-control" id="email" name="email" required value="<?php echo $email; ?>" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
           </div>
           <div class="form-group">
             <label for="password">Senha</label>
-            <input type="password" class="form-control" id="password" name="password" value="$password" required>
+            <input type="password" class="form-control" id="password" name="password" value="<?php echo $password; ?>" required>
           </div>
-          <button type="submit" class="btn btn-primary">Login</button>
+          <button type="submit" class="btn btn-primary">Entrar</button>
         </form>
         <a href="index.php" class="btn btn-link mt-3">Voltar</a>
       </div>
     </div>
   </div>
-FORM;
+
+<?php
 
 $db->close();
 
