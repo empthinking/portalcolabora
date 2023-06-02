@@ -1,5 +1,5 @@
 <?php
-define('HOST'    , 'localhost');
+define('HOST'    , '127.0.0.1');
 define('NAME'    , 'u871226378_colabora');
 define('PASSWORD', 'F7k|MYhYf>');
 define('DATABASE', 'u871226378_Colabora');
