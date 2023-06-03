@@ -9,7 +9,7 @@ function isUserLoggedIn() : bool {
 }
 
 
-$db = new mysqli('127.0.0.1', 'u871226378_Admin', 'Xq*4^5^1', 'u871226378_Colabora', 3306);
+$db = new mysqli('127.0.0.1', 'u871226378_admin', 'Xq*4^5^1', 'u871226378_Colabora', 3306);
 
 if($db->connect_error)
     exit('Falha na conexão');
