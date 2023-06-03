@@ -32,11 +32,6 @@ if (isset($_POST['add_product'])) {
                 for ($i = 0; $i < $total_images; $i++) {
                     $image_name = uniqid() . '_' . $uploaded_images['name'][$i];
                     $image_path = $image_dir . $image_name;
-                    $name_length = strlen($image_path);
-                    if($name_length > 50) {
-                        $split = str_split($image_path, $name_length - strlen($uploaded_images['type'][$i]));
-                        $image_path  = $split[0];
-                        $image_path .= $uploaded_images['type'][$i];
                     }
 
                     if (move_uploaded_file($uploaded_images['tmp_name'][$i], $image_path)) {
