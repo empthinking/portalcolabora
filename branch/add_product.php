@@ -35,7 +35,7 @@ if (isset($_POST['add_product'])) {
 
                     if (move_uploaded_file($uploaded_images['tmp_name'][$i], $image_path)) {
                         // Insert image into the database
-                        $stmt = $db->prepare("INSERT INTO Images(Image_Name, Image_Date, User_Id, Product_Id) VALUES (?, ?, ?, ?)");
+                        $stmt = $db->prepare("INSERT INTO Images(Image_Path, Image_Date, User_Id, Product_Id) VALUES (?, ?, ?, ?)");
                         $stmt->bind_param('ssii', $image_name, $date, $id, $product_id);
                         $stmt->execute();
                     }
