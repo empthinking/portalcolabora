@@ -32,7 +32,7 @@ if (isset($_POST['add_product'])) {
                 for ($i = 0; $i < $total_images; $i++) {
                     $image_name = uniqid() . '_' . $uploaded_images['name'][$i];
                     $image_path = $image_dir . $image_name;
-                    }
+                    
 
                     if (move_uploaded_file($uploaded_images['tmp_name'][$i], $image_path)) {
                         // Insert image into the database
