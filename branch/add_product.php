@@ -32,17 +32,18 @@ if (isset($_POST['add_product'])) {
                 for ($i = 0; $i < $total_images; $i++) {
                     $image_name = uniqid() . '_' . $uploaded_images['name'][$i];
                     $image_path = $image_dir . $image_name;
+                    
 
                     if (move_uploaded_file($uploaded_images['tmp_name'][$i], $image_path)) {
                         // Insert image into the database
                         $stmt = $db->prepare("INSERT INTO Images(Image_Name, Image_Date, User_Id, Product_Id) VALUES (?, ?, ?, ?)");
-                        $stmt->bind_param('ssii', $image_name, $date, $id, $product_id);
+                        $stmt->bind_param('ssii', $image_path, $date, $id, $product_id);
                         $stmt->execute();
                     }
                 }
             }
 
-            echo "SUCCESS";
+            header('Location: meusprodutos.php');
         } else {
             echo "FAILED";
         }
@@ -93,7 +94,7 @@ FORM;
           newImageField.classList.add("form-group");
           newImageField.innerHTML = `
             <label for="images">Imagem:</label>
-            <input type="file" class="form-control-file" name="images[]" accept="image/*" required>
+            <input type="file" class="form-control-file" name="images[]" accept="image/*">
           `;
           imageContainer.appendChild(newImageField);
         }

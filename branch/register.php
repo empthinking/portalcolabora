@@ -104,7 +104,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="gender" id="gender_nonbinary" value="naobinario" required>
-                <label class="form-check-label" for="gender_female">
+                <label class="form-check-label" for="gender_nonbinary">
                     Não-Binário
                 </label>
             </div>
