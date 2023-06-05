@@ -1,4 +1,6 @@
 <?php 
+$id = $_SESSION['id']??'';
+
 if(isUserLoggedIn()) {
     $welcome = 'Bem-Vind';
     if($_SESSION['gender'] === 'feminino')
@@ -8,10 +10,10 @@ if(isUserLoggedIn()) {
     else
         $welcome .= 'e';
 }
-$id = $_SESSION['id']??'';
+
 $checkUnreadMessages = function() use ($id, $db) : bool {
     $stmt = $db->prepare('SELECT Message_Id FROM Messages WHERE Message_Receiver = ? AND Message_Readed = 0');
-    $stmt->bind_param('i', $_SESSION['id']);
+    $stmt->bind_param('i', $id);
     $stmt->execute();
     $result = $stmt->get_result();
     $stmt->close();
