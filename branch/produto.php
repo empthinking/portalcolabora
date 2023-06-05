@@ -5,6 +5,7 @@ require_once 'db.php';
 
 // Assuming you have already connected to the database and obtained the product ID from the URL
 $product_id = $_GET['id']??'';
+$error = false;
 
 // Query the database to fetch the product information
 $stmt = $db->prepare("
@@ -14,9 +15,12 @@ $stmt = $db->prepare("
     WHERE p.Product_Id = ?
 ");
 $stmt->bind_param('i', $product_id);
-$stmt->execute();
-$stmt->bind_result($product_name, $product_description, $product_price, $product_date, $vendor_name, $vendor_id);
-$stmt->fetch();
+if($stmt->execute()) {
+    $stmt->bind_result($product_name, $product_description, $product_price, $product_date, $vendor_name, $vendor_id);
+    $stmt->fetch();
+} else {
+    $error = false;
+}
 $stmt->close();
 
 if(isset($_GET['mode']) && $_GET['mode'] === 'register') {
@@ -64,7 +68,7 @@ $stmt->close();
         <div class="row">
             <?php foreach ($images as $image) : ?>
                 <div class="col-md-3 mb-3">
-                    <img src="img/<?php echo $vendor_id; ?>/<?php echo $image; ?>" class="img-fluid" alt="Product Image">
+                    <img src="<?php echo $image; ?>" class="img-fluid" alt="Product Image">
                 </div>
             <?php endforeach; ?>
         </div>
