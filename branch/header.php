@@ -8,7 +8,7 @@ if(isUserLoggedIn()) {
     else
         $welcome .= 'e';
 }
-$id = $_SESSION['id'];
+$id = $_SESSION['id']??'';
 $checkUnreadMessages = function() use ($id, $db) : bool {
     $stmt = $db->prepare('SELECT Message_Id FROM Messages WHERE Message_Receiver = ? AND Message_Readed = 0');
     $stmt->bind_param('i', $_SESSION['id']);
