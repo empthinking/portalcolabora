@@ -60,7 +60,7 @@ $stmt->close();
             </div>
         </div>
 
-        <h2>Product Images</h2>
+        <h2>Imagens</h2>
         <div class="row">
             <?php foreach ($images as $image) : ?>
                 <div class="col-md-3 mb-3">
