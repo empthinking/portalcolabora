@@ -48,8 +48,8 @@
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="faq.php">FAQ</a>
                 </div>
                 <div class="flex justify-between">
-                    <div class="flex justify-center py-2 -mx-4 md:mx-4">
-                        <form method="post" action="pesquisa.php">
+                    <div class="grow ml-20">
+                        <form method="post" action="pesquisa.php" class="flex justify-center py-2 -mx-4 md:mx-4">
                             <div class="relative mr-10 md:mx-0">
                                 <input
                                     class="bg-gray-200 rounded-full border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 pl-4 pr-10 py-2 w-40"
@@ -61,10 +61,10 @@
                         </form>
                     </div>
 
-                    <div class="flex items-center justify-center ml-5">
+                    <div class="flex items-center ">
                         <a href="cadastro.php">
                             <button
-                                class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full ml-4">
+                                class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
                                 Cadastrar
                             </button>
                         </a>
