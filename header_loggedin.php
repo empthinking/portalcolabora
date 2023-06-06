@@ -1,4 +1,4 @@
-<?php /*
+<?php
 require_once "dbconn.php";
 
 $usuario_id = $_SESSION['id'] ?? null;
@@ -19,7 +19,7 @@ if ($user['user_imagem'] == null) {
 }
 
 $permissao_publicar = $user['permissao_publicar'] ?? false;
-*/?>
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
