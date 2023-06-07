@@ -70,6 +70,7 @@ $permissao_publicar = $user['permissao_publicar'] ?? false;
                     </button>
                 </div>
             </div>
+            <!-- container dos conteúdos do hamburgue -->
             <div id="menu_hamb" class="navbar-menu md:flex items-center hidden">
                 <div class="flex flex-col md:flex-row md:mx-6">
                     <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900"
