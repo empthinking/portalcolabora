@@ -84,19 +84,18 @@ if (isset($_POST['delete_product'])) {
       <tbody>
 <?php
 
-    while ($row = $result->fetch_assoc()) {
-        echo <<<ROW
-            <tr>
-              <td><a href="produto.php?id={$row['Product_Id']}" class="btn btn-primary mt-3">acessar</a></td>
-              <td>{$row['Product_Name']}</td>
-              <td>{$row['Product_Price']}</td>
-              <td>{$row['Product_Date']}</td>
-              <td><a href="editarproduto.php" class="btn btn-success">modificar</a></td>
-              <td><a href="excluirproduto.php" class="btn btn-warning">excluir</a></td>
-            </tr>
-ROW;
-    }
+while ($row = $result->fetch_assoc()) {
+    echo '<tr>';
+    echo '<td><a href="produto.php?id=' . $row['Product_Id'] . '" class="btn btn-primary mt-3">Acessar</a></td>';
+    echo '<td>' . $row['Product_Name'] . '</td>';
+    echo '<td>' . $row['Product_Price'] . '</td>';
+    echo '<td>' . $row['Product_Date'] . '</td>';
+    echo '<td><a href="editarproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-success">Modificar</a></td>';
+    echo '<td><a href="excluirproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-warning">Excluir</a></td>';
+    echo '</tr>';
+}
 ?>
+
       </tbody>    
     </table>
   </div>
