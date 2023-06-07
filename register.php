@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         return $result->num_rows > 0;
     };
 
-    if(empty($name) || empty($password) || empty($password_confirm) || empty($email) || empty($number) || empty($gender) || empty($user_type) || !filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/^[a-zA-Z]+$/', $name) || $password !== $password_confirm || strlen($password) < 8 || ($user_type !== 'vendedor' && $user_type !== 'cliente' && $user_type !== 'admin'))
+    if(empty($name) || empty($password) || empty($password_confirm) || empty($email) || empty($number) || empty($gender) || empty($user_type) || !filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/^[a-zA-Z ]+$/', $name) || $password !== $password_confirm || strlen($password) < 8 || ($user_type !== 'vendedor' && $user_type !== 'cliente' && $user_type !== 'admin'))
         $error = true;
 
 
