@@ -8,41 +8,78 @@ if (!isset($_SESSION['id']) || $_SESSION['type'] !== 'vendedor') {
     exit();
 }
 
+// Verifica se o ID do produto está presente
+if (!isset($_GET['id'])) {
+    header("Location: meusprodutos.php");
+    exit();
+}
 
-$product = $result->fetch_assoc();
+$productId = $_GET['id'];
+$userId = $_SESSION['id'];
+
+// Verifica se o produto pertence ao usuário logado
+$stmt = $db->prepare('SELECT * FROM Products WHERE Product_Id = ? AND User_Id = ?');
+$stmt->bind_param('ii', $productId, $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows === 0) {
+    // O produto não pertence ao usuário logado
+    header("Location: meusprodutos.php");
+    exit();
+}
 
 $stmt->close();
+
+// Exclui o produto do banco de dados
+$stmt = $db->prepare('DELETE FROM Products WHERE Product_Id = ?');
+$stmt->bind_param('i', $productId);
+$stmt->execute();
+
+$stmt = $db->prepare('DELETE FROM Images WHERE Product_Id = ?');
+$stmt->bind_param('i', $productId);
+$stmt->execute();
+
+$stmt->close();
+
+// Remove o diretório das imagens relacionadas ao produto
+$directoryPath = "img/product_images/$productId/";
+if (is_dir($directoryPath)) {
+    $files = array_diff(scandir($directoryPath), array('.', '..'));
+    
+    foreach ($files as $file) {
+        $filePath = $directoryPath . $file;
+        
+        if (is_dir($filePath)) {
+            deleteDirectory($filePath);
+        } else {
+            unlink($filePath);
+        }
+    }
+
+    rmdir($directoryPath);
+}
+
+header("Location: meusprodutos.php");
+exit();
+
+function deleteDirectory(string $directoryPath): bool {
+    if (!is_dir($directoryPath)) {
+        return false;
+    }
+
+    $files = array_diff(scandir($directoryPath), array('.', '..'));
+    
+    foreach ($files as $file) {
+        $filePath = $directoryPath . $file;
+        
+        if (is_dir($filePath)) {
+            deleteDirectory($filePath);
+        } else {
+            unlink($filePath);
+        }
+    }
+
+    return rmdir($directoryPath);
+}
 ?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Editar Produto</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-</head>
-
-<body>
-    <div class="container mt-5">
-        <h1>Editar Produto</h1>
-        <form action="salvarproduto.php" method="POST">
-            <input type="hidden" name="id" value="<?php echo $product['Product_Id']; ?>">
-            <div class="form-group">
-                <label for="name">Nome</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?php echo $product['Product_Name']; ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="price">Preço</label>
-                <input type="number" class="form-control" id="price" name="price" value="<?php echo $product['Product_Price']; ?>" required>
-            </div>
-            <div class="form-group">
-                <label for="description">Descrição</label>
-                <textarea class="form-control" id="description" name="description" rows="3" required><?php echo $product['Product_Description']; ?></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <a href="meusprodutos.php" class="btn btn-secondary">Cancelar</a>
-        </form>
-    </div>
-</body>
-
-</html>
