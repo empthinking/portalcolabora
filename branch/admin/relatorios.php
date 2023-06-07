@@ -1,35 +1,33 @@
 <?php
 session_start();
+require_once "db.php";
+// Consulta SQL para buscar os dados necessários para o relatório
+$sql = "SELECT COUNT(*) AS total_usuarios FROM Users";
+$resultado_usuarios = mysqli_query($conn, $sql);
+$row_usuarios = mysqli_fetch_assoc($resultado_usuarios);
+$total_usuarios = $row_usuarios['total_usuarios'];
 
-// Verifica se a sessão do admin está ativa
-if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
-    // Redireciona para a página de login do admin
-    header("Location: login_admin.php");
-    exit();
-}
+$sql = "SELECT COUNT(*) AS total_produtos FROM Products";
+$resultado_produtos = mysqli_query($conn, $sql);
+$row_produtos = mysqli_fetch_assoc($resultado_produtos);
+$total_produtos = $row_produtos['total_produtos'];
 
-// Aqui você pode adicionar a lógica para gerar os relatórios desejados
+// Geração do relatório
+$relatorio = "Relatório do Sistema:\n";
+$relatorio .= "Data: " . date('Y-m-d H:i:s') . "\n";
+$relatorio .= "Total de Usuários Registrados: " . $total_usuarios . "\n";
+$relatorio .= "Total de Produtos Disponíveis: " . $total_produtos . "\n";
 
+// Exibe o relatório na tela
+echo "<pre>";
+echo $relatorio;
+echo "</pre>";
+
+// Gera um arquivo de texto com o relatório
+$nomeArquivo = 'relatorio.txt';
+$file = fopen($nomeArquivo, 'w');
+fwrite($file, $relatorio);
+fclose($file);
+
+echo "Relatório gerado com sucesso! <a href='$nomeArquivo'>Baixar</a>";
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Relatórios</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-200">
-    <div class="flex justify-center m-20">
-        <img src="../img/logo G (2).png" alt="Descrição da imagem">
-    </div>
-    <div class="flex justify-center items-center">
-        <div class="bg-white p-8 rounded shadow-md">
-            <h2 class="text-2xl font-bold mb-4">Relatórios</h2>
-            <!-- Adicione aqui a estrutura HTML para exibir os relatórios -->
-        </div>
-    </div>
-    <div class="flex justify-center mt-4">
-        <a href="logout.php" class="block text-red-500 hover:text-red-700">Sair</a>
-    </div>
-</body>
-</html>
