@@ -87,23 +87,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
                         <img class="mx-auto" src="img/logo.png" width="323px" alt="logo">
                     </div>
                     <h2 class="mb-4 text-center">LOGIN</h2>
-                    <h4 class="text-danger"><?php echo $error; ?></h4>
-                    <form action="login.php" method="POST">
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" required
-                                value="<?php echo $email; ?>"
-                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Senha</label>
-                            <input type="password" class="form-control" id="password" name="password"
-                                value="<?php echo $password; ?>" required>
-                        </div>
-                        <div class="d-flex">
-                            <button type="submit" class="btn btn-primary m-3">Entrar</button>
-                            <a href="index.php" class="btn btn-danger m-3">Voltar</a>
-                        </div>
+           
                     </form>
                 </div>
             </div>
