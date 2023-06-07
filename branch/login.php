@@ -75,7 +75,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
           </div>
           <button type="submit" class="btn btn-primary">Entrar</button>
         </form>
-        <a href="index.php" class="btn btn-link mt-3">Voltar</a>
+        <a href="index.php" class="btn btn-danger">Voltar</a>
       </div>
     </div>
   </div>
