@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Verifica se há erros de validação
   if (count($errors) == 0) {
     // Configurações do e-mail
-    $to = "colaboraequipe@gmail.com"; 
+    $to = "suporte@portalcolabora.com.br"; 
     $subject = "Contato do Site - $assunto";
     $message = "Nome: $nome\n\n";
     $message .= "E-mail: $email\n\n";

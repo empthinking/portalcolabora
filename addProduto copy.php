@@ -62,11 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
-
-
         <main>
-          <section class="section ">
+          <section class="section ">  
             <div class="container m-7">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         <!-- Formulário de upload de imagem -->
