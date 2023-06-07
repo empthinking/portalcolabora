@@ -46,7 +46,7 @@ mysqli_close($db);
       <h3>Número: <?php echo $numero; ?></h3>
     </div>
     <div class="profile-actions">
-      <a href="editar_perfil.php" class="btn btn-primary">Editar Perfil</a>
+<a href="editar_perfil.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-primary">Editar Perfil</a>
       <a href="mensagens.php" class="btn btn-primary">Mensagens</a>
     </div>
   </div>
