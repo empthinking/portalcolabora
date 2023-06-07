@@ -5,8 +5,8 @@ function isUserLoggedIn(): bool
 {
   return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
-require_once "header_loggedin.php";
-require_once "dbconn.php";
+require_once "header.php";
+require_once "db.php";
 
 
 // Obtém as informações do usuário a partir do ID armazenado na sessão
