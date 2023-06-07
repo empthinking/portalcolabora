@@ -1,22 +1,21 @@
 <?php
 session_start();
-ob_start();
+require_once "db.php";
+require_once "header.php";
+
 function isUserLoggedIn(): bool
 {
   return isset($_SESSION['login']) && $_SESSION['login'] === true;
 }
-require_once "header.php";
-require_once "db.php";
-
 
 // Obtém as informações do usuário a partir do ID armazenado na sessão
-$usuario_id = $_SESSION['id'] ?? null;
+$usuario_id = $_SESSION['id'] ?? '';
 if ($usuario_id === null) {
   header("Location: index.php");
   exit();
 }
 
-$query = "SELECT * FROM usuarios WHERE user_id = $usuario_id";
+$query = "SELECT * FROM Users WHERE User_Id = $usuario_id";
 $result = mysqli_query($conn, $query);
 
 // Verifica se o usuário existe no banco de dados
@@ -33,6 +32,8 @@ $permissao_publicar = $user['permissao_publicar'];
 $nome = $user['User_Name'];
 $email = $user['User_Email'];
 $numero = $user['User_Number'];
+
+mysqli_close($conn);
 ?>
 
 <body>
