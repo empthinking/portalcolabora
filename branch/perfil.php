@@ -30,24 +30,15 @@ $user = mysqli_fetch_assoc($result);
 
 // Define as variáveis nome, email e número com as informações do usuário
 $permissao_publicar = $user['permissao_publicar'];
-$nome = $user['user_nome'];
-$email = $user['user_email'];
-$numero = $user['user_tel'];
-if ($user['user_imagem'] == null) {
-  $caminho_imagem = "img/perfil.png";
-} else {
-  $caminho_imagem = $user['user_imagem'];
-}
-
+$nome = $user['User_Name'];
+$email = $user['User_Email'];
+$numero = $user['User_Number'];
 ?>
 
 <body>
     <div class="flex items-center justify-centermt-  menu-overlay">
         <div class="bg-white rounded-lg  m-64 mx-auto p-8">
-            <h3 class="text-3xl font-bold">Perfil</h3>
-            <figure class="mt-4">
-                <img id="perfil" src="<?php echo $caminho_imagem; ?>" class="rounded-full w-32 h-32">
-            </figure>
+            <h3 class="text-3xl font-bold">Perfil</h3>            
             <div class="mt-6">
                 <h3 class="text-2xl font-bold">Nome</h3>
                 <h3 class="text-3xl font-bold text-gray-500"><?php echo $nome ?></h3>
