@@ -3,12 +3,6 @@ require_once 'db.php';
 
 session_start();
 
-if (!isset($_SESSION['id']) || $_SESSION['type'] !== 'vendedor') {
-    header("Location: login.php");
-    exit();
-}
-
-
 $product = $result->fetch_assoc();
 
 $stmt->close();
