@@ -2,43 +2,7 @@
 require_once 'db.php';
 
 session_start();
-
-if (!isUserLoggedIn()) {
-    header('Location: index.php');
-    exit();
-}
-
-$error = '';
-$user = getUserById($_SESSION['id']);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = validateData($_POST['email']);
-    $password = htmlspecialchars($_POST['password']);
-
-    if (empty($email) || empty($password)) {
-        $error = 'Email e senha são obrigatórios.';
-    } else {
-        // Atualizar os dados do perfil do usuário no banco de dados
-        $stmt = $db->prepare("UPDATE Users SET User_Email = ?, User_Password = ? WHERE User_Id = ?");
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $stmt->bind_param('ssi', $email, $hashedPassword, $user['User_Id']);
-        $stmt->execute();
-
-        if ($stmt->affected_rows > 0) {
-            $user['User_Email'] = $email;
-            $error = 'Perfil atualizado com sucesso.';
-        } else {
-            $error = 'Erro ao atualizar o perfil.';
-        }
-
-        $stmt->close();
-    }
-}
-
-$url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
-
 ?>
-
 <!DOCTYPE html>
 <html>
 
