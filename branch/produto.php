@@ -61,7 +61,30 @@ $stmt->close();
                 <p class="card-text">Preço: <?php echo $product_price; ?></p>
                 <p class="card-text">Anunciante: <?php echo $vendor_name; ?></p>
                 <a class="btn btn-success" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?id=$product_id&mode=register"; ?>">Contatar<a>
-                <a class="btn btn-success" href="https://api.whatsapp.com/send?phone=XXXXXXXXXXX&text=Olá, tudo bem?" target="_blank">Enviar mensagem pelo WhatsApp </a>
+                <?php
+                include 'conexao.php';
+
+                $productId = $_GET['productId'];
+
+                // Consulta para obter o número de telefone do anunciante do produto
+                $sql = "SELECT Users.User_Number FROM Users INNER JOIN Products ON Users.User_Id = Products.User_Id WHERE Products.Product_Id = $productId";
+                $result = $conn->query($sql);
+
+                if ($result && $result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $phoneNumber = $row['User_Number'];
+
+                    // Substitua XXXXXXXXXX pelo número de telefone obtido
+                    $whatsappLink = "https://api.whatsapp.com/send?phone=$phoneNumber&text=Olá, tudo bem?";
+
+                    // Exibir o link do WhatsApp
+                    echo "<a class='btn btn-success' href='$whatsappLink' target='_blank'>Enviar mensagem pelo WhatsApp</a>";
+                } else {
+                    echo "Número de telefone não encontrado para o anunciante do produto.";
+                }
+
+                $conn->close();
+                ?>
             </div>
         </div>
 
