@@ -41,7 +41,7 @@ require_once 'header.php';
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">
-                            <a href="product.php?id=<?php echo $row['Product_Id']; ?>">
+                            <a href="produto.php?id=<?php echo $row['Product_Id']; ?>">
                                 <?php echo $row['Product_Name']; ?>
                             </a>
                         </h5>
