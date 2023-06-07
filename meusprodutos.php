@@ -68,7 +68,7 @@ if (isset($_POST['delete_product'])) {
 <div class="conteiner">
     <br>
     <br>
-    <fieldset class="bg-light opacity-75 p-4 rounded">
+    <fieldset class="bg-light opacity-60 p-4 rounded">
         <h1 class="text-center">Meus Produtos</h1>
         <br>
         <br>
@@ -109,6 +109,8 @@ while ($row = $result->fetch_assoc()) {
 
 <?php endif; ?>
 
+<br>
+<br>
 <div class="conteiner text-center">
     <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . '?mode=register'; ?>"
         class="btn btn-lg btn-primary">Adicionar</a>
