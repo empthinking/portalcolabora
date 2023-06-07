@@ -6,7 +6,12 @@ session_start();
 <html>
 <head>
   <title>Editar Perfil</title>
-  <link rel="stylesheet" href="style.css"> <!-- Arquivo CSS para estilização -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      padding: 20px;
+    }
+  </style>
 </head>
 <body>
   <h1>Editar Perfil</h1>
@@ -14,25 +19,29 @@ session_start();
   <form action="atualizar_perfil.php" method="POST">
     <div class="form-group">
       <label for="nome">Nome:</label>
-      <input type="text" id="nome" name="nome" value="Nome atual" required>
+      <input type="text" class="form-control" id="nome" name="nome" value="Nome atual" required>
     </div>
 
     <div class="form-group">
       <label for="email">Email:</label>
-      <input type="email" id="email" name="email" value="email@example.com" required>
+      <input type="email" class="form-control" id="email" name="email" value="email@example.com" required>
     </div>
 
     <div class="form-group">
       <label for="numero">Número:</label>
-      <input type="tel" id="numero" name="numero" value="123456789" required>
+      <input type="tel" class="form-control" id="numero" name="numero" value="123456789" required>
     </div>
 
-    <button type="submit">Salvar</button>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <a href="perfil.php" class="btn btn-secondary">Cancelar</a>
+    </div>
   </form>
 
-  <script src="script.js"></script> <!-- Arquivo JavaScript para interatividade -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
 
     <?php
 require_once 'footer.php';
