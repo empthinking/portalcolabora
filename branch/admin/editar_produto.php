@@ -13,8 +13,8 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     exit();
 }
 
-// Incluir o arquivo de conexão com o banco de dados
-require_once "dbconn.php";
+require_once "../db.php";
+
 
 // Verificar se o parâmetro 'id' está presente na URL
 if (!isset($_GET['id'])) {
