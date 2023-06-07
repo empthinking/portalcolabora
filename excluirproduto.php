@@ -31,7 +31,7 @@ if ($result->num_rows === 0) {
 
 $stmt->close();
 
-// Exclui o produto do banco de dados
+// Deleta o produto do banco de dados
 $stmt = $db->prepare('DELETE FROM Products WHERE Product_Id = ?');
 $stmt->bind_param('i', $productId);
 $stmt->execute();
@@ -42,27 +42,13 @@ $stmt->execute();
 
 $stmt->close();
 
-// Remove o diretório das imagens relacionadas ao produto
-$directoryPath = "img/product_images/$productId/";
-if (is_dir($directoryPath)) {
-    $files = array_diff(scandir($directoryPath), array('.', '..'));
-    
-    foreach ($files as $file) {
-        $filePath = $directoryPath . $file;
-        
-        if (is_dir($filePath)) {
-            deleteDirectory($filePath);
-        } else {
-            unlink($filePath);
-        }
-    }
-
-    rmdir($directoryPath);
-}
+// Deleta o diretório de imagens do produto
+deleteDirectory("img/product_images/$productId/");
 
 header("Location: meusprodutos.php");
 exit();
 
+// Função para deletar um diretório e todo o seu conteúdo
 function deleteDirectory(string $directoryPath): bool {
     if (!is_dir($directoryPath)) {
         return false;
@@ -71,7 +57,7 @@ function deleteDirectory(string $directoryPath): bool {
     $files = array_diff(scandir($directoryPath), array('.', '..'));
     
     foreach ($files as $file) {
-        $filePath = $directoryPath . $file;
+        $filePath = $directoryPath . '/' . $file;
         
         if (is_dir($filePath)) {
             deleteDirectory($filePath);
