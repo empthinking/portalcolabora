@@ -92,7 +92,7 @@ if (isset($_POST['delete_product'])) {
               <td>{$row['Product_Price']}</td>
               <td>{$row['Product_Date']}</td>
               <td><a href="#" class="btn btn-success">modificar</a></td>
-              <td><a href="#" class="btn btn-danger">excluir</a></td>
+              <td><a href="#" class="btn btn-warning">excluir</a></td>
             </tr>
 ROW;
     }
