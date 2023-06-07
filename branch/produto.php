@@ -60,7 +60,7 @@ $stmt->close();
                 <p class="card-text"><?php echo $product_description; ?></p>
                 <p class="card-text">Preço: <?php echo $product_price; ?></p>
                 <p class="card-text">Anunciante: <?php echo $vendor_name; ?></p>
-                <a class="btn btn-success" href="<?php echo isUserLoggedIn() ? : htmlspecialchars($_SERVER['PHP_SELF']) . "?id=$product_id&mode=register" : "login.php"; ?>">Contatar<a>
+                <a class="btn btn-success" href="<?php echo isUserLoggedIn() ? htmlspecialchars($_SERVER['PHP_SELF']) . "?id=$product_id&mode=register" : "login.php"; ?>">Contatar<a>
                 <a class="btn btn-success" href="<?php echo isUserLoggedIn() ? "https://api.whatsapp.com/send?phone=+55$User_Number&text=Olá, tudo bem?" : "login.php"; ?>target="_blank">Enviar mensagem pelo WhatsApp </a>
             </div>
         </div>
