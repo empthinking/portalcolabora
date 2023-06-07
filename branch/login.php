@@ -72,8 +72,8 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <img src="img/logo G (2).png" width="100px" alt="logo">
-                    <h2 class="mb-4 text-center">Login</h2>
+                    <img src="img/logo G (2).png text-center" width="100px" alt="logo">
+                    <h2 class="mb-4 text-center">LOGIN</h2>
                     <h4 class="text-danger"><?php echo $error; ?></h4>
                     <form action="login.php" method="POST">
                         <div class="form-group">
