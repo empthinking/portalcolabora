@@ -88,7 +88,7 @@ if (isset($_POST['delete_product'])) {
         echo <<<ROW
             <tr>
               <td><a href="produto.php?id={$row['Product_Id']}" class="btn btn-primary">acessar</a></td>
-              <td>{$row['Product_Name']}</td></a>
+              <td>{$row['Product_Name']}</td>
               <td>{$row['Product_Price']}</td>
               <td>{$row['Product_Date']}</td>
               <td><a href="#" class="btn btn-success">modificar</a></td>
