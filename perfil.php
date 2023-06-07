@@ -36,6 +36,7 @@ $numero = $user['User_Number'];
 // Fecha a conexão com o banco de dados
 mysqli_close($db);
 ?>
+
 <main class="d-flex align-items-center justify-content-center">
   <div class="profile border">
     <h2>Perfil do Usuário</h2>
@@ -45,12 +46,10 @@ mysqli_close($db);
       <h3>Número: <?php echo $numero; ?></h3>
     </div>
     <div class="profile-actions">
-      <a href="editar_perfil.php">Editar Perfil</a>
-      <a href="mensagens.php">Mensagens</a>
+      <a href="editar_perfil.php" class="btn btn-primary">Editar Perfil</a>
+      <a href="mensagens.php" class="btn btn-primary">Mensagens</a>
     </div>
   </div>
 </main>
-
-
 
 <?php require_once 'footer.php'; ?>
