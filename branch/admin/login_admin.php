@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $senha = mysqli_real_escape_string($conn, $_POST["senha"]);
 
     // Consultar o banco de dados para verificar se as credenciais são válidas
-    $sql = "SELECT * FROM administradores WHERE name = '$name' AND senha = '$senha'";
+    $sql = "SELECT * FROM admin WHERE name = '$name' AND senha = '$senha'";
     $result = mysqli_query($conn, $sql);
 
     if (mysqli_num_rows($result) === 1) {
