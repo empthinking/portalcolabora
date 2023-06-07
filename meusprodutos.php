@@ -66,7 +66,7 @@ if (isset($_POST['delete_product'])) {
 <?php if ($result->num_rows > 0) : ?>
 
   <div class="conteiner">
-    <h1>Meus Produtos</h1>
+    <h1 class="text-center">Meus Produtos</h1>
     <table class="table">
       <thead>
         <tr>
