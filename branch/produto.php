@@ -9,14 +9,14 @@ $error = false;
 
 // Query the database to fetch the product information
 $stmt = $db->prepare("
-    SELECT p.Product_Name, p.Product_Description, p.Product_Price, p.Product_Date, u.User_Name, u.User_Id
+    SELECT p.Product_Name, p.Product_Description, p.Product_Price, p.Product_Date, u.User_Name, u.User_Id, u.User_Number
     FROM Products p
     INNER JOIN Users u ON p.User_Id = u.User_Id
     WHERE p.Product_Id = ?
 ");
 $stmt->bind_param('i', $product_id);
 if($stmt->execute()) {
-    $stmt->bind_result($product_name, $product_description, $product_price, $product_date, $vendor_name, $vendor_id);
+    $stmt->bind_result($product_name, $product_description, $product_price, $product_date, $vendor_name, $vendor_id,$User_Number);
     $stmt->fetch();
 } else {
     $error = false;
