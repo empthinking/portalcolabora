@@ -19,8 +19,7 @@
 
 <body class="bg-gray-100">
     <nav class="navbar py-2">
-       <div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex  md:items-center"> 
-        pegar a senho do banco do FERNADO DOS SANTO E DO ESTÉLIO GUIMARÃES.
+       <div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex  md:items-center">
             <div class="flex items-center justify-between">
                 <div>
                     <a class="" href="index.php">
