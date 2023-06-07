@@ -13,7 +13,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
     exit();
 }
 
-require_once "../db.php";
+require_once "db.php";
 
 
 // Verificar se o parâmetro 'id' está presente na URL

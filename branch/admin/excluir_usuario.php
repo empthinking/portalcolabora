@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
 }
 
 // Incluir o arquivo de conexão com o banco de dados
-require_once "../db.php";
+require_once "db.php";
 
 // Verificar se o parâmetro de ID do usuário está presente na URL
 if (!isset($_GET['id'])) {
