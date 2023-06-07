@@ -99,7 +99,6 @@ mysqli_close($conn);
         </a>
       </div>
     </div>
-  </div>
-
-  <?php require_once 'footer.php'; ?>
+  </div>  
 </body>
+<?php require_once 'footer.php'; ?>
