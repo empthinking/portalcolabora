@@ -10,6 +10,6 @@ if (isset($_SESSION['admin']) && $_SESSION['admin'] === true) {
 }
 
 // Redireciona para a página de login do admin
-header("Location: ./index.php");
+header("Location: ../index.php");
 exit();
 ?>
