@@ -86,7 +86,7 @@ if (isset($_POST['delete_product'])) {
 
 while ($row = $result->fetch_assoc()) {
     echo '<tr>';
-    echo '<td><a href="produto.php?id=' . $row['Product_Id'] . '" class="btn btn-primary mt-3">Acessar</a></td>';
+    echo '<td><a href="produto.php?id=' . $row['Product_Id'] . '" class="btn btn-success mt-3">Acessar</a></td>';
     echo '<td>' . $row['Product_Name'] . '</td>';
     echo '<td>' . $row['Product_Price'] . '</td>';
     echo '<td>' . $row['Product_Date'] . '</td>';
