@@ -32,8 +32,6 @@ $permissao_publicar = $user['permissao_publicar'];
 $nome = $user['User_Name'];
 $email = $user['User_Email'];
 $numero = $user['User_Number'];
-
-mysqli_close($conn);
 ?>
 
 <body>
