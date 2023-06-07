@@ -51,36 +51,20 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     .bg-header {
         background-color: rgb(99, 242, 83);
     }
-      body {
+
+    body {
         min-height: 100vh;
         display: flex;
         flex-direction: column;
     }
 
     .fundo {
-            margin: 0;
-            padding: 0;
-            background-color: #000000;
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: cover;
-            animation: slideAnimation 15s linear infinite;
-        }
-
-        @keyframes slideAnimation {
-            0%, 33.33% {
-                background-image: url(./img/gliricidia.jpg);
-                opacity: 1;
-            }
-            33.34%, 66.66% {
-                background-image: url(./img/GVI-Agriculture-800x443.png);
-                opacity: 1;
-            }
-            66.67%, 100% {
-                background-image: url(./img/plantar-pimenta-do-reino-cursos-cpt.jpg);
-                opacity: 1;
-            }
-        }
+        background-image:  url(./img/GVI-Agriculture-800x443.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 100vh;
+    }
     </style>
 </head>
 
@@ -88,7 +72,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     <div class="fundo">
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="col-md-6 bg-white rounded-lg w-full max-w-md mx-auto p-8"">
+                <div class="col-md-6">
                     <div class="text-center">
                         <img class="mx-auto" src="img/logo.png" width="323px" alt="logo">
                     </div>
@@ -115,7 +99,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             </div>
         </div>
     </div>
-                                                                          <?php
+    <?php
 
 $db->close();
 
