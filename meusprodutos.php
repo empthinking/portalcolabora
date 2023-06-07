@@ -91,7 +91,7 @@ while ($row = $result->fetch_assoc()) {
     echo '<td>' . $row['Product_Price'] . '</td>';
     echo '<td>' . $row['Product_Date'] . '</td>';
     echo '<td><a href="editarproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-success">Modificar</a></td>';
-    echo '<td><a href="excluirproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-warning">Excluir</a></td>';
+    echo '<td><a href="excluirproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-danger">Excluir</a></td>';
     echo '</tr>';
 }
 ?>
