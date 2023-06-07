@@ -1,33 +1,8 @@
 <?php
-//Inicia a sessao
 session_start();
 
-//Função para verificar se o usuário esta logado
-function isUserLoggedIn(): bool {
-    return isset($_SESSION['login']) && $_SESSION['login'] === true;
-}
-
-//Alerta de login realizado com sucesso
-if(isset($_SESSION['success_msg'])):
-    $msg = $_SESSION['success_msg'];
-    echo '<script>alert("' . htmlspecialchars($msg) . '")</script>';
-endif;
-
-//Checa se o formulaio de login foi enviado
-if ($_SERVER['REQUEST_METHOD'] === 'POST'):
-	require_once "login.php"; //executa login de usuario
-endif;
-
-// Cabeçalho
-if(isUserLoggedIn()):
-	require_once 'header_loggedin.php';
-else:
-	require_once 'header.php';
-endif;
-
-//Pagina de exibição dos produtos
-require_once 'home.php';
-
-// Pagina de rodapé
+require_once 'db.php';
+require_once 'header.php';
+require_once 'product_list.php';
 require_once 'footer.php';
-?>
+

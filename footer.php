@@ -1,38 +1,15 @@
-<footer>
-    <div class="container mx-auto flex flex-col md:flex-row items-center justify-between">
-        <div class="flex flex-col items-center">
-            <img class="order-last md:order-first w-16" src="img/Ativo 1 black.png" alt="Logo">
-            <p class="text-2xl font-bold text-red-500 ml-4">Criando soluções digitais.</p>
-        </div>
-        <div class="mt-6 md:mt-0">
-            <h3 class="text-gray-100 font-bold mb-3">Contato</h3>
-            <ul class="text-gray-100">
-                <!-- <li class="mb-2">Endereço: Rua X, 123, São Paulo, SP</li> -->
-                <li class="mb-2">Telefone: (91) 984388103 </li>
-                <li> Email: suporte@portalcolabora.com.br </li>
-            </ul>
-        </div>
 
-        <div class="mt-6 md:mt-0">
-            <h3 class="text-gray-100 font-bold mb-3">Redes Sociais</h3>
-            <ul class="flex items-center">
-                <li class="mr-4">
-                    <a href="#">
-                        <i class="fab fa-facebook text-gray-100 text-lg"></i>
-                    </a>
-                </li>
-                <li class="mr-4">
-                    <a href="#">
-                        <i class="fab fa-twitter text-gray-100 text-lg"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fab fa-instagram text-gray-100 text-lg"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-
-    </div>
-</footer>
+  <footer class="py-3 mt-auto">
+    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+      <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">Início</a></li>
+      <li class="nav-item"><a href="contato.php" class="nav-link px-2 text-muted">Contato</a></li>
+      <li class="nav-item"><a href="faq.php" class="nav-link px-2 text-muted">FAQs</a></li>
+      <li class="nav-item"><a href="about.php" class="nav-link px-2 text-muted">Sobre Nós</a></li>
+    </ul>
+    <p class="text-center text-muted">© <?php echo date('Y'); ?> UEPA</p>
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

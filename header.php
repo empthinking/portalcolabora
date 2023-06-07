@@ -1,187 +1,108 @@
+<?php 
+$id = $_SESSION['id']??'';
+
+if(isUserLoggedIn()) {
+    $welcome = 'Bem-Vind';
+    if($_SESSION['gender'] === 'feminino')
+        $welcome .= 'a';
+    else if($_SESSION['gender'] === 'masculino')
+        $welcome .= 'o';
+    else
+        $welcome .= 'e';
+}
+
+$checkUnreadMessages = function() use ($id, $db) : bool {
+    $stmt = $db->prepare('SELECT Message_Id FROM Messages WHERE Message_Receiver = ? AND Message_Readed = 0');
+    $stmt->bind_param('i', $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $stmt->close();
+    return $result->num_rows > 0;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Colabora</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,300,0,0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css">
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PortalColabora</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+  <style>
+    .bg-header {
+      background-color: rgb(99, 242, 83);
+    }
+    body {
+          min-height: 100vh;
+          display: flex;
+          flex-direction: column;
+    }
 
+  </style>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-header">
+      <a class="navbar-brand" href="index.php">
+        <img src="img/logo.png" alt="Your Logo" width="200">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- Display navigation options for logged-in user -->
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.php">Início</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="contato.php">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="faq.php">FAQs</a>
+            </li>
+          </ul>
+          <form id="search-form" action="index.php" method="GET" class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" name="search" type="search" placeholder="Pesquisar..." aria-label="Search">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">Pesquisar</button>
+          </form>
 
-<body class="bg-gray-100">
-    <nav class="navbar py-2">
-       <div class="mx-auto px-4 sm:px-6 lg:px-8 md:flex  md:items-center">
-            <div class="flex items-center justify-between">
-                <div>
-                    <a class="" href="index.php">
-                        <img src="img/Ativo 1 black.png" style="max-height: 3.75rem; max-width :10rem"
-                            class="flex-shrink-0">
-                    </a>
+    <!--Carrega em caso do usuario esteja logado -->
+    <?php if (isset($welcome)): ?>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="userMenuDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <?php echo "$welcome, {$_SESSION['username']}"; ?>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userMenuDropdown">
+                    <a class="dropdown-item" href="perfil.php">Perfil</a>
+                    <?php if($_SESSION['type'] === 'vendedor'): ?> 
+                    <a class="dropdown-item" href="meusprodutos.php">Meus Produtos</a>
+                    <a class="dropdown-item <?php echo $checkUnreadMessages() ? 'text-danger font-weight-bold' : ''; ?>" href="mensagens.php">Mensagens</a>
+                    <?php endif; ?>
+                    <a class="dropdown-item" href="#">Configuração</a>
+                    <a class="dropdown-item" href="logout.php">Sair</a>
                 </div>
-                <div class="flex  navbar-toggle md:hidden">
-                    <button type="button" onclick="toggleMenu()"
-                        class="navbarToggle text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600"
-                        aria-label="toggle menu">
-                        <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
-                            <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm16 4H4v2h16v-2z"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <!-- container dos conteúdos do hamburgue -->
-            <div id="menu_hamb" class="navbar-menu md:flex items-center hidden">
-                <div class="flex flex-col items-center justify-center md:flex-row md:mx-6">
-                    <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900"
-                        href="index.php">Início</a>
-                    <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900"
-                        href="contato.php">Contato</a>
-                    <a class="my-1 text-gray-700 font-medium md:mx-4 md:my-0 hover:text-gray-900" href="faq.php">FAQ</a>
-                </div>
-                <div class="flex justify-between">
-                    <div class="grow ml-20">
-                        <form method="post" action="pesquisa.php" class="flex justify-center py-2 -mx-4 md:mx-4">
-                            <div class="relative mr-10 md:mx-0">
-                                <input
-                                    class="bg-gray-200 rounded-full border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 pl-4 pr-10 py-2 w-40"
-                                    type="text" name="search" placeholder="Pesquisar...">
-                                <button type="submit" class="absolute right-0 mt-2 mr-2">
-                                    <span class="material-symbols-outlined">search</span>
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+            </li>
+        </ul>
+    <?php else: ?>
+    <!-- -->
 
-                    <div class="flex items-center ">
-                        <a href="cadastro.php">
-                            <button
-                                class="bg-green-400 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full">
-                                Cadastrar
-                            </button>
-                        </a>
-                        <button class="bg-green-200 hover:bg-green-600 text-white font-bold py-2 px-4 rounded-full ml-2"
-                            onclick="document.getElementById('singIn').style.display='block'">
-                            Entrar
-                        </button>
-                        <div id="singIn" class="modal hidden fixed z-10 inset-0 overflow-y-auto">
-                            <div
-                                class="flex items-center justify-center min-h-screen menu-overlay absolute inset-0 bg-gray-900">
-                                <div class="bg-white rounded-lg w-full max-w-md mx-auto p-8">
-                                    <h1 class="text-3xl font-bold mb-8 text-center">Login</h1>
-                                    <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-                                        <div class="mb-4 form-group">
-                                            <label class="block font-bold mb-2" for="email">
-                                                Email
-                                            </label>
-                                            <input
-                                                class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                                type="email" placeholder="exemplo@exemplo.com" id="email" name="email">
-                                        </div>
-                                        <div class="mb-6 form-group">
-                                            <label class="block font-bold mb-2" for="password">
-                                                Senha
-                                            </label>
-                                            <input
-                                                class="appearance-none border border-gray-300 rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-                                                type="password" id="senha" name="password">
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
-                                        </div>
-                                        <div class="flex items-center justify-between">
-                                            <button type="submit"
-                                                class=" bg-green-400 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                                type="button">
-                                                Entrar
-                                            </button>
-                                            <a class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-                                                href="/adm/login_admin.php">entrar como admin </a>
-                                        </div>
-                                    </form>
-                                    <button type="button"
-                                        onclick="document.getElementById('singIn').style.display='none'"
-                                        class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4 w-full">
-                                        Cancelar
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <script>
-
-                // Alternar menu hamburguer entre block e none
-                function toggleMenu() {
-                    var menu = document.getElementById('menu_hamb');
-                    if (menu.style.display === 'none') {
-                        menu.style.display = 'block';
-                    } else {
-                        menu.style.display = 'none';
-                    }
-                }
-
-
-
-                function toggleDropdown() {
-                    var dropdownMenu = document.getElementById("dropdown-menu");
-                    dropdownMenu.classList.toggle("hidden");
-                }
-                var elementos = document.getElementsByClassName('navbar');
-                var el = elementos[0];
-                el.style.backgroundColor = '#63f253';
-
-
-
-
-                btn.addEventListener('click', () => {
-                    let inputSenha = document.querySelector('#senha')
-
-                    if (inputSenha.getAttribute('type') == 'password') {
-                        inputSenha.setAttribute('type', 'text')
-                    } else {
-                        inputSenha.setAttribute('type', 'password')
-                    }
-                })
-                </script>
-            </div>
-        </div>
+<!-- Padrão para usuario não logados -->
+<ul class="navbar-nav ml-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="login.php">Entrar</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="register.php">Cadastre-se</a>
+    </li>
+</ul>
+<?php endif; ?>
+<!-- -->
+      </div>
     </nav>
-    <script>
-    var elementos = document.getElementsByClassName('navbar');
-    var el = elementos[0];
-    el.style.backgroundColor = '#63f253';
-
-
-    let btn = document.querySelector('.fa-eye')
-
-
-
-    // Seleciona o botão hamburger e o menu do navbar
-    const navbarToggle = document.querySelector('.navbar-toggle');
-    const navbarMenu = document.querySelector('.navbar-menu');
-
-    // Adiciona um evento de clique no botão hamburger
-    navbarToggle.addEventListener('click', () => {
-        // Adiciona ou remove a classe 'show' do menu do navbar
-        navbarMenu.classList.toggle('hidden');
-    });
-
-
-
-    btn.addEventListener('click', () => {
-        let inputSenha = document.querySelector('#senha')
-
-        if (inputSenha.getAttribute('type') == 'password') {
-            inputSenha.setAttribute('type', 'text')
-        } else {
-            inputSenha.setAttribute('type', 'password')
-        }
-    })
-    </script>
+  </header>
+<!-- Header End -->

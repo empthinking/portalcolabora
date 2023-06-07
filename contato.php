@@ -1,17 +1,6 @@
 <?php
-// Inicia a sessão
 session_start();
-
-function isUserLoggedIn(): bool {
-  return isset($_SESSION['login']) && $_SESSION['login'] === true;
-}
-
-// Cabeçalho 
-if(isUserLoggedIn()):
-  require_once 'header_loggedin.php';
-else:
-  require_once 'header.php';
-endif;
+require_once 'db.php';
 
 // Verifica se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -46,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   // Verifica se há erros de validação
   if (count($errors) == 0) {
     // Configurações do e-mail
-    $to = "colaboraequipe@gmail.com"; 
+    $to = "suporte@portalcolabora.com.br"; 
     $subject = "Contato do Site - $assunto";
     $message = "Nome: $nome\n\n";
     $message .= "E-mail: $email\n\n";
@@ -68,67 +57,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 }
+
+require_once 'header.php';
 ?>
 
-<main>
-  <section class="bg-gray-100 py-16">
-    <div class="container mx-auto">
-      <h2 class="text-3xl font-bold mb-8 text-center">Contato</h2>
-      <div class="flex flex-wrap">
-        <div class="w-full md:w-2/3 md:pr-8">
-          <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-            <div class="mb-4">
-              <label class="block text-gray-700 font-bold mb-2" for="nome">
-                Nome completo
-              </label>
-              <input
-                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="nome" name="nome" type="text" placeholder="Seu nome completo" value="<?php echo isset($nome) ? $nome : ''; ?>">
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700 font-bold mb-2" for="email">
-                E-mail
-              </label>
-              <input
-                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email" name="email" type="email" placeholder="Seu e-mail" value="<?php echo isset($email) ? $email : ''; ?>">
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700 font-bold mb-2" for="assunto">
-                Assunto
-              </label>
-              <input
-                class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="assunto" name="assunto" type="text" placeholder="Assunto da mensagem" value="<?php echo isset($assunto) ? $assunto : ''; ?>">
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700 font-bold mb-2" for="mensagem">
-                Mensagem
-              </label>
-              <textarea
-                class="no-resize appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="mensagem" name="mensagem" placeholder="Digite sua mensagem"><?php echo isset($mensagem) ? $mensagem : ''; ?></textarea>
-            </div>
-            <div class="flex items-center justify-between">
-              <button
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit">
-                Enviar mensagem
-              </button>
-            </div>
-          </form>
-        </div>
-        <div class="w-full md:w-1/3">
-          <h4 class="text-xl font-bold mb-4">Informações de contato</h4>
-          <p class="mb-2"><i class="fas fa-phone-alt mr-2"></i>(91) 98438-8103</p>
-          <p class="mb-2"><i class="fas fa-envelope mr-2"></i>suporte@portalcolabora.com.br</p>
-          <p><i class="fas fa-map-marker-alt mr-2"></i>Rua 15 de Novembro, 1320, Centro, Mocajuba-Pa</p>
-        </div>
-      </div>
+<div class="container m-3"> 
+  <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+    <div class="form-group">
+      <label for="nome">Nome completo</label>
+      <input class="form-control" type="text" id="nome" name="nome" placeholder="Seu nome completo" value="<?php echo isset($nome) ? $nome : ''; ?>">
     </div>
-  </section>
-</main>
-</body>
-<?php
-require_once "footer.php";
-?>
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input class="form-control" type="email" id="email" name="email" placeholder="Seu e-mail" value="<?php echo isset($email) ? $email : ''; ?>">
+    </div>
+    <div class="form-group">
+      <label for="assunto">Assunto</label>
+      <input class="form-control" type="text" id="assunto" name="assunto" placeholder="Assunto da mensagem" value="<?php echo isset($assunto) ? $assunto : ''; ?>">
+    </div>
+    <div class="form-group">
+      <label for="mensagem">Mensagem</label>
+      <textarea class="form-control" id="mensagem" name="mensagem" placeholder="Digite sua mensagem"><?php echo isset($mensagem) ? $mensagem : ''; ?></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Enviar mensagem</button>
+  </form>
+</div>
+
+<?php require_once 'footer.php'; ?>
