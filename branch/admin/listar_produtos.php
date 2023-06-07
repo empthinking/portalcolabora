@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
 }
 
 // Incluir o arquivo de conexão com o banco de dados
-require_once "dbconn.php";
+require_once "../db.php";
 
 // Excluir o produto, se o parâmetro 'delete_id' estiver presente na URL
 if (isset($_GET['delete_id'])) {
