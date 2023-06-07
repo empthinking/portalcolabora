@@ -1,110 +1,95 @@
 <?php
 session_start();
-require_once "funcoes.php";
 
-// Verificar se o usuário está logado e é um administrador
-if (!isUserLoggedIn() || !isAdmin()) {
-    header("Location: login.php");
+// Verificar se o usuário está logado
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
+    header("Location: login_admin.php");
     exit();
 }
 
-// Conexão com o banco de dados
-require_once "dbconn.php";
-
-// Filtrar por ID de usuário, se fornecido na URL
-$usuarioId = isset($_GET['usuario_id']) ? $_GET['usuario_id'] : null;
-$usuarioId = mysqli_real_escape_string($conn, $usuarioId);
-$whereClause = $usuarioId ? "WHERE usuario_id = '$usuarioId'" : "";
-
-// Filtrar por termo de pesquisa, se fornecido no formulário
-$pesquisa = isset($_POST['pesquisa']) ? $_POST['pesquisa'] : "";
-$pesquisa = mysqli_real_escape_string($conn, $pesquisa);
-$searchClause = $pesquisa ? "AND (nome LIKE '%$pesquisa%' OR descricao LIKE '%$pesquisa%')" : "";
-
-// Consulta para obter os produtos filtrados
-$sql = "SELECT * FROM produtos $whereClause $searchClause";
-$result = mysqli_query($conn, $sql);
-
-// Array para armazenar os produtos
-$produtos = [];
-
-// Verificar se há produtos
-if (mysqli_num_rows($result) > 0) {
-    // Iterar sobre os resultados e armazenar os produtos no array
-    while ($row = mysqli_fetch_assoc($result)) {
-        $produtos[] = $row;
-    }
+// Verificar se o usuário possui permissão de administrador
+if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
+    header("Location: acesso_negado.php");
+    exit();
 }
 
-// Atualizar o status "ativo" de produtos individuais
-if (isset($_POST['atualizar'])) {
-    foreach ($produtos as $produto) {
-        $produtoId = $produto['id'];
-        $ativo = isset($_POST['ativo'][$produtoId]) ? 1 : 0;
-        $sql = "UPDATE produtos SET ativo = '$ativo' WHERE id = '$produtoId'";
-        mysqli_query($conn, $sql);
-    }
+// Incluir o arquivo de conexão com o banco de dados
+require_once "dbconn.php";
+
+// Excluir o produto, se o parâmetro 'delete_id' estiver presente na URL
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id'];
+
+    // Excluir o produto da tabela Products
+    $delete_query = "DELETE FROM Products WHERE Product_Id = $delete_id";
+    mysqli_query($conn, $delete_query);
+
+    // Redirecionar de volta para a página listar_produtos.php
     header("Location: listar_produtos.php");
     exit();
 }
 
-// Fechar a conexão com o banco de dados
-mysqli_close($conn);
+// Consultar a tabela Products para obter a lista de produtos
+$sql = "SELECT * FROM Products";
+
+// Pesquisar produtos, se o parâmetro 'search' estiver presente na URL
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+    $sql .= " WHERE Product_Name LIKE '%$search%'";
+}
+
+$result = mysqli_query($conn, $sql);
 ?>
 
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Listar Produtos</title>
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    </head>
-    <body class="bg-gray-200">
-        <div class="flex justify-center items-center min-h-screen">
-            <div class="bg-white p-8 rounded shadow-md">
-                <h2 class="text-2xl font-bold mb-4">Listar Produtos</h2>
-                <form method="POST" class="mb-4">
-                    <div class="flex">
-                        <input type="text" name="pesquisa" placeholder="Digite o termo de pesquisa" class="w-full px-3 py-2 border border-gray-300 rounded-l focus:outline-none focus:border-blue-500">
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-r">Pesquisar</button>
-                    </div>
-                </form>
-                <table class="w-full border-collapse">
-                <form method="POST">
-                    <button type="submit" name="atualizar" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Atualizar</button>
-                    <thead>
-                        <tr>
-                            <th class="border-b-2 border-gray-300 py-2">Nome</th>
-                            <th class="border-b-2 border-gray-300 py-2">Descrição</th>
-                            <th class="border-b-2 border-gray-300 py-2">Preço</th>
-                            <th class="border-b-2 border-gray-300 py-2">Imagem</th>
-                            <th class="border-b-2 border-gray-300 py-2">Ativo</th>
-                            <th class="border-b-2 border-gray-300 py-2">Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($produtos as $produto): ?>
-                            <tr>
-                                <td class="border-b border-gray-300 py-2"><?= $produto['nome'] ?></td>
-                                <td class="border-b border-gray-300 py-2"><?= $produto['descricao'] ?></td>
-                                <td class="border-b border-gray-300 py-2"><?= $produto['preco'] ?></td>
-                                <td class="border-b border-gray-300 py-2"><img src="../<?= $produto['imagem'] ?>" alt="Imagem do produto" width="100"></td>
-                                <td class="border-b border-gray-300 py-2">
-                                    <input type="checkbox" name="ativo[<?= $produto['id'] ?>]" value="1" <?= $produto['ativo'] ? 'checked' : '' ?> class="rounded">
-                                </td>
-                                <td class="border-b border-gray-300 py-2">
-                                    <a href="editar_produtos.php?id=<?= $produto['id'] ?>" class="text-blue-500 hover:text-blue-700 mr-2">Editar</a>
-                                    <a href="excluir_produto.php?id=<?= $produto['id'] ?>" class="text-red-500 hover:text-red-700">Excluir</a>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </form>
-            <br>
-            <a href="area_admin.php"  class="w-100 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-9 rounded focus:outline-none focus:shadow-outline">
-            Voltar
-        </a>
-         </div>
+<head>
+    <title>Listar Produtos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body class="bg-gray-200">
+    <div class="container mt-5">
+        <h2 class="mb-4">Lista de Produtos</h2>
+
+        <form class="mb-4" method="GET">
+            <div class="form-group">
+                <input type="text" class="form-control" name="search" placeholder="Pesquisar por nome do produto">
+            </div>
+            <button type="submit" class="btn btn-primary">Pesquisar</button>
+            <a href="listar_produtos.php" class="btn btn-secondary">Limpar</a>
+        </form>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Preço</th>
+                    <th>Data</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result)) : ?>
+                    <tr>
+                        <td><?php echo $row['Product_Id']; ?></td>
+                        <td><?php echo $row['Product_Name']; ?></td>
+                        <td><?php echo $row['Product_Description']; ?></td>
+                        <td><?php echo $row['Product_Price']; ?></td>
+                        <td><?php echo $row['Product_Date']; ?></td>
+                        <td>
+                            <a href="editar_produto.php?id=<?php echo $row['Product_Id']; ?>" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="listar_produtos.php?delete_id=<?php echo $row['Product_Id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza de que deseja excluir este produto?')">Excluir</a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+        <a href="area_admin.php" class="btn btn-secondary">Voltar</a>
     </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>
