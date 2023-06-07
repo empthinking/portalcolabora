@@ -1,12 +1,3 @@
-<?php
-require_once 'db.php';
-
-session_start();
-
-$product = $result->fetch_assoc();
-
-$stmt->close();
-?>
 
 <!DOCTYPE html>
 <html>
