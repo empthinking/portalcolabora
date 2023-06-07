@@ -68,7 +68,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     <form action="<?php echo $url; ?>" method="POST">
         <div class="form-group">
             <label for="name">Nome:</label>
-            <input type="text" class="form-control" id="name" name="name" pattern="^[a-zA-Z ]+$" value="<?php echo $name; ?>" required>
+            <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" required>
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
