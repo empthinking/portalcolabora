@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         // Credenciais inválidas, redirecionar para a página de login com mensagem de erro
         $_SESSION['login_error'] = 'Email ou senha inválidos';
-        header("Location: login_admin.php");
+        header("Location: ../index.php");
         exit();
     }
 }
