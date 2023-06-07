@@ -87,14 +87,14 @@ if (isset($_POST['delete_product'])) {
     while ($row = $result->fetch_assoc()) {
         echo <<<ROW
             <tr>
-              <td><a href="produto.php?id={$row['Product_Id']}" class="btn btn-primary">acessar</a></td>
+              <td><a href="produto.php?id={$row['Product_Id']}" class="btn btn-primary mt-3">acessar</a></td>
               <td>{$row['Product_Name']}</td>
               <td>{$row['Product_Price']}</td>
               <td>{$row['Product_Date']}</td>
               <td><a href="#" class="btn btn-success">modificar</a></td>
               <td><a href="#" class="btn btn-danger">excluir</a></td>
             </tr>
-            ROW;
+ROW;
     }
 ?>
       </tbody>    
