@@ -62,9 +62,6 @@ if (isset($_POST['delete_product'])) {
 ?>
 
 <?php require_once 'header.php'; ?>
-<div class="conteiner">
-  <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . '?mode=register'; ?>" class="btn btn-primary">Adicionar</a>
-</div>
 
 <?php if ($result->num_rows > 0) : ?>
 
@@ -105,5 +102,9 @@ while ($row = $result->fetch_assoc()) {
   <h2>Nenhum produto registrado</h2>
 
 <?php endif; ?>
+
+<div class="conteiner text-center">
+  <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . '?mode=register'; ?>" class="btn btn-lg btn-primary">Adicionar</a>
+</div>
 
 <?php require_once 'footer.php'; ?>
