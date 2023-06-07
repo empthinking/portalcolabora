@@ -43,46 +43,58 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 ?>
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Login</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <style>
+    <title>Login</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
     .bg-header {
-      background-color: rgb(99, 242, 83);
+        background-color: rgb(99, 242, 83);
     }
+
     body {
-          min-height: 100vh;
-          display: flex;
-          flex-direction: column;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
     }
-  </style>
+    .fundo {
+        background-image: url('img/Fundo\ login.jpeg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }    
+    </style>
 </head>
+
 <body>
-
-  <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <h2 class="mb-4">Login</h2>
-        <h4 class="text-danger"><?php echo $error; ?></h4>
-        <form action="login.php" method="POST">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required value="<?php echo $email; ?>" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
-          </div>
-          <div class="form-group">
-            <label for="password">Senha</label>
-            <input type="password" class="form-control" id="password" name="password" value="<?php echo $password; ?>" required>
-          </div>
-          <div class="d-flex">
-            <button type="submit" class="btn btn-primary m-3">Entrar</button>
-            <a href="index.php" class="btn btn-danger m-3">Voltar</a>
-          </div>
-        </form>
-      </div>
+    <div class="fundo">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <h2 class="mb-4">Login</h2>
+                    <h4 class="text-danger"><?php echo $error; ?></h4>
+                    <form action="login.php" method="POST">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required
+                                value="<?php echo $email; ?>"
+                                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Senha</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                value="<?php echo $password; ?>" required>
+                        </div>
+                        <div class="d-flex">
+                            <button type="submit" class="btn btn-primary m-3">Entrar</button>
+                            <a href="index.php" class="btn btn-danger m-3">Voltar</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-
-<?php
+    <?php
 
 $db->close();
 
