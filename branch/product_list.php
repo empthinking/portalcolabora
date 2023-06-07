@@ -45,7 +45,7 @@ require_once 'header.php';
                                 <?php echo $row['Product_Name']; ?>
                             </a>
                         </h5>
-                        <p class="card-text">Price: <?php echo $row['Product_Price']; ?></p>
+                        <p class="card-text">Preço: <?php echo $row['Product_Price']; ?></p>
                     </div>
                 </div>
             </div>
