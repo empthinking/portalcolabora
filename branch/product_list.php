@@ -32,12 +32,12 @@ require_once 'header.php';
 <div class="container">
     <h2 class="mt-4">Recentes</h2>
 
- <div class="row">
+<div class="row">
     <?php while ($row = $result->fetch_assoc()) : ?>
         <div class="col-md-4 mb-4">
             <div class="card">
                 <a href="produto.php?id=<?php echo $row['Product_Id']; ?>">
-                    <img src="<?php echo $row['Image_Name']; ?>" class="card-img-top img-fluid" alt="Product Image">
+                    <img src="<?php echo $row['Image_Name']; ?>" class="card-img-top img-fluid" alt="Product Image" style="width: 350px; height: 400px;">
                 </a>
                 <div class="card-body">
                     <h5 class="card-title">
@@ -50,6 +50,7 @@ require_once 'header.php';
             </div>
         </div>
     <?php endwhile; ?>
+
 
 
         <?php if ($result->num_rows === 0) : ?>
