@@ -36,20 +36,21 @@ $numero = $user['User_Number'];
 // Fecha a conexão com o banco de dados
 mysqli_close($db);
 ?>
-<main>
-    <div class="profile">
-      <h2>Perfil do Usuário</h2>
-      <div class="profile-info">
-        <h3>Nome: <?php echo $nome; ?></h3>
-        <h3>Email: <?php echo $email; ?></h3>
-        <h3>Número: <?php echo $numero; ?></h3>
-      </div>
-      <div class="profile-actions">
-        <a href="editar_perfil.php">Editar Perfil</a>
-        <a href="meus_produtos.php">Meus Produtos</a>
-        <a href="mensagens.php">Mensagens</a>
-      </div>
+<main class="d-flex align-items-center justify-content-center">
+  <div class="profile border">
+    <h2>Perfil do Usuário</h2>
+    <div class="profile-info">
+      <h3>Nome: <?php echo $nome; ?></h3>
+      <h3>Email: <?php echo $email; ?></h3>
+      <h3>Número: <?php echo $numero; ?></h3>
     </div>
-  </main>
+    <div class="profile-actions">
+      <a href="editar_perfil.php">Editar Perfil</a>
+      <a href="meus_produtos.php">Meus Produtos</a>
+      <a href="mensagens.php">Mensagens</a>
+    </div>
+  </div>
+</main>
+
 
 <?php require_once 'footer.php'; ?>
