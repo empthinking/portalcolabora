@@ -37,10 +37,10 @@ require_once 'header.php';
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <a href="produto.php?id=<?php echo $row['Product_Id']; ?>">
-                    <img src="<?php echo $row['Image_Name']; ?>" class="card-img-top" alt="Product Image" style="width: 300px; height: 300px;">
+                    <img src="<?php echo $row['Image_Name']; ?>" class="card-img-top" alt="Product Image" style="width: 400px; height: 400px;">
                     </a>
                     <div class="card-body">
-                        <h5 class="card-title">3
+                        <h5 class="card-title">
                             <a href="produto.php?id=<?php echo $row['Product_Id']; ?>">
                                 <?php echo $row['Product_Name']; ?>
                             </a>
