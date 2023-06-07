@@ -91,8 +91,8 @@ if (isset($_POST['delete_product'])) {
               <td>{$row['Product_Name']}</td>
               <td>{$row['Product_Price']}</td>
               <td>{$row['Product_Date']}</td>
-              <td><a href="#" class="btn btn-success">modificar</a></td>
-              <td><a href="#" class="btn btn-warning">excluir</a></td>
+              <td><a href="editarproduto.php" class="btn btn-success">modificar</a></td>
+              <td><a href="excluirproduto.php" class="btn btn-warning">excluir</a></td>
             </tr>
 ROW;
     }
