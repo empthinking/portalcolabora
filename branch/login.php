@@ -51,7 +51,13 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     .bg-header {
         background-color: rgb(99, 242, 83);
     }
-    .fundo{
+      body {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .fundo {
             margin: 0;
             padding: 0;
             background-color: #000000;
