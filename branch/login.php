@@ -109,7 +109,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             </div>
         </div>
     </div>
-    <?php
+                                                                          <?php
 
 $db->close();
 
