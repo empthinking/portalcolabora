@@ -37,7 +37,7 @@ require_once 'header.php';
             <div class="col-md-4 mb-4">
                 <div class="card">
                     <a href="produto.php?id=<?php echo $row['Product_Id']; ?>">
-                    <img src="<?php echo $row['Image_Name']; ?>" class="card-img-top fixed-size" alt="Product Image">
+                    <img src="<?php echo $row['Image_Name']; ?>" class="card-img-top fixed-size" alt="Product Image  style="width: 100%; height: auto;">
                     </a>
                     <div class="card-body">
                         <h5 class="card-title">
