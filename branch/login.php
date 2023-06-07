@@ -63,15 +63,15 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 
         @keyframes slideAnimation {
             0%, 33.33% {
-                background-image: url(/img/gliricidia.jpg);
+                background-image: url(./img/gliricidia.jpg);
                 opacity: 1;
             }
             33.34%, 66.66% {
-                background-image: url(/img/GVI-Agriculture-800x443.png);
+                background-image: url(./img/GVI-Agriculture-800x443.png);
                 opacity: 1;
             }
             66.67%, 100% {
-                background-image: url(/img/plantar-pimenta-do-reino-cursos-cpt.jpg);
+                background-image: url(./img/plantar-pimenta-do-reino-cursos-cpt.jpg);
                 opacity: 1;
             }
         }
