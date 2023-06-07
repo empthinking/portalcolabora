@@ -26,7 +26,7 @@ CREATE TABLE Products (
 
 CREATE TABLE Images (
     Image_Id   INT AUTO_INCREMENT,
-    Image_Name VARCHAR(50) NOT NULL,
+    Image_Name VARCHAR(200) NOT NULL,
     Image_Date DATETIME NOT NULL,
     User_Id    INT,
     Product_Id INT,
