@@ -8,26 +8,6 @@ if (!isset($_SESSION['id']) || $_SESSION['type'] !== 'vendedor') {
     exit();
 }
 
-// Verifica se o ID do produto está presente
-if (!isset($_GET['id'])) {
-    header("Location: meusprodutos.php");
-    exit();
-}
-
-$productId = $_GET['id'];
-$userId = $_SESSION['id'];
-
-// Verifica se o produto pertence ao usuário logado
-$stmt = $db->prepare('SELECT * FROM Products WHERE Product_Id = ? AND User_Id = ?');
-$stmt->bind_param('ii', $productId, $userId);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows === 0) {
-    // O produto não pertence ao usuário logado
-    header("Location: meusprodutos.php");
-    exit();
-}
 
 $product = $result->fetch_assoc();
 
