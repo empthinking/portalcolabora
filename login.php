@@ -46,6 +46,8 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 
 <head>
     <title>Login</title>
+        <link rel="icon" type="image/x-icon" href="./img/favicon-32x32.png">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
     .bg-header {
