@@ -74,7 +74,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="text-center">
-                        <img class="mx-auto" src="img/logo G (2).png" width="323px" alt="logo">
+                        <img class="mx-auto" src="img/logo.png" width="323px" alt="logo">
                     </div>
                     <h2 class="mb-4 text-center">LOGIN</h2>
                     <h4 class="text-danger"><?php echo $error; ?></h4>
