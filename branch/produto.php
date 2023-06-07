@@ -61,7 +61,7 @@ $stmt->close();
                 <p class="card-text">Preço: <?php echo $product_price; ?></p>
                 <p class="card-text">Anunciante: <?php echo $vendor_name; ?></p>
                 <a class="btn btn-success" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?id=$product_id&mode=register"; ?>">Contatar<a>
-                <a href="https://api.whatsapp.com/send?phone=XXXXXXXXXXX&text=Olá, tudo bem?" target="_blank"><i class="fa-brands fa-square-whatsapp" style="color: #35bc1a;"></i>Enviar mensagem pelo WhatsApp </a>
+                <a class="btn btn-success" href="https://api.whatsapp.com/send?phone=XXXXXXXXXXX&text=Olá, tudo bem?" target="_blank">Enviar mensagem pelo WhatsApp </a>
             </div>
         </div>
 
