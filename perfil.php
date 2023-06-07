@@ -46,7 +46,6 @@ mysqli_close($db);
     </div>
     <div class="profile-actions">
       <a href="editar_perfil.php">Editar Perfil</a>
-      <a href="meusprodutos.php">Meus Produtos</a>
       <a href="mensagens.php">Mensagens</a>
     </div>
   </div>
