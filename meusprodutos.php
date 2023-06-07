@@ -65,25 +65,27 @@ if (isset($_POST['delete_product'])) {
 
 <?php if ($result->num_rows > 0) : ?>
 
-  <div class="conteiner">
+<div class="conteiner">
     <br>
     <br>
-    <br>
-    <h1 class="text-center">Meus Produtos</h1>
-    <br>
-    <table class="table">
-      <thead>
-        <tr>
-          <th></th>
-          <th>Nome</th>
-          <th>Preço</th>
-          <th>Data</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-<?php
+    <fieldset class="bg-light opacity-75 p-4 rounded">
+        <h1 class="text-center">Meus Produtos</h1>
+        <br>
+        <br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Nome</th>
+                    <th>Preço</th>
+                    <th>Data</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+    </fieldset>
+    <?php
 
 while ($row = $result->fetch_assoc()) {
     echo '<tr>';
@@ -97,18 +99,19 @@ while ($row = $result->fetch_assoc()) {
 }
 ?>
 
-      </tbody>    
+    </tbody>
     </table>
-  </div>
+</div>
 
 <?php else: ?>
 
-  <h2>Nenhum produto registrado</h2>
+<h2>Nenhum produto registrado</h2>
 
 <?php endif; ?>
 
 <div class="conteiner text-center">
-  <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . '?mode=register'; ?>" class="btn btn-lg btn-primary">Adicionar</a>
+    <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . '?mode=register'; ?>"
+        class="btn btn-lg btn-primary">Adicionar</a>
 </div>
 
 <?php require_once 'footer.php'; ?>
