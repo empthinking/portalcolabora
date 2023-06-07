@@ -56,6 +56,8 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 <head>
     <title>User Registration Form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="icon" type="image/x-icon" href="./img/favicon-32x32.png">
+
     <style>
         .container {
             max-width: 600px;
