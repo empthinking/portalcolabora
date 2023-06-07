@@ -14,7 +14,8 @@ if (!isset($_SESSION['admin']) || $_SESSION['admin'] !== true) {
 }
 
 // Incluir o arquivo de conexão com o banco de dados
-require_once "dbconn.php";
+require_once "../db.php";
+
 
 // Consultar a tabela Users para obter a lista de usuários
 $sql = "SELECT * FROM Users";
