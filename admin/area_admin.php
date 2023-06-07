@@ -11,6 +11,7 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
 <!DOCTYPE html>
 <html>
 <head>
+        <link rel="icon" type="image/x-icon" href="../img/Ativo 6 black.png">
     <title>Página de Administração</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
