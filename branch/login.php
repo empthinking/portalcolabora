@@ -73,9 +73,11 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             <label for="password">Senha</label>
             <input type="password" class="form-control" id="password" name="password" value="<?php echo $password; ?>" required>
           </div>
-          <button type="submit" class="btn btn-primary">Entrar</button>
+          <div class="d-flex">
+            <button type="submit" class="btn btn-primary">Entrar</button>
+            <a href="index.php" class="btn btn-danger mt-3">Voltar</a>
+          </div>
         </form>
-        <a href="index.php" class="btn btn-danger mt-3">Voltar</a>
       </div>
     </div>
   </div>
