@@ -38,19 +38,20 @@ mysqli_close($db);
 ?>
 
 <main class="align-items-center justify-content-center mt-5">
+  <fieldset class="bg-light opacity-60 p-4 rounded">
     <h2 class="text-center mb-5" style="font-family: 'Gill Sans';">PERFIL DE USUÁRIO</h2>
     <div class="d-flex justify-content-center align-items-start mt-5">
-        <div class="text-start">
-            <h3 style="font-family: 'Gill Sans';">Nome: <?php echo $nome; ?></h3>
-            <h3 style="font-family: 'Gill Sans';">Email: <?php echo $email; ?></h3>
-            <h3 style="font-family: 'Gill Sans';">Número: <?php echo $numero; ?></h3>
-        </div>
+      <div class="text-start">
+        <h3 style="font-family: 'Gill Sans';">Nome: <?php echo $nome; ?></h3>
+        <h3 style="font-family: 'Gill Sans';">Email: <?php echo $email; ?></h3>
+        <h3 style="font-family: 'Gill Sans';">Número: <?php echo $numero; ?></h3>
+      </div>
     </div>
-
-    <div class="profile-actions justify-content-between mt-3 text-center">
-        <a href="editar_perfil.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-success">Editar Perfil</a>
-        <a href="mensagens.php" class="btn btn-primary">Mensagens</a>
-    </div>
+  </fieldset>
+  <div class="profile-actions justify-content-between mt-3 text-center">
+    <a href="editar_perfil.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-success">Editar Perfil</a>
+    <a href="mensagens.php" class="btn btn-primary">Mensagens</a>
+  </div>
 </main>
 
 <?php require_once 'footer.php'; ?>
