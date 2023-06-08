@@ -37,7 +37,7 @@ $numero = $user['User_Number'];
 mysqli_close($db);
 ?>
 
-<main class="d-flex align-items-center justify-content-center mt: 5">
+<main class="d-flex align-items-center justify-content-center mt-5">
   <div class="profile border">
     <h2>Perfil do Usuário</h2>
     <div class="profile-info">
