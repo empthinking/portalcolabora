@@ -128,7 +128,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
         </div>
         <div class="text-center">
             <button type="submit" id="submit" class="btn btn-success">Cadastrar</button>
-            <a href="index.php" class="btn btn-link">Voltar</a>
+            <a href="index.php" class="btn btn-danger">Voltar</a>
         </div>
     </form>
 </div>
