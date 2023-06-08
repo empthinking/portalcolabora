@@ -40,7 +40,7 @@ mysqli_close($db);
 <main class="align-items-center justify-content-center mt-5 text-center">
     <h2 class="text-center" style="font-family: 'Gill Sans';">PERFIL DE USUÁRIO</h2>
     <div class="profile border">
-        <div class="profile-info">
+        <div class="d-flex justify-content-start">
             <h3>Nome: <?php echo $nome; ?></h3>
             <h3>Email: <?php echo $email; ?></h3>
             <h3>Número: <?php echo $numero; ?></h3>
