@@ -39,14 +39,14 @@ mysqli_close($db);
 
 <main class="align-items-center justify-content-center mt-5">
     <h2 class="text-center" style="font-family: 'Gill Sans';">PERFIL DE USUÁRIO</h2>
-    <div class="profile border">
+    <div class="profile border text-center">
         <div class="text-start">
             <h3>Nome: <?php echo $nome; ?></h3>
             <h3>Email: <?php echo $email; ?></h3>
             <h3>Número: <?php echo $numero; ?></h3>
         </div>
     </div>
-    <div class="profile-actions justify-content-between mt-5">
+    <div class="profile-actions justify-content-between mt-5 text-center">
         <a href="editar_perfil.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-success">Editar Perfil</a>
         <a href="mensagens.php" class="btn btn-primary">Mensagens</a>
     </div>
