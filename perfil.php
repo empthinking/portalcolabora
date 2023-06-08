@@ -46,7 +46,7 @@ mysqli_close($db);
             <h3>Número: <?php echo $numero; ?></h3>
         </div>
     </div>
-    <div class="profile-actions justify-content-between">
+    <div class="profile-actions justify-content-between mt-5">
         <a href="editar_perfil.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-success">Editar Perfil</a>
         <a href="mensagens.php" class="btn btn-primary">Mensagens</a>
     </div>
