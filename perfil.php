@@ -47,7 +47,7 @@ mysqli_close($db);
         </div>
     </div>
 
-    <div class="profile-actions justify-content-between mt-5 text-center">
+    <div class="profile-actions justify-content-between mt-3 text-center">
         <a href="editar_perfil.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-success">Editar Perfil</a>
         <a href="mensagens.php" class="btn btn-primary">Mensagens</a>
     </div>
