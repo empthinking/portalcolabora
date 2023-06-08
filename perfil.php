@@ -38,8 +38,8 @@ mysqli_close($db);
 ?>
 
 <main class="align-items-center justify-content-center mt-5">
-    <h2 class="text-center" style="font-family: 'Gill Sans';">PERFIL DE USUÁRIO</h2>
-    <div class="d-flex justify-content-center align-items-start">
+    <h2 class="text-center mb-5" style="font-family: 'Gill Sans';">PERFIL DE USUÁRIO</h2>
+    <div class="d-flex justify-content-center align-items-start mt-5">
         <div class="text-start">
             <h3 style="font-family: 'Gill Sans';">Nome: <?php echo $nome; ?></h3>
             <h3 style="font-family: 'Gill Sans';">Email: <?php echo $email; ?></h3>
