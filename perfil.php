@@ -42,9 +42,9 @@ mysqli_close($db);
     <h2 class="text-center mb-5">PERFIL DE USUÁRIO</h2>
     <div class="d-flex justify-content-center align-items-start mt-5">
       <div class="text-start">
-        <h3>Nome: <?php echo $nome; ?></h3>
-        <h3>Email: <?php echo $email; ?></h3>
-        <h3>Número: <?php echo $numero; ?></h3>
+        <h3>NOME: <?php echo $nome; ?></h3>
+        <h3>EMAIL: <?php echo $email; ?></h3>
+        <h3>NÚMERO: <?php echo $numero; ?></h3>
       </div>
     </div>
   </fieldset>
