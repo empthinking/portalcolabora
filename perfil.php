@@ -38,18 +38,18 @@ mysqli_close($db);
 ?>
 
 <main class="d-flex align-items-center justify-content-center mt-5">
-  <div class="profile border">
-    <h2>Perfil do Usuário</h2>
-    <div class="profile-info">
-      <h3>Nome: <?php echo $nome; ?></h3>
-      <h3>Email: <?php echo $email; ?></h3>
-      <h3>Número: <?php echo $numero; ?></h3>
+    <h2 class="text-center" style="font-family: 'Gill Sans';">Perfil do Usuário</h2>
+    <div class="profile border">
+        <div class="profile-info">
+            <h3>Nome: <?php echo $nome; ?></h3>
+            <h3>Email: <?php echo $email; ?></h3>
+            <h3>Número: <?php echo $numero; ?></h3>
+        </div>
     </div>
-    <div class="profile-actions">
-<a href="editar_perfil.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-primary">Editar Perfil</a>
-      <a href="mensagens.php" class="btn btn-primary">Mensagens</a>
+    <div class="profile-actions justify-content-between">
+        <a href="editar_perfil.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-success">Editar Perfil</a>
+        <a href="mensagens.php" class="btn btn-primary">Mensagens</a>
     </div>
-  </div>
 </main>
 
 <?php require_once 'footer.php'; ?>
