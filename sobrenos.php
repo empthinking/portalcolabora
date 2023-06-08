@@ -1,3 +1,4 @@
+<?php require_once 'header.php'; ?>
 <main>
 <div class="bg-primary text-white text-center py-5">
     <h1>Sobre Nós</h1>
@@ -19,3 +20,4 @@
     </div>
 </div>
 </main>
+<?php require_once 'footer.php'; ?>
