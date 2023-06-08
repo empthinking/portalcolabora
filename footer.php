@@ -4,7 +4,7 @@
       <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">Início</a></li>
       <li class="nav-item"><a href="contato.php" class="nav-link px-2 text-muted">Contato</a></li>
       <li class="nav-item"><a href="faq.php" class="nav-link px-2 text-muted">FAQs</a></li>
-      <li class="nav-item"><a href="about.php" class="nav-link px-2 text-muted">Sobre Nós</a></li>
+      <li class="nav-item"><a href="sobrenos.php" class="nav-link px-2 text-muted">Sobre Nós</a></li>
     </ul>
     <p class="text-center text-muted">© <?php echo date('Y'); ?> UEPA</p>
   </footer>
