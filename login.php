@@ -4,25 +4,24 @@ require_once 'db.php';
 
 session_start();
 
-if(isUserLoggedIn()) header('Location: index.php');
+if (isUserLoggedIn()) header('Location: index.php');
 
 $password = $email = $error = '';
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email     = validateData($_POST['email']);
     $password  = htmlspecialchars($_POST['password']);
 
-    $getUserByEmail = function() use ($email, $db) : false | array {
+    $getUserByEmail = function () use ($email, $db): false | array {
         $stmt = $db->prepare("SELECT * FROM Users WHERE User_Email = ?");
         $stmt->bind_param('s', $email);
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->num_rows > 0 ? $result->fetch_assoc() : false;
     };
-        
-    if(!($user = $getUserByEmail()) || !password_verify($password, $user['User_Password'])) {
-        $error = 'Email ou Senha não encontrados';
 
+    if (!($user = $getUserByEmail()) || !password_verify($password, $user['User_Password'])) {
+        $error = 'Email ou Senha não encontrados';
     } else {
         $_SESSION['login']     = true;
         $_SESSION['username']  = $user['User_Name'];
@@ -31,11 +30,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['gender']    = $user['User_Gender'];
 
         $db->close();
-        
+
         header('Location: index.php');
         exit();
     }
-
 }
 
 $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
@@ -46,7 +44,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 
 <head>
     <title>Login</title>
-        <link rel="icon" type="image/x-icon" href="./img/favicon-32x32.png">
+    <link rel="icon" type="image/x-icon" href="./img/favicon-32x32.png">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
@@ -57,11 +55,19 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     }
 
     .fundo {
-        background-image:  url(./img/GVI-Agriculture-800x443.png);
+        background-image: url(./img/GVI-Agriculture-800x443.png);
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
         height: 100vh;
+    }
+
+    @media screen and (max-width: 600px) {
+        .card {
+            height: 80vh;
+            width: 75vw;
+        }
+
     }
     </style>
 </head>
@@ -70,7 +76,8 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     <div class="fundo">
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="p-4 mx-5 mt-5 mb-5 rounded" style="background-color: rgba(255, 255, 255, 0.5);">
+                <div class="p-4 mx-5 mt-5 mb-5 rounded" style="background-color: rgba(255, 255, 255, 0.5);"
+                    class="card">
                     <div class="text-center">
                         <img class="mx-auto" src="img/logo.png" width="323px" alt="logo">
                     </div>
@@ -99,6 +106,6 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     </div>
     <?php
 
-$db->close();
+    $db->close();
 
-require_once 'footer.php';
+    require_once 'footer.php';
