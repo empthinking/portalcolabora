@@ -16,7 +16,7 @@ require_once 'header.php';
         $intuito = "fomentar a compra e venda da pimenta-do-reino na região do Baixo Tocantins.";
 
         // Exibindo o contexto na página
-        echo "<p class='fs-5 text-center mt-5'>O $projeto é um projeto desenvolvido pela $instituicao com o intuito de $intuito</p>";
+        echo "<h3 class='fs-5 text-center mt-5'>O $projeto é um projeto desenvolvido pela $instituicao com o intuito de $intuito</h3>";
     ?>
 </fieldset>
 </body>
