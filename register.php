@@ -95,19 +95,19 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             <label for="gender"><i class="fas fa-venus-mars"></i> Gênero:</label>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="gender" id="gender_male" value="masculino" required>
-                <label class="form-check-label" for="gender_male"><i class="fas fa-male"></i> 
+                <label class="form-check-label" for="gender_male"> 
                     Masculino
                 </label>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="gender" id="gender_female" value="feminino" required>
-                <label class="form-check-label" for="gender_female"><i class="fas fa-male"></i> 
+                <label class="form-check-label" for="gender_female"> 
                     Feminino
                 </label>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="gender" id="gender_nonbinary" value="naobinario" required>
-                <label class="form-check-label" for="gender_nonbinary"><i class="far fa-neuter"></i> 
+                <label class="form-check-label" for="gender_nonbinary"> 
                     Não-Binário
                 </label>
             </div>
@@ -116,20 +116,20 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             <label for="user_type"><i class="fas fa-users"></i> Tipo de usuário:</label>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="user_type" id="user_type_client" value="cliente" required>
-                <label class="form-check-label" for="user_type_client"><i class="fal fa-bags-shopping"></i> 
+                <label class="form-check-label" for="user_type_client">
                     Cliente
                 </label>
             </div>
             <div class="form-check">
                 <input class="form-check-input" type="radio" name="user_type" id="user_type_vendor" value="vendedor" required>
-                <label class="form-check-label" for="user_type_vendor"><i class="fad fa-cash-register"></i> 
+                <label class="form-check-label" for="user_type_vendor">
                     Vendedor
                 </label>
             </div>
         </div>
         <div class="text-center">
             <button type="submit" id="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i> Cadastrar</button>
-            <a href="index.php" class="btn btn-danger"><i class="far fa-undo-alt"></i> Voltar</a>
+            <a href="index.php" class="btn btn-danger"><i class="fal fa-undo"></i> Voltar</a>
         </div>
     </form>
 </div>
@@ -154,14 +154,6 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     confirmPasswordInput.addEventListener('input', checkPasswordMatch);
 </script>
 
-  <footer class="py-3 mt-auto">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-      <li class="nav-item"><a href="index.php" class="nav-link px-2 text-muted">Início</a></li>
-      <li class="nav-item"><a href="contact.php" class="nav-link px-2 text-muted">Contato</a></li>
-      <li class="nav-item"><a href="faq.php" class="nav-link px-2 text-muted">FAQs</a></li>
-      <li class="nav-item"><a href="about.php" class="nav-link px-2 text-muted">Sobre Nós</a></li>
-    </ul>
-    <p class="text-center text-muted">© <?php echo date('Y'); ?> UEPA</p>
-  </footer>
+  <?php require_once 'faq.php'?>
 </body>
 </html>

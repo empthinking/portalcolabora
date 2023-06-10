@@ -93,8 +93,8 @@ while ($row = $result->fetch_assoc()) {
     echo '<td>' . $row['Product_Name'] . '</td>';
     echo '<td>' . $row['Product_Price'] . '</td>';
     echo '<td>' . $row['Product_Date'] . '</td>';
-    echo '<td><a href="editarproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-warning"><i class="far fa-edit"></i>&nbsp;Modificar</a></td>';
-    echo '<td><a href="excluirproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp;Excluir</a></td>';
+    echo '<td><a href="editarproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-warning"><i class="far fa-edit"></i> Modificar</a></td>';
+    echo '<td><a href="excluirproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Excluir</a></td>';
     echo '</tr>';
 }
 ?>
