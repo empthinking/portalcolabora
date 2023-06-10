@@ -6,7 +6,7 @@
       <li class="nav-item"><a href="faq.php" class="nav-link px-2 text-muted">FAQs</a></li>
       <li class="nav-item"><a href="sobrenos.php" class="nav-link px-2 text-muted">Sobre Nós</a></li>
     </ul>
-    <p class="text-center text-muted">© <?php echo date('Y'); ?> UEPA</p>
+    <p class="text-center text-muted"><i class="fa-regular fa-copyright"></i> <?php echo date('Y'); ?> UEPA</p>
   </footer>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
