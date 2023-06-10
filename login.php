@@ -62,12 +62,16 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
         height: 100vh;
     }
 
+    .card {
+        background-color: rgba(255, 255, 255, 0.5);
+        
+    }
+
     @media screen and (max-width: 600px) {
         .card {
             height: 80vh;
             width: 75vw;
         }
-
     }
     </style>
 </head>
@@ -76,8 +80,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     <div class="fundo">
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="p-4 mx-5 mt-5 mb-5 rounded" style="background-color: rgba(255, 255, 255, 0.5);"
-                    class="card">
+                <div class="card p-4 mx-5 mt-5 mb-5 rounded">
                     <div class="text-center">
                         <img class="mx-auto" src="img/logo.png" width="323px" alt="logo">
                     </div>
