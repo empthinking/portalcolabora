@@ -64,13 +64,14 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 
     .card {
         background-color: rgba(255, 255, 255, 0.5);
+        width: 100vw;
         
     }
 
     @media screen and (max-width: 320px) {
-        .card {
-            height: 80vh;
-            width: 75vw;
+        .card{        
+            height: 100vh;
+            width: 100vw;
         }
     }
     </style>
