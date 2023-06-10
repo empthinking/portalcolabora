@@ -89,12 +89,12 @@ if (isset($_POST['delete_product'])) {
 
 while ($row = $result->fetch_assoc()) {
     echo '<tr>';
-    echo '<td><a href="produto.php?id=' . $row['Product_Id'] . '" class="btn btn-success mt-3">Acessar</a></td>';
+    echo '<td><a href="produto.php?id=' . $row['Product_Id'] . '" class="btn btn-success mt-3"><i class="fas fa-sign-in-alt"></i>Acessar</a></td>';
     echo '<td>' . $row['Product_Name'] . '</td>';
     echo '<td>' . $row['Product_Price'] . '</td>';
     echo '<td>' . $row['Product_Date'] . '</td>';
     echo '<td><a href="editarproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-warning"><i class="far fa-edit"></i>Modificar</a></td>';
-    echo '<td><a href="excluirproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-danger">Excluir</a></td>';
+    echo '<td><a href="excluirproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Excluir</a></td>';
     echo '</tr>';
 }
 ?>
@@ -113,7 +113,7 @@ while ($row = $result->fetch_assoc()) {
 <br>
 <div class="conteiner text-center">
     <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . '?mode=register'; ?>"
-        class="btn btn-lg btn-primary">Adicionar Produto</a>
+        class="btn btn-lg btn-primary"><i class="fas fa-plus-circle"></i>Adicionar Produto</a>
 </div>
 
 <?php require_once 'footer.php'; ?>
