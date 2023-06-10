@@ -1,25 +1,26 @@
 <?php
 session_start();
-require_once 'header.php'; ?>
-<main>
-<div class="bg-primary text-white text-center py-5">
+require_once 'header.php'; 
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Sobre Nós</title>
+</head>
+<body>
     <h1>Sobre Nós</h1>
-</div>
-<div class="container py-5">
-    <div class="row">
-        <div class="col-md-6">
-            <h2>Quem somos</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec volutpat nisi. Integer auctor ipsum
-                ac elit eleifend, in efficitur neque ultricies. Proin posuere orci ac enim viverra mollis. Nullam eu
-                quam ut lorem rhoncus condimentum. In porttitor bibendum dui, at fringilla elit semper eget.</p>
-        </div>
-        <div class="col-md-6">
-            <h2>Nossa Missão</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec volutpat nisi. Integer auctor ipsum
-                ac elit eleifend, in efficitur neque ultricies. Proin posuere orci ac enim viverra mollis. Nullam eu
-                quam ut lorem rhoncus condimentum. In porttitor bibendum dui, at fringilla elit semper eget.</p>
-        </div>
-    </div>
-</div>
-</main>
-<?php require_once 'footer.php'; ?>
+
+    <?php
+        // Contexto sobre o Portal Colabora
+        $projeto = "Portal Colabora";
+        $instituicao = "UEPA";
+        $intuito = "fomentar a compra e venda da pimenta-do-reino na região do Baixo Tocantins.";
+
+        // Exibindo o contexto na página
+        echo "<p>O $projeto é um projeto desenvolvido pela $instituicao com o intuito de $intuito</p>";
+    ?>
+
+</body>
+</html>
