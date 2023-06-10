@@ -7,7 +7,11 @@ require_once 'header.php';
 <html>
 
 <body>
-    <div style="background-image: url(./img/GVI-Agriculture-800x443.png);">
+    <div style="background-image: url(./img/GVI-Agriculture-800x443.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        height: 100vh;">
         <fieldset class="bg-light opacity-60 p-4 mx-5 my-5 mb-5 rounded">
             <h1 class="text-center">SOBRE NÓS</h1>
 
