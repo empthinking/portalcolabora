@@ -69,7 +69,7 @@ $checkUnreadMessages = function() use ($id, $db) : bool {
           </ul>
           <form id="search-form" action="index.php" method="GET" class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" name="search" type="search" placeholder="Pesquisar..." aria-label="Search">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fad fa-search"></i>&nbsp;Pesquisar</button>
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Pesquisar</button>
           </form>
 
     <!--Carrega em caso do usuario esteja logado -->
