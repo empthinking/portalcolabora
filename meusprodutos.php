@@ -89,12 +89,12 @@ if (isset($_POST['delete_product'])) {
 
 while ($row = $result->fetch_assoc()) {
     echo '<tr>';
-    echo '<td><a href="produto.php?id=' . $row['Product_Id'] . '" class="btn btn-success mt-3"><i class="fas fa-sign-in-alt"></i>Acessar</a></td>';
+    echo '<td><a href="produto.php?id=' . $row['Product_Id'] . '" class="btn btn-success mt-3"><i class="fas fa-sign-in-alt"></i>&nbsp;Acessar</a></td>';
     echo '<td>' . $row['Product_Name'] . '</td>';
     echo '<td>' . $row['Product_Price'] . '</td>';
     echo '<td>' . $row['Product_Date'] . '</td>';
-    echo '<td><a href="editarproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-warning"><i class="far fa-edit"></i>Modificar</a></td>';
-    echo '<td><a href="excluirproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-danger"><i class="fas fa-trash-alt"></i>Excluir</a></td>';
+    echo '<td><a href="editarproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-warning"><i class="far fa-edit"></i>&nbsp;Modificar</a></td>';
+    echo '<td><a href="excluirproduto.php?id=' . $row['Product_Id'] . '" class="btn btn-danger"><i class="fas fa-trash-alt"></i>&nbsp;Excluir</a></td>';
     echo '</tr>';
 }
 ?>
