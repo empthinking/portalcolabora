@@ -6,7 +6,7 @@ require_once 'header.php';
 ?>
 <html>
 <body>
-<fieldset class="bg-light opacity-60 p-4 mx-5 my-5 rounded">
+<fieldset class="bg-light opacity-60 p-4 mx-5 my-5 mb-5 rounded">
     <h1 class="text-center">SOBRE NÓS</h1>
 
     <?php   
@@ -16,7 +16,7 @@ require_once 'header.php';
         $intuito = "fomentar a compra e venda da pimenta-do-reino na região do Baixo Tocantins.";
 
         // Exibindo o contexto na página
-        echo "<p class='fs-5 text-center'>O $projeto é um projeto desenvolvido pela $instituicao com o intuito de $intuito</p>";
+        echo "<p class='fs-5 text-center mt-5'>O $projeto é um projeto desenvolvido pela $instituicao com o intuito de $intuito</p>";
     ?>
 </fieldset>
 </body>
