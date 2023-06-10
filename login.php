@@ -50,10 +50,6 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
-    .bg-header {
-        background-color: rgb(99, 242, 83, 0.5);
-    }
-
     body {
         min-height: 100vh;
         display: flex;
@@ -74,7 +70,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     <div class="fundo">
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="col-md-6 bg-white rounded-lg w-full max-w-md mx-auto p-8"">
+                <div class="col-md-2 bg-white rounded-lg w-full max-w-md mx-auto p-8">
                     <div class="text-center">
                         <img class="mx-auto" src="img/logo.png" width="323px" alt="logo">
                     </div>
