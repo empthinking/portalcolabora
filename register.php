@@ -154,6 +154,6 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     confirmPasswordInput.addEventListener('input', checkPasswordMatch);
 </script>
 
-  <?php require_once 'faq.php'?>
+  <?php require_once 'footer.php'?>
 </body>
 </html>
