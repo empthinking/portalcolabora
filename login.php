@@ -67,6 +67,8 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
         padding: 20px;
         margin: 20px;
         border-radius: 10px;
+        height: 50vh;
+        width: 50vw;
     }
 
     @media screen and (max-width: 600px) {
@@ -101,7 +103,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
                             <input type="password" class="form-control" id="password" name="password"
                                 value="<?php echo $password; ?>" required>
                         </div>
-                        <div class="d-flex text-center">
+                        <div class="d-flex">
                             <button type="submit" class="btn btn-primary m-3">Entrar</button>
                             <a href="index.php" class="btn btn-danger m-3">Voltar</a>
                         </div>
