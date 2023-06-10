@@ -6,7 +6,7 @@ require_once 'header.php';
 ?>
 <html>
 <body>
-<fieldset class="bg-light opacity-60 p-4 mx-5 rounded">
+<fieldset class="bg-light opacity-60 p-4 mx-5 my-6 rounded">
     <h1 class="text-center">SOBRE NÓS</h1>
 
     <?php   
