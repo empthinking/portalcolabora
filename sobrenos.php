@@ -1,9 +1,5 @@
 <?php require_once 'header.php';?>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <title>Sobre Nós</title>
-</head>
 <body>
     <h1>Sobre Nós</h1>
 
