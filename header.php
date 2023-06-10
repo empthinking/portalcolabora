@@ -96,10 +96,10 @@ $checkUnreadMessages = function() use ($id, $db) : bool {
 <!-- Padrão para usuario não logados -->
 <ul class="navbar-nav ml-auto">
     <li class="nav-item">
-        <a class="nav-link" href="login.php"><i class="fa-solid fa-right-to-bracket"></i> Entrar</a>
+        <a class="nav-link" href="login.php"><i class="fas fa-right-to-bracket"></i> Entrar</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="register.php">Cadastre-se</a>
+        <a class="nav-link" href="register.php"><i class="fas-regular fas-address-card"></i> Cadastre-se</a>
     </li>
 </ul>
 <?php endif; ?>
