@@ -13,7 +13,7 @@ require_once 'header.php';
         background-size: cover;
         background-position: center;
         height: 100vh;">
-        <fieldset class="bg-light opacity-60 p-4 mx-5 mb-5 rounded" style="margin-top: 40vh;">
+        <fieldset class="bg-light opacity-60 p-4 mx-5 mb-5 rounded" style="margin-top: 30vh;">
             <h1 class="text-center">SOBRE NÓS</h1>
 
             <?php   
