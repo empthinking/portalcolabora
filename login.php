@@ -101,7 +101,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
                             <input type="password" class="form-control" id="password" name="password"
                                 value="<?php echo $password; ?>" required>
                         </div>
-                        <div class="d-flex">
+                        <div class="d-flex text-center">
                             <button type="submit" class="btn btn-primary m-3">Entrar</button>
                             <a href="index.php" class="btn btn-danger m-3">Voltar</a>
                         </div>
