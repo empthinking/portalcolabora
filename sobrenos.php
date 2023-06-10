@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php require_once 'header.php';?>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -19,3 +19,4 @@
 
 </body>
 </html>
+<?php require_once 'footer.php';?>
