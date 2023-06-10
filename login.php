@@ -67,8 +67,6 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
         padding: 20px;
         margin: 20px;
         border-radius: 10px;
-        height: 50vh;
-        width: 50vw;
     }
 
     @media screen and (max-width: 600px) {
