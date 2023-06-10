@@ -129,7 +129,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
         </div>
         <div class="text-center">
             <button type="submit" id="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i> Cadastrar</button>
-            <a href="index.php" class="btn danger"><i class="fal fa-undo"></i> Voltar</a>
+            <a href="index.php" class="btn btn-danger"><i class="fal fa-undo"></i> Voltar</a>
         </div>
     </form>
 </div>
