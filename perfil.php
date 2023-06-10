@@ -49,8 +49,8 @@ mysqli_close($db);
     </div>
   </fieldset>
   <div class="profile-actions justify-content-between mt-3 text-center">
-    <a href="editar_perfil.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-success">Editar Perfil</a>
-    <a href="mensagens.php" class="btn btn-primary">Mensagens</a>
+    <a href="editar_perfil.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-success"><i class="far fa-edit"></i> Editar Perfil</a>
+    <a href="mensagens.php" class="btn btn-primary"><i class="fas fa-comments"></i> Mensagens</a>
   </div>
 </main>
 
