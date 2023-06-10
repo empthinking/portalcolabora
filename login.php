@@ -51,7 +51,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
     .bg-header {
-        background-color: rgb(99, 242, 83);
+        background-color: rgb(99, 242, 83, 0.5);
     }
 
     body {
