@@ -70,7 +70,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     <div class="fundo">
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="col-md-2 bg-white rounded-lg w-full max-w-md mx-auto p-8">
+                <div class="col-md-9 bg-white rounded-lg w-full max-w-md mx-auto p-8">
                     <div class="text-center">
                         <img class="mx-auto" src="img/logo.png" width="323px" alt="logo">
                     </div>
