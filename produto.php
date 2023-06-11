@@ -60,8 +60,8 @@ $stmt->close();
                 <p class="card-text"><?php echo $product_description; ?></p>
                 <p class="card-text">Preço: <?php echo $product_price; ?></p>
                 <p class="card-text">Anunciante: <?php echo $vendor_name; ?></p>
-                <a class="btn btn-success mt-2" href="<?php echo isUserLoggedIn() ? htmlspecialchars($_SERVER['PHP_SELF']) . "?id=$product_id&mode=register" : "login.php"; ?>">Contatar<a>
-                <a class="btn btn-success mt-2" <?php echo isUserLoggedIn() ? "href='https://api.whatsapp.com/send?phone=+55$User_Number&text=Olá, tudo bem?' target='_blank'" : "href=login.php"; ?> ><i class="fa-brands fa-whatsapp fa-2xs"></i></a>
+                <a class="btn btn-success my-2 mx-3" href="<?php echo isUserLoggedIn() ? htmlspecialchars($_SERVER['PHP_SELF']) . "?id=$product_id&mode=register" : "login.php"; ?>">Contatar<a>
+                <a class="btn btn-success my-2 mx-3" <?php echo isUserLoggedIn() ? "href='https://api.whatsapp.com/send?phone=+55$User_Number&text=Olá, tudo bem?' target='_blank'" : "href=login.php"; ?> ><i class="fa-brands fa-whatsapp fa-2sm"></i></a>
             </div>
         </div>
 
