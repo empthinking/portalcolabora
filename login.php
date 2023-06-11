@@ -65,7 +65,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     .card {
         background-color: rgba(255, 255, 255, 0.5);
         padding: 20px;
-        margin-top: 20vh;
+        margin-top: 17vh;
         border-radius: 10px;
     }
 
