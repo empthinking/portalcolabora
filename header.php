@@ -86,7 +86,7 @@ $checkUnreadMessages = function() use ($id, $db) : bool {
                     <a class="dropdown-item <?php echo $checkUnreadMessages() ? 'text-danger font-weight-bold' : ''; ?>" href="mensagens.php">Mensagens</a>
                     <?php endif; ?>
                <!--     <a class="dropdown-item" href="#">Configuração</a> -->
-                    <a class="dropdown-item" href="logout.php"><i class="fas fa-right-from-bracket"></i> Sair</a>
+                    <a class="dropdown-item" href="logout.php"><i class="fas fa-chevron-right"></i> Sair</a>
                 </div>
             </li>
         </ul>
