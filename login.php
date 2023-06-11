@@ -65,13 +65,13 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     .card {
         background-color: rgba(255, 255, 255, 0.5);
         padding: 20px;
-        margin: 20px;
+        margin-top: 20vh;
         border-radius: 10px;
     }
 
     @media screen and (max-width: 1000px) {
         .card {
-            height: 40vh;
+            height: 50vh;
             width: 75vw;
             font-size: large;
         }
