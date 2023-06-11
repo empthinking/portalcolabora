@@ -73,7 +73,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
         .card {
             height: 80vh;
             width: 75vw;
-            background-color: red;
+            font-size: large;
         }
     }
     </style>
