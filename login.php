@@ -75,21 +75,17 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             width: 75vw;
             font-size: large;
         }
-
-        label {
+        label{
             font-size: 60px;
         }
-
-        a {
+        a{
             font-size: xx-large;
         }
-
         button {
             font-size: xx-large;
         }
-
-        input {
-            height: 10vh;
+        input{
+            height:10vh;
         }
     }
     </style>
@@ -118,11 +114,8 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
                                 value="<?php echo $password; ?>" required>
                         </div>
                         <div class="d-flex justify-content-center ">
-                            <button type="submit" class="btn btn-primary m-3">Entrar</button>
-                            <a href="index.php" class="btn btn-danger m-3">Voltar</a>
-
-                            <button class="btn btn-lg btn-primary d-sm-none">Botão para Mobile</button>
-                            <button class="btn btn-primary d-none d-sm-inline">Botão para Desktop</button>
+                            <button type="submit" class="btn btn-primary btn-lg m-3">Entrar</button>
+                            <a href="index.php" class="btn btn-danger btn-lg m-3">Voltar</a>
                         </div>
                     </form>
                 </div>
