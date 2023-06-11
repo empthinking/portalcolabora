@@ -68,11 +68,11 @@ if (isset($_POST['delete_product'])) {
 <div class="conteiner">
     <br>
     <br>
-    <fieldset class="bg-light opacity-60 p-4 rounded">
+    <fieldset class="bg-light opacity-60 p-4 rounded table-responsive">
         <h1 class="text-center">Meus Produtos</h1>
         <br>
         <br>
-        <table class="table text-wrap">
+        <table class="table">
             <thead>
                 <tr>
                     <th></th>
