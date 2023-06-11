@@ -76,7 +76,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             font-size: large;
         }
         label{
-            font-size: xx-large;
+            font-size: 60px;
         }
         a{
             font-size: xx-large;
