@@ -75,6 +75,9 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             width: 75vw;
             font-size: large;
         }
+        label{
+            font-size: xx-large;
+        }
     }
     </style>
 </head>
