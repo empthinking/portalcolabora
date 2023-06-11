@@ -71,7 +71,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 
     @media screen and (max-width: 1000px) {
         .card {
-            height: 80vh;
+            height: 40vh;
             width: 75vw;
             font-size: large;
         }
