@@ -69,7 +69,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
         border-radius: 10px;
     }
 
-    @media screen and (max-width: 720px) {
+    @media screen and (max-width: 800px) {
         .card {
             height: 80vh;
             width: 75vw;
