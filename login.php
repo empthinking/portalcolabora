@@ -77,13 +77,15 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
         }
         label{
             font-size: 60px;
-            height:10vh;
         }
         a{
             font-size: xx-large;
         }
         button {
             font-size: xx-large;
+        }
+        input{
+            height:10vh;
         }
     }
     </style>
