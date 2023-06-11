@@ -59,13 +59,13 @@ $checkUnreadMessages = function() use ($id, $db) : bool {
           <!-- Display navigation options for logged-in user -->
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="index.php">Início</a>
+              <a class="nav-link" href="index.php"><i class="fas fa-house"></i> Início</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="contato.php">Contato</a>
+              <a class="nav-link" href="contato.php"><i class="fas fa-message"></i> Contato</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="faq.php">FAQs</a>
+              <a class="nav-link" href="faq.php"><i class="fas fa-clipboard-question"></i> FAQs</a>
             </li>
           </ul>
           <form id="search-form" action="index.php" method="GET" class="form-inline my-2 my-lg-0">
