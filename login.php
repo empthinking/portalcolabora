@@ -78,6 +78,12 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
         label{
             font-size: xx-large;
         }
+        a{
+            font-size: xx-large;
+        }
+        button {
+            font-size: xx-large;
+        }
     }
     </style>
 </head>
