@@ -41,7 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute();
                 $db->close();
         
-                echo '<div class="text-center">CADASTRO REALIZADO COM SUCESSO!</div>';
+                echo '<div class="alert alert-warning d-flex align-items-center" role="alert">
+                <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                <div>
+                 SUCESSO!
+                </div>
+              </div>';
                 header('Refresh: 3; URL=index.php');
                 exit();
             } else {
