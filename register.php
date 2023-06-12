@@ -8,8 +8,6 @@ if (isUserLoggedIn()) {
 
 $name = $password = $password_confirm = $email = $number = $gender = $user_type = '';
 
-$error = array();
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = validateData($_POST['name']);
     $password = htmlspecialchars($_POST['password']);
@@ -19,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gender = validateData($_POST['gender']);
     $user_type = validateData($_POST['user_type']);
 
-    $error = false;
+    $error = array();
 
     $isEmailRegistered = function () use ($email, $db) : bool {
         $stmt = $db->prepare("SELECT * FROM Users WHERE User_Email = ?");
