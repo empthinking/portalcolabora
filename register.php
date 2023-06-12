@@ -40,8 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->bind_param('ssssss', $name, $email, $password, $number, $gender, $user_type);
                 $stmt->execute();
                 $db->close();
-        
-                echo <<<MSG
+                
+//Mensagem de registro concluido
+require_once 'header.php'; 
+echo <<<MSG
 <div class="container">
     <div class="alert alert-success m-3 p-3">CADASTRO REALIZADO COM SUCESSO!</div>
 
@@ -71,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     });
   </script>
 MSG;
+require_once 'footer.php';
 
                 header('Refresh: 3; URL=index.php');
                 exit();
