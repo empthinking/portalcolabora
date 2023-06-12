@@ -75,7 +75,7 @@ echo <<<MSG
       function redirectToOtherPage() {
         setTimeout(function() {
           window.location.href = 'index.php';
-        }, 3000); // 3000 milliseconds = 3 seconds
+        }, 1000);
       }
     });
   </script>
