@@ -54,11 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 require_once 'header.php';
-?>
 
-<div class="container d-flex justify-content-center align-items-center">
-
-<?php 
 if(isset($success))
 echo <<<MSG
 <div class="alert alert-success" role="alert">
@@ -67,6 +63,7 @@ echo <<<MSG
 MSG;
 ?>
 
+<div class="container d-flex justify-content-center align-items-center">
     <div class="w-75">
         <h1 class="text-center mt-3">Fale Conosco</h1>
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
