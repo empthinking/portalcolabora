@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     };
 
     if(empty($name)) $error['name'] = 'Campo precisa ser preenchido';
-    elseif(!preg_match('/^[a-zA-Z ]+$/', $name)) $error['name'] = 'Nome com formato inválido';
+    elseif(!preg_match('/^[a-zA-Z ]+$/', $name)) $error['name'] = 'Nome não deve conter números ou caracteres especiais';
 
     if(empty($password)) $error['password'] = 'Campo precisa ser preenchido';
     elseif(strlen($password) < 8) $error['password'] = 'Senha precisa conter pelo menos 8 caracteres';
@@ -141,18 +141,16 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             </div>
             <div class="form-group">
                 <label for="password"><i class="fas fa-key"></i> Senha (No mínimo 8 caracteres):</label>
-                <input type="password" class="form-control" id="password" name="password" pattern=".{8,}"
-                    value="<?php echo $password; ?>" required>
+                <input type="password" class="form-control" id="password" name="password" value="<?php echo $password; ?>" required>
 <span class="text-danger"><?php echo $error['password']??''; ?></span> </div>
             <div class="form-group">
                 <label for="password_confirm"><i class="fas fa-key"></i> Confirmar senha:</label>
-                <input type="password" class="form-control" id="password_confirm" name="password_confirm"
-                    pattern=".{8,}" value="<?php echo $password_confirm; ?>" required>
+                <input type="password" class="form-control" id="password_confirm" name="password_confirm" value="<?php echo $password_confirm; ?>" required>
                 <span class="text-danger" id="password_error"><?php echo $error['password_confirm']??''; ?></span>
             </div>
             <div class="form-group">
                 <label for="number"><i class="fas fa-phone-square-alt"></i> Telefone:</label>
-                <input type="tel" class="form-control" id="number" name="number" pattern=".{11}"
+                <input type="tel" class="form-control" id="number" name="number"
                     value="<?php echo $number; ?>" required>
             </div>
             <div class="form-group">
