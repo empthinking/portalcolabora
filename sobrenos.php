@@ -18,7 +18,7 @@ require_once 'header.php';
 
             <?php   
         // Contexto sobre o Portal Colabora
-        $projeto = "O Portal Colabora";
+        $projeto = "Portal Colabora";
         $instituicao = "UEPA";
         $intuito = "fomentar a compra e venda da pimenta-do-reino na região do Baixo Tocantins.";
         // Exibindo o contexto na página
