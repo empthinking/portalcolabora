@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 require_once 'header.php';
 ?>
 
-<div class="container m-3 d-flex justify-content-center"> 
+<div class="container m-3 justify-content-center"> 
   <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
     <div class="form-group">
       <label for="nome">Nome completo</label>
