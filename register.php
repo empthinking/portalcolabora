@@ -151,9 +151,6 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
         </form>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
 <script>
 const passwordInput = document.getElementById('password');
 const confirmPasswordInput = document.getElementById('password_confirm');
