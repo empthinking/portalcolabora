@@ -84,7 +84,7 @@ $checkUnreadMessages = function() use ($id, $db) : bool {
                     <a class="dropdown-item" href="perfil.php"><i class="fas fa-user"></i> Perfil</a>
                     <?php if($_SESSION['type'] === 'vendedor'): ?> 
                     <a class="dropdown-item" href="meusprodutos.php"><i class="fab fa-product-hunt"></i> Meus Produtos</a>
-                    <a class="dropdown-item <?php echo $checkUnreadMessages() ? 'text-danger font-weight-bold' : ''; ?>" href="mensagens.php">Mensagens</a>
+                    <a class="dropdown-item <?php echo $checkUnreadMessages() ? 'text-danger font-weight-bold' : ''; ?>" href="mensagens.php"><i class="fas fa-messages"></i> Mensagens</a>
                     <?php endif; ?>
                <!--     <a class="dropdown-item" href="#">Configuração</a> -->
                     <a class="dropdown-item" href="logout.php"><i class="fas fa-chevron-right"></i> Sair</a>

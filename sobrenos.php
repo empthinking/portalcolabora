@@ -18,12 +18,13 @@ require_once 'header.php';
 
             <?php   
         // Contexto sobre o Portal Colabora
-        $projeto = "Portal Colabora";
+        $projeto = "O Portal Colabora";
         $instituicao = "UEPA";
         $intuito = "fomentar a compra e venda da pimenta-do-reino na região do Baixo Tocantins.";
-
         // Exibindo o contexto na página
-        echo "<h3 class='fs-5 text-center mt-5'>O $projeto é um projeto de iniciação científica -PIBIC desenvolvido pela $instituicao com o intuito de $intuito</h3>";
+        echo "<h3 class='fs-5 text-center mt-5'>O $projeto é um projeto de iniciação científica -PIBIC, financiado pelo edital xxx/ 2022, 
+        desenvolvido pela $instituicao com o intuito de $intuito.
+        Agradecemos a Propesp/Uepa pelo incentivo e apoio.</h3>";
     ?>
         </fieldset>
     </div>
