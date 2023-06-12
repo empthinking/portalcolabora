@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $stmt->bind_param('ssssss', $name, $email, $password, $number, $gender, $user_type);
                 $stmt->execute();
-                echo "<div class='alert-success'>'CADASTRO REALIZADO COM SUCESSO!')</div>";
+                echo "<div class='alert-success'>CADASTRO REALIZADO COM SUCESSO!</div>";
                 header('Refresh: 3; URL=index.php');
                 $db->close();
                 exit();
