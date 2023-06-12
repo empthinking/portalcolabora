@@ -6,7 +6,7 @@ if (isUserLoggedIn()) {
     exit();
 }
 
-$name = $password = $password_confirm = $email = $number = $email_error = '';
+$name = $password = $password_confirm = $email = $number = $gender = $user_type = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = validateData($_POST['name']);
@@ -158,23 +158,20 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             <div class="form-group">
                 <label for="gender"><i class="fas fa-venus-mars"></i> Gênero:</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="gender_male" value="masculino"
-                        required>
+                    <input class="form-check-input" type="radio" name="gender" id="gender_male" value="masculino" <?php if ($gender === 'masculino') echo 'checked'; ?> required>
                     <label class="form-check-label" for="gender_male">
                         Masculino
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="gender_female" value="feminino"
-                        required>
+                    <input class="form-check-input" type="radio" name="gender" id="gender_female" value="feminino" <?php if ($gender === 'feminino') echo 'checked'; ?>                        required>
                     <label class="form-check-label" for="gender_female">
                         Feminino
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="gender_nonbinary" value="naobinario"
-                        required>
-                    <label class="form-check-label" for="gender_nonbinary">
+                    <input class="form-check-input" type="radio" name="gender" id="gender_nonbinary" value="naobinario" <?php if ($gender === 'naobinario') echo 'checked'; ?>                        required>
+                    <label class="form-check-label" for="gender_nonbinary"  >
                         Não-Binário
                     </label>
                 </div>
@@ -182,15 +179,13 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             <div class="form-group">
                 <label for="user_type"><i class="fas fa-users"></i> Tipo de usuário:</label>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="user_type" id="user_type_client" value="cliente"
-                        required>
+                    <input class="form-check-input" type="radio" name="user_type" id="user_type_client" value="cliente" <?php if ($user_type === 'cliente') echo 'checked'; ?> required>
                     <label class="form-check-label" for="user_type_client">
                         Cliente
                     </label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="user_type" id="user_type_vendor" value="vendedor"
-                        required>
+                    <input class="form-check-input" type="radio" name="user_type" id="user_type_vendor" value="vendedor" <?php if ($user_type === 'vendedor') echo 'checked'; ?> required>
                     <label class="form-check-label" for="user_type_vendor">
                         Vendedor
                     </label>
