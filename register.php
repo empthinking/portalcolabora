@@ -41,7 +41,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute();
                 $db->close();
         
-                echo '<div style="display: flex; justify-content: center; align-items: center; text-align: center; background-color: #dff0d8; color: #3c763d; border-color: #d6e9c6; padding: 15px; border-radius: 5px;">CADASTRO REALIZADO COM SUCESSO!</div>';
+                echo <<<MSG
+<div class="container">
+    <div class="alert alert-success m-3 p-3">CADASTRO REALIZADO COM SUCESSO!</div>
+
+      <div class="container mt-5">
+        <div class="progress">
+          <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+</div>
+
+  <script>
+    $(document).ready(function() {
+      var progressBar = document.getElementById('progressBar');
+      var width = 0;
+      var interval = setInterval(increaseProgress, 30);
+
+      function increaseProgress() {
+        if (width >= 100) {
+          clearInterval(interval);
+        } else {
+          width++;
+          progressBar.style.width = width + '%';
+          progressBar.setAttribute('aria-valuenow', width);
+          progressBar.innerHTML = width + '%';
+        }
+      }
+    });
+  </script>
+MSG;
+
                 header('Refresh: 3; URL=index.php');
                 exit();
             } else {
