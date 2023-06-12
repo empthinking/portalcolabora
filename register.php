@@ -81,8 +81,6 @@ echo <<<MSG
   </script>
 MSG;
 require_once 'footer.php';
-
-                header('Refresh: 3; URL=index.php');
                 exit();
             } else {
                 $email_error = 'Email já registrado';
