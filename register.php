@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute();
                 $db->close();
         
-                echo '<div style="background-color: #dff0d8; color: #3c763d; border-color: #d6e9c6; padding: 15px; border-radius: 5px;">CADASTRO REALIZADO COM SUCESSO!</div>';
+                echo '<div style="display: flex; justify-content: center; align-items: center; text-align: center; background-color: #dff0d8; color: #3c763d; border-color: #d6e9c6; padding: 15px; border-radius: 5px;">CADASTRO REALIZADO COM SUCESSO!</div>';
                 header('Refresh: 3; URL=index.php');
                 exit();
             } else {
@@ -152,24 +152,25 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
-    <script>
-    const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('password_confirm');
-    const passwordError = document.getElementById('password_error');
-    const submitInput = document.getElementById('submit');
+<script>
+const passwordInput = document.getElementById('password');
+const confirmPasswordInput = document.getElementById('password_confirm');
+const passwordError = document.getElementById('password_error');
+const submitInput = document.getElementById('submit');
 
-    function checkPasswordMatch() {
-        if (passwordInput.value !== confirmPasswordInput.value) {
-            passwordError.textContent = 'As senhas não correspondem.';
-            submitInput.disabled = true;
-        } else {
-            passwordError.textContent = '';
-            submitInput.disabled = false;
-        }
+function checkPasswordMatch() {
+    if (passwordInput.value !== confirmPasswordInput.value) {
+        passwordError.textContent = 'As senhas não correspondem.';
+        submitInput.disabled = true;
+    } else {
+        passwordError.textContent = '';
+        submitInput.disabled = false;
     }
-    passwordInput.addEventListener('input', checkPasswordMatch);
-    confirmPasswordInput.addEventListener('input', checkPasswordMatch); 
-    </script>
+}
+passwordInput.addEventListener('input', checkPasswordMatch);
+confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+</script>
 
-    <?php require_once 'footer.php'?>
+<?php require_once 'footer.php'?>
