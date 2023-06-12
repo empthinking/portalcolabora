@@ -62,7 +62,7 @@ require_once 'header.php';
 ?>
 
 <div class="container d-flex justify-content-center align-items-center">
-    <div class="">
+    <div class="w-75">
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <div class="form-group">
                 <label for="nome">Nome completo</label>
@@ -88,5 +88,6 @@ require_once 'header.php';
         </form>
     </div>
 </div>
+
 
 <?php require_once 'footer.php'; ?>
