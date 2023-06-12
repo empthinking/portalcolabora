@@ -56,19 +56,26 @@ echo <<<MSG
 
   <script>
     $(document).ready(function() {
-      var progressBar = document.getElementById('progressBar');
-      var width = 0;
-      var interval = setInterval(increaseProgress, 30);
+      let progressBar = document.getElementById('progressBar');
+      let width = 0;
+      let interval = setInterval(increaseProgress, 30);
 
-      function increaseProgress() {
+    function increaseProgress() {
         if (width >= 100) {
           clearInterval(interval);
+          redirectToOtherPage(); // Call the redirection function
         } else {
           width++;
           progressBar.style.width = width + '%';
           progressBar.setAttribute('aria-valuenow', width);
           progressBar.innerHTML = width + '%';
         }
+      }
+
+      function redirectToOtherPage() {
+        setTimeout(function() {
+          window.location.href = 'index.php';
+        }, 3000); // 3000 milliseconds = 3 seconds
       }
     });
   </script>
