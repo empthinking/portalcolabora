@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $stmt->execute();
                 $db->close();
         
-                echo "<div class='alert alert-success text-center'>CADASTRO REALIZADO COM SUCESSO!</div>";
+                echo '<div class="text-center">CADASTRO REALIZADO COM SUCESSO!</div>';
                 header('Refresh: 3; URL=index.php');
                 exit();
             } else {
