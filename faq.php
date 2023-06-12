@@ -7,7 +7,9 @@ require_once 'header.php';
 <main>
   <section class="bg-gray-100 py-12">
     <div class="container">
+      <div class="text-center mt-2">
       <h1 class="text-3xl font-bold mb-4">Perguntas frequentes</h1>
+      </div>
       <h2 class="text-lg font-medium mb-8">Aqui estão algumas das perguntas mais frequentes que recebemos.</h2>
 
       <div class="border-top border-gray-300 py-8">
