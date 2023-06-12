@@ -23,7 +23,7 @@ require_once 'header.php';
         $intuito = "fomentar a compra e venda da pimenta-do-reino na região do Baixo Tocantins.";
         // Exibindo o contexto na página
         echo "<h3 class='fs-5 text-center mt-5'>O projeto $projeto é um projeto de iniciação científica (PIBIC), financiado pelo edital xxx/2022, 
-        desenvolvido pela $instituicao com o intuito de $intuito.
+        desenvolvido pela $instituicao com o intuito de $intuito
         Agradecemos à Propesp/UEPA pelo incentivo e apoio.</h3>";
 
     ?>
