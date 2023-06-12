@@ -15,21 +15,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $errors = array();
 
   if (empty($nome)) {
-    $errors[] = "O campo 'Nome completo' é obrigatório.";
+    $errors['name'] = "O campo 'Nome completo' é obrigatório.";
   }
 
   if (empty($email)) {
-    $errors[] = "O campo 'E-mail' é obrigatório.";
+    $errors['email'] = "O campo 'E-mail' é obrigatório.";
   } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-    $errors[] = "O campo 'E-mail' não possui um formato válido.";
+    $errors['email'] = "O campo 'E-mail' não possui um formato válido.";
   }
 
   if (empty($assunto)) {
-    $errors[] = "O campo 'Assunto' é obrigatório.";
+    $errors['subject'] = "O campo 'Assunto' é obrigatório.";
   }
 
   if (empty($mensagem)) {
-    $errors[] = "O campo 'Mensagem' é obrigatório.";
+    $errors['message'] = "O campo 'Mensagem' é obrigatório.";
   }
 
   // Verifica se há erros de validação
@@ -45,15 +45,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $headers = "From: $nome <$email>";
     if (mail($to, $subject, $message, $headers)) {
       // E-mail enviado com sucesso
-      echo "<span class='text-green-500'>Sua mensagem foi enviada com sucesso!</span>";
+      $success = "Sua mensagem foi enviada com sucesso!";
     } else {
       // Erro ao enviar o e-mail
-      echo "<span class='text-red-500'>Ocorreu um erro ao enviar a mensagem. Por favor, tente novamente mais tarde.</span>";
-    }
-  }else {
-    // Exibe os erros de validação
-    foreach ($errors as $error) {
-      echo "<p class='text-red-500'>$error</p>";
+      $errors['send'] = "Ocorreu um erro ao enviar a mensagem.";
     }
   }
 }
@@ -62,6 +57,16 @@ require_once 'header.php';
 ?>
 
 <div class="container d-flex justify-content-center align-items-center">
+
+<?php 
+if(isset($success))
+echo <<<MSG
+<div class="alert alert-success" role="alert">
+    $sucess
+</div>
+MSG;
+?>
+
     <div class="w-75">
         <h1 class="text-center mt-3">Fale Conosco</h1>
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
@@ -69,24 +74,31 @@ require_once 'header.php';
                 <label for="nome">Nome completo</label>
                 <input class="form-control" type="text" id="nome" name="nome" placeholder="Seu nome completo"
                     value="<?php echo isset($nome) ? $nome : ''; ?>">
+                <span class="text-danger"><?php echo $errors['name']??''; ?></span>
             </div>
             <div class="form-group">
                 <label for="email">E-mail</label>
                 <input class="form-control" type="email" id="email" name="email" placeholder="Seu e-mail"
                     value="<?php echo isset($email) ? $email : ''; ?>">
+                <span class="text-danger"><?php echo $errors['email']??''; ?></span>
             </div>
             <div class="form-group">
                 <label for="assunto">Assunto</label>
                 <input class="form-control" type="text" id="assunto" name="assunto" placeholder="Assunto da mensagem"
                     value="<?php echo isset($assunto) ? $assunto : ''; ?>">
+                <span class="text-danger"><?php echo $errors['subject']??''; ?></span>
             </div>
             <div class="form-group">
                 <label for="mensagem">Mensagem</label>
                 <textarea class="form-control" id="mensagem" name="mensagem"
                     placeholder="Digite sua mensagem"><?php echo isset($mensagem) ? $mensagem : ''; ?></textarea>
+                <span class="text-danger"><?php echo $errors['message']??''; ?></span>
             </div>
-            <button class="btn btn-primary" type="submit">Enviar mensagem</button>
-            <a class="btn btn-danger" href="index.php">Voltar</a>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Enviar mensagem</button>
+                <a class="btn btn-danger" href="index.php">Voltar</a>
+                <span class="text-danger"><?php echo $errors['send']??''; ?></span>
+            </div>
         </form>
     </div>
 </div>
