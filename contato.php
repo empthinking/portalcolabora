@@ -63,6 +63,7 @@ require_once 'header.php';
 
 <div class="container d-flex justify-content-center align-items-center">
     <div class="w-75">
+        <h1 class="text-center">Fale Conosco</h1>
         <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
             <div class="form-group">
                 <label for="nome">Nome completo</label>
