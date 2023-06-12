@@ -8,6 +8,8 @@ if (isUserLoggedIn()) {
 
 $name = $password = $password_confirm = $email = $number = $gender = $user_type = '';
 
+$error = array();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = validateData($_POST['name']);
     $password = htmlspecialchars($_POST['password']);
