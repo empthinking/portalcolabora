@@ -39,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $password = password_hash($password, PASSWORD_DEFAULT);
             $stmt->bind_param('ssssss', $name, $email, $password, $number, $gender, $user_type);
             $stmt->execute();
-            echo "<p>Cadastro Realizado</p><a href='index.php'><button>página inicial</button></a>";
+            echo "<script>alert('Redirecionando para a página inicial');</script>
+            header('Refresh: 3; URL=index.php')";
             $db->close();
             exit();
         } else {
