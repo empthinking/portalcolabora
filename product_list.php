@@ -54,7 +54,7 @@ require_once 'header.php';
 
 
         <?php if ($result->num_rows === 0) : ?>
-            <div class="col text-center">
+            <div class="col text-center mt-2">
                 <br>
                 <p class="text-center">Nenhum Produto Registrado.</p>
             </div>
