@@ -32,21 +32,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 
-    if ($error !== true) {
-        if ($isEmailRegistered() === false) {
+        if ($error !== true) {
+            if ($isEmailRegistered() === false) {
                 $sql_prep = "INSERT INTO Users(User_Name, User_Email, User_Password, User_Number, User_Gender, User_Type) VALUES(?, ?, ?, ?, ?, ?)";
                 $stmt = $db->prepare($sql_prep);
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $stmt->bind_param('ssssss', $name, $email, $password, $number, $gender, $user_type);
                 $stmt->execute();
-                echo "<div class='alert alert-success text-center'>CADASTRO REALIZADO COM SUCESSO!</div>";              
-                header('Refresh: 3; URL=index.php');
                 $db->close();
+        
+                echo "<div class='alert alert-success text-center'>CADASTRO REALIZADO COM SUCESSO!</div>";
+                header('Refresh: 3; URL=index.php');
                 exit();
             } else {
                 $email_error = 'Email já registrado';
             }
         }
+        
         
 }
 
