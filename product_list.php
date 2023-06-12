@@ -29,7 +29,7 @@ $result = $db->query($sql);
 require_once 'header.php';
 ?>
 
-<div class="container">
+<div class="container text-center">
     <h2 class="mt-4">Recentes</h2>
 
 <div class="row">
