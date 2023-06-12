@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 $stmt->bind_param('ssssss', $name, $email, $password, $number, $gender, $user_type);
                 $stmt->execute();
-                echo "<script>alert('Redirecionando para a página inicial');</script>";
+                echo "<div class='alert-success'>'CADASTRO REALIZADO COM SUCESSO!')</div>";
                 header('Refresh: 3; URL=index.php');
                 $db->close();
                 exit();
@@ -55,88 +55,101 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>User Registration Form</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="icon" type="image/x-icon" href="./img/favicon-32x32.png">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="icon" type="image/x-icon" href="./img/favicon-32x32.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
     <style>
-        .container {
-            max-width: 600px;
-        }
+    .container {
+        max-width: 600px;
+    }
     </style>
 </head>
-<body>
-<div class="container mt-4">
-    <h2 class="text-center">Cadastro</h2>
-    <form action="<?php echo $url; ?>" method="POST">
-        <div class="form-group">
-            <label for="name"><i class="fas fa-signature"></i> Nome:</label>
-            <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="email"><i class="fas fa-envelope"></i> Email:</label>
-            <input type="email" class="form-control" id="email" name="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" value="<?php echo $email; ?>" required>
-            <span class="text-danger"><?php echo $email_error; ?></span>
-        </div>
-        <div class="form-group">
-            <label for="password"><i class="fas fa-key"></i> Senha (No mínimo 8 caracteres):</label>
-            <input type="password" class="form-control" id="password" name="password" pattern=".{8,}" value="<?php echo $password; ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="password_confirm"><i class="fas fa-key"></i> Confirmar senha:</label>
-            <input type="password" class="form-control" id="password_confirm" name="password_confirm" pattern=".{8,}" value="<?php echo $password_confirm; ?>" required>
-            <span class="text-danger" id="password_error"></span>
-        </div>
-        <div class="form-group">
-            <label for="number"><i class="fas fa-phone-square-alt"></i> Telefone:</label>
-            <input type="tel" class="form-control" id="number" name="number" pattern=".{11}" value="<?php echo $number; ?>" required>
-        </div>
-        <div class="form-group">
-            <label for="gender"><i class="fas fa-venus-mars"></i> Gênero:</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="gender_male" value="masculino" required>
-                <label class="form-check-label" for="gender_male"> 
-                    Masculino
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="gender_female" value="feminino" required>
-                <label class="form-check-label" for="gender_female"> 
-                    Feminino
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="gender" id="gender_nonbinary" value="naobinario" required>
-                <label class="form-check-label" for="gender_nonbinary"> 
-                    Não-Binário
-                </label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="user_type"><i class="fas fa-users"></i> Tipo de usuário:</label>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="user_type" id="user_type_client" value="cliente" required>
-                <label class="form-check-label" for="user_type_client">
-                    Cliente
-                </label>
-            </div>
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="user_type" id="user_type_vendor" value="vendedor" required>
-                <label class="form-check-label" for="user_type_vendor">
-                    Vendedor
-                </label>
-            </div>
-        </div>
-        <div class="text-center">
-            <button type="submit" id="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i> Cadastrar</button>
-            <a href="index.php" class="btn btn-danger"><i class="fas fa-undo"></i> Voltar</a>
-        </div>
-    </form>
-</div>
 
-<script>
+<body>
+    <div class="container mt-4">
+        <h2 class="text-center">Cadastro</h2>
+        <form action="<?php echo $url; ?>" method="POST">
+            <div class="form-group">
+                <label for="name"><i class="fas fa-signature"></i> Nome:</label>
+                <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="email"><i class="fas fa-envelope"></i> Email:</label>
+                <input type="email" class="form-control" id="email" name="email"
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" value="<?php echo $email; ?>" required>
+                <span class="text-danger"><?php echo $email_error; ?></span>
+            </div>
+            <div class="form-group">
+                <label for="password"><i class="fas fa-key"></i> Senha (No mínimo 8 caracteres):</label>
+                <input type="password" class="form-control" id="password" name="password" pattern=".{8,}"
+                    value="<?php echo $password; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="password_confirm"><i class="fas fa-key"></i> Confirmar senha:</label>
+                <input type="password" class="form-control" id="password_confirm" name="password_confirm"
+                    pattern=".{8,}" value="<?php echo $password_confirm; ?>" required>
+                <span class="text-danger" id="password_error"></span>
+            </div>
+            <div class="form-group">
+                <label for="number"><i class="fas fa-phone-square-alt"></i> Telefone:</label>
+                <input type="tel" class="form-control" id="number" name="number" pattern=".{11}"
+                    value="<?php echo $number; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="gender"><i class="fas fa-venus-mars"></i> Gênero:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="gender_male" value="masculino"
+                        required>
+                    <label class="form-check-label" for="gender_male">
+                        Masculino
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="gender_female" value="feminino"
+                        required>
+                    <label class="form-check-label" for="gender_female">
+                        Feminino
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="gender_nonbinary" value="naobinario"
+                        required>
+                    <label class="form-check-label" for="gender_nonbinary">
+                        Não-Binário
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="user_type"><i class="fas fa-users"></i> Tipo de usuário:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="user_type" id="user_type_client" value="cliente"
+                        required>
+                    <label class="form-check-label" for="user_type_client">
+                        Cliente
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="user_type" id="user_type_vendor" value="vendedor"
+                        required>
+                    <label class="form-check-label" for="user_type_vendor">
+                        Vendedor
+                    </label>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" id="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i>
+                    Cadastrar</button>
+                <a href="index.php" class="btn btn-danger"><i class="fas fa-undo"></i> Voltar</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+    <script>
     const passwordInput = document.getElementById('password');
     const confirmPasswordInput = document.getElementById('password_confirm');
     const passwordError = document.getElementById('password_error');
@@ -151,11 +164,8 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             submitInput.disabled = false;
         }
     }
-
     passwordInput.addEventListener('input', checkPasswordMatch);
-    confirmPasswordInput.addEventListener('input', checkPasswordMatch);
-</script>
+    confirmPasswordInput.addEventListener('input', checkPasswordMatch); 
+    </script>
 
-  <?php require_once 'footer.php'?>
-</body>
-</html>
+    <?php require_once 'footer.php'?>
