@@ -61,26 +61,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 require_once 'header.php';
 ?>
 
-<div class="container m-3 justify-content-center"> 
-  <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
-    <div class="form-group">
-      <label for="nome">Nome completo</label>
-      <input class="form-control" type="text" id="nome" name="nome" placeholder="Seu nome completo" value="<?php echo isset($nome) ? $nome : ''; ?>">
+<div class="container d-flex justify-content-center align-items-center">
+    <div class="">
+        <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+            <div class="form-group">
+                <label for="nome">Nome completo</label>
+                <input class="form-control" type="text" id="nome" name="nome" placeholder="Seu nome completo"
+                    value="<?php echo isset($nome) ? $nome : ''; ?>">
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail</label>
+                <input class="form-control" type="email" id="email" name="email" placeholder="Seu e-mail"
+                    value="<?php echo isset($email) ? $email : ''; ?>">
+            </div>
+            <div class="form-group">
+                <label for="assunto">Assunto</label>
+                <input class="form-control" type="text" id="assunto" name="assunto" placeholder="Assunto da mensagem"
+                    value="<?php echo isset($assunto) ? $assunto : ''; ?>">
+            </div>
+            <div class="form-group">
+                <label for="mensagem">Mensagem</label>
+                <textarea class="form-control" id="mensagem" name="mensagem"
+                    placeholder="Digite sua mensagem"><?php echo isset($mensagem) ? $mensagem : ''; ?></textarea>
+            </div>
+            <button class="btn btn-primary" type="submit">Enviar mensagem</button>
+        </form>
     </div>
-    <div class="form-group">
-      <label for="email">E-mail</label>
-      <input class="form-control" type="email" id="email" name="email" placeholder="Seu e-mail" value="<?php echo isset($email) ? $email : ''; ?>">
-    </div>
-    <div class="form-group">
-      <label for="assunto">Assunto</label>
-      <input class="form-control" type="text" id="assunto" name="assunto" placeholder="Assunto da mensagem" value="<?php echo isset($assunto) ? $assunto : ''; ?>">
-    </div>
-    <div class="form-group">
-      <label for="mensagem">Mensagem</label>
-      <textarea class="form-control" id="mensagem" name="mensagem" placeholder="Digite sua mensagem"><?php echo isset($mensagem) ? $mensagem : ''; ?></textarea>
-    </div>
-    <button class="btn btn-primary" type="submit">Enviar mensagem</button>
-  </form>
 </div>
 
 <?php require_once 'footer.php'; ?>
