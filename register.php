@@ -27,13 +27,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         return $result->num_rows > 0;
     };
 
-    if(empty($name) || empty($password) || empty($password_confirm) || empty($email) || empty($number) || empty($gender) || empty($user_type) || !filter_var($email, FILTER_VALIDATE_EMAIL) || !preg_match('/^[a-zA-Z ]+$/', $name) || $password !== $password_confirm || strlen($password) < 8 || ($user_type !== 'vendedor' && $user_type !== 'cliente' && $user_type !== 'admin'))
-        $error = true;
+    if(empty($name)) $error['name'] = 'Campo precisa ser preenchido';
+    elseif(!preg_match('/^[a-zA-Z ]+$/', $name)) $error['name'] = 'Nome com formato inválido';
+
+    if(empty($password)) $error['password'] = 'Campo precisa ser preenchido';
+    elseif(strlen($password) < 8) $error['password'] = 'Senha precisa conter pelo menos 8 caracteres';
+
+    if(empty($password_confirm)) $error['password_confirm'] = 'Campo precisa ser preenchido';
+
+    if(empty($email)) $error['email'] = 'Campo precisa ser preenchido';
+    elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)) $error['email'] = 'Formato de email inválido';
+    elseif($isEmailRegistered()) $error['email'] = 'Email já registrado';
+
+    if(empty($number)) $error['number'] = 'Campo precisa ser preenchido';
+
+    if(empty($gender)) $error['gender'] = 'Campo precisa ser preenchido';
+
+    if(empty($user_type)) $error['user_type'] = 'Campo precisa ser preenchido';
+
+    if($password !== $password_confirm) $error['password_confirm'] = true;
+
+    if($user_type !== 'vendedor' && $user_type !== 'cliente' && $user_type !== 'admin') $error['user_type'] = true;
 
 
 
-        if ($error !== true) {
-            if ($isEmailRegistered() === false) {
+    if (count($error) === 0) {
+            
                 $sql_prep = "INSERT INTO Users(User_Name, User_Email, User_Password, User_Number, User_Gender, User_Type) VALUES(?, ?, ?, ?, ?, ?)";
                 $stmt = $db->prepare($sql_prep);
                 $password = password_hash($password, PASSWORD_DEFAULT);
@@ -82,11 +101,8 @@ echo <<<MSG
 MSG;
 require_once 'footer.php';
                 exit();
-            } else {
-                $email_error = 'Email já registrado';
-            }
-        }
-        
+           
+    }     
         
 }
 
@@ -117,23 +133,22 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
             <div class="form-group">
                 <label for="name"><i class="fas fa-signature"></i> Nome:</label>
                 <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" required>
-            </div>
+<span class="text-danger"><?php echo $error['name']??''; ?></span>            </div>
             <div class="form-group">
                 <label for="email"><i class="fas fa-envelope"></i> Email:</label>
-                <input type="email" class="form-control" id="email" name="email"
-                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" value="<?php echo $email; ?>" required>
-                <span class="text-danger"><?php echo $email_error; ?></span>
+                <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>" required>
+                <span class="text-danger"><?php echo $error['email']??''; ?></span>
             </div>
             <div class="form-group">
                 <label for="password"><i class="fas fa-key"></i> Senha (No mínimo 8 caracteres):</label>
                 <input type="password" class="form-control" id="password" name="password" pattern=".{8,}"
                     value="<?php echo $password; ?>" required>
-            </div>
+<span class="text-danger"><?php echo $error['password']??''; ?></span> </div>
             <div class="form-group">
                 <label for="password_confirm"><i class="fas fa-key"></i> Confirmar senha:</label>
                 <input type="password" class="form-control" id="password_confirm" name="password_confirm"
                     pattern=".{8,}" value="<?php echo $password_confirm; ?>" required>
-                <span class="text-danger" id="password_error"></span>
+                <span class="text-danger" id="password_error"><?php echo $error['password_confirm']??''; ?></span>
             </div>
             <div class="form-group">
                 <label for="number"><i class="fas fa-phone-square-alt"></i> Telefone:</label>
