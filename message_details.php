@@ -1,7 +1,7 @@
 <?php
 $sql_prep= 'SELECT m.Message_Sender, m.Message_Content, u.User_Name FROM Messages m JOIN Users u ON m.Message_Receiver = u.User_Id WHERE m.Message_Receiver = ? AND m.Message_Id = ?';
 $stmt = $db->prepare($sql_prep);
-$stmt = bind_param('ii', $messageId);
+$stmt = $db->bind_param('ii', $messageId);
 
 
 require_once 'header.php';
@@ -19,4 +19,4 @@ require_once 'header.php';
     </div>
   </main>
 
-<?php require_once 'foorter.php';
+<?php require_once 'footer.php';
