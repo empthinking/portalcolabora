@@ -86,6 +86,7 @@ require_once 'header.php';
                     placeholder="Digite sua mensagem"><?php echo isset($mensagem) ? $mensagem : ''; ?></textarea>
             </div>
             <button class="btn btn-primary" type="submit">Enviar mensagem</button>
+            <a class="btn btn-danger" href="index.php">Voltar</a>
         </form>
     </div>
 </div>
