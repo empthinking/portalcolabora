@@ -81,7 +81,7 @@ echo <<<FORM
           <input type="file" class="form-control-file" id="images" name="images[]" accept="image/*" multiple required>
         </div>
       </div>
-      <div class="d-flex">
+      <div class="d-flex mb-3">
   <button type="button" class="btn btn-success mr-2" onclick="addImageField()">Adicionar</button>
   <button type="button" class="btn btn-warning" onclick="removeImageField()">Remover</button>
 </div>
