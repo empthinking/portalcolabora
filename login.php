@@ -39,57 +39,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
 
 ?>
+
 <!DOCTYPE html>
-<html>
+  <html lang="pt-br">
+  <head>                                                    <meta charset="UTF-8">                                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>                                     <link rel="icon" type="image/x-icon" href="./img/favicon-32x32.png">
 
-<head>
-    <title>Login</title>
-    <link rel="icon" type="image/x-icon" href="./img/favicon-32x32.png">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>                                                   body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+      }
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-    body {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-    }
+                                                                  .fundo {                                               background-image: url(./img/GVI-Agriculture-800x443.png);                                                       background-repeat: no-repeat;                           background-size: cover;                                 background-position: center;
+         height: 100vh;
+     }                                                  
+     .card {
+         background-color: rgba(255, 255, 255, 0.5);
+         padding: 20px;
+         margin-top: 17vh;
+         border-radius: 10px;
+     }
 
-    .fundo {
-        background-image: url(./img/GVI-Agriculture-800x443.png);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
-        height: 100vh;
-    }
-
-    .card {
-        background-color: rgba(255, 255, 255, 0.5);
-        padding: 20px;
-        margin-top: 17vh;
-        border-radius: 10px;
-    }
-
-    @media screen and (max-width: 1000px) {
-        .card {
-            height: 75vh;
-            width: 75vw;
-            font-size: large;
-        }
-        label{
-            font-size: 60px;
-        }
-        a{
-            font-size: xx-large;
-        }
-        button {
-            font-size: xx-large;
-        }
-        input{
-            height:10vh;
-        }
-    }
     </style>
-</head>
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://kit.fontawesome.com/0280b9824e.js" crossorigin="anonymous"></script>
+  </head>
 
 <body>
     <div class="fundo">
@@ -113,13 +89,9 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
                             <input type="password" class="form-control" id="password" name="password"
                                 value="<?php echo $password; ?>" required>
                         </div>
-                        <div class="d-flex justify-content-center">
-                             <button type="submit" class="btn btn-primary btn-lg m-3">
-                               <i class="fas fa-sign-in-alt"></i> Entrar
-                               </button>
-                            <a href="index.php" class="btn btn-danger btn-lg m-3">
-                            <i class="fas fa-arrow-left"></i> Voltar
-                            </a>
+                        <div class="d-flex justify-content-center ">
+                            <button type="submit" class="btn btn-primary btn-lg m-3">Entrar</button>
+                            <a href="index.php" class="btn btn-danger btn-lg m-3">Voltar</a>
                         </div>
                     </form>
                 </div>
