@@ -73,9 +73,11 @@ $stmt->close();
                 </div>
             <?php endforeach; ?>
             <br>
-            <a href="index.php" class="btn btn-danger"><i class="fas fa-undo"></i> Voltar</a>
+            
         </div>
+        <a href="index.php" class="btn btn-danger"><i class="fas fa-undo"></i> Voltar</a>
 <?php 
+
 else:
 echo "<p>$error</p>";
 endif;
