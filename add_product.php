@@ -88,11 +88,13 @@ echo <<<FORM
 <div class="d-flex">
   <button type="button" class="btn btn-success mr-2" onclick="addImageField()">Adicionar</button>
   <button type="button" class="btn btn-warning" onclick="removeImageField()">Remover</button>
-  <button type="submit" name="add_product" class="btn btn-primary ml-2">Registrar</button>
+</div>
+<div class="container m-3">
+  <button type="submit" name="add_product" class="btn btn-primary">Registrar</button>
   <button type="submit" name="add_product" class="btn btn-danger ml-2" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
 </div>
 </form>
-</div>
+  </div>
 FORM;
 ?>
   <script>
