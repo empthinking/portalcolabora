@@ -4,8 +4,14 @@ session_start();
 require_once 'db.php';
 
 // Assuming you have already connected to the database and obtained the product ID from the URL
-$product_id = $_GET['id']??'';
+$product_id = $_GET['id'] ?? '';
 $error = false;
+
+// Function to check if a user is logged in
+function isUserLoggedIn()
+{
+    return isset($_SESSION['id']) && $_SESSION['type'] === 'vendedor';
+}
 
 // Query the database to fetch the product information
 $stmt = $db->prepare("
@@ -15,15 +21,15 @@ $stmt = $db->prepare("
     WHERE p.Product_Id = ?
 ");
 $stmt->bind_param('i', $product_id);
-if($stmt->execute()) {
-    $stmt->bind_result($product_name, $product_description, $product_price, $product_date, $vendor_name, $vendor_id,$User_Number);
+if ($stmt->execute()) {
+    $stmt->bind_result($product_name, $product_description, $product_price, $product_date, $vendor_name, $vendor_id, $User_Number);
     $stmt->fetch();
 } else {
-    $error = false;
+    $error = "Erro ao buscar informações do produto.";
 }
 $stmt->close();
 
-if(isset($_GET['mode']) && $_GET['mode'] === 'register') {
+if (isset($_GET['mode']) && $_GET['mode'] === 'register') {
     require_once 'send_message.php';
     exit();
 }
@@ -49,8 +55,8 @@ $stmt->close();
 
 <?php require_once 'header.php'; ?>
 
-    <div class="container">
-<?php if(!$error): ?>
+<div class="container">
+    <?php if (!$error) : ?>
         <h1>Detalhes do Produto:</h1>
 
         <div class="card">
@@ -73,15 +79,37 @@ $stmt->close();
                 </div>
             <?php endforeach; ?>
             <br>
-            
         </div>
+
+        <?php if (isUserLoggedIn()) : ?>
+            <h2>Gerenciar Imagens</h2>
+            <form action="upload_image.php" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                <div class="form-group">
+                    <label for="image">Adicionar Imagem:</label>
+                    <input type="file" class="form-control-file" id="image" name="image" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Enviar Imagem</button>
+            </form>
+            <br>
+            <h3>Imagens Existentes:</h3>
+            <div class="row">
+                <?php foreach ($images as $image) : ?>
+                    <div class="col-md-3 mb-3">
+                        <img src="<?php echo $image; ?>" class="img-fluid" alt="Product Image">
+                        <br>
+                        <a href="delete_image.php?image=<?php echo $image; ?>&product_id=<?php echo $product_id; ?>" class="btn btn-danger">Excluir Imagem</a>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+
         <a href="index.php" class="btn btn-danger"><i class="fas fa-undo"></i> Voltar</a>
-<?php 
 
-else:
-echo "<p>$error</p>";
-endif;
-?>
-    </div>
+    <?php else :
+        echo "<p>$error</p>";
+    endif;
+    ?>
+</div>
 
-<?php require_once 'footer.php'; 
+<?php require_once 'footer.php';
