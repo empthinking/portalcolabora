@@ -71,7 +71,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     <div class="fundo">
         <div class="container mt-5">
             <div class="row justify-content-center">
-                <div class="card my-4">
+                <div class="card mt-4 mb-2">
                     <div class="text-center">
                         <img class="mx-auto" src="img/logo.png" width="323px" alt="logo">
                     </div>
