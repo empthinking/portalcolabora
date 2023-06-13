@@ -82,8 +82,8 @@ echo <<<FORM
         </div>
       </div>
       <div class="d-flex flex-column">
-  <button type="button" class="btn btn-success" onclick="addImageField()">Adicionar</button>
-  <button type="button" class="btn btn-danger" onclick="removeImageField()">Remover</button>
+  <button type="button" class="btn btn-success btn-lg" onclick="addImageField()">Adicionar</button>
+  <button type="button" class="btn btn-danger btn-lg" onclick="removeImageField()">Remover</button>
   <div class="d-flex mt-auto">
     <button type="submit" name="add_product" class="btn btn-primary">Registrar</button>
     <button type="submit" name="add_product" class="btn btn-danger ml-2" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
