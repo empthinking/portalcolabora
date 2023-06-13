@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     elseif($isEmailRegistered()) $error['email'] = 'Email já registrado';
 
     if(empty($number)) $error['number'] = 'Campo precisa ser preenchido';
+    elseif(!preg_match('/^[0-9]+$/', $number)) $error['number'] = 'Campo não deve conter letras ou caracteres especiais';
 
     if(empty($gender)) $error['gender'] = 'Campo precisa ser preenchido';
 
@@ -152,6 +153,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
                 <label for="number"><i class="fas fa-phone-square-alt"></i> Telefone:</label>
                 <input type="tel" class="form-control" id="number" name="number"
                     value="<?php echo $number; ?>" required>
+<span class="text-danger"><?php echo $error['number']??''; ?></span> </div>
             </div>
             <div class="form-group">
                 <label for="gender"><i class="fas fa-venus-mars"></i> Gênero:</label>
