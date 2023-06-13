@@ -153,7 +153,7 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
                 <label for="number"><i class="fas fa-phone-square-alt"></i> Telefone:</label>
                 <input type="tel" class="form-control" id="number" name="number"
                     value="<?php echo $number; ?>" required>
-<span class="text-danger"><?php echo $error['number']??''; ?></span> </div>
+<span class="text-danger"><?php echo $error['number']??''; ?></span>
             </div>
             <div class="form-group">
                 <label for="gender"><i class="fas fa-venus-mars"></i> Gênero:</label>
