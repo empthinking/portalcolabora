@@ -46,9 +46,11 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     <title>Cadastro</title>                                     <link rel="icon" type="image/x-icon" href="./img/favicon-32x32.png">
 
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>                                                   
-
-                                                .fundo {                                               background-image: url(./img/GVI-Agriculture-800x443.png);                                                       background-repeat: no-repeat;                           background-size: cover;                                 background-position: center;
+    <style>
+body {
+min-height: 100%;
+}
+.fundo {                                               background-image: url(./img/GVI-Agriculture-800x443.png);                                                       background-repeat: no-repeat;                           background-size: cover;                                 background-position: center;
 
      }                                                  
      .card {
