@@ -56,7 +56,7 @@ require_once 'header.php';
 $url = htmlspecialchars($_SERVER['PHP_SELF']) . '?mode=register';
 echo <<<FORM
   <div class="container">
-    <h1>Registrar</h1>
+    <h1 class="mt-4">Registrar</h1>
     <form action="$url" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label for="name">Nome:</label>
