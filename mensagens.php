@@ -25,8 +25,11 @@ require_once 'header.php';
 
   <!-- Main Content -->
   <main>
+    <br>
+    <br>
     <div class="container">
       <h1>Mensagens</h1>
+      <br>
       <table class="table">
         <thead>
           <tr>
