@@ -82,10 +82,10 @@ echo <<<FORM
         </div>
       </div>
       <div class="d-flex mb-3">
-  <button type="button" class="btn btn-success mr-2" onclick="addImageField()">Adicionar</button>
-  <button type="button" class="btn btn-warning" onclick="removeImageField()">Remover</button>
+  <button type="button" class="btn btn-success mr-2" onclick="addImageField()"><i class="fas fa-plus"></i> Adicionar</button>
+  <button type="button" class="btn btn-warning" onclick="removeImageField()"><i class="fas fa-trash"></i> Remover</button>
 </div>
-<button type="submit" name="add_product" class="btn btn-primary">Registrar</button>
+<button type="submit" name="add_product" class="btn btn-primary"><i class="fas fa-check"></i> Registrar</button>
 <button type="submit" name="add_product" class="btn btn-danger ml-2" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
 </form>
 </div>
