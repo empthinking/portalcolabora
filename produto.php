@@ -72,6 +72,8 @@ $stmt->close();
                     <img src="<?php echo $image; ?>" class="img-fluid" alt="Product Image">
                 </div>
             <?php endforeach; ?>
+            <br>
+            <a href="index.php" class="btn btn-danger"><i class="fas fa-undo"></i> Voltar</a>
         </div>
 <?php 
 else:
