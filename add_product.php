@@ -57,7 +57,9 @@ $url = htmlspecialchars($_SERVER['PHP_SELF']) . '?mode=register';
 echo <<<FORM
   <div class="container">
   <br>
-    <h1 class="mt-4">Registrar</h1>
+  <br>
+    <h1>Registrar</h1>
+    <br>
     <br>
     <form action="$url" method="POST" enctype="multipart/form-data">
       <div class="form-group">
@@ -79,13 +81,15 @@ echo <<<FORM
           <input type="file" class="form-control-file" id="images" name="images[]" accept="image/*" multiple required>
         </div>
       </div>
-      <button type="button" class="btn btn-success" onclick="addImageField()">Adicionar</button>
-      <button type="button" class="btn btn-danger" onclick="removeImageField()">Remover</button>
-      <div class="container m-3">
-        <button type="submit" name="add_product" class="btn btn-primary">Registrar</button>
-        <button type="submit" name="add_product" class="btn btn-danger" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
-      </div>
-    </form>
+      <div class="d-flex">
+  <button type="button" class="btn btn-success mr-2" onclick="addImageField()">Adicionar</button>
+  <button type="button" class="btn btn-danger" onclick="removeImageField()">Remover</button>
+</div>
+<div class="container m-3">
+  <button type="submit" name="add_product" class="btn btn-primary">Registrar</button>
+  <button type="submit" name="add_product" class="btn btn-danger ml-2" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
+</div>
+</form>
   </div>
 FORM;
 ?>
