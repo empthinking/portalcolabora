@@ -85,11 +85,11 @@ echo <<<FORM
   <button type="button" class="btn btn-success mr-2" onclick="addImageField()">Adicionar</button>
   <button type="button" class="btn btn-warning" onclick="removeImageField()">Remover</button>
 </div>
-<div class="d-flex">
-  <button type="button" class="btn btn-success mr-2" onclick="addImageField()">Adicionar</button>
+<div class="d-flex flex-column fixed-bottom fixed-right m-3">
+  <button type="button" class="btn btn-success mb-2" onclick="addImageField()">Adicionar</button>
   <button type="button" class="btn btn-warning" onclick="removeImageField()">Remover</button>
-  <button type="submit" name="add_product" class="btn btn-primary ml-auto">Registrar</button>
-  <button type="submit" name="add_product" class="btn btn-danger ml-2" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
+  <button type="submit" name="add_product" class="btn btn-primary mt-2">Registrar</button>
+  <button type="submit" name="add_product" class="btn btn-danger mt-2" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
 </div>
 </form>
 </div>
