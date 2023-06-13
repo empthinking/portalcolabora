@@ -90,7 +90,10 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
                                 value="<?php echo $password; ?>" required>
                         </div>
                         <div class="d-flex justify-content-center ">
-                            <button type="submit" class="btn btn-primary btn-lg m-3"><i class="fa-solid fa-person-to-portal"></i>Entrar</button>
+                            <button type="submit" class="btn btn-primary btn-lg m-3">
+  <i class="fas fa-sign-in-alt"></i> Entrar
+</button>
+
                             <a href="index.php" class="btn btn-danger btn-lg m-3"><i class="fa-solid fa-arrow-rotate-left"></i>Voltar</a>
                         </div>
                     </form>
