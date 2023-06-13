@@ -32,6 +32,24 @@ if ($result->num_rows === 0) {
 $product = $result->fetch_assoc();
 
 $stmt->close();
+
+// Verifica se o formulário foi enviado para salvar as alterações
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Obtém os dados do formulário
+    $updatedName = $_POST['name'];
+    $updatedPrice = $_POST['price'];
+    $updatedDescription = $_POST['description'];
+
+    // Atualiza os dados do produto no banco de dados
+    $stmt = $db->prepare('UPDATE Products SET Product_Name = ?, Product_Price = ?, Product_Description = ? WHERE Product_Id = ? AND User_Id = ?');
+    $stmt->bind_param('sdssi', $updatedName, $updatedPrice, $updatedDescription, $productId, $userId);
+    $stmt->execute();
+    $stmt->close();
+
+    // Redireciona de volta para a página de produtos do usuário
+    header("Location: meusprodutos.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +63,7 @@ $stmt->close();
 <body>
     <div class="container mt-5">
         <h1>Editar Produto</h1>
-        <form action="salvarproduto.php" method="POST">
+        <form action="" method="POST">
             <input type="hidden" name="id" value="<?php echo $product['Product_Id']; ?>">
             <div class="form-group">
                 <label for="name">Nome</label>
