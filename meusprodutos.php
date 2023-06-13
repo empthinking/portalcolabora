@@ -69,6 +69,8 @@ if (isset($_POST['delete_product'])) {
     <br>
     <br>
     <fieldset class="bg-light opacity-60 p-4 rounded table-responsive">
+        <br>
+        <br>
         <h1 class="text-center">Meus Produtos</h1>
         <br>
         <br>
