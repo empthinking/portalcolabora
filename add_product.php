@@ -81,14 +81,15 @@ echo <<<FORM
           <input type="file" class="form-control-file" id="images" name="images[]" accept="image/*" multiple required>
         </div>
       </div>
-      <div class="d-flex flex-column">
-  <button type="button" class="btn btn-success btn-lg mb-2" onclick="addImageField()">Adicionar</button>
-  <button type="button" class="btn btn-danger btn-lg" onclick="removeImageField()">Remover</button>
+      <div class="d-flex">
+  <button type="button" class="btn btn-success mr-2" onclick="addImageField()">Adicionar</button>
+  <button type="button" class="btn btn-danger" onclick="removeImageField()">Remover</button>
 </div>
 <div class="container m-3">
   <button type="submit" name="add_product" class="btn btn-primary">Registrar</button>
-  <button type="submit" name="add_product" class="btn btn-danger mt-2" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
+  <button type="submit" name="add_product" class="btn btn-danger ml-2" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
 </div>
+</form>
   </div>
 FORM;
 ?>
