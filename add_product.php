@@ -56,7 +56,7 @@ require_once 'header.php';
 $url = htmlspecialchars($_SERVER['PHP_SELF']) . '?mode=register';
 echo <<<FORM
   <div class="container">
-    <h1 class="mt-3">Registrar</h1>
+    <h1>Registrar</h1>
     <form action="$url" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label for="name">Nome:</label>
@@ -81,6 +81,7 @@ echo <<<FORM
       <button type="button" class="btn btn-danger" onclick="removeImageField()">Remover</button>
       <div class="container m-3">
         <button type="submit" name="add_product" class="btn btn-primary">Registrar</button>
+        <button type="submit" name="add_product" class="btn btn-primary" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
       </div>
     </form>
   </div>
