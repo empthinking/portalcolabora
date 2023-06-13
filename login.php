@@ -48,10 +48,10 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <style>
 body {
-min-height: 100%;
+min-height: 100vh;
 }
 .fundo {                                               background-image: url(./img/GVI-Agriculture-800x443.png);                                                       background-repeat: no-repeat;                           background-size: cover;                                 background-position: center;
-height: 100%;
+height: 100vh;
 
      }                                                  
      .card {
