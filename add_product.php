@@ -81,7 +81,7 @@ echo <<<FORM
       <button type="button" class="btn btn-danger" onclick="removeImageField()">Remover</button>
       <div class="container m-3">
         <button type="submit" name="add_product" class="btn btn-primary">Registrar</button>
-        <button type="submit" name="add_product" class="btn btn-primary" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
+        <button type="submit" name="add_product" class="btn btn-danger" onclick="history.back()"><i class="fas fa-undo"></i> Voltar</button>
       </div>
     </form>
   </div>
