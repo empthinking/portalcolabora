@@ -49,6 +49,9 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
     <style>
 body {
 min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 }
 .fundo {                                               background-image: url(./img/GVI-Agriculture-800x443.png);                                                       background-repeat: no-repeat;                           background-size: cover;                                 background-position: center;
 height: 100vh;
