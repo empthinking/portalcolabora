@@ -83,7 +83,7 @@ echo <<<FORM
       </div>
       <div class="d-flex">
   <button type="button" class="btn btn-success mr-2" onclick="addImageField()">Adicionar</button>
-  <button type="button" class="btn btn-danger" onclick="removeImageField()">Remover</button>
+  <button type="button" class="btn btn-warning" onclick="removeImageField()">Remover</button>
 </div>
 <div class="container m-3">
   <button type="submit" name="add_product" class="btn btn-primary">Registrar</button>
