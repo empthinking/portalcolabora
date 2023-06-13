@@ -105,7 +105,7 @@ while ($row = $result->fetch_assoc()) {
 
 <?php else: ?>
 
-<h2>Nenhum produto registrado</h2>
+<h2 class="text-center mt-3">Nenhum produto registrado</h2>
 
 <?php endif; ?>
 
