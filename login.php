@@ -113,9 +113,13 @@ $url = htmlspecialchars(trim($_SERVER['PHP_SELF']));
                             <input type="password" class="form-control" id="password" name="password"
                                 value="<?php echo $password; ?>" required>
                         </div>
-                        <div class="d-flex justify-content-center ">
-                            <button type="submit" class="btn btn-primary btn-lg m-3">Entrar</button>
-                            <a href="index.php" class="btn btn-danger btn-lg m-3">Voltar</a>
+                        <div class="d-flex justify-content-center">
+                             <button type="submit" class="btn btn-primary btn-lg m-3">
+                               <i class="fas fa-sign-in-alt"></i> Entrar
+                               </button>
+                            <a href="index.php" class="btn btn-danger btn-lg m-3">
+                            <i class="fas fa-arrow-left"></i> Voltar
+                            </a>
                         </div>
                     </form>
                 </div>
