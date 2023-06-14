@@ -44,21 +44,44 @@ $stmt->close();
 
 // Verifica se o formulário foi enviado para salvar as alterações
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Obtém os dados do formulário
-    $updatedName = $_POST['name'];
-    $updatedPrice = doubleval($_POST['price']);
-    $updatedDescription = $_POST['description'];
-
-    // Atualiza os dados do produto no banco de dados
-    $stmt = $db->prepare('UPDATE Products SET Product_Name = ?, Product_Price = ?, Product_Description = ? WHERE Product_Id = ? AND User_Id = ?');
-    $stmt->bind_param('ssssi', $updatedName, $updatedPrice, $updatedDescription, $productId, $userId);
-    $stmt->execute();
-    $stmt->close();
-
-    // Redireciona de volta para a página de produtos do usuário
-    header("Location: meusprodutos.php");
-    exit();
+    if (isset($_FILES['image'])) {
+        $image = $_FILES['image'];
+        $imagePath = 'path/to/upload/directory/' . $image['name'];
+        
+        // Move a imagem para o diretório de upload
+        move_uploaded_file($image['tmp_name'], $imagePath);
+        
+        // Insere a nova imagem no banco de dados
+        $stmt = $db->prepare('INSERT INTO Product_Images (Product_Id, Image_Path) VALUES (?, ?)');
+        $stmt->bind_param('is', $productId, $imagePath);
+        $stmt->execute();
+        $stmt->close();
+    }
 }
+
+// Excluir imagem
+if (isset($_GET['image_id'])) {
+    $imageId = $_GET['image_id'];
+
+    // Verifica se a imagem pertence ao produto e ao usuário logado
+    $stmt = $db->prepare('SELECT * FROM Product_Images WHERE Image_Id = ? AND Product_Id = ?');
+    $stmt->bind_param('ii', $imageId, $productId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $image = $result->fetch_assoc();
+
+        // Exclui a imagem do banco de dados e do diretório de upload
+        $stmt = $db->prepare('DELETE FROM Product_Images WHERE Image_Id = ?');
+        $stmt->bind_param('i', $imageId);
+        $stmt->execute();
+        $stmt->close();
+
+        unlink($image['Image_Path']); // Exclui o arquivo do diretório de upload
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
     <div class="container mt-5">
         <h1>Editar Produto</h1>
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="id" value="<?php echo $product['Product_Id']; ?>">
             <div class="form-group">
                 <label for="name">Nome</label>
@@ -90,18 +113,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h2>Imagens do Produto</h2>
             <?php foreach ($images as $image): ?>
                 <img src="<?php echo $image['Image_Path']; ?>" alt="Product Image" width="200px">
-                <a href="excluirimagem.php?id=<?php echo $image['Image_Id']; ?>&product_id=<?php echo $product['Product_Id']; ?>">Excluir</a>
+                <a href="?id=<?php echo $productId; ?>&image_id=<?php echo $image['Image_Id']; ?>">Excluir</a>
                 <hr>
             <?php endforeach; ?>
 
             <h3>Adicionar Imagem</h3>
-            <form action="adicionarimagem.php" method="POST" enctype="multipart/form-data">
-                <input type="hidden" name="product_id" value="<?php echo $product['Product_Id']; ?>">
-                <div class="form-group">
-                    <input type="file" name="image" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Adicionar Imagem</button>
-            </form>
+            <div class="form-group">
+                <input type="file" name="image" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Adicionar Imagem</button>
 
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a href="meusprodutos.php" class="btn btn-secondary">Cancelar</a>
