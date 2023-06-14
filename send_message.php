@@ -35,7 +35,7 @@ require_once 'header.php';
             </div>
 
             <button type="submit" class="btn btn-primary">Enviar</button>
-            <a class="btn btn-danger" href="produto.php">Voltar</a>
+    <a class="btn btn-danger" onclick="window.history.back()">Voltar</a>
         </form>
     </div>
 
