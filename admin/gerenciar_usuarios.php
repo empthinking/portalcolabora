@@ -21,8 +21,8 @@ $filter = "";
 if (isset($_GET['filter'])) {
     $filter = $_GET['filter'];
 
-    // Verificar se o filtro é válido (comprador ou vendedor)
-    if ($filter !== "comprador" && $filter !== "vendedor") {
+    // Verificar se o filtro é válido (vendedor ou cliente)
+    if ($filter !== "vendedor" && $filter !== "cliente") {
         $filter = "";
     }
 }
@@ -31,10 +31,10 @@ if (isset($_GET['filter'])) {
 $sql = "SELECT COUNT(*) AS total FROM Users";
 
 // Adicionar o filtro à consulta SQL
-if ($filter === "comprador") {
-    $sql .= " WHERE User_Type = 'comprador'";
-} elseif ($filter === "vendedor") {
+if ($filter === "vendedor") {
     $sql .= " WHERE User_Type = 'vendedor'";
+} elseif ($filter === "cliente") {
+    $sql .= " WHERE User_Type = 'cliente'";
 }
 
 // Obter o total de usuários
@@ -63,14 +63,15 @@ $offset = ($current_page - 1) * $users_per_page;
 $sql = "SELECT * FROM Users";
 
 // Adicionar o filtro e a limitação à consulta SQL
-if ($filter === "comprador") {
-    $sql .= " WHERE User_Type = 'comprador'";
-} elseif ($filter === "vendedor") {
+if ($filter === "vendedor") {
     $sql .= " WHERE User_Type = 'vendedor'";
+} elseif ($filter === "cliente") {
+    $sql .= " WHERE User_Type = 'cliente'";
 }
 $sql .= " ORDER BY $sort_column $sort_order LIMIT $offset, $users_per_page";
 $result = mysqli_query($conn, $sql);
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -91,8 +92,8 @@ $result = mysqli_query($conn, $sql);
                                         <label for="filter">Filtro:</label>
                                         <select class="form-control" id="filter" name="filter">
                                             <option value="">Todos</option>
-                                            <option value="comprador" <?php if ($filter === "comprador") echo "selected"; ?>>Compradores</option>
                                             <option value="vendedor" <?php if ($filter === "vendedor") echo "selected"; ?>>Vendedores</option>
+                                            <option value="cliente" <?php if ($filter === "cliente") echo "selected"; ?>>Clientes</option>
                                         </select>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Filtrar</button>
@@ -118,7 +119,7 @@ $result = mysqli_query($conn, $sql);
                                         <th scope="row"><?php echo $row['User_Id']; ?></th>
                                         <td><?php echo $row['User_Name']; ?></td>
                                         <td><?php echo $row['User_Email']; ?></td>
-                                        <td><?php echo $row['User_Type']; ?></td>
+                                        <td><?php echo $row['User_Type'] === 'vendedor' ? 'Vendedor' : 'Cliente'; ?></td>
                                         <td>
                                             <!-- Botões de ação -->
                                             <a href="editar_usuario.php?id=<?php echo $row['User_Id']; ?>" class="btn btn-primary btn-sm">Editar</a>
@@ -140,16 +141,35 @@ $result = mysqli_query($conn, $sql);
                                             <span class="page-link">Previous</span>
                                         </li>
                                     <?php endif; ?>
+
                                     <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
-                                    <?php if ($i == $current_page) : ?>
-                                        <li class="page-item active" aria-current="page">
-                                            <span class="page-link"><?php echo $i; ?></span>
+                                        <?php if ($i == $current_page) : ?>
+                                            <li class="page-item active" aria-current="page">
+                                                <span class="page-link"><?php echo $i; ?></span>
+                                            </li>
+                                        <?php else : ?>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?filter=<?php echo $filter; ?>&sort_column=<?php echo $sort_column; ?>&sort_order=<?php echo $sort_order; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+
+                                    <?php if ($current_page < $total_pages) : ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?filter=<?php echo $filter; ?>&sort_column=<?php echo $sort_column; ?>&sort_order=<?php echo $sort_order; ?>&page=<?php echo $current_page + 1; ?>">Next</a>
                                         </li>
                                     <?php else : ?>
-                                        <li class="page-item">
-                                            <a class="page-link" href="?filter=<?php echo $filter; ?>&sort_column=<?php echo $sort_column; ?>&sort_order=<?php echo $sort_order; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Next</span>
                                         </li>
                                     <?php endif; ?>
-                                <?php endfor; ?>
-
-                                <?php if ($current_page <
+                                </ul>
+                            </nav>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
