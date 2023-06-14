@@ -3,7 +3,6 @@ require_once 'db.php';
 
 session_start();
 
-
 if (!isUserLoggedIn()) {
     header('Location: index.php');
     exit();
@@ -54,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
-            echo '<div class="conteiner">
+            echo '<div class="container">
             Produto Adicionado Com Sucesso';
             echo '<a href="'.htmlspecialchars($_SERVER['PHP_SELF']).'" class="btn btn-primary">ADICIONAR OUTRO</a>';
             echo '<a href="index.php" class="btn btn-success">INÍCIO</a>';
@@ -88,20 +87,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <textarea class="form-control" name="description" id="description" rows="4" required><?php echo htmlspecialchars($description); ?></textarea>
         </div>
 
-<div class="form-group">
+        <div class="form-group">
             <label for="price">Preço:</label>
             <input type="number" class="form-control" name="price" id="price" step="0.01" value="<?php echo htmlspecialchars($price); ?>" required>
         </div>
 
-   <div class="form-group">
-    <label for="images">Imagens:</label>
-    <input type="file" class="form-control-file" name="images[]" id="images" accept="image/*" multiple required>
-    <small class="form-text text-muted">Adicione até 5 imagens</small>
-</div>
+        <div class="form-group">
+            <label for="images">Imagens:</label>
+            <input type="file" class="form-control-file" name="images[]" id="images" accept="image/*" multiple required>
+            <small class="form-text text-muted">Adicione até 5 imagens</small>
+        </div>
+
+        <!-- Container para exibir as imagens selecionadas -->
+        <div id="image-preview" class="mt-4"></div>
 
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 </div>
+
 <script>
     document.getElementById('images').addEventListener('change', function(e) {
         var files = e.target.files;
@@ -123,6 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     });
 </script>
+
 <?php
 require_once 'footer.php';
 ?>
