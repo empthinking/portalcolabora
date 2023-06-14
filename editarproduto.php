@@ -66,9 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updateProductStmt->bind_param("ssdii", $name, $description, $price, $product_id, $vendor_id);
 
     if ($updateProductStmt->execute()) {
-        echo '<div class="container">';
-        echo 'Produto atualizado com sucesso!';
-        echo '</div>';
+        header("Location: meusprodutos.php");
+        exit();
     } else {
         $error = 'Falha ao atualizar o produto. Por favor, tente novamente.';
     }
