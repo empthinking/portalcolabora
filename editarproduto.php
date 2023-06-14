@@ -8,39 +8,124 @@ if (!isUserLoggedIn()) {
     exit();
 }
 
-$image_id = $_GET['id'];
-$product_id = $_GET['product_id'];
+require_once 'header.php';
 
-// Verificar se a imagem pertence ao produto do usuário logado
-$stmt = $db->prepare('SELECT * FROM Images WHERE Image_Id = ? AND Product_Id = ?');
-$stmt->bind_param('ii', $image_id, $product_id);
-$stmt->execute();
-$result = $stmt->get_result();
+$error = '';
+$product_id = $_GET['id'];
 
-if ($result->num_rows === 0) {
-    // A imagem não pertence ao produto ou não existe
-    header("Location: editarproduto.php?id=$product_id");
-    exit();
-}
-
-// Excluir a imagem do banco de dados e do diretório
-$image = $result->fetch_assoc();
-$image_path = $image['Image_Name'];
-
-$deleteStmt = $db->prepare("DELETE FROM Images WHERE Image_Id = ?");
-$deleteStmt->bind_param("i", $image_id);
-
-if ($deleteStmt->execute()) {
-    if (unlink($image_path)) {
-        echo '<script>alert("Imagem excluída com sucesso!");</script>';
-    } else {
-        echo '<script>alert("Falha ao excluir a imagem do diretório.");</script>';
-    }
+// Query the database to fetch the product information
+$stmt = $db->prepare("
+    SELECT p.Product_Name, p.Product_Description, p.Product_Price, p.Product_Date, u.User_Name, u.User_Id, u.User_Number
+    FROM Products p
+    INNER JOIN Users u ON p.User_Id = u.User_Id
+    WHERE p.Product_Id = ?
+");
+$stmt->bind_param('i', $product_id);
+if ($stmt->execute()) {
+    $stmt->bind_result($product_name, $product_description, $product_price, $product_date, $vendor_name, $vendor_id, $User_Number);
+    $stmt->fetch();
 } else {
-    echo '<script>alert("Falha ao excluir a imagem do banco de dados.");</script>';
+    $error = false;
 }
-
 $stmt->close();
 
-echo '<script>window.location.href = "editarproduto.php?id='.$product_id.'";</script>';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Handle image uploads
+    if (!empty($_FILES['images']['name'][0])) {
+        $images = $_FILES['images'];
+
+        //Cria um diretório caso não exista
+        $targetDir = 'img/product_images/';
+        if (!file_exists($targetDir)) {
+            mkdir($targetDir, 0777, true);
+        }
+
+        $uploadedImages = [];
+
+        //Atualiza e armazena as imagens
+        foreach ($images['name'] as $index => $imageName) {
+            $imageDate = date('Y-m-d H:i:s');
+            $imagePath = $targetDir . uniqid() . '_' . $imageName;
+
+            if (move_uploaded_file($images['tmp_name'][$index], $imagePath)) {
+                $uploadedImages[] = $imagePath;
+
+                $insertImageStmt = $db->prepare("INSERT INTO Images (Image_Name, Image_Date, User_Id, Product_Id) VALUES (?, ?, ?, ?)");
+                $insertImageStmt->bind_param("ssii", $imagePath, $imageDate, $vendor_id, $product_id);
+                $insertImageStmt->execute();
+            }
+        }
+    }
+
+    // Handle other form fields
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+
+    $updateProductStmt = $db->prepare("UPDATE Products SET Product_Name = ?, Product_Description = ?, Product_Price = ? WHERE Product_Id = ? AND User_Id = ?");
+    $updateProductStmt->bind_param("ssdii", $name, $description, $price, $product_id, $vendor_id);
+
+    if ($updateProductStmt->execute()) {
+        echo '<div class="container">';
+        echo 'Produto atualizado com sucesso!';
+        echo '</div>';
+    } else {
+        $error = 'Falha ao atualizar o produto. Por favor, tente novamente.';
+    }
+}
+
+// Fetch images associated with the product
+$imageStmt = $db->prepare("SELECT Image_Id, Image_Name FROM Images WHERE Product_Id = ?");
+$imageStmt->bind_param("i", $product_id);
+$imageStmt->execute();
+$imageResult = $imageStmt->get_result();
+$images = $imageResult->fetch_all(MYSQLI_ASSOC);
+$imageStmt->close();
 ?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Editar Produto</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container mt-5">
+        <h1>Editar Produto</h1>
+        <form action="" method="POST" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="name">Nome</label>
+                <input type="text" class="form-control" id="name" name="name" value="<?php echo $product_name; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Preço</label>
+                <input type="number" step="0.01" class="form-control" id="price" name="price" value="<?php echo $product_price; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Descrição</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required><?php echo $product_description; ?></textarea>
+            </div>
+            <div class="form-group">
+                <label for="images">Imagens</label>
+                <input type="file" class="form-control-file" id="images" name="images[]" multiple>
+            </div>
+            <div class="form-group">
+                <label>Imagens Atuais</label>
+                <div class="row">
+                    <?php foreach ($images as $image) : ?>
+                        <div class="col-md-3">
+                            <img src="<?php echo $image['Image_Name']; ?>" class="img-thumbnail">
+                            <a href="excluirimagem.php?id=<?php echo $image['Image_Id']; ?>&product_id=<?php echo $product_id; ?>" class="btn btn-danger">Excluir</a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="meusprodutos.php" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</body>
+
+</html>
