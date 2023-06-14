@@ -45,7 +45,7 @@ $checkUnreadMessages = function() use ($id, $db) : bool {
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://kit.fontawesome.com/0280b9824e.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="dark">
   <!-- Header -->
   <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-header">
