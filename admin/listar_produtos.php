@@ -107,7 +107,7 @@ $result = mysqli_query($conn, $sql);
                         <td><?php echo $row['Product_Description']; ?></td>
                         <td><?php echo $row['Product_Price']; ?></td>
                         <td><?php echo $row['Product_Date']; ?></td>
-                        <td><?php echo $row['Product_Author']; ?></td>
+                        <td><?php echo $row['User_Id ']; ?></td>
                         <td>
                             <a href="editar_produto.php?id=<?php echo $row['Product_Id']; ?>" class="btn btn-primary btn-sm">Editar</a>
                             <a href="listar_produtos.php?delete_id=<?php echo $row['Product_Id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza de que deseja excluir este produto?')">Excluir</a>
