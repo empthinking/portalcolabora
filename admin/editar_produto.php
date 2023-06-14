@@ -84,7 +84,7 @@ $images = mysqli_fetch_all($image_result, MYSQLI_ASSOC);
                     <?php foreach ($images as $image) { ?>
                         <div class="col-md-3">
                             <div class="card mb-3">
-                                <img src="<?php echo $image['Image_Name']; ?>" class="card-img-top" alt="Imagem do Produto">
+                                <img src="../<?php echo $image['Image_Name']; ?>" class="card-img-top" alt="Imagem do Produto">
                                 <div class="card-body">
                                     <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#imagemModal<?php echo $image['Image_Id']; ?>">Visualizar</a>
                                     <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#trocarImagemModal<?php echo $image['Image_Id']; ?>">Trocar</a>
@@ -97,7 +97,7 @@ $images = mysqli_fetch_all($image_result, MYSQLI_ASSOC);
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-body">
-                                        <img src="<?php echo ../$image['Image_Name']; ?>" class="img-fluid" alt="Imagem do Produto">
+                                        <img src="../<?php echo $image['Image_Name']; ?>" class="img-fluid" alt="Imagem do Produto">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
