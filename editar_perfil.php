@@ -54,12 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label for="numero">Número:</label>
       <input type="tel" class="form-control" id="numero" name="numero" value="123456789" required>
     </div>
-<a href="mudar_senha.php">mudar senha</a>
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Salvar</button>
       <a href="perfil.php" class="btn btn-secondary">Cancelar</a>
     </div>
   </form>
+<a href="mudar_senha.php">mudar senha</a>
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
