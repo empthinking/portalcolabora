@@ -104,29 +104,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 </div>
-
-<script>
-    document.getElementById('images').addEventListener('change', function(e) {
-        var files = e.target.files;
-        var previewContainer = document.getElementById('image-preview');
-        previewContainer.innerHTML = ''; // Limpar o container de visualização
-
-        for (var i = 0; i < files.length; i++) {
-            var file = files[i];
-            var reader = new FileReader();
-
-            reader.onload = function(e) {
-                var img = document.createElement('img');
-                img.className = 'img-thumbnail';
-                img.src = e.target.result;
-                previewContainer.appendChild(img);
-            };
-
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
-
 <?php
 require_once 'footer.php';
 ?>
