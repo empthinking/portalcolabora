@@ -32,12 +32,15 @@ $deleteStmt->bind_param("i", $image_id);
 
 if ($deleteStmt->execute()) {
     if (unlink($image_path)) {
-        echo "Imagem excluída com sucesso!";
+        echo '<script>alert("Imagem excluída com sucesso!");</script>';
     } else {
-        echo "Falha ao excluir a imagem do diretório.";
+        echo '<script>alert("Falha ao excluir a imagem do diretório.");</script>';
     }
 } else {
-    echo "Falha ao excluir a imagem do banco de dados.";
+    echo '<script>alert("Falha ao excluir a imagem do banco de dados.");</script>';
 }
 
 $stmt->close();
+
+echo '<script>window.location.href = "editarproduto.php?id='.$product_id.'";</script>';
+?>
