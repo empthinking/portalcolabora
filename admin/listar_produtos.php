@@ -34,10 +34,14 @@ $limit = 10; // Número de produtos por página
 $page = isset($_GET['page']) ? $_GET['page'] : 1; // Página atual
 $start = ($page - 1) * $limit; // Registro inicial para a consulta
 
+// Configurar os parâmetros de classificação
+$sort_column = isset($_GET['sort_column']) ? $_GET['sort_column'] : 'Product_Id';
+$sort_order = isset($_GET['sort_order']) ? $_GET['sort_order'] : 'ASC';
+
 $sql = "SELECT Products.*, Users.User_Name 
         FROM Products 
         INNER JOIN Users ON Products.User_Id = Users.User_Id 
-        ORDER BY Product_Id DESC 
+        ORDER BY $sort_column $sort_order 
         LIMIT $start, $limit";
 
 $result = mysqli_query($conn, $sql);
@@ -57,22 +61,31 @@ $total_pages = ceil($total_products / $limit);
 <head>
     <title>Listar Produtos</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .progress {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body class="bg-gray-200">
     <div class="container mt-5">
         <h2 class="mb-4">Lista de Produtos</h2>
 
+        <!-- Barra de Progresso -->
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<?php echo $page; ?>" aria-valuemin="1" aria-valuemax="<?php echo $total_pages; ?>" style="width: <?php echo ($page / $total_pages) * 100; ?>%"></div>
+        </div>
+
         <table class="table">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Descrição</th>
-                    <th>Preço</th>
-                    <th>Data</th>
-                    <th>Nome do Usuário</th>
+                    <th><a href="listar_produtos.php?sort_column=Product_Id&sort_order=<?php echo $sort_column == 'Product_Id' && $sort_order == 'ASC' ? 'DESC' : 'ASC'; ?>">ID</a></th>
+                    <th><a href="listar_produtos.php?sort_column=Product_Name&sort_order=<?php echo $sort_column == 'Product_Name' && $sort_order == 'ASC' ? 'DESC' : 'ASC'; ?>">Nome</a></th>
+                    <th><a href="listar_produtos.php?sort_column=Product_Description&sort_order=<?php echo $sort_column == 'Product_Description' && $sort_order == 'ASC' ? 'DESC' : 'ASC'; ?>">Descrição</a></th>
+                    <th><a href="listar_produtos.php?sort_column=Product_Price&sort_order=<?php echo $sort_column == 'Product_Price' && $sort_order == 'ASC' ? 'DESC' : 'ASC'; ?>">Preço</a></th>
+                    <th><a href="listar_produtos.php?sort_column=Product_Date&sort_order=<?php echo $sort_column == 'Product_Date' && $sort_order == 'ASC' ? 'DESC' : 'ASC'; ?>">Data</a></th>
+                    <th>Publicado por</th>
                     <th>Ações</th>
-                    <th>Selecionar</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,9 +101,6 @@ $total_pages = ceil($total_products / $limit);
                             <a href="editar_produto.php?id=<?php echo $row['Product_Id']; ?>" class="btn btn-primary btn-sm">Editar</a>
                             <a href="listar_produtos.php?delete_id=<?php echo $row['Product_Id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza de que deseja excluir este produto?')">Excluir</a>
                         </td>
-                        <td>
-                            <input type="checkbox" name="selected_products[]" value="<?php echo $row['Product_Id']; ?>">
-                        </td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>
@@ -98,7 +108,7 @@ $total_pages = ceil($total_products / $limit);
 
         <!-- Botão "Mostrar Mais" -->
         <?php if ($page < $total_pages) : ?>
-            <button class="btn btn-primary mb-4" onclick="window.location.href='listar_produtos.php?page=<?php echo $page + 1; ?>'">Mostrar Mais</button>
+            <button class="btn btn-primary mb-4" onclick="window.location.href='listar_produtos.php?page=<?php echo $page + 1; ?>&sort_column=<?php echo $sort_column; ?>&sort_order=<?php echo $sort_order; ?>'">Mostrar Mais</button>
         <?php endif; ?>
 
         <!-- Botão de Excluir Produtos Selecionados -->
