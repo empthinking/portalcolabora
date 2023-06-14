@@ -10,42 +10,43 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
 // Incluir o arquivo de conexão com o banco de dados
 require_once "db.php";
 
+// Obter o ID do usuário da sessão
+$user_id = $_SESSION['user_id'];
+
 // Verificar se o formulário foi enviado
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Obter os dados do formulário
-    $currentPassword = mysqli_real_escape_string($conn, $_POST["current_password"]);
-    $newPassword = mysqli_real_escape_string($conn, $_POST["new_password"]);
-    $confirmPassword = mysqli_real_escape_string($conn, $_POST["confirm_password"]);
+    $current_password = mysqli_real_escape_string($conn, $_POST["current_password"]);
+    $new_password = mysqli_real_escape_string($conn, $_POST["new_password"]);
+    $confirm_password = mysqli_real_escape_string($conn, $_POST["confirm_password"]);
 
-    // Verificar se a nova senha e a confirmação da senha coincidem
-    if ($newPassword !== $confirmPassword) {
-        $error = "A nova senha e a confirmação da senha não coincidem.";
-    } else {
-        // Obter o ID do usuário da sessão
-        $userId = $_SESSION['user_id'];
+    // Consultar a tabela Users para obter a senha atual do usuário
+    $sql = "SELECT User_Password FROM Users WHERE User_Id = '$user_id'";
+    $result = mysqli_query($conn, $sql);
+    $user = mysqli_fetch_assoc($result);
 
-        // Consultar a tabela Users para obter as informações do usuário
-        $sql = "SELECT User_Password FROM Users WHERE User_Id = '$userId'";
-        $result = mysqli_query($conn, $sql);
-        $user = mysqli_fetch_assoc($result);
-
-        // Verificar se a senha atual está correta
-        if (password_verify($currentPassword, $user['User_Password'])) {
+    // Verificar se a senha atual fornecida pelo usuário corresponde à senha armazenada no banco de dados
+    if (password_verify($current_password, $user['User_Password'])) {
+        // Verificar se a nova senha e a confirmação da senha são iguais
+        if ($new_password === $confirm_password) {
             // Gerar o hash da nova senha
-            $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
+            $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
 
             // Atualizar a senha do usuário no banco de dados
-            $updateSql = "UPDATE Users SET User_Password = '$newPasswordHash' WHERE User_Id = '$userId'";
-            mysqli_query($conn, $updateSql);
+            $update_sql = "UPDATE Users SET User_Password = '$hashed_password' WHERE User_Id = '$user_id'";
+            mysqli_query($conn, $update_sql);
 
-            // Redirecionar para a página de perfil do usuário
-            header("Location: perfil.php");
+            // Redirecionar para uma página de sucesso ou exibir uma mensagem de sucesso
+            header("Location: senha_atualizada.php");
             exit();
         } else {
-            $error = "A senha atual está incorreta.";
+            $error_message = "A nova senha e a confirmação de senha não correspondem.";
         }
+    } else {
+        $error_message = "A senha atual está incorreta.";
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -61,10 +62,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="card">
                     <div class="card-body">
                         <h2 class="card-title text-center mb-4">Mudar Senha</h2>
+                        <?php if (isset($error_message)) : ?>
+                            <div class="alert alert-danger"><?php echo $error_message; ?></div>
+                        <?php endif; ?>
                         <form method="POST">
-                            <?php if (isset($error)) : ?>
-                                <div class="alert alert-danger"><?php echo $error; ?></div>
-                            <?php endif; ?>
                             <div class="form-group">
                                 <label for="current_password">Senha Atual:</label>
                                 <input type="password" id="current_password" name="current_password" class="form-control" required>
