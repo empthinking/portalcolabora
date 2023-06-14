@@ -95,7 +95,7 @@ $result = mysqli_query($conn, $sql);
                     <th><a href="listar_produtos.php?order_by=Product_Description&order=<?php echo ($order === 'ASC' && $order_by === 'Product_Description') ? 'DESC' : 'ASC'; ?>">Descrição</a></th>
                     <th><a href="listar_produtos.php?order_by=Product_Price&order=<?php echo ($order === 'ASC' && $order_by === 'Product_Price') ? 'DESC' : 'ASC'; ?>">Preço</a></th>
                     <th><a href="listar_produtos.php?order_by=Product_Date&order=<?php echo ($order === 'ASC' && $order_by === 'Product_Date') ? 'DESC' : 'ASC'; ?>">Data</a></th>
-                    <th><a href="listar_produtos.php?order_by=Product_Author&order=<?php echo ($order === 'ASC' && $order_by === 'Product_Author') ? 'DESC' : 'ASC'; ?>">Autor</a></th>
+                    <th><a href="listar_produtos.php?order_by=Product_Author&order=<?php echo ($order === 'ASC' && $order_by === 'User_Id') ? 'DESC' : 'ASC'; ?>">Autor</a></th>
                     <th>Ações</th>
                 </tr>
             </thead>
