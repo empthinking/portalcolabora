@@ -3,82 +3,65 @@ require_once 'db.php';
 
 session_start();
 
-if (!isset($_SESSION['id']) || $_SESSION['type'] !== 'vendedor') {
-    header("Location: login.php");
+if (!isUserLoggedIn()) {
+    header('Location: index.php');
     exit();
 }
 
-// Verifica se o ID do produto está presente
-if (!isset($_GET['id'])) {
-    header("Location: meusprodutos.php");
-    exit();
-}
+$name = $price = $description = '';
+$error = '';
 
-$productId = $_GET['id'];
-$userId = $_SESSION['id'];
+require_once 'header.php';
 
-// Verifica se o produto pertence ao usuário logado
-$stmt = $db->prepare('SELECT * FROM Products WHERE Product_Id = ? AND User_Id = ?');
-$stmt->bind_param('ii', $productId, $userId);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows === 0) {
-    // O produto não pertence ao usuário logado
-    header("Location: meusprodutos.php");
-    exit();
-}
-
-$product = $result->fetch_assoc();
-
-$stmt->close();
-
-// Query the database to fetch the product images
-$stmt = $db->prepare('SELECT * FROM Product_Images WHERE Product_Id = ?');
-$stmt->bind_param('i', $productId);
-$stmt->execute();
-$imageResult = $stmt->get_result();
-$images = $imageResult->fetch_all(MYSQLI_ASSOC);
-
-$stmt->close();
-
-// Verifica se o formulário foi enviado para salvar as alterações
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_FILES['image'])) {
-        $image = $_FILES['image'];
-        $imagePath = 'path/to/upload/directory/' . $image['name'];
-        
-        // Move a imagem para o diretório de upload
-        move_uploaded_file($image['tmp_name'], $imagePath);
-        
-        // Insere a nova imagem no banco de dados
-        $stmt = $db->prepare('INSERT INTO Product_Images (Product_Id, Image_Path) VALUES (?, ?)');
-        $stmt->bind_param('is', $productId, $imagePath);
-        $stmt->execute();
-        $stmt->close();
-    }
-}
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $price = $_POST['price'];
+    $images = $_FILES['images'];
 
-// Excluir imagem
-if (isset($_GET['image_id'])) {
-    $imageId = $_GET['image_id'];
+    if (empty($name) || empty($description) || empty($price) || empty($images['name'][0])) {
+        $error = 'Preencha todos os campos';
+    } else {
+        $userId = $_SESSION['id'];
+        $productDate = date('Y-m-d H:i:s');
 
-    // Verifica se a imagem pertence ao produto e ao usuário logado
-    $stmt = $db->prepare('SELECT * FROM Product_Images WHERE Image_Id = ? AND Product_Id = ?');
-    $stmt->bind_param('ii', $imageId, $productId);
-    $stmt->execute();
-    $result = $stmt->get_result();
+        $insertProductStmt = $db->prepare("INSERT INTO Products (Product_Name, Product_Description, Product_Price, Product_Date, User_Id) VALUES (?, ?, ?, ?, ?)");
+        $insertProductStmt->bind_param("ssdsi", $name, $description, $price, $productDate, $userId);
 
-    if ($result->num_rows > 0) {
-        $image = $result->fetch_assoc();
+        if ($insertProductStmt->execute()) {
+            $productId = $insertProductStmt->insert_id;
 
-        // Exclui a imagem do banco de dados e do diretório de upload
-        $stmt = $db->prepare('DELETE FROM Product_Images WHERE Image_Id = ?');
-        $stmt->bind_param('i', $imageId);
-        $stmt->execute();
-        $stmt->close();
+            // Cria um diretório caso não exista
+            $targetDir = 'img/product_images/';
+            if (!file_exists($targetDir)) {
+                mkdir($targetDir, 0777, true);
+            }
 
-        unlink($image['Image_Path']); // Exclui o arquivo do diretório de upload
+            $uploadedImages = [];
+
+            // Atualiza e armazena as imagens
+            foreach ($images['name'] as $index => $imageName) {
+                $imageDate = date('Y-m-d H:i:s');
+                $imagePath = $targetDir . uniqid() . '_' . $imageName;
+
+                if (move_uploaded_file($images['tmp_name'][$index], $imagePath)) {
+                    $uploadedImages[] = $imagePath;
+
+                    $insertImageStmt = $db->prepare("INSERT INTO Images (Image_Name, Image_Date, User_Id, Product_Id) VALUES (?, ?, ?, ?)");
+                    $insertImageStmt->bind_param("ssii", $imagePath, $imageDate, $userId, $productId);
+                    $insertImageStmt->execute();
+                }
+            }
+
+            echo '<div class="conteiner">
+            Produto Adicionado Com Sucesso';
+            echo '<a href="'.htmlspecialchars($_SERVER['PHP_SELF']).'" class="btn btn-primary">ADICIONAR OUTRO</a>';
+            echo '<a href="index.php" class="btn btn-success">INÍCIO</a>';
+            echo '</div>';
+            exit();
+        } else {
+            $error = 'Failed to add the product. Please try again.';
+        }
     }
 }
 
@@ -95,19 +78,21 @@ if (isset($_GET['image_id'])) {
 <body>
     <div class="container mt-5">
         <h1>Editar Produto</h1>
-        <form action="" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="id" value="<?php echo $product['Product_Id']; ?>">
+        <?php if (!empty($error)): ?>
+            <div class="alert alert-danger"><?php echo $error; ?></div>
+        <?php endif; ?>
+        <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="name">Nome</label>
-                <input type="text" class="form-control" id="name" name="name" value="<?php echo $product['Product_Name']; ?>" required>
+                <input type="text" class="form-control" id="name" name="name" value="<?php echo $name; ?>" required>
             </div>
             <div class="form-group">
                 <label for="price">Preço</label>
-                <input type="number" class="form-control" id="price" name="price" value="<?php echo $product['Product_Price']; ?>" required>
+                <input type="number" class="form-control" id="price" name="price" value="<?php echo $price; ?>" required>
             </div>
             <div class="form-group">
                 <label for="description">Descrição</label>
-                <textarea class="form-control" id="description" name="description" rows="3" required><?php echo $product['Product_Description']; ?></textarea>
+                <textarea class="form-control" id="description" name="description" rows="3" required><?php echo $description; ?></textarea>
             </div>
 
             <h2>Imagens do Produto</h2>
@@ -119,7 +104,7 @@ if (isset($_GET['image_id'])) {
 
             <h3>Adicionar Imagem</h3>
             <div class="form-group">
-                <input type="file" name="image" required>
+                <input type="file" name="images[]" multiple required>
             </div>
             <button type="submit" class="btn btn-primary">Adicionar Imagem</button>
 
