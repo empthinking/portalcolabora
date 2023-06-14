@@ -93,16 +93,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <input type="number" class="form-control" name="price" id="price" step="0.01" value="<?php echo htmlspecialchars($price); ?>" required>
         </div>
 
-        <div class="form-group">
-            <label for="images">Imagens:</label>
-            <input type="file" class="form-control-file" name="images[]" id="images" accept="image/*" multiple required>
-            <small class="form-text text-muted">Adicione até 5 imagens</small>
-        </div>
+   <div class="form-group">
+    <label for="images">Imagens:</label>
+    <input type="file" class="form-control-file" name="images[]" id="images" accept="image/*" multiple required>
+    <small class="form-text text-muted">Adicione até 5 imagens</small>
+</div>
 
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 </div>
+<script>
+    document.getElementById('images').addEventListener('change', function(e) {
+        var files = e.target.files;
+        var previewContainer = document.getElementById('image-preview');
+        previewContainer.innerHTML = ''; // Limpar o container de visualização
 
+        for (var i = 0; i < files.length; i++) {
+            var file = files[i];
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                var img = document.createElement('img');
+                img.className = 'img-thumbnail';
+                img.src = e.target.result;
+                previewContainer.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
 <?php
 require_once 'footer.php';
 ?>
