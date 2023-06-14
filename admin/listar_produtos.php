@@ -29,15 +29,20 @@ if (isset($_GET['delete_id'])) {
     exit();
 }
 
-// Consultar a tabela Products para obter a lista de produtos
-$limit = 10; // Número de produtos por página
-$page = isset($_GET['page']) ? $_GET['page'] : 1; // Página atual
-$start = ($page - 1) * $limit; // Registro inicial para a consulta
+// Definir a quantidade de produtos por página
+$limit = 10;
 
-// Configurar os parâmetros de classificação
+// Definir a página atual
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Definir o deslocamento para a consulta
+$start = ($page - 1) * $limit;
+
+// Definir o campo de ordenação padrão e a direção de ordenação padrão
 $sort_column = isset($_GET['sort_column']) ? $_GET['sort_column'] : 'Product_Id';
 $sort_order = isset($_GET['sort_order']) ? $_GET['sort_order'] : 'ASC';
 
+// Consultar a tabela Products para obter a lista de produtos com ordenação e limite
 $sql = "SELECT Products.*, Users.User_Name 
         FROM Products 
         INNER JOIN Users ON Products.User_Id = Users.User_Id 
@@ -61,31 +66,79 @@ $total_pages = ceil($total_products / $limit);
 <head>
     <title>Listar Produtos</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <style>
-        .progress {
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
 <body class="bg-gray-200">
     <div class="container mt-5">
         <h2 class="mb-4">Lista de Produtos</h2>
 
-        <!-- Barra de Progresso -->
-        <div class="progress">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="<?php echo $page; ?>" aria-valuemin="1" aria-valuemax="<?php echo $total_pages; ?>" style="width: <?php echo ($page / $total_pages) * 100; ?>%"></div>
-        </div>
-
         <table class="table">
             <thead>
                 <tr>
-                    <th><a href="listar_produtos.php?sort_column=Product_Id&sort_order=<?php echo $sort_column == 'Product_Id' && $sort_order == 'ASC' ? 'DESC' : 'ASC'; ?>">ID</a></th>
-                    <th><a href="listar_produtos.php?sort_column=Product_Name&sort_order=<?php echo $sort_column == 'Product_Name' && $sort_order == 'ASC' ? 'DESC' : 'ASC'; ?>">Nome</a></th>
-                    <th><a href="listar_produtos.php?sort_column=Product_Description&sort_order=<?php echo $sort_column == 'Product_Description' && $sort_order == 'ASC' ? 'DESC' : 'ASC'; ?>">Descrição</a></th>
-                    <th><a href="listar_produtos.php?sort_column=Product_Price&sort_order=<?php echo $sort_column == 'Product_Price' && $sort_order == 'ASC' ? 'DESC' : 'ASC'; ?>">Preço</a></th>
-                    <th><a href="listar_produtos.php?sort_column=Product_Date&sort_order=<?php echo $sort_column == 'Product_Date' && $sort_order == 'ASC' ? 'DESC' : 'ASC'; ?>">Data</a></th>
+                    <th>
+                        <a href="listar_produtos.php?sort_column=Product_Id&sort_order=<?php echo $sort_column === 'Product_Id' && $sort_order === 'ASC' ? 'DESC' : 'ASC'; ?>">
+                            ID
+                            <?php if ($sort_column === 'Product_Id') : ?>
+                                <?php if ($sort_order === 'ASC') : ?>
+                                    <i class="fas fa-sort-up"></i>
+                                <?php else : ?>
+                                    <i class="fas fa-sort-down"></i>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="listar_produtos.php?sort_column=Product_Name&sort_order=<?php echo $sort_column === 'Product_Name' && $sort_order === 'ASC' ? 'DESC' : 'ASC'; ?>">
+                            Nome
+                            <?php if ($sort_column === 'Product_Name') : ?>
+                                <?php if ($sort_order === 'ASC') : ?>
+                                    <i class="fas fa-sort-up"></i>
+                                <?php else : ?>
+                                    <i class="fas fa-sort-down"></i>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="listar_produtos.php?sort_column=Product_Description&sort_order=<?php echo $sort_column === 'Product_Description' && $sort_order === 'ASC' ? 'DESC' : 'ASC'; ?>">
+                            Descrição
+                            <?php if ($sort_column === 'Product_Description') : ?>
+                                <?php if ($sort_order === 'ASC') : ?>
+                                    <i class="fas fa-sort-up"></i>
+                                <?php else : ?>
+                                    <i class="fas fa-sort-down"></i>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="listar_produtos.php?sort_column=Product_Price&sort_order=<?php echo $sort_column === 'Product_Price' && $sort_order === 'ASC' ? 'DESC' : 'ASC'; ?>">
+                            Preço
+                            <?php if ($sort_column === 'Product_Price') : ?>
+                                <?php if ($sort_order === 'ASC') : ?>
+                                    <i class="fas fa-sort-up"></i>
+                                <?php else : ?>
+                                    <i class="fas fa-sort-down"></i>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="listar_produtos.php?sort_column=Product_Date&sort_order=<?php echo $sort_column === 'Product_Date' && $sort_order === 'ASC' ? 'DESC' : 'ASC'; ?>">
+                            Data
+                            <?php if ($sort_column === 'Product_Date') : ?>
+                                <?php if ($sort_order === 'ASC') : ?>
+                                    <i class="fas fa-sort-up"></i>
+                                <?php else : ?>
+                                    <i class="fas fa-sort-down"></i>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </a>
+                    </th>
                     <th>Publicado por</th>
                     <th>Ações</th>
+                    <th>
+                        <input type="checkbox" id="select-all-checkbox">
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -101,34 +154,61 @@ $total_pages = ceil($total_products / $limit);
                             <a href="editar_produto.php?id=<?php echo $row['Product_Id']; ?>" class="btn btn-primary btn-sm">Editar</a>
                             <a href="listar_produtos.php?delete_id=<?php echo $row['Product_Id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza de que deseja excluir este produto?')">Excluir</a>
                         </td>
+                        <td>
+                            <input type="checkbox" class="select-checkbox" data-product-id="<?php echo $row['Product_Id']; ?>">
+                        </td>
                     </tr>
                 <?php endwhile; ?>
             </tbody>
         </table>
 
-        <!-- Botão "Mostrar Mais" -->
-        <?php if ($page < $total_pages) : ?>
-            <button class="btn btn-primary mb-4" onclick="window.location.href='listar_produtos.php?page=<?php echo $page + 1; ?>&sort_column=<?php echo $sort_column; ?>&sort_order=<?php echo $sort_order; ?>'">Mostrar Mais</button>
-        <?php endif; ?>
+        <nav aria-label="...">
+            <ul class="pagination">
+                <li class="page-item <?php echo $page === 1 ? 'disabled' : ''; ?>">
+                    <a class="page-link" href="listar_produtos.php?page=<?php echo $page - 1; ?>&sort_column=<?php echo $sort_column; ?>&sort_order=<?php echo $sort_order; ?>">Anterior</a>
+                </li>
+                <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                    <li class="page-item <?php echo $page === $i ? 'active' : ''; ?>">
+                        <a class="page-link" href="listar_produtos.php?page=<?php echo $i; ?>&sort_column=<?php echo $sort_column; ?>&sort_order=<?php echo $sort_order; ?>"><?php echo $i; ?></a>
+                    </li>
+                <?php endfor; ?>
+                <li class="page-item <?php echo $page === $total_pages ? 'disabled' : ''; ?>">
+                    <a class="page-link" href="listar_produtos.php?page=<?php echo $page + 1; ?>&sort_column=<?php echo $sort_column; ?>&sort_order=<?php echo $sort_order; ?>">Próxima</a>
+                </li>
+            </ul>
+        </nav>
 
-        <!-- Botão de Excluir Produtos Selecionados -->
-        <form action="excluir_selecionados.php" method="POST">
-            <div class="form-group">
-                <label for="selected-products">Produtos Selecionados:</label>
-                <select class="form-control" name="selected_products[]" id="selected-products" multiple>
-                    <?php mysqli_data_seek($result, 0); // Reiniciar o ponteiro do resultado ?>
-                    <?php while ($row = mysqli_fetch_assoc($result)) : ?>
-                        <option value="<?php echo $row['Product_Id']; ?>"><?php echo $row['Product_Name']; ?></option>
-                    <?php endwhile; ?>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-danger">Excluir Selecionados</button>
-        </form>
+        <button type="button" class="btn btn-danger" id="delete-selected-button">Excluir selecionados</button>
 
         <a href="area_admin.php" class="btn btn-secondary">Voltar</a>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script>
+        // Selecionar todos os checkboxes
+        $("#select-all-checkbox").change(function() {
+            $(".select-checkbox").prop("checked", $(this).prop("checked"));
+        });
+
+        // Excluir produtos selecionados
+        $("#delete-selected-button").click(function() {
+            var selectedProductIds = [];
+
+            $(".select-checkbox:checked").each(function() {
+                selectedProductIds.push($(this).data("product-id"));
+            });
+
+            if (selectedProductIds.length > 0) {
+                if (confirm("Tem certeza de que deseja excluir os produtos selecionados?")) {
+                    var url = "delete_selected_products.php?product_ids=" + selectedProductIds.join(",");
+                    window.location.href = url;
+                }
+            } else {
+                alert("Nenhum produto selecionado.");
+            }
+        });
+    </script>
 </body>
 </html>
