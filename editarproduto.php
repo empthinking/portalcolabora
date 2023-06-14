@@ -21,8 +21,8 @@ $stmt = $db->prepare("
     WHERE p.Product_Id = ?
 ");
 $stmt->bind_param('i', $product_id);
-if($stmt->execute()) {
-    $stmt->bind_result($product_name, $product_description, $product_price, $product_date, $vendor_name, $vendor_id,$User_Number);
+if ($stmt->execute()) {
+    $stmt->bind_result($product_name, $product_description, $product_price, $product_date, $vendor_name, $vendor_id, $User_Number);
     $stmt->fetch();
 } else {
     $error = false;
@@ -73,6 +73,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $error = 'Falha ao atualizar o produto. Por favor, tente novamente.';
     }
 }
+
+// Fetch images associated with the product
+$imageStmt = $db->prepare("SELECT Image_Id, Image_Name FROM Images WHERE Product_Id = ?");
+$imageStmt->bind_param("i", $product_id);
+$imageStmt->execute();
+$imageResult = $imageStmt->get_result();
+$images = $imageResult->fetch_all(MYSQLI_ASSOC);
+$imageStmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -102,6 +110,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="form-group">
                 <label for="images">Imagens</label>
                 <input type="file" class="form-control-file" id="images" name="images[]" multiple>
+            </div>
+            <div class="form-group">
+                <label>Imagens Atuais</label>
+                <div class="row">
+                    <?php foreach ($images as $image) : ?>
+                        <div class="col-md-3">
+                            <img src="<?php echo $image['Image_Name']; ?>" class="img-thumbnail">
+                            <a href="excluirimagem.php?id=<?php echo $image['Image_Id']; ?>&product_id=<?php echo $product_id; ?>" class="btn btn-danger">Excluir</a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>
             <a href="meusprodutos.php" class="btn btn-secondary">Cancelar</a>
