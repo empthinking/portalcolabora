@@ -28,7 +28,7 @@ if (isset($_GET['filter'])) {
 }
 
 // Definir a consulta SQL base
-$sql = "SELECT * FROM Users";
+$sql = "SELECT COUNT(*) AS total FROM Users";
 
 // Adicionar o filtro à consulta SQL
 if ($filter === "comprador") {
@@ -37,12 +37,38 @@ if ($filter === "comprador") {
     $sql .= " WHERE User_Type = 'vendedor'";
 }
 
-// Ordenação padrão (por ID ascendente)
-$sort_column = isset($_GET['sort_column']) ? $_GET['sort_column'] : 'User_Id';
-$sort_order = isset($_GET['sort_order']) ? $_GET['sort_order'] : 'ASC';
-$sql .= " ORDER BY $sort_column $sort_order";
+// Obter o total de usuários
+$result = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($result);
+$total_users = $row['total'];
+
+// Definir a quantidade de usuários por página
+$users_per_page = 5;
+
+// Calcular o número total de páginas
+$total_pages = ceil($total_users / $users_per_page);
+
+// Obter o número da página atual
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Verificar se o número da página é válido
+if ($current_page < 1 || $current_page > $total_pages) {
+    $current_page = 1;
+}
+
+// Calcular o offset para a consulta SQL
+$offset = ($current_page - 1) * $users_per_page;
 
 // Consultar a tabela Users para obter a lista de usuários
+$sql = "SELECT * FROM Users";
+
+// Adicionar o filtro e a limitação à consulta SQL
+if ($filter === "comprador") {
+    $sql .= " WHERE User_Type = 'comprador'";
+} elseif ($filter === "vendedor") {
+    $sql .= " WHERE User_Type = 'vendedor'";
+}
+$sql .= " ORDER BY $sort_column $sort_order LIMIT $offset, $users_per_page";
 $result = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
@@ -69,25 +95,20 @@ $result = mysqli_query($conn, $sql);
                                             <option value="vendedor" <?php if ($filter === "vendedor") echo "selected"; ?>>Vendedores</option>
                                         </select>
                                     </div>
-                                    <div class="form-group mr-2">
-                                        <label for="search">Pesquisar:</label>
-                                        <input type="text" class="form-control" id="search" name="search" placeholder="Nome, E-mail, etc." value="<?php echo isset($_GET['search']) ? $_GET['search'] : ""; ?>">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                                    <button type="submit" class="btn btn-primary">Filtrar</button>
                                 </form>
                             </div>
                             <div>
-                                <a href="gerenciar_usuarios.php" class="btn btn-secondary mr-2">Limpar</a>
-                                <a href="gerenciar_usuarios.php?sort_column=<?php echo $sort_column; ?>&sort_order=<?php echo $sort_order === 'ASC' ? 'DESC' : 'ASC'; ?>" class="btn btn-primary">Ordenar</a>
+                                <a href="area_admin.php" class="btn btn-secondary">Voltar</a>
                             </div>
                         </div>
                         <table class="table">
                             <thead>
                                 <tr>
                                     <th scope="col">ID</th>
-                                    <th scope="col">Nome</th>
+                                    <th scope="col"><a href="?sort_column=User_Name&sort_order=<?php echo $sort_column === 'User_Name' && $sort_order === 'ASC' ? 'DESC' : 'ASC'; ?>">Nome</a></th>
                                     <th scope="col">E-mail</th>
-                                    <th scope="col">Tipo</th>
+                                    <th scope="col"><a href="?sort_column=User_Type&sort_order=<?php echo $sort_column === 'User_Type' && $sort_order === 'ASC' ? 'DESC' : 'ASC'; ?>">Tipo</a></th>
                                     <th scope="col">Ações</th>
                                 </tr>
                             </thead>
@@ -107,14 +128,28 @@ $result = mysqli_query($conn, $sql);
                                 <?php endwhile; ?>
                             </tbody>
                         </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <a href="area_admin.php" class="btn btn-secondary">Voltar</a>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-</body>
-</html>
+                        <?php if ($total_pages > 1) : ?>
+                            <nav aria-label="Navegação de página">
+                                <ul class="pagination">
+                                    <?php if ($current_page > 1) : ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?filter=<?php echo $filter; ?>&sort_column=<?php echo $sort_column; ?>&sort_order=<?php echo $sort_order; ?>&page=<?php echo $current_page - 1; ?>">Previous</a>
+                                        </li>
+                                    <?php else : ?>
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Previous</span>
+                                        </li>
+                                    <?php endif; ?>
+                                    <?php for ($i = 1; $i <= $total_pages; $i++) : ?>
+                                    <?php if ($i == $current_page) : ?>
+                                        <li class="page-item active" aria-current="page">
+                                            <span class="page-link"><?php echo $i; ?></span>
+                                        </li>
+                                    <?php else : ?>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?filter=<?php echo $filter; ?>&sort_column=<?php echo $sort_column; ?>&sort_order=<?php echo $sort_order; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
+                                        </li>
+                                    <?php endif; ?>
+                                <?php endfor; ?>
+
+                                <?php if ($current_page <
