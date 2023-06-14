@@ -54,6 +54,24 @@ if (!$product) {
 $image_query = "SELECT * FROM Images WHERE Product_Id = $product_id";
 $image_result = mysqli_query($conn, $image_query);
 $images = mysqli_fetch_all($image_result, MYSQLI_ASSOC);
+
+// Verificar se o formulário de adicionar imagem foi enviado
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_FILES['new_image'])) {
+    // Obter informações sobre a nova imagem
+    $new_image_name = $_FILES['new_image']['name'];
+    $new_image_tmp = $_FILES['new_image']['tmp_name'];
+
+    // Mover a nova imagem para a pasta de imagens
+    move_uploaded_file($new_image_tmp, "../images/$new_image_name");
+
+    // Inserir a nova imagem no banco de dados
+    $insert_query = "INSERT INTO Images (Product_Id, Image_Name) VALUES ($product_id, '$new_image_name')";
+    mysqli_query($conn, $insert_query);
+
+    // Redirecionar para atualizar a página
+    header("Location: editar_produto.php?id=$product_id");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -107,50 +125,54 @@ $images = mysqli_fetch_all($image_result, MYSQLI_ASSOC);
                         </div>
                         <!-- Modal de Troca de Imagem -->
                         <div class="modal fade" id="trocarImagemModal<?php echo $image['Image_Id']; ?>" tabindex="-1" role="dialog" aria-labelledby="trocarImagemModal<?php echo $image['Image_Id']; ?>Label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="trocarImagemModal<?php echo $image['Image_Id']; ?>Label">Trocar Imagem</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="trocar_imagem.php" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="image_id" value="<?php echo $image['Image_Id']; ?>">
-                    <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-                    <div class="form-group">
-                        <input type="file" name="new_image" class="form-control-file" accept="image/*" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Trocar</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="trocarImagemModal<?php echo $image['Image_Id']; ?>Label">Trocar Imagem</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="editar_produto.php?id=<?php echo $product_id; ?>" method="POST" enctype="multipart/form-data">
+                                            <input type="hidden" name="image_id" value="<?php echo $image['Image_Id']; ?>">
+                                            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                                            <div class="form-group">
+                                                <input type="file" name="new_image" class="form-control-file" accept="image/*" required>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary">Trocar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!-- Modal de Exclusão de Imagem -->
-                       <div class="modal fade" id="excluirImagemModal<?php echo $image['Image_Id']; ?>" tabindex="-1" role="dialog" aria-labelledby="excluirImagemModal<?php echo $image['Image_Id']; ?>Label" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="excluirImagemModal<?php echo $image['Image_Id']; ?>Label">Excluir Imagem</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p>Deseja realmente excluir esta imagem?</p>
-                <form action="excluir_imagem.php" method="POST">
-                    <input type="hidden" name="image_id" value="<?php echo $image['Image_Id']; ?>">
-                    <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-                    <button type="submit" class="btn btn-danger">Excluir</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+                        <div class="modal fade" id="excluirImagemModal<?php echo $image['Image_Id']; ?>" tabindex="-1" role="dialog" aria-labelledby="excluirImagemModal<?php echo $image['Image_Id']; ?>Label" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="excluirImagemModal<?php echo $image['Image_Id']; ?>Label">Excluir Imagem</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Deseja realmente excluir esta imagem?</p>
+                                        <form action="excluir_imagem.php" method="POST">
+                                            <input type="hidden" name="image_id" value="<?php echo $image['Image_Id']; ?>">
+                                            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                                            <button type="submit" class="btn btn-danger">Excluir</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <?php } ?>
                 </div>
+            </div>
+            <div class="form-group">
+                <label>Adicionar Imagem:</label>
+                <input type="file" name="new_image" class="form-control-file" accept="image/*">
             </div>
             <button type="submit" class="btn btn-primary">Atualizar</button>
             <a href="listar_produtos.php" class="btn btn-secondary">Cancelar</a>
