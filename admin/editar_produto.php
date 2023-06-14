@@ -107,51 +107,48 @@ $images = mysqli_fetch_all($image_result, MYSQLI_ASSOC);
                         </div>
                         <!-- Modal de Troca de Imagem -->
                         <div class="modal fade" id="trocarImagemModal<?php echo $image['Image_Id']; ?>" tabindex="-1" role="dialog" aria-labelledby="trocarImagemModal<?php echo $image['Image_Id']; ?>Label" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="trocarImagemModal<?php echo $image['Image_Id']; ?>Label">Trocar Imagem</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form action="trocar_imagem.php" method="POST" enctype="multipart/form-data">
-                                            <input type="hidden" name="image_id" value="<?php echo $image['Image_Id']; ?>">
-                                            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-                                            <div class="form-group">
-                                                <input type="file" name="new_image" class="form-control-file" accept="image/*" required>
-                                            </div>
-                                            <button type="submit" class="btn btn-primary">Trocar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="trocarImagemModal<?php echo $image['Image_Id']; ?>Label">Trocar Imagem</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="trocar_imagem.php" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="image_id" value="<?php echo $image['Image_Id']; ?>">
+                    <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                    <div class="form-group">
+                        <input type="file" name="new_image" class="form-control-file" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Trocar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
                         <!-- Modal de Exclusão de Imagem -->
-                        <div class="modal fade" id="excluirImagemModal<?php echo $image['Image_Id']; ?>" tabindex="-1" role="dialog" aria-labelledby="excluirImagemModal<?php echo $image['Image_Id']; ?>Label" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="excluirImagemModal<?php echo $image['Image_Id']; ?>Label">Excluir Imagem</h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <p>Deseja realmente excluir esta imagem?</p>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <form action="excluir_imagem.php" method="POST">
-                                            <input type="hidden" name="image_id" value="<?php echo $image['Image_Id']; ?>">
-                                            <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
-                                            <button type="submit" class="btn btn-danger">Excluir</button>
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       <div class="modal fade" id="excluirImagemModal<?php echo $image['Image_Id']; ?>" tabindex="-1" role="dialog" aria-labelledby="excluirImagemModal<?php echo $image['Image_Id']; ?>Label" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="excluirImagemModal<?php echo $image['Image_Id']; ?>Label">Excluir Imagem</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Deseja realmente excluir esta imagem?</p>
+                <form action="excluir_imagem.php" method="POST">
+                    <input type="hidden" name="image_id" value="<?php echo $image['Image_Id']; ?>">
+                    <input type="hidden" name="product_id" value="<?php echo $product_id; ?>">
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
                     <?php } ?>
                 </div>
             </div>
