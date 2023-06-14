@@ -97,7 +97,7 @@ $images = mysqli_fetch_all($image_result, MYSQLI_ASSOC);
                             <div class="modal-dialog modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-body">
-                                        <img src="../<?php echo $image['Image_Name']; ?>" class="img-fluid" alt="Imagem do Produto">
+                                        <img src="<?php echo ../$image['Image_Name']; ?>" class="img-fluid" alt="Imagem do Produto">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
