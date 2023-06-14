@@ -41,11 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Obter os dados do formulário
     $name = mysqli_real_escape_string($conn, $_POST["name"]);
     $email = mysqli_real_escape_string($conn, $_POST["email"]);
-    $phone = mysqli_real_escape_string($conn, $_POST["phone"]);
-    $role = mysqli_real_escape_string($conn, $_POST["role"]);
+    $password = mysqli_real_escape_string($conn, $_POST["password"]);
+    $number = mysqli_real_escape_string($conn, $_POST["number"]);
+    $gender = mysqli_real_escape_string($conn, $_POST["gender"]);
+    $type = mysqli_real_escape_string($conn, $_POST["type"]);
 
     // Atualizar as informações do usuário no banco de dados
-    $update_sql = "UPDATE Users SET User_Name = '$name', User_Email = '$email', User_Phone = '$phone', User_Role = '$role' WHERE User_Id = '$user_id'";
+    $update_sql = "UPDATE Users SET User_Name = '$name', User_Email = '$email', User_Password = '$password', User_Number = '$number', User_Gender = '$gender', User_Type = '$type' WHERE User_Id = '$user_id'";
     mysqli_query($conn, $update_sql);
 
     // Redirecionar de volta para a página de gerenciamento de usuários
@@ -77,14 +79,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                 <input type="email" id="email" name="email" class="form-control" value="<?php echo $user['User_Email']; ?>" required>
                             </div>
                             <div class="form-group">
-                                <label for="phone">Número de Telefone:</label>
-                                <input type="text" id="phone" name="phone" class="form-control" value="<?php echo $user['User_Phone']; ?>" required>
+                                <label for="password">Senha:</label>
+                                <input type="password" id="password" name="password" class="form-control" required>
                             </div>
                             <div class="form-group">
-                                <label for="role">Função:</label>
-                                <select id="role" name="role" class="form-control" required>
-                                    <option value="cliente" <?php if ($user['User_Role'] === 'cliente') echo 'selected'; ?>>Cliente</option>
-                                    <option value="vendedor" <?php if ($user['User_Role'] === 'vendedor') echo 'selected'; ?>>Vendedor</option>
+                                <label for="number">Número de Telefone:</label>
+                                <input type="text" id="number" name="number" class="form-control" value="<?php echo $user['User_Number']; ?>" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gênero:</label>
+                                <select id="gender" name="gender" class="form-control" required>
+                                    <option value="Masculino" <?php if ($user['User_Gender'] === 'Masculino') echo 'selected'; ?>>Masculino</option>
+                                    <option value="Feminino" <?php if ($user['User_Gender'] === 'Feminino') echo 'selected'; ?>>Feminino</option>
+                                    <option value="Outro" <?php if ($user['User_Gender'] === 'Outro') echo 'selected'; ?>>Outro</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="type">Tipo:</label>
+                                <select id="type" name="type" class="form-control" required>
+                                    <option value="cliente" <?php if ($user['User_Type'] === 'cliente') echo 'selected'; ?>>Cliente</option>
+                                    <option value="vendedor" <?php if ($user['User_Type'] === 'vendedor') echo 'selected'; ?>>Vendedor</option>
                                 </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Salvar</button>
