@@ -41,13 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Obter os dados do formulário
     $name = mysqli_real_escape_string($conn, $_POST["name"]);
     $email = mysqli_real_escape_string($conn, $_POST["email"]);
-    $password = mysqli_real_escape_string($conn, $_POST["password"]);
     $number = mysqli_real_escape_string($conn, $_POST["number"]);
     $gender = mysqli_real_escape_string($conn, $_POST["gender"]);
     $type = mysqli_real_escape_string($conn, $_POST["type"]);
 
     // Atualizar as informações do usuário no banco de dados
-    $update_sql = "UPDATE Users SET User_Name = '$name', User_Email = '$email', User_Password = '$password', User_Number = '$number', User_Gender = '$gender', User_Type = '$type' WHERE User_Id = '$user_id'";
+    $update_sql = "UPDATE Users SET User_Name = '$name', User_Email = '$email', User_Number = '$number', User_Gender = '$gender', User_Type = '$type' WHERE User_Id = '$user_id'";
     mysqli_query($conn, $update_sql);
 
     // Redirecionar de volta para a página de gerenciamento de usuários
@@ -77,10 +76,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                             <div class="form-group">
                                 <label for="email">E-mail:</label>
                                 <input type="email" id="email" name="email" class="form-control" value="<?php echo $user['User_Email']; ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Senha:</label>
-                                <input type="password" id="password" name="password" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label for="number">Número de Telefone:</label>
