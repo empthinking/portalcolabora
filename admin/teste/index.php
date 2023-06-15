@@ -12,16 +12,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
         $sessionToken = generateSessionToken();
         // Armazenar o token de sessão em uma variável de sessão
         $_SESSION['session_token'] = $sessionToken;
-        // Redirecionar para a página de teste usando JavaScript
-// Redirecionar para a página de teste usando JavaScript
-echo '<script>window.location.href = "teste.php?chave=' . $chave . '";</script>';
-exit();
+        
+        // Redirecionar para a página de teste
+        $chave = $_SESSION['chave']; // Obter a chave da sessão
+        header("Location: teste.php?chave=$chave");
         exit();
     } else {
         // Código inválido ou expirado
         echo '<div class="alert alert-danger">Código de verificação inválido ou expirado. Acesso negado.</div>';
     }
-}// Função para validar o código de verificação
+}
+// Função para validar o código de verificação
 function validateVerificationCode($code) {
     global $connection;
 
