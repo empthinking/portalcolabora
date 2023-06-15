@@ -48,6 +48,7 @@ require_once 'header.php';
           <?php endwhile; ?>
         </tbody>
       </table>
+        <a class="btn btn-danger" onclick="window.history.back()"><i class="fas fa-undo"></i> Voltar</a>
     </div>
   </main>
   <!-- Main Content End -->
