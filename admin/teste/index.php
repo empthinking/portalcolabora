@@ -8,8 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
 
     // Validar o código de verificação
     if (validateVerificationCode($verificationCode)) {
-        // Código válido, redirecionar para a página de teste
-        header("Location: teste.php");
+        // Gerar a chave
+        $chave = generateChave();
+
+        // Redirecionar para a página de teste com a chave na URL
+        header("Location: teste.php?chave=" . urlencode($chave));
         exit();
     } else {
         // Código inválido, exibir mensagem de erro
@@ -34,6 +37,18 @@ function validateVerificationCode($code) {
     $stmt->close();
 
     return $count > 0;
+}
+
+// Função para gerar a chave
+function generateChave() {
+    // Implemente a lógica de geração da chave aqui
+    // Por exemplo, você pode usar uma função de hash como o SHA1 para gerar a chave com base em algum valor único
+    // Retorne a chave gerada
+
+    // Exemplo de geração de chave usando SHA1:
+    $chave = sha1(uniqid());
+
+    return $chave;
 }
 ?>
 
