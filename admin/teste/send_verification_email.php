@@ -52,7 +52,7 @@ function sendVerificationCodeByEmail($code, $recipientEmail,$row) {
     $subject = 'Código de verificação';
     $message = 'Seu código de verificação é: ' . $code . "\n\n";
     $message .= 'Utilize o seguinte link para validar seu e-mail: ';
-    $message .= 'http://exemplo.com/validar_email.php?chave=' . $chave;
+    $message .= 'https://portalcolabora.com.br/admin/teste/index.php?id=' . $chave;
     $headers = 'From: suporte@portalcolabora.com.br' . "\r\n" .
                'Reply-To: suporte@portalcolabora.com.br' . "\r\n" .
                'X-Mailer: PHP/' . phpversion();
