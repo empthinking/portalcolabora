@@ -10,6 +10,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
     if (validateVerificationCode($verificationCode)) {
         // Código válido
         echo '<div class="alert alert-success">Código de verificação válido. Acesso permitido.</div>';
+        // Gerar um token de sessão
+        $sessionToken = generateSessionToken();
+        // Armazenar o token de sessão em uma variável de sessão
+        $_SESSION['session_token'] = $sessionToken;
         // Redirecionar para a página de teste
         header("Location: teste.php");
         exit();
@@ -68,6 +72,11 @@ function validateVerificationCode($code) {
     // Código inválido ou expirado
     $stmt->close();
     return false;
+}
+
+// Função para gerar um token de sessão
+function generateSessionToken() {
+    return bin2hex(random_bytes(16));
 }
 ?>
 
