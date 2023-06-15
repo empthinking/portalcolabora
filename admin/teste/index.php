@@ -1,9 +1,9 @@
 <?php
 require_once "dbconn.php";
-$chave = $_SESSION['chave'];
 // Verificar se o formulário foi submetido para validar o código
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
-    // Obter o código digitado pelo usuário
+$chave = $_SESSION['chave'];
+
     $verificationCode = $_POST['verification_code'];
 
     // Validar o código de verificação
@@ -19,11 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
 
 // Função para validar o código de verificação
 function validateVerificationCode($code) {
-    // Implemente a lógica de validação do código de verificação aqui
-    // Por exemplo, consulte o banco de dados para verificar se o código existe e é válido
-    // Retorne true se o código for válido, ou false caso contrário
 
-    // Exemplo de lógica de validação:
     global $connection;
 
     $stmt = $connection->prepare("SELECT COUNT(*) FROM verification_codes WHERE code = ?");
