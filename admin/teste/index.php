@@ -10,7 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
     if (validateVerificationCode($verificationCode)) {
         // Código válido
         echo '<div class="alert alert-success">Código de verificação válido. Acesso permitido.</div>';
-        header("teste.php");
+        // Redirecionar para a página de teste
+        header("Location: teste.php");
         exit();
     } else {
         // Código inválido ou expirado
@@ -57,8 +58,7 @@ function validateVerificationCode($code) {
             // Código válido
             $stmt->close();
 
-            // Remover o código de verificação do banco de dados após 1 minuto
-            sleep(60); // Aguardar 1 minuto
+            // Remover o código de verificação do banco de dados imediatamente
             removeVerificationCode($code);
 
             return true;
