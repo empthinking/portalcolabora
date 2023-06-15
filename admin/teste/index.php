@@ -15,7 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
         // Armazenar o token de sessão em uma variável de sessão
         $_SESSION['session_token'] = $sessionToken;
         // Redirecionar para a página de teste usando JavaScript
-        echo '<script>window.location.href = "teste.php";</script>';
+// Redirecionar para a página de teste usando JavaScript
+echo '<script>window.location.href = "teste.php?chave=' . $chave . '";</script>';
+exit();
         exit();
     } else {
         // Código inválido ou expirado
