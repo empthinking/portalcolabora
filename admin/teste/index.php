@@ -7,17 +7,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
 
     // Validar o código de verificação
     if (validateVerificationCode($verificationCode)) {
-        // Obter a chave codificada da URL
-        $encodedKey = $_GET['$chave'];
-
-        // Decodificar a chave
-        $decodedKey = base64_decode($encodedKey);
-
-        // Descriptografar a chave
-        $decryptedKey = decryptKey($decodedKey);
-
-        // Exibir o conteúdo da variável $chave
-        echo "Conteúdo da variável \$chave: $decryptedKey";
+        // Redirecionar para a página de teste com a chave na URL
+        header("Location: teste.php?code=" . urlencode($verificationCode));
+        exit();
     } else {
         // Código inválido, exibir mensagem de erro
         echo '<div class="alert alert-danger">Código de verificação inválido. Acesso negado.</div>';
@@ -38,31 +30,43 @@ function validateVerificationCode($code) {
     return $count > 0;
 }
 
-// Função para descriptografar a chave
-function decryptKey($encryptedKey) {
-    // Aqui você deve implementar o algoritmo de descriptografia adequado
-    // Utilize a lógica de descriptografia que você possui
+// Função para descriptografar a chave e obter o ID e o e-mail do usuário
+function decryptChave($chave) {
+    $decodedChave = base64_decode($chave);
+    $chaveParts = explode('_', $decodedChave);
 
-    // Exemplo: descriptografia simples com base64_decode
-    $decryptedKey = base64_decode($encryptedKey);
+    $id = $chaveParts[0];
+    $email = $chaveParts[1];
 
-    return $decryptedKey;
+    return array('id' => $id, 'email' => $email);
+}
+
+// Verificar se a chave está presente na URL
+if (isset($_GET['id'])) {
+    $chave = $_GET['id'];
+
+    // Descriptografar a chave
+    $userInfo = decryptChave($chave);
+
+    // Exibir informações do usuário
+    echo '<div class="alert alert-info">';
+    echo 'ID do usuário: ' . $userInfo['id'] . '<br>';
+    echo 'E-mail do usuário: ' . $userInfo['email'];
+    echo '</div>';
 }
 ?>
-
 
 <!DOCTYPE html>
 <html>
 <head>
     <title>Verificação de Código</title>
-    <!-- Adicione os links para os arquivos CSS do Bootstrap -->
+    <!-- Adicione o link para o arquivo CSS do Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
     <div class="container">
         <h1>Verificação de Código</h1>
 
-        <!-- Formulário para verificar o código de verificação -->
         <form method="POST" action="index.php">
             <div class="mb-3">
                 <label for="verification_code" class="form-label">Código de Verificação:</label>
@@ -70,11 +74,9 @@ function decryptKey($encryptedKey) {
             </div>
             <button type="submit" class="btn btn-primary" name="verify_code">Verificar</button>
         </form>
-
-        <!-- Formulário para gerar e validar a chave -->
-        <form method="POST" action="validate_key.php">
-            <button type="submit" class="btn btn-secondary" name="validate_key">Validar Chave</button>
-        </form>
     </div>
+
+    <!-- Adicione o script do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
