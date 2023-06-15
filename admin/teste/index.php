@@ -8,9 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
 
     // Validar o código de verificação
     if (validateVerificationCode($verificationCode)) {
-        // Gerar a chave
-        $chave = generateChave();
-
         // Redirecionar para a página de teste com a chave na URL
         header("Location: teste.php?chave=" . urlencode($chave));
         exit();
