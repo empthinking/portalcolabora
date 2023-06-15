@@ -21,27 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
         // Código inválido ou expirado
         echo '<div class="alert alert-danger">Código de verificação inválido ou expirado. Acesso negado.</div>';
     }
-}
-// Função para remover o código de verificação do banco de dados
-function removeVerificationCode($code) {
-    global $connection;
-
-    // Preparar a consulta SQL para remover o código
-    $stmt = $connection->prepare("DELETE FROM verification_codes WHERE code = ?");
-    $stmt->bind_param("s", $code);
-
-    // Executar a consulta
-    if ($stmt->execute()) {
-        // Código de verificação removido com sucesso
-    } else {
-        // Tratar o erro de remoção
-    }
-
-    // Fechar a declaração
-    $stmt->close();
-}
-
-// Função para validar o código de verificação
+}// Função para validar o código de verificação
 function validateVerificationCode($code) {
     global $connection;
 
@@ -59,10 +39,19 @@ function validateVerificationCode($code) {
         // Verificar se o código ainda está válido (não expirado)
         if (time() <= $expiryTime) {
             // Código válido
+
+            // Excluir o código de verificação do banco de dados após 5 minutos
+            if (time() >= $expiryTime + (60 * 5)) {
+                $stmtDelete = $connection->prepare("DELETE FROM verification_codes WHERE code = ?");
+                $stmtDelete->bind_param("s", $code);
+                $stmtDelete->execute();
+                $stmtDelete->close();
+            }
+
             $stmt->close();
 
-            // Remover o código de verificação do banco de dados imediatamente
-            removeVerificationCode($code);
+            // Remover o código de verificação do banco de dados, se desejado
+            // removerVerificationCode($code);
 
             return true;
         }
@@ -71,11 +60,6 @@ function validateVerificationCode($code) {
     // Código inválido ou expirado
     $stmt->close();
     return false;
-}
-
-// Função para gerar um token de sessão
-function generateSessionToken() {
-    return bin2hex(random_bytes(16));
 }
 ?>
 
