@@ -16,23 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
         // Descriptografar a chave
         $decryptedKey = decryptKey($decodedKey);
 
-        // Obter os dados (ID e email) da chave descriptografada
-        list($userId, $email) = explode('|', $decryptedKey);
-
-        // Validar os dados com a tabela User
-        if (validateUser($userId, $email)) {
-            // Iniciar a sessão para o usuário
-            session_start();
-            $_SESSION['user_id'] = $userId;
-            $_SESSION['email'] = $email;
-
-            // Redirecionar para a página de teste
-            header("Location: teste.php");
-            exit();
-        } else {
-            // Dados inválidos, exibir mensagem de erro
-            echo '<div class="alert alert-danger">Dados inválidos. Acesso negado.</div>';
-        }
+        // Exibir o conteúdo da variável $chave
+        echo "Conteúdo da variável \$chave: $decryptedKey";
     } else {
         // Código inválido, exibir mensagem de erro
         echo '<div class="alert alert-danger">Código de verificação inválido. Acesso negado.</div>';
@@ -63,21 +48,8 @@ function decryptKey($encryptedKey) {
 
     return $decryptedKey;
 }
-
-// Função para validar os dados do usuário
-function validateUser($userId, $email) {
-    global $connection;
-
-    $stmt = $connection->prepare("SELECT COUNT(*) FROM User WHERE User_Id = ? AND User_Email = ?");
-    $stmt->bind_param("is", $userId, $email);
-    $stmt->execute();
-    $stmt->bind_result($count);
-    $stmt->fetch();
-    $stmt->close();
-
-    return $count > 0;
-}
 ?>
+
 
 <!DOCTYPE html>
 <html>
