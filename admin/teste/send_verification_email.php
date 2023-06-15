@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 // Função para enviar o código de verificação por e-mail
 function sendVerificationCodeByEmail($code, $recipientEmail,$row) {
-    $chave = sha1($row['User_Email'].$row['User_Id']);
+$chave = base64_encode($row['User_Email'].$row['User_Id']);
     $to = $recipientEmail;
     $subject = 'Código de verificação';
     $message = 'Seu código de verificação é: ' . $code . "\n\n";
