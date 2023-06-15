@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
         $chave = $_SESSION['chave'];
 
         // Redirecionar para a página de teste
-        header("Location: teste.php?chave=" . urlencode($chave));
+        header("Location: teste.php");
         exit();
     } else {
         // Código inválido ou expirado
