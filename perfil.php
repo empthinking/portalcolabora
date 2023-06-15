@@ -51,6 +51,7 @@ mysqli_close($db);
   <div class="profile-actions justify-content-between mt-3 text-center">
     <a href="editar_perfil.php?id=<?php echo $_SESSION['id']; ?>" class="btn btn-success"><i class="far fa-edit"></i> Editar Perfil</a>
     <a href="mensagens.php" class="btn btn-primary"><i class="fas fa-comments"></i> Mensagens</a>
+    <a class="btn btn-danger" onclick="window.history.back()"><i class="fas fa-undo"></i> Voltar</a>
   </div>
 </main>
 
