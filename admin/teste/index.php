@@ -14,15 +14,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
         $sessionToken = generateSessionToken();
         // Armazenar o token de sessão em uma variável de sessão
         $_SESSION['session_token'] = $sessionToken;
-        // Redirecionar para a página de teste
-        header("Location: teste.php");
+        // Redirecionar para a página de teste usando JavaScript
+        echo '<script>window.location.href = "teste.php";</script>';
         exit();
     } else {
         // Código inválido ou expirado
         echo '<div class="alert alert-danger">Código de verificação inválido ou expirado. Acesso negado.</div>';
     }
 }
-
 // Função para remover o código de verificação do banco de dados
 function removeVerificationCode($code) {
     global $connection;
