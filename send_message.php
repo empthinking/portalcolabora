@@ -35,7 +35,7 @@ require_once 'header.php';
             </div>
 
             <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Enviar</button>
-            <a class="btn btn-danger" href="produto.php"><i class="fas fa-undo"></i> Voltar</a>
+            <a href="index.php" class="btn btn-danger"><i class="fas fa-undo"></i> Voltar</a>
         </form>
     </div>
 
