@@ -95,7 +95,7 @@ MSG;
                 <span class="text-danger"><?php echo $errors['message']??''; ?></span>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Enviar</button>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Enviar mensagem</button>
                 <a class="btn btn-danger" onclick="window.history.back()"><i class="fas fa-undo"></i> Voltar</a>
                 <span class="text-danger"><?php echo $errors['send']??''; ?></span>
             </div>
