@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
     // Validar o código de verificação
     if (validateVerificationCode($verificationCode)) {
         // Obter a chave codificada da URL
-        $encodedKey = $_GET['chave'];
+        $encodedKey = $_GET['$chave'];
 
         // Decodificar a chave
         $decodedKey = base64_decode($encodedKey);
