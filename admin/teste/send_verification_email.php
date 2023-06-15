@@ -8,7 +8,7 @@ $verificationCode = generateSecureVerificationCode();
 storeVerificationCode($verificationCode);
 
 // Enviar o código por e-mail
-sendVerificationCodeByEmail($verificationCode, 'viniciusvghrj@gmail.com');
+sendVerificationCodeByEmail($verificationCode, 'colaboraequipe@gmail.coma');
 
 // Função para gerar um código de verificação seguro
 function generateSecureVerificationCode()
