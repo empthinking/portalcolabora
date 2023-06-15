@@ -28,6 +28,7 @@ require_once 'header.php';
 
     ?>
         </fieldset>
+        <a class="btn btn-danger" onclick="window.history.back()"><i class="fas fa-undo"></i> Voltar</a>
     </div>
 </body>
 
