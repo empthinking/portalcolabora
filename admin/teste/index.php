@@ -20,8 +20,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
     } else {
         // Código inválido ou expirado
         echo '<div class="alert alert-danger">Código de verificação inválido ou expirado. Acesso negado.</div>';
+        exit(); // Adicionado para interromper a execução após exibir a mensagem de erro
     }
 }
+
 // Função para validar o código de verificação
 function validateVerificationCode($code) {
     global $connection;
