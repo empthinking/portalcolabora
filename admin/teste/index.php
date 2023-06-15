@@ -1,6 +1,6 @@
 <?php
 require_once "dbconn.php";
-
+$chave = $_SESSION['chave'];
 // Verificar se o formulário foi submetido para validar o código
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
     // Obter o código digitado pelo usuário
@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
     // Validar o código de verificação
     if (validateVerificationCode($verificationCode)) {
         // Redirecionar para a página de teste com a chave na URL
-        header("Location: teste.php?chave=" . urlencode($chave));
+        header("Location: teste.php?id=" . urlencode($chave));
         exit();
     } else {
         // Código inválido, exibir mensagem de erro
