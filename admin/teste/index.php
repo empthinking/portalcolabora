@@ -25,6 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
         exit(); // Adicionado para interromper a execução após exibir a mensagem de erro
     }
 }
+
 // Função para validar o código de verificação
 function validateVerificationCode($code) {
     global $connection;
@@ -78,16 +79,12 @@ function validateVerificationCode($code) {
     <div class="container">
         <h1>Verificação de Código</h1>
 
-        <form method="POST" action="index.php">
+        <form method="POST" action="">
             <div class="mb-3">
                 <label for="verification_code" class="form-label">Código de Verificação:</label>
                 <input type="text" class="form-control" id="verification_code" name="verification_code" required>
             </div>
             <button type="submit" class="btn btn-primary" name="verify_code">Verificar</button>
-        </form>
-
-        <form method="POST" action="send_verification_email.php">
-            <button type="submit" class="btn btn-secondary" name="send_email">Enviar Código por E-mail</button>
         </form>
     </div>
 
