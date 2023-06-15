@@ -119,6 +119,7 @@ while ($row = $result->fetch_assoc()) {
 <div class="conteiner text-center">
 <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . '?mode=register'; ?>"
    class="btn btn-lg btn-primary"><i class="fas fa-plus-circle mr-2"></i>Adicionar Produto</a>
+   <a class="btn btn-danger" onclick="window.history.back()"><i class="fas fa-undo"></i> Voltar</a>
 </div>
 
 <?php require_once 'footer.php'; ?>
