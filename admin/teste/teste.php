@@ -14,7 +14,7 @@ $sessionToken = $_SESSION['session_token'];
 // Verificar se a página foi acessada após fechar a janela do navegador
 if (!isset($_COOKIE['session_token']) || $_COOKIE['session_token'] !== $sessionToken) {
     // Token de sessão inválido ou ausente, redirecionar de volta para a página de verificação
-    header("Location: index.php");
+echo "erro";
     exit();
 }
 
