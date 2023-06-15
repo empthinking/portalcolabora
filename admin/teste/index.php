@@ -39,17 +39,7 @@ function validateVerificationCode($code) {
     return $count > 0;
 }
 
-// Função para gerar a chave
-function generateChave() {
-    // Implemente a lógica de geração da chave aqui
-    // Por exemplo, você pode usar uma função de hash como o SHA1 para gerar a chave com base em algum valor único
-    // Retorne a chave gerada
 
-    // Exemplo de geração de chave usando SHA1:
-    $chave = sha1(uniqid());
-
-    return $chave;
-}
 ?>
 
 <!DOCTYPE html>
