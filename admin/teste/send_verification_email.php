@@ -8,17 +8,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Verifica se o e-mail é válido
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // Gerar um código de verificação seguro
-        $verificationCode = generateSecureVerificationCode();
+        // Consulta o banco de dados para verificar se o e-mail existe
+        $stmt = $connection->prepare("SELECT User_Email FROM Users WHERE User_Email = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-        // Armazenar o código de verificação e a hora de expiração em um banco de dados ou em uma sessão
-        storeVerificationCode($verificationCode);
+        $row = $result->fetch_assoc();
 
-        // Enviar o código por e-mail
-        sendVerificationCodeByEmail($verificationCode, $email);
-        
-        // Mensagem de sucesso
-        $success = "O código de verificação foi enviado para o e-mail fornecido.";
+
+        if ($result->num_rows > 0) {
+            // E-mail existe na tabela de usuários
+
+            // Gerar um código de verificação seguro
+            $verificationCode = generateSecureVerificationCode();
+
+            // Armazenar o código de verificação e a hora de expiração em um banco de dados ou em uma sessão
+            storeVerificationCode($verificationCode);
+
+            // Enviar o código por e-mail
+            sendVerificationCodeByEmail($verificationCode, $email,$row);
+
+            // Mensagem de sucesso
+            $success = "O código de verificação foi enviado para o e-mail fornecido.";
+        } else {
+            // E-mail não existe na tabela de usuários
+            $errors['email'] = "O e-mail fornecido não está registrado em nosso sistema.";
+        }
+
+        // Fechar a declaração e liberar os resultados
+        $stmt->close();
+        $result->free();
     } else {
         // E-mail inválido
         $errors['email'] = "E-mail inválido. Por favor, insira um endereço de e-mail válido.";
@@ -26,10 +46,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Função para enviar o código de verificação por e-mail
-function sendVerificationCodeByEmail($code, $recipientEmail) {
+function sendVerificationCodeByEmail($code, $recipientEmail,$row) {
+    $chave = sha1($row['User_Email'].$row['User_Id']);
     $to = $recipientEmail;
     $subject = 'Código de verificação';
-    $message = 'Seu código de verificação é: ' . $code;
+    $message = 'Seu código de verificação é: ' . $code . "\n\n";
+    $message .= 'Utilize o seguinte link para validar seu e-mail: ';
+    $message .= 'http://exemplo.com/validar_email.php?chave=' . $chave;
     $headers = 'From: suporte@portalcolabora.com.br' . "\r\n" .
                'Reply-To: suporte@portalcolabora.com.br' . "\r\n" .
                'X-Mailer: PHP/' . phpversion();
@@ -70,7 +93,6 @@ function storeVerificationCode($code) {
     // Fechar a declaração
     $stmt->close();
 }
-
 ?>
 
 <!DOCTYPE html>
