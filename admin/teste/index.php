@@ -8,8 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
 
     // Validar o código de verificação
     if (validateVerificationCode($verificationCode)) {
-        // Código válido
-        echo '<div class="alert alert-success">Código de verificação válido. Acesso permitido.</div>';
         // Gerar um token de sessão
         $sessionToken = generateSessionToken();
         // Armazenar o token de sessão em uma variável de sessão
