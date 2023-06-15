@@ -34,8 +34,8 @@ require_once 'header.php';
                 <textarea name="content" class="form-control" required></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary">Enviar</button>
-    <a class="btn btn-danger" onclick="window.history.back()">Voltar</a>
+            <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Enviar</button>
+            <a class="btn btn-danger" href="produto.php"><i class="fas fa-arrow-left"></i> Voltar</a>
         </form>
     </div>
 
