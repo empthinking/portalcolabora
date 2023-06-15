@@ -75,7 +75,7 @@ $stmt->close();
             <br>
             
         </div>
-    <a class="btn btn-danger" onclick="window.history.back()">Voltar</a>
+  <a href="index.php" class="btn btn-danger"><i class="fas fa-undo"></i> Voltar</a>
 <?php 
 
 else:
