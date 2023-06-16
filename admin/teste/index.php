@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
 
     // Validar o código de verificação
     if (validateVerificationCode($verificationCode)) {
-        // Redirecionar para a página de teste com a chave na URL
+        // Redirecionar para a página de teste com o código de verificação na URL
         header("Location: teste.php?code=" . urlencode($verificationCode));
         exit();
     } else {
@@ -41,18 +41,24 @@ function decryptChave($chave) {
     return array('id' => $id, 'email' => $email);
 }
 
-// Verificar se a chave está presente na URL
-if (isset($_GET['id'])) {
-    $chave = $_GET['id'];
+// Verificar se o código de verificação está presente na URL
+if (isset($_GET['code'])) {
+    $verificationCode = $_GET['code'];
 
-    // Descriptografar a chave
-    $userInfo = decryptChave($chave);
+    // Validar o código de verificação
+    if (validateVerificationCode($verificationCode)) {
+        // Descriptografar a chave
+        $userInfo = decryptChave($verificationCode);
 
-    // Exibir informações do usuário
-    echo '<div class="alert alert-info">';
-    echo 'ID do usuário: ' . $userInfo['id'] . '<br>';
-    echo 'E-mail do usuário: ' . $userInfo['email'];
-    echo '</div>';
+        // Exibir informações do usuário
+        echo '<div class="alert alert-info">';
+        echo 'ID do usuário: ' . $userInfo['id'] . '<br>';
+        echo 'E-mail do usuário: ' . $userInfo['email'];
+        echo '</div>';
+    } else {
+        // Código inválido, exibir mensagem de erro
+        echo '<div class="alert alert-danger">Código de verificação inválido. Acesso negado.</div>';
+    }
 }
 ?>
 
