@@ -9,10 +9,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Verifica se o e-mail é válido
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // Consulta o banco de dados para verificar se o e-mail existe
-        $stmt = $connection->prepare("SELECT User_Id FROM Users WHERE User_Email = ?");
+        $stmt = $connection->prepare("SELECT User_Email, User_Id FROM Users WHERE User_Email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
+
+        $row = $result->fetch_assoc();
 
         if ($result->num_rows > 0) {
             // E-mail existe na tabela de usuários
@@ -24,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             storeVerificationCode($verificationCode);
 
             // Enviar o código por e-mail
-            sendVerificationCodeByEmail($verificationCode, $email);
+            sendVerificationCodeByEmail($verificationCode, $email, $row);
 
             // Mensagem de sucesso
             $success = "O código de verificação foi enviado para o e-mail fornecido.";
@@ -43,16 +45,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 // Função para enviar o código de verificação por e-mail
-function sendVerificationCodeByEmail($code, $recipientEmail) {
-    $chave = base64_encode($email);
+function sendVerificationCodeByEmail($code, $recipientEmail, $row) {
+    $chave = base64_encode($row['User_Email'] . "|" . $row['User_Id']);
     $to = $recipientEmail;
     $subject = 'Código de verificação';
-    $message = 'Seu código de verificação é: ' . $code . "\n\n";
-    $message .= 'Utilize o seguinte link para validar seu e-mail: ';
-    $message .= 'https://portalcolabora.com.br/admin/teste/index.php?id=' . urlencode($chave);
-    $headers = 'From: suporte@example.com' . "\r\n" .
-               'Reply-To: suporte@example.com' . "\r\n" .
-               'X-Mailer: PHP/' . phpversion();
+    $message = '
+        <html>
+        <head>
+            <title>Código de Verificação</title>
+        </head>
+        <body>
+            <h1>Seu código de verificação é: ' . $code . '</h1>
+            <p>Utilize o seguinte link para validar seu e-mail:</p>
+            <p><a href="https://portalcolabora.com.br/admin/teste/index.php?id=' . $chave . '">Clique aqui para validar seu e-mail</a></p>
+        </body>
+        </html>
+    ';
+
+    $headers = "From: suporte@portalcolabora.com.br\r\n";
+    $headers .= "Reply-To: suporte@portalcolabora.com.br\r\n";
+    $headers .= "MIME-Version: 1.0\r\n";
+    $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
 
     mail($to, $subject, $message, $headers);
 }
@@ -72,45 +85,54 @@ function generateSecureVerificationCode() {
 
 // Função para armazenar o código de verificação e a hora de expiração
 function storeVerificationCode($code) {
-    // Aqui você pode implementar o armazenamento do código de verificação e a hora de expiração em um banco de dados ou em uma sessão, de acordo com a sua necessidade
+    global $connection;
+
+    $expiryTime = time() + (60 * 5); // Expira em 5 minutos
+
+    // Preparar a consulta SQL
+    $stmt = $connection->prepare("INSERT INTO verification_codes (code, expiry_time) VALUES (?, ?)");
+    $stmt->bind_param("si", $code, $expiryTime);
+
+    // Executar a consulta
+    if ($stmt->execute()) {
+        // Código de verificação armazenado com sucesso
+    } else {
+        // Tratar o erro de armazenamento
+    }
+
+    // Fechar a declaração
+    $stmt->close();
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Envio de Código de Verificação</title>
-    <!-- Adicione o link para o arquivo CSS do Bootstrap -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         .error {
             color: red;
         }
+
         .success {
             color: green;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Envio de Código de Verificação</h1>
+<h1>Envio de Código de Verificação</h1>
 
-        <?php if (isset($success)): ?>
-            <div class="alert alert-success"><?php echo $success; ?></div>
-        <?php endif; ?>
+<?php if (isset($success)): ?>
+    <div class="success"><?php echo $success; ?></div>
+<?php endif; ?>
 
-        <form method="POST" action="">
-            <div class="mb-3">
-                <label for="email" class="form-label">Digite seu e-mail:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
-                <?php if (isset($errors['email'])): ?>
-                    <div class="error"><?php echo $errors['email']; ?></div>
-                <?php endif; ?>
-            </div>
-            <button type="submit" class="btn btn-primary">Enviar código de verificação</button>
-        </form>
-    </div>
-
-    <!-- Adicione o script do Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<form method="POST" action="">
+    <label for="email">Digite seu e-mail:</label>
+    <input type="email" id="email" name="email" required>
+    <?php if (isset($errors['email'])): ?>
+        <div class="error"><?php echo $errors['email']; ?></div>
+    <?php endif; ?>
+    <button type="submit">Enviar código de verificação</button>
+</form>
 </body>
 </html>
