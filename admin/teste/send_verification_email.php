@@ -53,7 +53,7 @@ function sendVerificationCodeByEmail($code, $recipientEmail) {
     $headers = 'From: suporte@example.com' . "\r\n" .
                'Reply-To: suporte@example.com' . "\r\n" .
                'X-Mailer: PHP/' . phpversion();
-  
+
     mail($to, $subject, $message, $headers);
 }
 
