@@ -7,7 +7,9 @@ if (isset($_GET['code'])) {
 
     // Validar o código de verificação
     if (validateVerificationCode($verificationCode)) {
-        echo 'Código de verificação válido.';
+        // Redirecionar para a página de teste com a chave na URL
+        header("Location: teste.php?code=" . urlencode($verificationCode));
+        exit();
     } else {
         echo 'Código de verificação inválido.';
     }
@@ -27,7 +29,6 @@ function validateVerificationCode($code) {
     return $count > 0;
 }
 ?>
-
 
 <!DOCTYPE html>
 <html>
