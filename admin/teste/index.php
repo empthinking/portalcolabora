@@ -1,18 +1,15 @@
 <?php
 require_once "dbconn.php";
 
-// Verificar se o formulário foi submetido para validar o código
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
-    $verificationCode = $_POST['verification_code'];
+// Verificar se o código de verificação está presente na URL
+if (isset($_GET['code'])) {
+    $verificationCode = $_GET['code'];
 
     // Validar o código de verificação
     if (validateVerificationCode($verificationCode)) {
-        // Redirecionar para a página de teste com o código de verificação na URL
-        header("Location: teste.php?code=" . urlencode($verificationCode));
-        exit();
+        echo 'Código de verificação válido.';
     } else {
-        // Código inválido, exibir mensagem de erro
-        echo '<div class="alert alert-danger">Código de verificação inválido. Acesso negado.</div>';
+        echo 'Código de verificação inválido.';
     }
 }
 
@@ -20,8 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
 function validateVerificationCode($code) {
     global $connection;
 
-    $stmt = $connection->prepare("SELECT COUNT(*) FROM verification_codes WHERE code = ?");
-    $stmt->bind_param("s", $code);
+    $stmt = $connection->prepare("SELECT COUNT(*) FROM verification_codes WHERE code = ? AND expiry_time >= ?");
+    $stmt->bind_param("si", $code, time());
     $stmt->execute();
     $stmt->bind_result($count);
     $stmt->fetch();
@@ -29,38 +26,8 @@ function validateVerificationCode($code) {
 
     return $count > 0;
 }
-
-// Função para descriptografar a chave e obter o ID e o e-mail do usuário
-function decryptChave($chave) {
-    $decodedChave = base64_decode($chave);
-    $chaveParts = explode('_', $decodedChave);
-
-    $id = $chaveParts[0];
-    $email = $chaveParts[1];
-
-    return array('id' => $id, 'email' => $email);
-}
-
-// Verificar se o código de verificação está presente na URL
-if (isset($_GET['code'])) {
-    $verificationCode = $_GET['code'];
-
-    // Validar o código de verificação
-    if (validateVerificationCode($verificationCode)) {
-        // Descriptografar a chave
-        $userInfo = decryptChave($verificationCode);
-
-        // Exibir informações do usuário
-        echo '<div class="alert alert-info">';
-        echo 'ID do usuário: ' . $userInfo['id'] . '<br>';
-        echo 'E-mail do usuário: ' . $userInfo['email'];
-        echo '</div>';
-    } else {
-        // Código inválido, exibir mensagem de erro
-        echo '<div class="alert alert-danger">Código de verificação inválido. Acesso negado.</div>';
-    }
-}
 ?>
+
 
 <!DOCTYPE html>
 <html>
