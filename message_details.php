@@ -18,8 +18,8 @@ require_once 'header.php';
     <div class="container">
       <h1>Mensagem</h1>
       <div>
-        <h3>Remetente: <?php echo $message['sender']; ?></h3>
-        <p><?php echo $message['content']; ?></p>
+        <h3>Remetente: <?php echo $message['User_Name']; ?></h3>
+        <p><?php echo $message['Message_Content']; ?></p>
       </div>
     </div>
   </main>
