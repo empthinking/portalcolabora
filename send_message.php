@@ -14,13 +14,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("iisis", $message_sender, $message_receiver, $message_content, $message_product, $message_date);
 
     if ($stmt->execute()) {
-        echo "Mensagem enviada com sucesso.";
+        require_once 'header.php'; 
+echo <<<MSG
+<div class="container">
+    <div class="alert alert-success m-3 p-3">MENSAGEM ENVIADA!</div>
+
+      <div class="container mt-5">
+        <div class="progress">
+          <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+</div>
+
+  <script>
+    $(document).ready(function() {
+      let progressBar = document.getElementById('progressBar');
+      let width = 0;
+      let interval = setInterval(increaseProgress, 30);
+
+    function increaseProgress() {
+        if (width >= 100) {
+          clearInterval(interval);
+          redirectToOtherPage(); // Call the redirection function
+        } else {
+          width++;
+          progressBar.style.width = width + '%';
+          progressBar.setAttribute('aria-valuenow', width);
+          progressBar.innerHTML = width + '%';
+        }
+      }
+
+      function redirectToOtherPage() {
+        setTimeout(function() {
+          window.location.href = 'produto.php?id=$id';
+        }, 1000);
+      }
+    });
+  </script>
+MSG;
+require_once 'footer.php';
+
     } else {
         echo "Error: " . $stmt->error;
     }
 
     $stmt->close();
     $db->close();
+    exit();
 }
 
 require_once 'header.php';
