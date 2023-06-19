@@ -30,7 +30,7 @@ echo <<<MSG
     $(document).ready(function() {
       let progressBar = document.getElementById('progressBar');
       let width = 0;
-      let interval = setInterval(increaseProgress, 30);
+      let interval = setInterval(increaseProgress, 10);
 
     function increaseProgress() {
         if (width >= 100) {
