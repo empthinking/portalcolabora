@@ -32,7 +32,7 @@ require_once 'header.php';
       <br>
       <table class="table">
         <thead>
-          <tr>
+          <tr class="dark">
             <th>Remetente</th>
             <th>Produto</th>
             <th>Data</th>
@@ -40,7 +40,7 @@ require_once 'header.php';
         </thead>
         <tbody>
           <?php while ($row = $result->fetch_assoc()): ?>
-            <tr <?php echo $row['Message_Readed'] ? '' : 'class="unread"'; ?>>
+            <tr class="<?php echo $row['Message_Readed'] ? 'table-danger' : 'table-primary'; ?>">
               <td><a href="<?php echo $_SERVER['PHP_SELF'] . "?id={$row['Message_Id']}"; ?>"><?php echo $row['User_Name']; ?></a></td>
               <td><?php echo $row['Product_Name']; ?></td>
               <td><?php echo $row['Message_Date']; ?></td>
