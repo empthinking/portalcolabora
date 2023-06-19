@@ -41,9 +41,11 @@ require_once 'header.php';
         <tbody>
           <?php while ($row = $result->fetch_assoc()): ?>
             <tr class="<?php echo $row['Message_Readed'] ? 'table-danger' : 'table-primary'; ?>">
-              <td><a href="<?php echo $_SERVER['PHP_SELF'] . "?id={$row['Message_Id']}"; ?>"><?php echo $row['User_Name']; ?></a></td>
+              <a href="<?php echo $_SERVER['PHP_SELF'] . "?id={$row['Message_Id']}"; ?>">
+              <td><?php echo $row['User_Name']; ?></td>
               <td><?php echo $row['Product_Name']; ?></td>
               <td><?php echo $row['Message_Date']; ?></td>
+              </a>
             </tr>
           <?php endwhile; ?>
         </tbody>
