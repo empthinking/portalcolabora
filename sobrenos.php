@@ -27,7 +27,7 @@ require_once 'header.php';
         Agradecemos à Propesp/UEPA pelo incentivo e apoio.</h3>";
 
     ?>
-            <a class="btn btn-danger" onclick="window.history.back()"><i class="fas fa-undo"></i> Voltar</a>
+           
         </fieldset>
         
     </div>
