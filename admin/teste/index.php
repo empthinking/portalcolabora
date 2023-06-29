@@ -1,92 +1,61 @@
 <?php
-// Database connection details
-$servername = "127.0.0.1";
-$username = "u871226378_admin";
-$password = "Xq*4^5^1";
-$dbname = "u871226378_Colabora";
+require_once "dbconn.php";
 
-// Initialize variables
-$email = '';
-$message = '';
+// Verificar se o formulário foi submetido para validar o código
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify_code'])) {
+    $verificationCode = $_POST['verification_code'];
 
-// Check if the form is submitted
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-  // Retrieve email from the form
-  $email = $_POST['email'];
+    // Validar o código de verificação
+    if (validateVerificationCode($verificationCode)) {
+        // Redirecionar para a página de teste com o código na URL
+        header("Location: teste.php?code=" . urlencode($verificationCode));
+        exit();
+    } else {
+        // Código inválido, exibir mensagem de erro
+        echo '<div class="alert alert-danger">Código de verificação inválido. Acesso negado.</div>';
+    }
+}
 
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
+// Função para validar o código de verificação
+function validateVerificationCode($code) {
+    global $connection;
 
-  // Check connection
-  if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-  }
+    $stmt = $connection->prepare("SELECT COUNT(*) FROM verification_codes WHERE code = ? AND expiry_time >= ?");
+    $stmt->bind_param("si", $code, time());
+    $stmt->execute();
+    $stmt->bind_result($count);
+    $stmt->fetch();
+    $stmt->close();
 
-  // Prepare and execute query to check if email exists in the database
-  $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-  $stmt->bind_param("s", $email);
-  $stmt->execute();
-  $result = $stmt->get_result();
-
-  // Check if the email exists in the database
-  if ($result->num_rows > 0) {
-    // Email exists, send password recovery instructions to the user
-    // Add your code to send the password recovery instructions via email here
-    $message = "Password recovery instructions sent to the email address.";
-  } else {
-    // Email doesn't exist in the database
-    $message = "Email not found.";
-  }
-
-  // Close the database connection
-  $stmt->close();
-  $conn->close();
+    return $count > 0;
 }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <title>Password Recovery</title>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    $(document).ready(function() {
-      <?php if(!empty($message)): ?>
-        <?php if($message === 'Password recovery instructions sent to the email address.'): ?>
-          alert('Funciona');
-        <?php elseif($message === 'Email not found.'): ?>
-          alert('Email not found');
-        <?php endif; ?>
-      <?php endif; ?>
-    });
-  </script>
+    <title>Verificação de Código</title>
+    <!-- Adicione os links para os arquivos CSS do Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-  <div class="container">
-    <h2>Password Recovery</h2>
-    <form action="<?php echo $_SERVER["PHP_SELF"]; ?>" method="POST">
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="email" required value="<?php echo $email; ?>">
-      </div>
-      <button type="submit" class="btn btn-primary">Recover Password</button>
-    </form>
-    <?php if (!empty($message)): ?>
-      <div class="mt-3">
-        <?php if ($message === 'Password recovery instructions sent to the email address.'): ?>
-          <div class="alert alert-success" role="alert">
-            <?php echo $message; ?>
-          </div>
-        <?php elseif ($message === 'Email not found.'): ?>
-          <div class="alert alert-danger" role="alert">
-            <?php echo $message; ?>
-          </div>
-        <?php endif; ?>
-      </div>
-    <?php endif; ?>
-  </div>
+    <div class="container">
+        <h1>Verificação de Código</h1>
+
+        <form method="POST" action="index.php">
+            <div class="mb-3">
+                <label for="verification_code" class="form-label">Código de Verificação:</label>
+                <input type="text" class="form-control" id="verification_code" name="verification_code" required>
+            </div>
+            <button type="submit" class="btn btn-primary" name="verify_code">Verificar</button>
+        </form>
+
+        <form method="POST" action="send_verification_email.php">
+            <button type="submit" class="btn btn-secondary" name="send_email">Enviar Código por E-mail</button>
+        </form>
+    </div>
+
+    <!-- Adicione os scripts do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
