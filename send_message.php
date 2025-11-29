@@ -1,19 +1,37 @@
 <?php
 
-// Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the message details from the form
+
     $message_sender = $_SESSION['id'];
     $message_receiver = $vendor_id;
     $message_content = $_POST['content'];
     $message_product = $product_id;
-    $message_date = date('Y-m-d H:i:s'); // Assuming you want to use the current date and time in datetime format
+    $message_date = date('Y-m-d H:i:s');
+    $message_readed = 0; // NOVO
 
+    $stmt = $db->prepare("
+        INSERT INTO Messages (
+            Message_Sender,
+            Message_Receiver,
+            Message_Content,
+            Message_Product,
+            Message_Date,
+            Message_Readed
+        ) VALUES (?, ?, ?, ?, ?, ?)
+    ");
 
-    $stmt = $db->prepare("INSERT INTO Messages (Message_Sender, Message_Receiver, Message_Content, Message_Product, Message_Date) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("iisis", $message_sender, $message_receiver, $message_content, $message_product, $message_date);
+    $stmt->bind_param(
+        "iisisi",
+        $message_sender,
+        $message_receiver,
+        $message_content,
+        $message_product,
+        $message_date,
+        $message_readed
+    );
 
     if ($stmt->execute()) {
+        // seu código continua igual…
         require_once 'header.php'; 
 echo <<<MSG
 <div class="container">

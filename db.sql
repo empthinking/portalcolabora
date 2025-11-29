@@ -1,6 +1,4 @@
-CREATE DATABASE u871226378_Colabora;
-
-USE u871226378_Colabora;
+USE portalcolabora_db;
 
 CREATE TABLE Users (
     User_Id       INT AUTO_INCREMENT,

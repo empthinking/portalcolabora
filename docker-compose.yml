@@ -1,0 +1,28 @@
+services:
+  app:
+    build: .
+    container_name: portalcolabora-php
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - mysql-db
+    env_file:
+      - .env
+
+  mysql-db:
+    image: mysql:5.7
+    container_name: portalcolabora-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db.sql:/docker-entrypoint-initdb.d/db.sql:ro
+
+volumes:
+  mysql_data:
